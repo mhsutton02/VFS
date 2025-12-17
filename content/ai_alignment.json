@@ -1,0 +1,32 @@
+{
+  "title": "AI Alignment",
+  "intro": "We advance America's AI Action Plan, turning veteran grit and expertise into U.S. strength. Our team's platform experience (Palantir, ServiceNow, Palo Alto, Databricks, AWS/Azure) fuels key pillars, creating value for agencies and nation:",
+  "cards": [
+    {
+      "title": "Accelerating Adoption",
+      "body": "Integrate frontier AI for DoD/VA\u2014faster workflows, LLMs; expedited value delivery."
+    },
+    {
+      "title": "Safe AI",
+      "body": "NIST-tested systems against risks\u2014unbiased, secure safeguards for trust and protection."
+    },
+    {
+      "title": "Workforce Development",
+      "body": "Train rural veterans via DOL/NSF\u2014building skills, jobs, economic growth."
+    },
+    {
+      "title": "Small Business / Security",
+      "body": "Leverage SBIR/STTR for affordable AI\u2014counter adversaries, enhance controls."
+    },
+    {
+      "title": "American Values",
+      "body": "Uphold integrity, free speech; reinvest 20% profits in veterans/families for lasting impact."
+    },
+    {
+      "title": "Platform Execution",
+      "body": "Deliver with proven platforms and delivery discipline\u2014Palantir, ServiceNow, Palo Alto, Databricks, AWS/Azure."
+    }
+  ],
+  "cta_label": "Align with the plan",
+  "image": "assets/img/pexels-tara-winstead-8386440.jpg"
+}

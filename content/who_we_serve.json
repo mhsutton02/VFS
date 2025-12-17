@@ -1,0 +1,32 @@
+{
+  "title": "Who We Serve",
+  "intro": "We work best where missions are complex, constraints are real, and outcomes must be measurable. Edit these cards to match the current Who We Serve copy you want to retain.",
+  "cards": [
+    {
+      "title": "Department of Defense",
+      "body": "Programs requiring secure AI, modernization, and execution under mission and compliance constraints."
+    },
+    {
+      "title": "Department of Veterans Affairs",
+      "body": "Veteran-centric service delivery and operational improvement with measurable outcomes."
+    },
+    {
+      "title": "Federal Agencies & Primes",
+      "body": "Teams operating in regulated environments, modernizing workflows and platforms safely."
+    },
+    {
+      "title": "State & Local Government",
+      "body": "Citizen-facing modernization with governance, security, and workforce realities."
+    },
+    {
+      "title": "Mission-Critical Operations",
+      "body": "Environments where reliability, uptime, and cyber posture are non-negotiable."
+    },
+    {
+      "title": "Rural & Veteran Workforce Pipelines",
+      "body": "Workforce development and staffing aligned to federal initiatives and regional growth."
+    }
+  ],
+  "cta_label": "See fit for your mission",
+  "image": "assets/img/samuel-schroth-hyPt63Df3Dw-unsplash.jpg"
+}

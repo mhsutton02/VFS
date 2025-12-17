@@ -1,0 +1,32 @@
+{
+  "title": "What We Do",
+  "intro": "We create value by transforming challenges into victories for your agency and America, drawing on our team's battlefield and Fortune 50 experience. Tailored solutions accelerate Plan adoption at DoD/VA, delivering secure, efficient outcomes:",
+  "cards": [
+    {
+      "title": "Consulting",
+      "body": "Craft IT strategies and cyber roadmaps with NIST frameworks\u2014reducing risks, aligning values, creating resilient defenses via Palo Alto."
+    },
+    {
+      "title": "IT Services",
+      "body": "Streamline cloud migrations and software with AI automation\u2014enabling seamless operations, scalable growth through AWS/Azure."
+    },
+    {
+      "title": "Project/Program Management",
+      "body": "Provide Agile leadership with predictive AI\u2014optimizing efficiency, syncing with GSA tools via ServiceNow."
+    },
+    {
+      "title": "AI Implementation",
+      "body": "Deploy machine learning and automation\u2014ensuring robust, interpretable systems with Palantir/Databricks for mission dominance."
+    },
+    {
+      "title": "Staffing",
+      "body": "Place AI-skilled veterans\u2014bridging gaps, supporting Plan exchanges for a stronger workforce."
+    },
+    {
+      "title": "Transformation & Simplification",
+      "body": "Use Design Thinking to redesign operations\u2014blending data insights with human focus, empowering teams for innovative, cost saving alpha."
+    }
+  ],
+  "cta_label": "Discuss capabilities",
+  "image": "assets/img/getty-images-MCOxTPW6MJI-unsplash.jpg"
+}

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>ValorForge Solutions</title>
+<link href="assets/css/site.css" rel="stylesheet"/>
+
+<style>
+</style>
+
+</head>
+<body>
+<header class="site-header">
+<div class="container header-inner">
+<a aria-label="Go to landing" class="logo-link" href="#hero">
+<img alt="ValorForge Solutions logo" class="logo" src="assets/img/vf-logo.jpeg"/>
+</a>
+<button aria-expanded="false" aria-label="Toggle navigation" class="nav-toggle">Menu</button>
+<nav aria-label="Primary" class="nav">
+<ul class="nav-list" id="navList"></ul>
+</nav>
+</div>
+</header>
+<main>
+<!-- HERO -->
+<section class="section section-hero" id="hero">
+<div class="container section-grid odd">
+<div class="section-copy">
+<div class="kicker" id="heroKicker"></div>
+<h1 class="h1">
+<span id="heroL0"></span><br/>
+<span class="accent" id="heroL1"></span>
+</h1>
+<p class="lead" id="heroBody"></p>
+</div>
+<div class="section-media hero-media">
+<img alt="" class="media-img" id="heroImg"/>
+</div>
+</div>
+<div class="container section-bottom">
+<a class="btn btn-ghost" href="#contact" id="heroBottomCta">Contact ValorForge</a>
+</div>
+</section>
+<!-- WHAT WE DO -->
+<section class="section section-alt section-carousels" id="what-we-do">
+<div class="container section-grid even">
+<div class="section-media">
+<img alt="" class="media-img" id="wwdImg"/>
+</div>
+<div class="section-copy">
+<h2 class="h2" id="wwdTitle">What We Do</h2>
+<p class="body" id="wwdIntro"></p>
+<div class="carousel" data-carousel="wwd">
+<button aria-label="Previous" class="car-btn prev">‹</button>
+<div class="car-viewport">
+<div class="car-track" id="wwdTrack"></div>
+</div>
+<button aria-label="Next" class="car-btn next">›</button>
+</div>
+</div>
+</div>
+<div class="container section-bottom">
+<a class="btn btn-ghost" href="#contact" id="wwdBottomCta">Discuss capabilities</a>
+</div>
+</section>
+<!-- WHO WE SERVE -->
+<section class="section section-carousels" id="who-we-serve">
+<div class="container section-grid odd">
+<div class="section-copy">
+<h2 class="h2" id="wwsTitle">Who We Serve</h2>
+<p class="body" id="wwsIntro"></p>
+<div class="carousel" data-carousel="wws">
+<button aria-label="Previous" class="car-btn prev">‹</button>
+<div class="car-viewport">
+<div class="car-track" id="wwsTrack"></div>
+</div>
+<button aria-label="Next" class="car-btn next">›</button>
+</div>
+</div>
+<div class="section-media">
+<img alt="" class="media-img" id="wwsImg"/>
+</div>
+</div>
+<div class="container section-bottom">
+<a class="btn btn-ghost" href="#contact" id="wwsBottomCta">See fit for your mission</a>
+</div>
+</section>
+<!-- AI ALIGNMENT -->
+<section class="section section-alt section-carousels" id="ai-alignment">
+<div class="container section-grid even">
+<div class="section-media">
+<img alt="" class="media-img" id="aiImg"/>
+</div>
+<div class="section-copy">
+<h2 class="h2" id="aiTitle">AI Alignment</h2>
+<p class="body" id="aiIntro"></p>
+<div class="carousel" data-carousel="ai">
+<button aria-label="Previous" class="car-btn prev">‹</button>
+<div class="car-viewport">
+<div class="car-track" id="aiTrack"></div>
+</div>
+<button aria-label="Next" class="car-btn next">›</button>
+</div>
+</div>
+</div>
+<div class="container section-bottom">
+<a class="btn btn-ghost" href="#contact" id="aiBottomCta">Align with the plan</a>
+</div>
+</section>
+<!-- ABOUT -->
+<section class="section section-alt" id="about">
+  <div class="container section-grid odd">
+    <div class="section-copy">
+      <h2 class="h2" id="aboutTitle">About</h2>
+      <p class="body" id="aboutIntro"></p>
+
+      <div class="carousel" data-carousel="about" aria-label="About carousel">
+        <button class="car-btn prev" type="button" aria-label="Previous">‹</button>
+        <div class="car-viewport">
+          <div class="car-track" id="aboutTrack"></div>
+        </div>
+        <button class="car-btn next" type="button" aria-label="Next">›</button>
+      </div>
+
+      <div class="section-bottom">
+        <a class="btn btn-ghost" href="#contact" id="aboutBottomCta">Contact</a>
+      </div>
+    </div>
+    <div class="section-media">
+      <img alt="" class="media-img" id="aboutImg" loading="lazy" />
+    </div>
+  </div>
+</section>
+<!-- CONTACT -->
+<section class="section section-alt" id="contact">
+<div class="container section-grid even contact-grid">
+<div class="section-media">
+<img alt="" class="media-img" id="contactImg"/>
+</div>
+<div class="section-copy">
+<h2 class="h2" id="contactTitle">Contact</h2>
+<p class="body" id="contactIntro"></p>
+<div class="contact-meta">
+<div><div class="meta-value" id="addrValue"></div></div>
+<div><div class="meta-value" id="phoneValue"></div></div>
+<div><div class="meta-value"><a href="#" id="emailValue"></a></div></div>
+</div>
+<!-- Netlify form: must be in HTML at build-time -->
+<form action="/" class="form" data-netlify="true" data-netlify-honeypot="bot-field" method="POST" name="contact" id="contact-form">
+<input name="form-name" type="hidden" value="contact"/>
+<p class="hidden">
+<label>Don’t fill this out: <input name="bot-field"/></label>
+</p>
+<label>
+              Name
+              <input name="name" required="" type="text"/>
+</label>
+<label>
+              Organization
+              <input name="organization" type="text"/>
+</label>
+<label>
+              Email
+              <input name="email" required="" type="email"/>
+</label>
+<label>
+              Message
+              <textarea name="message" required="" rows="5"></textarea>
+</label>
+<button class="btn btn-primary" id="contactCta" type="submit">Send</button>
+</form><p class="fineprint">By submitting, you agree we may contact you at the email provided.</p>
+</div>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-left">
+<div class="footer-title">ValorForge Solutions</div>
+<div class="footer-sub">Veteran-owned SDVOSB • Rockwall, TX</div>
+</div>
+<div class="footer-right">
+<a href="#what-we-do">What We Do</a>
+<a href="#who-we-serve">Who We Serve</a>
+<a href="#ai-alignment">AI Alignment</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+</div>
+</div>
+</footer>
+<script src="assets/js/main.js"></script>
+
+<!-- Contact form success modal -->
+  <div id="vf-modal-backdrop" class="vf-modal-backdrop" aria-hidden="true">
+    <div class="vf-modal" role="dialog" aria-modal="true" aria-labelledby="vf-modal-title">
+      <h3 id="vf-modal-title">Thank you</h3>
+      <p>Thank you, we will contact you shortly.</p>
+      <button type="button" id="vf-modal-close" class="btn btn-primary">Close</button>
+    </div>
+  </div>
+
+
+<script>
+(function(){
+  const form = document.getElementById('contact-form');
+  const backdrop = document.getElementById('vf-modal-backdrop');
+  const closeBtn = document.getElementById('vf-modal-close');
+  if(!form) return;
+
+  function openModal(){
+    if(!backdrop) return;
+    backdrop.setAttribute('aria-hidden','false');
+    backdrop.classList.add('is-open');
+    if(closeBtn) closeBtn.focus();
+  }
+  function closeModal(){
+    if(!backdrop) return;
+    backdrop.setAttribute('aria-hidden','true');
+    backdrop.classList.remove('is-open');
+  }
+  if(closeBtn) closeBtn.addEventListener('click', closeModal);
+  if(backdrop) backdrop.addEventListener('click', function(e){
+    if(e.target === backdrop) closeModal();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeModal();
+  });
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    const formData = new FormData(form);
+    const params = new URLSearchParams();
+    for (const [k,v] of formData.entries()){
+      params.append(k, String(v));
+    }
+    try{
+      const res = await fetch(form.getAttribute('action') || '/', {
+        method: 'POST',
+        headers: {'Content-Type':'application/x-www-form-urlencoded'},
+        body: params.toString()
+      });
+      if(res.ok){
+        form.reset();
+        openModal();
+      } else {
+        alert('Submission failed. Please try again.');
+      }
+    }catch(err){
+      alert('Submission failed. Please try again.');
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
