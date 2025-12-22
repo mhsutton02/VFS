@@ -1,6 +1,6 @@
 // components/HeroSection.tsx
 import Image from "next/image";
-import heroContent from "@/content/hero.json";
+import heroContent from "../content/hero.json";
 
 export function HeroSection() {
   return (
@@ -26,7 +26,7 @@ export function HeroSection() {
         </div>
         <div className="vf-section-media hero-media">
           <Image
-            src="/assets/img/hugo-delauney-juRa-jPO-Go-unsplash.jpg"
+            src="/assets/img/hero.jpg"
             alt={heroContent.imageAlt}
             className="vf-media-img"
             width={800}

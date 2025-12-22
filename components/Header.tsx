@@ -28,8 +28,8 @@ export function Header() {
             src="/assets/img/vf-logo.jpeg"
             alt="ValorForge Solutions logo"
             className="vf-logo"
-            width={120}
-            height={60}
+            width={240}
+            height={120}
           />
         </Link>
 

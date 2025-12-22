@@ -1,6 +1,6 @@
 // components/AboutSection.tsx
 import Image from "next/image";
-import aboutContent from "@/content/about.json";
+import aboutContent from "../content/about.json";
 import { Carousel } from "./Carousel";
 
 export function AboutSection() {

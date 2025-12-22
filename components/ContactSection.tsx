@@ -1,6 +1,6 @@
 // components/ContactSection.tsx
 import Image from "next/image";
-import contactContent from "@/content/contact.json";
+import contactContent from "../content/contact.json";
 import { ContactForm } from "./ContactForm";
 
 export function ContactSection() {
@@ -12,7 +12,7 @@ export function ContactSection() {
       <div className="vf-container vf-section-grid vf-section-grid-even contact-grid">
         <div className="vf-section-media">
           <Image
-            src="/assets/img/pexels-tara-winstead-8386440.jpg"
+            src="/assets/img/contact1.jpg"
             alt={contactContent.imageAlt}
             className="vf-media-img"
             width={800}

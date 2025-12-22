@@ -1,7 +1,7 @@
 // components/Carousel.tsx
 "use client";
 
-import { useCarousel } from "@/hooks/useCarousel";
+import { useCarousel } from "../hooks/useCarousel";
 
 export interface CarouselItem {
   id: string;

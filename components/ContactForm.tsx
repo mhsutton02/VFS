@@ -1,7 +1,7 @@
 // components/ContactForm.tsx
 "use client";
 
-import { useNetlifyForm } from "@/hooks/useNetlifyForm";
+import { useNetlifyForm } from "../hooks/useNetlifyForm";
 
 export function ContactForm() {
   const { submitting, success, handleSubmit } =

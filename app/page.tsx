@@ -1,14 +1,14 @@
 // app/page.tsx
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { HeroSection } from "@/components/HeroSection";
-import { CarouselSection } from "@/components/CarouselSection";
-import { AboutSection } from "@/components/AboutSection";
-import { ContactSection } from "@/components/ContactSection";
+import { Header } from "../components/Header.tsx";
+import { Footer } from "../components/Footer";
+import { HeroSection } from "../components/HeroSection";
+import { CarouselSection } from "../components/CarouselSection";
+import { AboutSection } from "../components/AboutSection";
+import { ContactSection } from "../components/ContactSection";
 
-import whatWeDo from "@/content/whatWeDo.json";
-import whoWeServe from "@/content/whoWeServe.json";
-import aiAlignment from "@/content/aiAlignment.json";
+import whatWeDo from "../content/what_we_do.json";
+import whoWeServe from "../content/who_we_Serve.json";
+import aiAlignment from "../content/ai_alignment.json";
 
 export default function HomePage() {
   return (
