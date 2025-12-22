@@ -1,32 +1,23 @@
 {
   "title": "Who We Serve",
-  "intro": "We work best where missions are complex, constraints are real, and outcomes must be measurable. Edit these cards to match the current Who We Serve copy you want to retain.",
+  "intro": "We partner with organizations whose missions demand reliability, resilience, and trust.",
+  "imageAlt": "Teams aligned around a mission",
+  "bottomCta": "See fit for your mission",
   "cards": [
     {
-      "title": "Department of Defense",
-      "body": "Programs requiring secure AI, modernization, and execution under mission and compliance constraints."
+      "id": "federal",
+      "title": "Federal & Public Sector",
+      "body": "Agencies and commands with complex compliance, security, and mission readiness requirements."
     },
     {
-      "title": "Department of Veterans Affairs",
-      "body": "Veteran-centric service delivery and operational improvement with measurable outcomes."
+      "id": "enterprise",
+      "title": "Enterprise Leaders",
+      "body": "Large-scale communication, media, and telecom organizations navigating transformation."
     },
     {
-      "title": "Federal Agencies & Primes",
-      "body": "Teams operating in regulated environments, modernizing workflows and platforms safely."
-    },
-    {
-      "title": "State & Local Government",
-      "body": "Citizen-facing modernization with governance, security, and workforce realities."
-    },
-    {
-      "title": "Mission-Critical Operations",
-      "body": "Environments where reliability, uptime, and cyber posture are non-negotiable."
-    },
-    {
-      "title": "Rural & Veteran Workforce Pipelines",
-      "body": "Workforce development and staffing aligned to federal initiatives and regional growth."
+      "id": "partners",
+      "title": "Strategic Partners",
+      "body": "Prime contractors and integrators seeking a trusted SDVOSB ally at the edge of delivery."
     }
-  ],
-  "cta_label": "See fit for your mission",
-  "image": "assets/img/samuel-schroth-hyPt63Df3Dw-unsplash.jpg"
+  ]
 }

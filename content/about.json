@@ -1,22 +1,23 @@
 {
   "title": "About",
-  "company_heading": "Company",
-  "company_body": "At ValorForge, our strength lies in our people\u2014veterans and experts with grit, experience, and a track record of delivering wins in combat and corporate America. We're partners in your success and America's future, helping federal agencies dominate with agile, cost effective solutions that generate real alpha.\n\nOur founder, a service-disabled veteran and Texas A&M mechanical engineering graduate with extensive experience in leading multimillion-dollar IT initiatives, guides teams in scaling platforms like Palantir Foundry/AIP, ServiceNow, Palo Alto, Databricks, AWS/Azure\u2014including quantum-resistant AI and edge computing for lasting impact. Investor networks fuel collaboration, per the AI Action Plan's SBIR/STTR. Bootstrapped with resilience, our team's expertise enhances margins 20%, speeds delivery 30%, ensures compliance. We target 70% rural veteran hires by Year 3, aligning with DOL/NSF training\u2014creating jobs, skills, and national vitality.\n\nWhat makes us unique is that we draw insights not only from analytics and AI, but walking in the front lines with your experts incorporating their voice, pain points and ideas in creating tactical solutions that deliver immediate wins with long-term strategic and sustainable improvements/gains.",
+  "intro": "ValorForge Solutions is a veteran-owned SDVOSB with extensive experience in leading multimillion-dollar IT initiatives across communications, media, and telecom.\n\nWe bring decades of hands-on leadership to complex technology portfolios, with a focus on disciplined delivery and mission outcomes.",
+  "imageAlt": "ValorForge leadership and team collaboration",
+  "bottomCta": "Contact",
   "cards": [
     {
+      "id": "mission",
       "title": "Mission",
-      "body": "Deliver secure AI solutions for government missions, veteran-led and Plan-aligned. Optimize efficiency, security; reinvest 20% profits in veterans, families, faith-based causes \u2014creating value for clients and advancing U.S. excellence."
+      "body": "To forge durable, high-confidence technology outcomes for organizations whose missions cannot fail."
     },
     {
+      "id": "vision",
       "title": "Vision Statement",
-      "body": "Strive for excellence in everything we do and become America's premier SDVOSB, driven by veteran grit, rural talent, investor insights. Forge American excellence through Plan's innovation, workforce, secure AI\u2014delivering alpha for agencies and nation. \"Laus Deo\""
+      "body": "A world where mission-led teams confidently harness technology and AI, grounded in trust, discipline, and alignment."
     },
     {
+      "id": "values",
       "title": "Core Values",
-      "body": "Integrity \u2022 Service \u2022 Excellence \u2022 Accountability \u2022 Stewardship ."
+      "body": "Service, discipline, integrity, and stewardship—applied to every engagement we lead."
     }
-  ],
-  "cta_label": "Contact ValorForge",
-  "image": "assets/img/generated-image-1.png",
-  "company": ""
+  ]
 }

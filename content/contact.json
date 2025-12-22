@@ -1,17 +1,5 @@
 {
   "title": "Contact",
-  "intro": "Tell us what mission, program, or operational problem you\u2019re trying to solve. We will respond quickly with next steps.",
-  "address_label": "",
-  "address_value": "",
-  "phone_label": "",
-  "phone_value": "",
-  "email_label": "",
-  "email_value": "",
-  "cta_label": "Send message",
-  "image": "assets/img/contact.jpg",
-  "success_title": "Thanks \u2014 message received",
-  "success_body": "Your message has been submitted. We will follow up shortly.",
-  "address": "",
-  "phone": "",
-  "email": ""
+  "intro": "Tell us about your mission, your current challenges, and where you want to go next.",
+  "imageAlt": "Professional contact and communication imagery"
 }
