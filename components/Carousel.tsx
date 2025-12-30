@@ -12,16 +12,17 @@ export interface CarouselItem {
 interface CarouselProps {
   items: CarouselItem[];
   ariaLabel: string;
+  direction?: "left" | "right";
 }
 
-export function Carousel({ items, ariaLabel }: CarouselProps) {
+export function Carousel({ items, ariaLabel, direction = "right" }: CarouselProps) {
   const {
     next,
     prev,
     onMouseEnter,
     onMouseLeave,
     getVisibleItems
-  } = useCarousel(items, 5000);
+  } = useCarousel(items, 5000, direction);
 
   const visible = getVisibleItems();
 
@@ -44,10 +45,7 @@ export function Carousel({ items, ariaLabel }: CarouselProps) {
       <div className="vf-car-viewport">
         <div className="vf-car-track">
           {visible.map((item) => (
-            <article
-              key={item.id}
-              className="vf-card vf-card-active"
-            >
+            <article key={item.id} className="vf-card vf-card-active">
               <h3 className="vf-card-title">{item.title}</h3>
               <p className="vf-card-body">{item.body}</p>
             </article>

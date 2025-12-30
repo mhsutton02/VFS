@@ -1,13 +1,15 @@
 // app/page.tsx
-import { Header } from "../components/Header.tsx";
+import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { HeroSection } from "../components/HeroSection";
 import { CarouselSection } from "../components/CarouselSection";
+import { WhoWeServeSection } from "../components/WhoWeServeSection";
 import { AboutSection } from "../components/AboutSection";
+import { GivingBackSection } from "../components/GivingBackSection";
 import { ContactSection } from "../components/ContactSection";
 
 import whatWeDo from "../content/what_we_do.json";
-import whoWeServe from "../content/who_we_Serve.json";
+import whoWeServe from "../content/who_we_serve.json";
 import aiAlignment from "../content/ai_alignment.json";
 
 export default function HomePage() {
@@ -27,17 +29,8 @@ export default function HomePage() {
           items={whatWeDo.cards}
         />
 
-        <CarouselSection
-          id="who-we-serve"
-          reverse
-          altBackground
-          imageSrc="/assets/img/samuel-schroth-hyPt63Df3Dw-unsplash.jpg"
-          imageAlt={whoWeServe.imageAlt}
-          title={whoWeServe.title}
-          intro={whoWeServe.intro}
-          ctaText={whoWeServe.bottomCta}
-          items={whoWeServe.cards}
-        />
+        {/* LOCK: who-we-serve layout — text on the LEFT, image on the RIGHT. Do not change unless requested. */}
+        <WhoWeServeSection />
 
         <CarouselSection
           id="ai-alignment"
@@ -48,6 +41,7 @@ export default function HomePage() {
           ctaText={aiAlignment.bottomCta}
           items={aiAlignment.cards}
         />
+        <GivingBackSection />
 
         <AboutSection />
         <ContactSection />

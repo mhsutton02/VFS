@@ -13,6 +13,10 @@ export const metadata: Metadata = {
     url: "https://valorforge.com/",
     type: "website"
   },
+  
+};
+
+export const viewport = {
   themeColor: "#070b14"
 };
 

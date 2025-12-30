@@ -6,11 +6,13 @@ import Image from "next/image";
 import { useState } from "react";
 
 const NAV_ITEMS = [
-  { href: "#what-we-do", label: "What We Do" },
-  { href: "#who-we-serve", label: "Who We Serve" },
-  { href: "#ai-alignment", label: "AI Alignment" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" }
+  { href: "/#what-we-do", label: "What We Do" },
+  { href: "/#who-we-serve", label: "Who We Serve" },
+  { href: "/#ai-alignment", label: "AI Alignment" },
+  { href: "/partners", label: "Partners" },
+  { href: "/careers", label: "Careers" },
+  { href: "/#about", label: "About" },
+  { href: "/#contact", label: "Contact" }
 ];
 
 export function Header() {
@@ -20,7 +22,7 @@ export function Header() {
     <header className="vf-site-header">
       <div className="vf-container vf-header-inner">
         <Link
-          href="#hero"
+          href="/#hero"
           aria-label="Go to landing"
           className="inline-flex items-center"
         >

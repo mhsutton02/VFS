@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { Carousel, CarouselItem } from "./Carousel";
 
-interface CarouselSectionProps {
+type CarouselSectionProps = {
   id: string;
   altBackground?: boolean;
   reverse?: boolean;
@@ -12,7 +12,7 @@ interface CarouselSectionProps {
   intro: string;
   ctaText: string;
   items: CarouselItem[];
-}
+};
 
 export function CarouselSection({
   id,
@@ -33,9 +33,7 @@ export function CarouselSection({
     <section id={id} className={sectionBgClass}>
       <div
         className={`vf-container ${
-          reverse
-            ? "vf-section-grid-even"
-            : "vf-section-grid"
+          reverse ? "vf-section-grid-even" : "vf-section-grid"
         }`}
       >
         {!reverse && (
@@ -53,10 +51,11 @@ export function CarouselSection({
         <div className="relative">
           <h2 className="vf-h2">{title}</h2>
           <p className="vf-body">{intro}</p>
-          <Carousel
-            items={items}
-            ariaLabel={title + " carousel"}
-          />
+                <Carousel
+                  items={items}
+                  ariaLabel={title + " carousel"}
+                  direction={reverse ? "left" : "right"}
+                />
         </div>
 
         {reverse && (
@@ -72,10 +71,7 @@ export function CarouselSection({
         )}
       </div>
       <div className="vf-container vf-section-bottom">
-        <a
-          href="#contact"
-          className="vf-btn vf-btn-ghost"
-        >
+        <a href="/#contact" className="vf-btn vf-btn-ghost">
           {ctaText}
         </a>
       </div>
