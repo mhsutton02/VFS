@@ -44,12 +44,12 @@ function renderNav(items){
     "Who We Serve":"#who-we-serve",
     "AI Alignment":"#ai-alignment",
     "About":"#about",
-    "Contact":"#contact",
+    "Contact":"/contact",
   };
   items.forEach(name=>{
     const li = document.createElement("li");
     const a = document.createElement("a");
-    a.href = map[name] || "#contact";
+    a.href = map[name] || "/contact";
     a.textContent = name;
     li.appendChild(a);
     list.appendChild(li);

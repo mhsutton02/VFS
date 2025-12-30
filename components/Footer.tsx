@@ -16,7 +16,7 @@ export function Footer() {
           <Link href="/#who-we-serve">Who We Serve</Link>
           <Link href="/#ai-alignment">AI Alignment</Link>
           <Link href="/#about">About</Link>
-          <Link href="/#contact">Contact</Link>
+          <Link href="/contact">Contact</Link>
         </div>
       </div>
     </footer>

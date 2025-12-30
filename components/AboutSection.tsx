@@ -24,7 +24,7 @@ export function AboutSection() {
           <p className="vf-body">{aboutContent.intro}</p>
           <Carousel items={aboutContent.cards} ariaLabel="About carousel" />
           <div className="vf-section-bottom">
-            <a href="/#contact" className="vf-btn vf-btn-ghost">
+            <a href="/contact" className="vf-btn vf-btn-ghost">
               {aboutContent.bottomCta}
             </a>
           </div>

@@ -12,7 +12,7 @@ const NAV_ITEMS = [
   { href: "/partners", label: "Partners" },
   { href: "/careers", label: "Careers" },
   { href: "/#about", label: "About" },
-  { href: "/#contact", label: "Contact" }
+  { href: "/contact", label: "Contact" }
 ];
 
 export function Header() {

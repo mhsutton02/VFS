@@ -18,7 +18,7 @@ export function WhoWeServeSection() {
             ))}
           </ul>
           <div className="vf-section-bottom">
-            <a href="/#contact" className="vf-btn vf-btn-ghost">
+            <a href="/contact" className="vf-btn vf-btn-ghost">
               {whoWeServe.bottomCta}
             </a>
           </div>

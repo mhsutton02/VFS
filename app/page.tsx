@@ -6,7 +6,7 @@ import { CarouselSection } from "../components/CarouselSection";
 import { WhoWeServeSection } from "../components/WhoWeServeSection";
 import { AboutSection } from "../components/AboutSection";
 import { GivingBackSection } from "../components/GivingBackSection";
-import { ContactSection } from "../components/ContactSection";
+// Contact moved to its own page: app/contact/page.tsx
 
 import whatWeDo from "../content/what_we_do.json";
 import whoWeServe from "../content/who_we_serve.json";
@@ -44,7 +44,6 @@ export default function HomePage() {
         <GivingBackSection />
 
         <AboutSection />
-        <ContactSection />
       </main>
       <Footer />
     </>

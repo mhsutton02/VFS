@@ -36,7 +36,7 @@ export function HeroSection() {
       </div>
       <div className="vf-container vf-section-bottom">
         <a
-          href="/#contact"
+          href="/contact"
           className="vf-btn vf-btn-ghost"
         >
           {heroContent.bottomCta}

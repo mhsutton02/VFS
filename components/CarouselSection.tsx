@@ -71,7 +71,7 @@ export function CarouselSection({
         )}
       </div>
       <div className="vf-container vf-section-bottom">
-        <a href="/#contact" className="vf-btn vf-btn-ghost">
+        <a href="/contact" className="vf-btn vf-btn-ghost">
           {ctaText}
         </a>
       </div>

@@ -10,14 +10,14 @@ export function GivingBackSection() {
           <h2 className="vf-h2">{givingBackContent.title}</h2>
           <p className="vf-body">{givingBackContent.intro}</p>
           <div className="vf-section-bottom">
-            <a href="/#contact" className="vf-btn vf-btn-ghost">
+            <a href="/contact" className="vf-btn vf-btn-ghost">
               {givingBackContent.bottomCta}
             </a>
           </div>
         </div>
         <div className="vf-section-media">
           <Image
-            src="/assets/img/giving-back.svg"
+            src="/assets/img/partners.png"
             alt={givingBackContent.imageAlt}
             className="vf-media-img"
             width={800}
