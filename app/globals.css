@@ -573,3 +573,47 @@ section[id] {
   max-height: none;
   line-height: 1.25;
 }
+
+/* ────────────────────────────────────────────── */
+/* STRONGER MOBILE MENU FIX – ensure toggle works and menu opens reliably */
+/* ────────────────────────────────────────────── */
+
+@media (max-width: 760px) {
+  .vf-nav-toggle {
+    display: inline-flex !important;
+    z-index: 1001; /* above everything */
+  }
+
+  .vf-nav-list {
+    display: none !important;
+    position: absolute;
+    top: 54px;
+    right: 0;
+    left: 0;
+    width: 100vw;
+    background: rgba(5, 8, 18, 0.98);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    padding: 20px 0;
+    box-sizing: border-box;
+    z-index: 1000;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Very high-specificity override for open state */
+  .vf-nav-list.vf-nav-list-open {
+    display: flex !important;
+  }
+
+  .vf-nav-list-open li {
+    width: 100%;
+  }
+
+  .vf-nav-list-open a {
+    display: block;
+    width: 100%;
+    padding: 16px 24px;
+    font-size: 1.1rem;
+    text-align: left;
+  }
+}
