@@ -25,22 +25,15 @@ export const viewport = {
 
 // ... imports and metadata/viewport as before
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }) {
   return (
-    <html 
-      lang="en" 
-      className={GeistSans.className}  // or geistSans.variable if using variable
-      suppressHydrationWarning={true}   // ← Add this line
-    >
+    <html lang="en">
       <head>
-        <link rel="manifest" href="/manifest.json" />
-        {/* other head content */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* ...other head tags... */}
       </head>
-      <body className="antialiased">{children}</body>
+      <body>{children}</body>
     </html>
   );
+}
 }
