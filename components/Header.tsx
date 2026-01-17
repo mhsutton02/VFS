@@ -5,12 +5,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 
+// components/Header.tsx – updated NAV_ITEMS
 const NAV_ITEMS = [
   { href: "#what-we-do", label: "What We Do" },
   { href: "#who-we-serve", label: "Who We Serve" },
   { href: "#ai-alignment", label: "AI Alignment" },
+  { href: "#giving-back", label: "Giving Back" },     // ← NEW
   { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" }
+  { href: "#contact", label: "Contact" },
+  { href: "/careers", label: "Careers" }             // ← NEW (page link)
 ];
 
 export function Header() {

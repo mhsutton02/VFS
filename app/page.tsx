@@ -5,9 +5,10 @@ import { HeroSection } from "../components/HeroSection";
 import { CarouselSection } from "../components/CarouselSection";
 import { AboutSection } from "../components/AboutSection";
 import { ContactSection } from "../components/ContactSection";
+import { GivingBackSection } from "../components/GivingBackSection";
 
 import whatWeDo from "../content/what_we_do.json";
-import whoWeServe from "../content/who_we_serve.json";  // fixed file name case (was who_we_Serve)
+import whoWeServe from "../content/who_we_serve.json";
 import aiAlignment from "../content/ai_alignment.json";
 
 import Image from 'next/image';
@@ -19,18 +20,17 @@ export default function HomePage() {
       <main>
         <HeroSection />
 
-        {/* Carousel 1: what-we-do */}
         <CarouselSection
           id="what-we-do"
-          imageSrc="/assets/img/whatwedo.jpg"
+          imageSrc="/assets/img/getty-images-MCOxTPW6MJI-unsplash.jpg"
           imageAlt={whatWeDo.imageAlt}
           title={whatWeDo.title}
           intro={whatWeDo.intro}
           ctaText={whatWeDo.bottomCta}
           items={whatWeDo.cards}
+          priority={true}
         />
 
-        {/* Carousel 2: who-we-serve */}
         <CarouselSection
           id="who-we-serve"
           imageSrc="/assets/img/whoweserve.jpg"
@@ -41,10 +41,9 @@ export default function HomePage() {
           items={whoWeServe.cards}
         />
 
-        {/* Carousel 3: ai-alignment */}
         <CarouselSection
           id="ai-alignment"
-          imageSrc="/assets/img/aialigned.jpg"
+          imageSrc="/assets/img/pexels-tara-winstead-8386440.jpg"
           imageAlt={aiAlignment.imageAlt}
           title={aiAlignment.title}
           intro={aiAlignment.intro}
@@ -52,8 +51,9 @@ export default function HomePage() {
           items={aiAlignment.cards}
         />
 
-        <AboutSection />
         <ContactSection />
+        <GivingBackSection />    {/* Now before About */}
+        <AboutSection />
       </main>
       <Footer />
     </>
