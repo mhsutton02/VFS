@@ -137,15 +137,17 @@ a {
   gap: 42px;
   align-items: stretch;
 }
-.vf-section-grid-even {
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+/* Force About section to side-by-side layout like others */
+#about .vf-section-grid-even {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); /* text/carousel wider, image slightly narrower */
+  gap: 42px;
+  align-items: stretch;
 }
 
 /* Media */
-.vf-section-media {
-  position: relative;
-  display: flex;
-  align-items: stretch;
+#about .vf-section-media {
+  max-width: 640px;
+  margin: 0 auto;
 }
 .vf-media-img {
   width: 100%;
@@ -241,42 +243,54 @@ a {
   justify-content: flex-start;
 }
 
-/* Carousel basics */
+/* Carousel basics – adjusted to show ONE card at a time */
+/* Carousel basics – define card size first, viewport fits around it */
 .vf-carousel {
   margin-top: 14px;
   display: grid;
-  grid-template-columns: 42px 1fr 42px;
-  gap: 10px;
+  grid-template-columns: 48px 1fr 48px;  /* buttons + flexible viewport */
+  gap: 12px;
   align-items: center;
+  max-width: 460px;  /* optional: cap entire carousel width */
+  margin-left: auto;
+  margin-right: auto;
 }
-
 .vf-car-btn {
-  height: 42px;
-  width: 42px;
+  height: 48px;
+  width: 48px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.24);
   background: rgba(0, 0, 0, 0.18);
   color: var(--text);
   cursor: pointer;
+  min-width: 48px;
 }
 
+/* Viewport – sized to fit ONE full card + padding */
 .vf-car-viewport {
   overflow: hidden;
   width: 100%;
-  padding: 0 10px;
+  max-width: 520px;          /* ← fits one 480px card + 20px left + 20px right padding */
+  margin: 0 auto;            /* centers the viewport */
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
+/* Track – allows sliding multiple cards */
 .vf-car-track {
   display: flex;
-  gap: 14px;
+  gap: 32px;                 /* space between cards */
   transform: translateX(0);
   transition: transform 0.5s ease;
   padding: 2px 0;
+  width: max-content;
+/* Card – full width of viewport when only one shown */
 }
 
-/* Card */
+/* Card – FIXED maximum size, no percentage calc needed */
 .vf-card {
-  flex: 0 0 calc((100% - 14px) / 2);
+  flex: 0 0 300px;           /* ← define RIGHT card size here (480px wide) */
+  min-width: 0;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 16px;
@@ -287,183 +301,48 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: 288px;
+  height: auto;
+  min-height: 288px;
 }
 
 .vf-card-title {
-  font-size: clamp(12px, 1.05vw, 14px);
+  font-size: clamp(8px, 0.95vw, 13px);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   text-align: center;
   font-weight: 800;
-  margin: 0 0 10px;
+  margin: 0 0 10px;                    /* restored to original 10px for better spacing */
+  color: var(--accent);  /* ← ADD THIS LINE – uses your gold color #f5b74a */
+  /* Natural word wrapping, no mid-word breaks */
   white-space: normal;
+  word-break: normal;
+  hyphens: auto;
+  overflow-wrap: break-word;
+  
+  /* Prevent clipping, allow controlled expansion */
   overflow: visible;
-  text-overflow: clip;
+  text-overflow: initial;
   min-height: 2.6em;
-  word-break: keep-all;
-  overflow-wrap: normal;
-  hyphens: none;
+  max-height: none;
+  line-height: 1.35;                   /* slightly looser – better readability on wrap */
+  
+  /* Optional: limit to 3 lines with ellipsis (uncomment if you want) */
+  /* display: -webkit-box; */
+  /* -webkit-line-clamp: 3; */
+  /* -webkit-box-orient: vertical; */
+  /* overflow: hidden; */
 }
 
-.vf-card-body {
-  color: var(--muted);
-  font-size: 16px;
-  margin: 0;
-  flex: 1;
-  overflow: hidden;
-}
-
-.vf-card-active {
-  border-color: rgba(245, 183, 74, 0.55);
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45);
-}
-
-/* About */
-.vf-company-block {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius);
-  padding: 16px;
-  margin: 10px 0 16px;
-}
-
-.vf-contact-meta {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  margin: 12px 0 14px;
-}
-
-.vf-meta-value {
-  color: var(--muted);
-  font-size: 14px;
-  margin-top: 4px;
-}
-
-/* Form */
-.vf-form {
-  display: grid;
-  gap: 10px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius);
-  padding: 14px;
-}
-
-.vf-form label {
-  display: grid;
-  gap: 6px;
-  color: var(--text);
-  font-size: 13px;
-}
-
-.vf-form input,
-.vf-form textarea {
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(0, 0, 0, 0.18);
-  color: var(--text);
-  padding: 10px;
-}
-
-/* Footer */
-.vf-site-footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 22px 0;
-  background: #050812;
-}
-
-.vf-footer-inner {
-  display: flex;
-  justify-content: space-between;
-  gap: 18px;
-  flex-wrap: wrap;
-}
-
-.vf-footer-title {
-  font-weight: 800;
-}
-
-.vf-footer-sub {
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.vf-footer-right {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-
-.vf-footer-right a {
-  text-decoration: none;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.vf-footer-right a:hover {
-  color: var(--text);
-}
-
-/* Toast */
-.vf-toast {
-  position: fixed;
-  left: 50%;
-  bottom: 26px;
-  transform: translateX(-50%);
-  background: rgba(10, 18, 32, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  color: #fff;
-  padding: 12px 14px;
-  border-radius: 12px;
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease;
-  z-index: 9999;
-}
-
-.vf-toast-show {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* Responsive (match your breakpoints) */
-@media (max-width: 980px) {
-  .vf-section-grid,
-  .vf-section-grid-even {
-    grid-template-columns: 1fr;
-  }
-  .vf-h1 {
-    font-size: 38px;
-  }
-  .vf-h2 {
-    font-size: 30px;
-  }
-}
-
+/* Responsive – on mobile, keep one card, adjust padding */
 @media (max-width: 760px) {
-  .vf-nav-toggle {
-    display: inline-flex;
+  .vf-car-viewport {
+    padding: 0 20px;
   }
-  .vf-nav-list {
-    position: absolute;
-    right: 0;
-    top: 54px;
-    flex-direction: column;
-    align-items: flex-start;
-    background: rgba(5, 8, 18, 0.96);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 16px;
-    padding: 12px 14px;
-    display: none;
+  .vf-car-track {
+    gap: 20px;
   }
-  .vf-nav-list-open {
-    display: flex;
+  .vf-card {
+    flex: 0 0 calc(100% - 40px); /* 100% minus mobile padding */
   }
 }
 
@@ -531,37 +410,4 @@ section[id] {
   .vf-section {
     padding-top: 70px;
   }
-}
-
-/* ────────────────────────────────────────────── */
-/* FIX: Carousel & Card Titles – Prevent intra-word wrapping & clipping */
-/* ────────────────────────────────────────────── */
-
-.vf-card-title {
-  font-size: clamp(8px, 0.95vw, 13px);   /* smaller & tighter range */
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  text-align: center;
-  font-weight: 800;
-  margin: 0 0 8px;
-  
-  /* FIX: Allow natural word wrapping, no mid-word breaks */
-  white-space: normal;
-  word-break: normal;
-  hyphens: auto;
-  overflow-wrap: break-word;
-  
-  /* Prevent clipping – allow height to expand */
-  overflow: visible;
-  text-overflow: initial;
-  min-height: 2.6em;
-  max-height: none;
-  line-height: 1.25;                    /* slightly tighter for better fit */
-}
-
-/* Carousel cards – make each ~10% wider, still show exactly 2 at a time */
-.vf-card {
-  flex: 0 0 calc((100% - 14px) / 1.8);   /* ~55.6% width each → ~10% wider than 50% */
-  min-width: 0;                         /* prevent overflow issues */
-  /* keep all your existing styles (background, border, shadow, etc.) */
 }
