@@ -412,3 +412,17 @@ section[id] {
   box-shadow: 0 0 16px rgba(245, 183, 74, 0.3); /* Optional subtle gold glow */
 }
 
+/* Force all section grids to stack vertically on mobile */
+@media (max-width: 980px) {  /* or 760px – match your existing breakpoint */
+  .vf-section-grid,
+  .vf-section-grid-even {
+    grid-template-columns: 1fr;      /* single column */
+    gap: 32px;                       /* tighter gap for mobile */
+  }
+
+  /* Optional: ensure images and text stack correctly */
+  .vf-section-media,
+  .vf-section-media + div {
+    order: 1;  /* image first on mobile if needed */
+  }
+}
