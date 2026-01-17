@@ -538,12 +538,12 @@ section[id] {
 /* ────────────────────────────────────────────── */
 
 .vf-card-title {
-  font-size: clamp(10px, 0.95vw, 13px);   /* smaller & tighter range */
+  font-size: clamp(8px, 0.95vw, 13px);   /* smaller & tighter range */
   letter-spacing: 0.14em;
   text-transform: uppercase;
   text-align: center;
   font-weight: 800;
-  margin: 0 0 10px;
+  margin: 0 0 8px;
   
   /* FIX: Allow natural word wrapping, no mid-word breaks */
   white-space: normal;
@@ -559,8 +559,9 @@ section[id] {
   line-height: 1.25;                    /* slightly tighter for better fit */
 }
 
-/* Ensure card height can expand if title wraps more */
+/* Carousel cards – make each ~10% wider, still show exactly 2 at a time */
 .vf-card {
-  height: auto;                         /* ← change from fixed 288px */
-  min-height: 288px;                    /* keep minimum, allow taller */
+  flex: 0 0 calc((100% - 14px) / 1.8);   /* ~55.6% width each → ~10% wider than 50% */
+  min-width: 0;                         /* prevent overflow issues */
+  /* keep all your existing styles (background, border, shadow, etc.) */
 }
