@@ -22,13 +22,12 @@ export default function HomePage() {
         {/* Carousel 1: what-we-do */}
         <CarouselSection
           id="what-we-do"
-          imageSrc="/assets/img/getty-images-MCOxTPW6MJI-unsplash.jpg"
+          imageSrc="/assets/img/whatwedo.jpg"
           imageAlt={whatWeDo.imageAlt}
           title={whatWeDo.title}
           intro={whatWeDo.intro}
           ctaText={whatWeDo.bottomCta}
           items={whatWeDo.cards}
-          priority={true}  // priority for above-fold LCP
         />
 
         {/* Carousel 2: who-we-serve */}
@@ -45,7 +44,7 @@ export default function HomePage() {
         {/* Carousel 3: ai-alignment */}
         <CarouselSection
           id="ai-alignment"
-          imageSrc="/assets/img/pexels-tara-winstead-8386440.jpg"
+          imageSrc="/assets/img/aialigned.jpg"
           imageAlt={aiAlignment.imageAlt}
           title={aiAlignment.title}
           intro={aiAlignment.intro}
