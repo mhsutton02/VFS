@@ -2,6 +2,8 @@
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import careers from "../../content/careers.json";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function CareersPage() {
   return (
@@ -16,42 +18,60 @@ export default function CareersPage() {
           {careers.intro}
         </p>
 
-        <div className="vf-section-grid" style={{ gap: "40px" }}>
-          {careers.jobs.map((job) => (
-            <div
-              key={job.id}
-              className="vf-card"
-              style={{
-                padding: "24px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "16px",
-              }}
-            >
-              <h3 className="vf-card-title" style={{ fontSize: "1.5rem" }}>
-                {job.title}
-              </h3>
-              <div style={{ color: "var(--muted)", fontSize: "0.95rem" }}>
-                <strong>Location:</strong> {job.location} • <strong>Type:</strong> {job.type}
-              </div>
-              <p className="vf-card-body">{job.summary}</p>
-              <p style={{ marginTop: "auto", fontWeight: 600 }}>
-                How to apply: {job.howToApply}
-              </p>
-            </div>
-          ))}
+        {/* Three blocks with icons, linking to sections below */}
+        <div className="vf-section-grid" style={{ gap: "40px", marginBottom: "80px" }}>
+          <Link href="#culture" className="vf-card min-w-touch min-h-touch focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent" style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "24px", textDecoration: "none" }}>
+            <Image src="/assets/img/icon-culture.png" alt="Our Culture icon" width={80} height={80} style={{ marginBottom: "16px" }} /> {/* Add your icon file */}
+            <h3 className="vf-h3">Our Culture</h3>
+            <p className="vf-card-body" style={{ textAlign: "center" }}>Click to learn more</p>
+          </Link>
+
+          <Link href="#benefits" className="vf-card min-w-touch min-h-touch focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent" style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "24px", textDecoration: "none" }}>
+            <Image src="/assets/img/icon-benefits.png" alt="Our Benefits icon" width={80} height={80} style={{ marginBottom: "16px" }} /> {/* Add your icon file */}
+            <h3 className="vf-h3">Our Benefits</h3>
+            <p className="vf-card-body" style={{ textAlign: "center" }}>Click to learn more</p>
+          </Link>
+
+          <Link href="#opportunities" className="vf-card min-w-touch min-h-touch focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent" style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "24px", textDecoration: "none" }}>
+            <Image src="/assets/img/icon-opportunities.png" alt="Our Opportunities icon" width={80} height={80} style={{ marginBottom: "16px" }} /> {/* Add your icon file */}
+            <h3 className="vf-h3">Our Opportunities</h3>
+            <p className="vf-card-body" style={{ textAlign: "center" }}>Click to learn more</p>
+          </Link>
         </div>
 
-        {/* NEW: Back to Contact CTA */}
-        <div style={{ textAlign: "center", marginTop: "60px" }}>
-          <a
-            href="/#contact"
-            className="vf-btn vf-btn-primary min-w-touch min-h-touch px-touch py-touch focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent"
-            aria-label="Back to Contact section on homepage"
-          >
-            Back to Contact
-          </a>
-        </div>
+        {/* Lower sections with placeholder text */}
+        <section id="culture" className="vf-section" style={{ marginBottom: "60px" }}>
+          <h2 className="vf-h2" style={{ textAlign: "center" }}>Our Culture</h2>
+          <p className="vf-body" style={{ maxWidth: "800px", margin: "0 auto" }}>
+            Placeholder text for our culture description. Updates coming soon!
+          </p>
+          <div className="vf-section-bottom" style={{ justifyContent: "center", gap: "20px" }}>
+            <Link href="/#contact" className="vf-btn vf-btn-primary">Contact</Link>
+            <Link href="/careers" className="vf-btn vf-btn-ghost">Back to Top</Link>
+          </div>
+        </section>
+
+        <section id="benefits" className="vf-section" style={{ marginBottom: "60px" }}>
+          <h2 className="vf-h2" style={{ textAlign: "center" }}>Our Benefits</h2>
+          <p className="vf-body" style={{ maxWidth: "800px", margin: "0 auto" }}>
+            Placeholder text for our benefits description. Updates coming soon!
+          </p>
+          <div className="vf-section-bottom" style={{ justifyContent: "center", gap: "20px" }}>
+            <Link href="/#contact" className="vf-btn vf-btn-primary">Contact</Link>
+            <Link href="/careers" className="vf-btn vf-btn-ghost">Back to Top</Link>
+          </div>
+        </section>
+
+        <section id="opportunities" className="vf-section">
+          <h2 className="vf-h2" style={{ textAlign: "center" }}>Our Opportunities</h2>
+          <p className="vf-body" style={{ maxWidth: "800px", margin: "0 auto" }}>
+            Placeholder text for our opportunities description. Updates coming soon!
+          </p>
+          <div className="vf-section-bottom" style={{ justifyContent: "center", gap: "20px" }}>
+            <Link href="/#contact" className="vf-btn vf-btn-primary">Contact</Link>
+            <Link href="/careers" className="vf-btn vf-btn-ghost">Back to Top</Link>
+          </div>
+        </section>
       </main>
       <Footer />
     </>
