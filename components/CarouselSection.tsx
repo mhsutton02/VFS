@@ -54,7 +54,6 @@ export function CarouselSection({
                 <Carousel
                   items={items}
                   ariaLabel={title + " carousel"}
-                  direction={reverse ? "left" : "right"}
                 />
         </div>
 
