@@ -137,17 +137,15 @@ a {
   gap: 42px;
   align-items: stretch;
 }
-/* Force About section to side-by-side layout like others */
-#about .vf-section-grid-even {
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); /* text/carousel wider, image slightly narrower */
-  gap: 42px;
-  align-items: stretch;
+.vf-section-grid-even {
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
 }
 
 /* Media */
-#about .vf-section-media {
-  max-width: 640px;
-  margin: 0 auto;
+.vf-section-media {
+  position: relative;
+  display: flex;
+  align-items: stretch;
 }
 .vf-media-img {
   width: 100%;
@@ -243,52 +241,44 @@ a {
   justify-content: flex-start;
 }
 
-/* Carousel basics – show ONE card at a time, centered, no clipping */
+/* Carousel basics */
 .vf-carousel {
   margin-top: 14px;
   display: grid;
-  grid-template-columns: 48px 1fr 48px;
-  gap: 12px;
+  grid-template-columns: 42px 1fr 42px;
+  gap: 10px;
   align-items: center;
-  max-width: 390px;  /* optional: cap entire carousel width – adjust as needed */
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .vf-car-btn {
-  height: 48px;
-  width: 48px;
+  height: 42px;
+  width: 42px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.24);
   background: rgba(0, 0, 0, 0.18);
   color: var(--text);
   cursor: pointer;
-  min-width: 48px;
 }
 
 .vf-car-viewport {
   overflow: hidden;
   width: 100%;
-  max-width: 330px;          /* fits one 480px card + 20px left/right padding */
-  margin: 0 auto;
-  padding: 0 20px;
-  box-sizing: border-box;
+  padding: 0 10px;
 }
 
 .vf-car-track {
   display: flex;
-  gap: 32px;
+  gap: 14px;
   transform: translateX(0);
   transition: transform 0.5s ease;
   padding: 2px 0;
-  width: max-content;
 }
 
+/* Card */
 .vf-card {
-  flex: 0 0 230px;           /* fixed card width – adjust this number if needed */
-  min-width: 0;
+  flex: 0 0 calc((100% - 14px) / 2);
   background: rgba(255, 255, 255, 0.05);
-  border: 2px solid var(--accent);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 16px;
   padding: 14px 14px 12px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.32);
@@ -297,91 +287,9 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: auto;
-  min-height: 288px;
+  height: 288px;
 }
 
-/* Mobile – reduce padding, keep one card */
-@media (max-width: 760px) {
-  .vf-car-viewport {
-    padding: 0 20px;
-    max-width: none;
-  }
-  .vf-car-track {
-    gap: 20px;
-  }
-  .vf-card {
-    flex: 0 0 calc(100% - 40px); /* full width minus padding */
-  }
-}
-
-/* ────────────────────────────────────────────── */
-/* NEW ADDITIONS for priority #6: Mobile-Specific UX & Accessibility */
-/* ────────────────────────────────────────────── */
-
-/* Respect user's prefers-reduced-motion setting (disables animations/transitions) */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* Better focus states for keyboard/touch navigation (visible only when needed) */
-:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 2px;
-  border-radius: var(--radius);
-}
-
-/* Smooth focus fallback for older browsers or when not using :focus-visible */
-a:focus,
-button:focus,
-input:focus,
-textarea:focus,
-select:focus {
-  outline: 3px solid var(--accent);
-  outline-offset: 2px;
-}
-
-/* Improve touch target feel (already using min-w-touch/min-h-touch from Tailwind) */
-*:focus-visible {
-  transition: outline 0.1s ease;
-}
-
-/* Optional: Prevent text size adjust on mobile (good for accessibility) */
-html {
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-}
-
-/* ────────────────────────────────────────────── */
-/* FIX: Prevent section headers from being clipped under sticky header */
-/* ────────────────────────────────────────────── */
-
-section[id] {
-  scroll-margin-top: 100px;     /* ~header height + breathing room */
-}
-
-@media (max-width: 760px) {
-  section[id] {
-    scroll-margin-top: 80px;
-  }
-}
-
-/* Extra top padding so title isn't right at the edge when scrolled to */
-.vf-section {
-  padding-top: 80px;
-}
-
-@media (max-width: 760px) {
-  .vf-section {
-    padding-top: 70px;
-  }
-}
-
-/* Carousel & Card Titles – Prevent intra-word wrapping & clipping */
 .vf-card-title {
   font-size: clamp(8px, 0.95vw, 13px);
   letter-spacing: 0.14em;
@@ -389,7 +297,7 @@ section[id] {
   text-align: center;
   font-weight: 800;
   margin: 0 0 8px;
-  color: var(--accent);
+  
   /* FIX: Allow natural word wrapping, no mid-word breaks */
   white-space: normal;
   word-break: normal;
@@ -404,26 +312,264 @@ section[id] {
   line-height: 1.25;
 }
 
-/* Gold accent outline around all image frames */
-.vf-section-media {
-  border: 2px solid var(--accent);          /* Gold border – adjust thickness (2px) or color */
-  border-radius: var(--radius);             /* Matches your existing corner radius */
-  overflow: hidden;                         /* Ensures image doesn't spill outside border */
-  box-shadow: 0 0 16px rgba(245, 183, 74, 0.3); /* Optional subtle gold glow */
+.vf-card-body {
+  color: var(--muted);
+  font-size: 16px;
+  margin: 0;
+  flex: 1;
+  overflow: hidden;
 }
 
-/* Force all section grids to stack vertically on mobile */
-@media (max-width: 760px) {  /* or 760px – match your existing breakpoint */
+.vf-card-active {
+  border-color: rgba(245, 183, 74, 0.55);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45);
+}
+
+/* About */
+.vf-company-block {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin: 10px 0 16px;
+}
+
+.vf-contact-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 12px 0 14px;
+}
+
+.vf-meta-value {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* Form */
+.vf-form {
+  display: grid;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+
+.vf-form label {
+  display: grid;
+  gap: 6px;
+  color: var(--text);
+  font-size: 13px;
+}
+
+.vf-form input,
+.vf-form textarea {
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.18);
+  color: var(--text);
+  padding: 10px;
+}
+
+/* Footer */
+.vf-site-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 22px 0;
+  background: #050812;
+}
+
+.vf-footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.vf-footer-title {
+  font-weight: 800;
+}
+
+.vf-footer-sub {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.vf-footer-right {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.vf-footer-right a {
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.vf-footer-right a:hover {
+  color: var(--text);
+}
+
+/* Toast */
+.vf-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 26px;
+  transform: translateX(-50%);
+  background: rgba(10, 18, 32, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #fff;
+  padding: 12px 14px;
+  border-radius: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 9999;
+}
+
+.vf-toast-show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Responsive (match your breakpoints) */
+@media (max-width: 980px) {
   .vf-section-grid,
   .vf-section-grid-even {
-    grid-template-columns: 1fr;      /* single column */
-    gap: 32px;                       /* tighter gap for mobile */
+    grid-template-columns: 1fr;
   }
-
-  /* Optional: ensure images and text stack correctly */
-  .vf-section-media,
-  .vf-section-media + div {
-    order: 1;  /* image first on mobile if needed */
+  .vf-h1 {
+    font-size: 38px;
+  }
+  .vf-h2 {
+    font-size: 30px;
   }
 }
 
+@media (max-width: 760px) {
+  .vf-nav-toggle {
+    display: inline-flex !important;
+  }
+  .vf-nav-list {
+    position: absolute;
+    top: 54px;
+    right: 0;
+    left: 0;
+    width: 100vw;
+    background: rgba(5, 8, 18, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 0 0 16px 16px;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 1000;
+    flex-direction: column;
+    align-items: flex-start;
+    display: none;
+  }
+  .vf-nav-list-open {
+    display: flex !important;
+  }
+  .vf-nav-list-open li {
+    width: 100%;
+  }
+  .vf-nav-list-open a {
+    display: block;
+    width: 100%;
+    padding: 16px 0;
+    font-size: 1.1rem;
+    text-align: left;
+  }
+}
+
+/* ────────────────────────────────────────────── */
+/* Mobile-Specific UX & Accessibility */
+/* ────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius);
+}
+
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+*:focus-visible {
+  transition: outline 0.1s ease;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* ────────────────────────────────────────────── */
+/* FIX: Anchor scrolling & header clipping */
+/* ────────────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth !important;
+}
+
+section[id] {
+  scroll-margin-top: 100px;
+}
+
+@media (max-width: 760px) {
+  section[id] {
+    scroll-margin-top: 80px;
+  }
+}
+
+.vf-section {
+  padding-top: 80px;
+}
+
+@media (max-width: 760px) {
+  .vf-section {
+    padding-top: 70px;
+  }
+}
+
+/* ────────────────────────────────────────────── */
+/* FIX: Carousel & Card Titles */
+/* ────────────────────────────────────────────── */
+
+.vf-card-title {
+  font-size: clamp(8px, 0.95vw, 13px);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 800;
+  margin: 0 0 8px;
+  color: var(--accent);
+  white-space: normal;
+  word-break: normal;
+  hyphens: auto;
+  overflow-wrap: break-word;
+  overflow: visible;
+  text-overflow: initial;
+  min-height: 2.6em;
+  max-height: none;
+  line-height: 1.25;
+}

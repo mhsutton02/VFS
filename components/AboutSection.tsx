@@ -28,14 +28,17 @@ export function AboutSection() {
             margin: "0 auto",
           }}
         >
-          <Image
-            src="/assets/img/aboutnew.jpg"
-            alt={aboutContent.imageAlt}
-            className="vf-media-img"
-            loading="lazy"
-            sizes="(max-width: 768px) 100vw, 50vw"
-            quality={85}
-          />
+<Image
+  src="/assets/img/aboutnew.jpg"
+  alt={aboutContent.imageAlt}
+  className="vf-media-img"
+  width={400}           // max width: 400px
+  height={300}          // max height: 300px (maintains 4:3 ratio)
+  loading="lazy"
+  sizes="(max-width: 400px) 100vw, 50vw"
+  quality={85}
+  style={{ maxWidth: '400px', maxHeight: '300px', width: '100%', height: 'auto' }}  // enforces max dimensions
+/>
         </div>
       </div>
     </section>
