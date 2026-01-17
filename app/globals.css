@@ -250,7 +250,7 @@ a {
   grid-template-columns: 48px 1fr 48px;
   gap: 12px;
   align-items: center;
-  max-width: 900px;  /* optional: cap entire carousel width – adjust as needed */
+  max-width: 480px;  /* optional: cap entire carousel width – adjust as needed */
   margin-left: auto;
   margin-right: auto;
 }
@@ -269,7 +269,7 @@ a {
 .vf-car-viewport {
   overflow: hidden;
   width: 100%;
-  max-width: 520px;          /* fits one 480px card + 20px left/right padding */
+  max-width: 380px;          /* fits one 480px card + 20px left/right padding */
   margin: 0 auto;
   padding: 0 20px;
   box-sizing: border-box;
@@ -285,10 +285,10 @@ a {
 }
 
 .vf-card {
-  flex: 0 0 480px;           /* fixed card width – adjust this number if needed */
+  flex: 0 0 320px;           /* fixed card width – adjust this number if needed */
   min-width: 0;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 2px solid var(--accent);
   border-radius: 16px;
   padding: 14px 14px 12px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.32);
@@ -389,7 +389,7 @@ section[id] {
   text-align: center;
   font-weight: 800;
   margin: 0 0 8px;
-  
+  color: var(--accent);
   /* FIX: Allow natural word wrapping, no mid-word breaks */
   white-space: normal;
   word-break: normal;
@@ -403,3 +403,12 @@ section[id] {
   max-height: none;
   line-height: 1.25;
 }
+
+/* Gold accent outline around all image frames */
+.vf-section-media {
+  border: 2px solid var(--accent);          /* Gold border – adjust thickness (2px) or color */
+  border-radius: var(--radius);             /* Matches your existing corner radius */
+  overflow: hidden;                         /* Ensures image doesn't spill outside border */
+  box-shadow: 0 0 16px rgba(245, 183, 74, 0.3); /* Optional subtle gold glow */
+}
+

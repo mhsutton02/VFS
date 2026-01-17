@@ -1,11 +1,6 @@
 // components/ContactForm.tsx
 "use client";
 
-// Use a standard HTML POST to allow Netlify Forms to capture submissions
-// This form posts to /success (static page) so the user sees confirmation
-// and Netlify records the submission. Client-side JS submission was
-// removed because Netlify's build-time detection + form endpoint require
-// a regular POST to register form submissions reliably.
 export function ContactForm() {
   return (
     <form
@@ -15,9 +10,16 @@ export function ContactForm() {
       data-netlify="true"
       netlify-honeypot="bot-field"
       className="vf-form"
-      // NEW: role="form" + aria-label for better screen reader context
-      role="form"
-      aria-label="Contact form"
+      style={{
+        display: "grid",
+        gap: "24px",
+        background: "rgba(255, 255, 255, 0.04)",
+        border: "1px solid rgba(255, 255, 255, 0.1)",
+        borderRadius: "var(--radius)",
+        padding: "32px",
+        maxWidth: "600px",
+        margin: "0 auto",
+      }}
     >
       <input type="hidden" name="form-name" value="contact" />
       <p className="hidden">
@@ -26,64 +28,122 @@ export function ContactForm() {
         </label>
       </p>
 
-      {/* Name field – larger touch area + focus state */}
-      <label>
-        Name
-        <input
-          name="name"
-          type="text"
-          required
-          className="min-w-touch min-h-touch px-touch py-3 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent"
-          // NEW: placeholder for better mobile UX (tap to type)
-          placeholder="Your full name"
-          autoComplete="name"
-        />
-      </label>
+      {/* Name & Organization – side-by-side on desktop, stacked on mobile */}
+      <div className="vf-contact-meta" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
+        <label>
+          Name
+          <input
+            name="name"
+            type="text"
+            required
+            placeholder="Your full name"
+            style={{
+              width: "100%",
+              padding: "14px",
+              fontSize: "1rem",
+              borderRadius: "10px",
+              border: "1px solid rgba(255, 255, 255, 0.18)",
+              background: "rgba(0, 0, 0, 0.18)",
+              color: "var(--text)",
+              boxSizing: "border-box",
+            }}
+          />
+        </label>
 
-      {/* Organization – optional, same touch/focus */}
-      <label>
-        Organization
-        <input
-          name="organization"
-          type="text"
-          className="min-w-touch min-h-touch px-touch py-3 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent"
-          placeholder="Your company or organization (optional)"
-          autoComplete="organization"
-        />
-      </label>
+        <label>
+          Organization
+          <input
+            name="organization"
+            type="text"
+            placeholder="Your company or organization (optional)"
+            style={{
+              width: "100%",
+              padding: "14px",
+              fontSize: "1rem",
+              borderRadius: "10px",
+              border: "1px solid rgba(255, 255, 255, 0.18)",
+              background: "rgba(0, 0, 0, 0.18)",
+              color: "var(--text)",
+              boxSizing: "border-box",
+            }}
+          />
+        </label>
+      </div>
 
-      {/* Email – same improvements */}
-      <label>
-        Email
-        <input
-          name="email"
-          type="email"
-          required
-          className="min-w-touch min-h-touch px-touch py-3 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent"
-          placeholder="your.email@example.com"
-          autoComplete="email"
-        />
-      </label>
+      {/* Email & Phone – side-by-side on desktop, stacked on mobile */}
+      <div className="vf-contact-meta" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
+        <label>
+          Email
+          <input
+            name="email"
+            type="email"
+            required
+            placeholder="your.email@example.com"
+            style={{
+              width: "100%",
+              padding: "14px",
+              fontSize: "1rem",
+              borderRadius: "10px",
+              border: "1px solid rgba(255, 255, 255, 0.18)",
+              background: "rgba(0, 0, 0, 0.18)",
+              color: "var(--text)",
+              boxSizing: "border-box",
+            }}
+          />
+        </label>
 
-      {/* Message textarea – larger touch area, better rows for mobile */}
+        <label>
+          Phone
+          <input
+            name="phone"
+            type="tel"
+            placeholder="Your phone number"
+            style={{
+              width: "100%",
+              padding: "14px",
+              fontSize: "1rem",
+              borderRadius: "10px",
+              border: "1px solid rgba(255, 255, 255, 0.18)",
+              background: "rgba(0, 0, 0, 0.18)",
+              color: "var(--text)",
+              boxSizing: "border-box",
+            }}
+          />
+        </label>
+      </div>
+
+      {/* Message */}
       <label>
         Message
         <textarea
           name="message"
           required
-          rows={6}  // Slightly more rows on mobile for easier typing
-          className="min-w-touch min-h-touch px-touch py-3 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent resize-y"
+          rows={6}
           placeholder="Tell us about your needs or project..."
-          autoComplete="off"
+          style={{
+            width: "100%",
+            padding: "14px",
+            fontSize: "1rem",
+            borderRadius: "10px",
+            border: "1px solid rgba(255, 255, 255, 0.18)",
+            background: "rgba(0, 0, 0, 0.18)",
+            color: "var(--text)",
+            resize: "vertical",
+            minHeight: "140px",
+          }}
         />
       </label>
 
-      {/* Submit button – larger touch target + focus */}
+      {/* Send Button */}
       <button
-        className="vf-btn vf-btn-primary min-w-touch min-h-touch px-touch py-touch focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        className="vf-btn vf-btn-primary"
         type="submit"
-        // NEW: aria-label for clarity if button text changes
-        aria-label="Send contact message"
+        style={{
+          width: "100%",
+          padding: "16px",
+          fontSize: "1.1rem",
+          marginTop: "20px",
+        }}
       >
         Send
       </button>
