@@ -467,12 +467,14 @@ a {
   .vf-nav-list {
     display: none !important;
     position: absolute;
-    top: 100%; /* directly below header */
-    left: 0;
-    right: 0;
-    width: 100%;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 420px;
+    width: 94vw;
     background: rgba(5, 8, 18, 0.98);
     border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 0 0 18px 18px;
     padding: 20px 0;
     box-sizing: border-box;
     z-index: 1000;
