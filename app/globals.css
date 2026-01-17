@@ -470,7 +470,7 @@ a {
     z-index: 1000;
     flex-direction: column;
     align-items: flex-start;
-    display: none;
+    display: none !important;
   }
   .vf-nav-list-open {
     display: flex !important;
