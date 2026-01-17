@@ -9,33 +9,75 @@ export default function CareersPage() {
   return (
     <>
       <Header />
-      <main className="vf-container" style={{ padding: "80px 20px" }}>
+      <main className="vf-container" style={{ padding: "80px 20px", maxWidth: "900px" }}>
         <h1 className="vf-h1" style={{ textAlign: "center", marginBottom: "40px" }}>
           {careers.title}
         </h1>
 
-        <p className="vf-body" style={{ textAlign: "center", maxWidth: "800px", margin: "0 auto 60px" }}>
+        <p className="vf-body" style={{ textAlign: "center", margin: "0 auto 60px" }}>
           {careers.intro}
         </p>
 
-        {/* Three blocks with icons, linking to sections below */}
-        <div className="vf-section-grid" style={{ gap: "40px", marginBottom: "80px" }}>
-          <Link href="#culture" className="vf-card min-w-touch min-h-touch focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent" style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "24px", textDecoration: "none" }}>
-            <Image src="/assets/img/icon-culture.png" alt="Our Culture icon" width={80} height={80} style={{ marginBottom: "16px" }} /> {/* Add your icon file */}
+        {/* Three stacked rectangles – same size, vertical layout */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "40px", marginBottom: "80px" }}>
+          {/* Culture */}
+          <Link
+            href="#culture"
+            className="vf-card"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              padding: "32px",
+              textDecoration: "none",
+              minHeight: "280px",     // ← fixed height for same size
+              justifyContent: "center",
+              textAlign: "center",
+            }}
+          >
+            <Image src="/assets/img/icon-culture.png" alt="Our Culture icon" width={80} height={80} style={{ marginBottom: "16px" }} />
             <h3 className="vf-h3">Our Culture</h3>
-            <p className="vf-card-body" style={{ textAlign: "center" }}>Click to learn more</p>
+            <p className="vf-card-body">Click to learn more</p>
           </Link>
 
-          <Link href="#benefits" className="vf-card min-w-touch min-h-touch focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent" style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "24px", textDecoration: "none" }}>
-            <Image src="/assets/img/icon-benefits.png" alt="Our Benefits icon" width={80} height={80} style={{ marginBottom: "16px" }} /> {/* Add your icon file */}
+          {/* Benefits */}
+          <Link
+            href="#benefits"
+            className="vf-card"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              padding: "32px",
+              textDecoration: "none",
+              minHeight: "280px",     // same fixed height
+              justifyContent: "center",
+              textAlign: "center",
+            }}
+          >
+            <Image src="/assets/img/icon-benefits.png" alt="Our Benefits icon" width={80} height={80} style={{ marginBottom: "16px" }} />
             <h3 className="vf-h3">Our Benefits</h3>
-            <p className="vf-card-body" style={{ textAlign: "center" }}>Click to learn more</p>
+            <p className="vf-card-body">Click to learn more</p>
           </Link>
 
-          <Link href="#opportunities" className="vf-card min-w-touch min-h-touch focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent" style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "24px", textDecoration: "none" }}>
-            <Image src="/assets/img/icon-opportunities.png" alt="Our Opportunities icon" width={80} height={80} style={{ marginBottom: "16px" }} /> {/* Add your icon file */}
+          {/* Opportunities */}
+          <Link
+            href="#opportunities"
+            className="vf-card"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              padding: "32px",
+              textDecoration: "none",
+              minHeight: "280px",     // same fixed height
+              justifyContent: "center",
+              textAlign: "center",
+            }}
+          >
+            <Image src="/assets/img/icon-opportunities.png" alt="Our Opportunities icon" width={80} height={80} style={{ marginBottom: "16px" }} />
             <h3 className="vf-h3">Our Opportunities</h3>
-            <p className="vf-card-body" style={{ textAlign: "center" }}>Click to learn more</p>
+            <p className="vf-card-body">Click to learn more</p>
           </Link>
         </div>
 
