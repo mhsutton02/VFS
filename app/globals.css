@@ -507,3 +507,28 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
+/* ────────────────────────────────────────────── */
+/* FIX 1: Prevent section headers from being clipped under sticky header */
+/* when jumping from menu items (e.g. #who-we-serve)                     */
+/* ────────────────────────────────────────────── */
+
+section[id] {
+  scroll-margin-top: 100px;     /* ~header height + breathing room */
+}
+
+@media (max-width: 760px) {
+  section[id] {
+    scroll-margin-top: 80px;
+  }
+}
+
+/* Extra top padding so title isn't right at the edge when scrolled to */
+.vf-section {
+  padding-top: 80px;
+}
+
+@media (max-width: 760px) {
+  .vf-section {
+    padding-top: 70px;
+  }
+}
