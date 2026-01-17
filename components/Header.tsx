@@ -25,7 +25,7 @@ export function Header() {
 
   return (
     <header className="vf-site-header">
-      <div className="vf-container vf-header-inner">
+      <div className="vf-container vf-header-inner" style={{ position: "relative" }}>
         <Link
           href="/"
           aria-label="Go to homepage – ValorForge Solutions"
@@ -47,14 +47,17 @@ export function Header() {
           aria-expanded={open}
           aria-label="Toggle navigation menu"
           className="vf-nav-toggle min-w-touch min-h-touch px-touch py-touch focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent"
-          onClick={() => setOpen((v) => !v)}
+          onClick={() => {
+            setOpen((v) => !v);
+            console.log("Menu open state:", !open);
+          }}
         >
           Menu
         </button>
 
         <nav aria-label="Primary navigation" className="relative" role="navigation">
           <ul
-            className={`vf-nav-list ${open ? "vf-nav-list-open" : ""}`}
+            className={`vf-nav-list${open ? " vf-nav-list-open" : ""}`}
             aria-hidden={!open}
           >
             {NAV_ITEMS.map((item) => (
