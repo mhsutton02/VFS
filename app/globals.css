@@ -130,6 +130,21 @@ a {
   color: var(--text);
 }
 
+
+
+
+
+
+.vf-nav-list.vf-nav-list-open {
+  display: flex !important;
+  background: red !important;
+}
+
+
+
+
+
+
 /* Grid layout */
 .vf-section-grid {
   display: grid;
