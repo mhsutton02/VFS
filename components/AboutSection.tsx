@@ -24,7 +24,7 @@ export function AboutSection() {
         <div
           className="vf-section-media"
           style={{
-            maxWidth: "640px",
+            maxWidth: "320px",
             margin: "0 auto",
           }}
         >

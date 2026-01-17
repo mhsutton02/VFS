@@ -250,7 +250,7 @@ a {
   grid-template-columns: 48px 1fr 48px;
   gap: 12px;
   align-items: center;
-  max-width: 480px;  /* optional: cap entire carousel width – adjust as needed */
+  max-width: 390px;  /* optional: cap entire carousel width – adjust as needed */
   margin-left: auto;
   margin-right: auto;
 }
@@ -269,7 +269,7 @@ a {
 .vf-car-viewport {
   overflow: hidden;
   width: 100%;
-  max-width: 380px;          /* fits one 480px card + 20px left/right padding */
+  max-width: 330px;          /* fits one 480px card + 20px left/right padding */
   margin: 0 auto;
   padding: 0 20px;
   box-sizing: border-box;
@@ -285,7 +285,7 @@ a {
 }
 
 .vf-card {
-  flex: 0 0 320px;           /* fixed card width – adjust this number if needed */
+  flex: 0 0 230px;           /* fixed card width – adjust this number if needed */
   min-width: 0;
   background: rgba(255, 255, 255, 0.05);
   border: 2px solid var(--accent);
@@ -413,7 +413,7 @@ section[id] {
 }
 
 /* Force all section grids to stack vertically on mobile */
-@media (max-width: 980px) {  /* or 760px – match your existing breakpoint */
+@media (max-width: 760px) {  /* or 760px – match your existing breakpoint */
   .vf-section-grid,
   .vf-section-grid-even {
     grid-template-columns: 1fr;      /* single column */
@@ -426,3 +426,4 @@ section[id] {
     order: 1;  /* image first on mobile if needed */
   }
 }
+
