@@ -538,7 +538,7 @@ section[id] {
 /* ────────────────────────────────────────────── */
 
 .vf-card-title {
-  font-size: clamp(12px, 1.05vw, 14px);
+  font-size: clamp(10px, 0.95vw, 13px);   /* smaller & tighter range */
   letter-spacing: 0.14em;
   text-transform: uppercase;
   text-align: center;
@@ -546,17 +546,17 @@ section[id] {
   margin: 0 0 10px;
   
   /* FIX: Allow natural word wrapping, no mid-word breaks */
-  white-space: normal;                  /* already good */
-  word-break: normal;                   /* ← changed from keep-all */
-  hyphens: auto;                        /* ← allows hyphenation on long words */
-  overflow-wrap: break-word;            /* ← safe fallback for very long words */
+  white-space: normal;
+  word-break: normal;
+  hyphens: auto;
+  overflow-wrap: break-word;
   
   /* Prevent clipping – allow height to expand */
   overflow: visible;
-  text-overflow: initial;               /* ← remove clip */
-  min-height: 2.6em;                    /* keep minimum height for consistency */
-  max-height: none;                     /* remove any cap if present */
-  line-height: 1.3;                     /* tighter line height for multi-line */
+  text-overflow: initial;
+  min-height: 2.6em;
+  max-height: none;
+  line-height: 1.25;                    /* slightly tighter for better fit */
 }
 
 /* Ensure card height can expand if title wraps more */
