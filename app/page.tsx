@@ -1,5 +1,5 @@
 // app/page.tsx
-import { Header } from "../components/Header.tsx";
+import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { HeroSection } from "../components/HeroSection";
 import { CarouselSection } from "../components/CarouselSection";
@@ -7,10 +7,9 @@ import { AboutSection } from "../components/AboutSection";
 import { ContactSection } from "../components/ContactSection";
 
 import whatWeDo from "../content/what_we_do.json";
-import whoWeServe from "../content/who_we_Serve.json";
+import whoWeServe from "../content/who_we_serve.json";  // fixed file name case (was who_we_Serve)
 import aiAlignment from "../content/ai_alignment.json";
 
-// NEW: Import Image from next/image (for priority #1 in child components if needed here)
 import Image from 'next/image';
 
 export default function HomePage() {
@@ -29,23 +28,18 @@ export default function HomePage() {
           intro={whatWeDo.intro}
           ctaText={whatWeDo.bottomCta}
           items={whatWeDo.cards}
-          // NEW: Add priority for above-fold LCP image (priority #1 perf win on mobile)
-          priority={true}
-          // Optional: If CarouselSection supports lazy, add loading="lazy" prop here too
+          priority={true}  // priority for above-fold LCP
         />
 
         {/* Carousel 2: who-we-serve */}
         <CarouselSection
           id="who-we-serve"
-          reverse
-          altBackground
-          imageSrc="/assets/img/samuel-schroth-hyPt63Df3Dw-unsplash.jpg"
+          imageSrc="/assets/img/whoweserve.jpg"
           imageAlt={whoWeServe.imageAlt}
           title={whoWeServe.title}
           intro={whoWeServe.intro}
           ctaText={whoWeServe.bottomCta}
           items={whoWeServe.cards}
-          // NEW: No priority (below fold) → allow lazy loading
         />
 
         {/* Carousel 3: ai-alignment */}
@@ -57,7 +51,6 @@ export default function HomePage() {
           intro={aiAlignment.intro}
           ctaText={aiAlignment.bottomCta}
           items={aiAlignment.cards}
-          // NEW: Below fold, lazy by default
         />
 
         <AboutSection />

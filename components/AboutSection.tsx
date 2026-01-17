@@ -29,7 +29,7 @@ export function AboutSection() {
           }}
         >
           <Image
-            src="/assets/img/generated-image-1.png"
+            src="/assets/img/aboutnew.jpg"
             alt={aboutContent.imageAlt}
             className="vf-media-img"
             width={800}
