@@ -32,8 +32,6 @@ export function AboutSection() {
             src="/assets/img/aboutnew.jpg"
             alt={aboutContent.imageAlt}
             className="vf-media-img"
-            width={800}
-            height={600}
             loading="lazy"
             sizes="(max-width: 768px) 100vw, 50vw"
             quality={85}
