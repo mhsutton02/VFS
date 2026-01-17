@@ -243,18 +243,18 @@ a {
   justify-content: flex-start;
 }
 
-/* Carousel basics – adjusted to show ONE card at a time */
-/* Carousel basics – define card size first, viewport fits around it */
+/* Carousel basics – show ONE card at a time, centered, no clipping */
 .vf-carousel {
   margin-top: 14px;
   display: grid;
-  grid-template-columns: 48px 1fr 48px;  /* buttons + flexible viewport */
+  grid-template-columns: 48px 1fr 48px;
   gap: 12px;
   align-items: center;
-  max-width: 460px;  /* optional: cap entire carousel width */
+  max-width: 900px;  /* optional: cap entire carousel width – adjust as needed */
   margin-left: auto;
   margin-right: auto;
 }
+
 .vf-car-btn {
   height: 48px;
   width: 48px;
@@ -266,30 +266,26 @@ a {
   min-width: 48px;
 }
 
-/* Viewport – sized to fit ONE full card + padding */
 .vf-car-viewport {
   overflow: hidden;
   width: 100%;
-  max-width: 520px;          /* ← fits one 480px card + 20px left + 20px right padding */
-  margin: 0 auto;            /* centers the viewport */
+  max-width: 520px;          /* fits one 480px card + 20px left/right padding */
+  margin: 0 auto;
   padding: 0 20px;
   box-sizing: border-box;
 }
 
-/* Track – allows sliding multiple cards */
 .vf-car-track {
   display: flex;
-  gap: 32px;                 /* space between cards */
+  gap: 32px;
   transform: translateX(0);
   transition: transform 0.5s ease;
   padding: 2px 0;
   width: max-content;
-/* Card – full width of viewport when only one shown */
 }
 
-/* Card – FIXED maximum size, no percentage calc needed */
 .vf-card {
-  flex: 0 0 300px;           /* ← define RIGHT card size here (480px wide) */
+  flex: 0 0 480px;           /* fixed card width – adjust this number if needed */
   min-width: 0;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -305,44 +301,17 @@ a {
   min-height: 288px;
 }
 
-.vf-card-title {
-  font-size: clamp(8px, 0.95vw, 13px);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  text-align: center;
-  font-weight: 800;
-  margin: 0 0 10px;                    /* restored to original 10px for better spacing */
-  color: var(--accent);  /* ← ADD THIS LINE – uses your gold color #f5b74a */
-  /* Natural word wrapping, no mid-word breaks */
-  white-space: normal;
-  word-break: normal;
-  hyphens: auto;
-  overflow-wrap: break-word;
-  
-  /* Prevent clipping, allow controlled expansion */
-  overflow: visible;
-  text-overflow: initial;
-  min-height: 2.6em;
-  max-height: none;
-  line-height: 1.35;                   /* slightly looser – better readability on wrap */
-  
-  /* Optional: limit to 3 lines with ellipsis (uncomment if you want) */
-  /* display: -webkit-box; */
-  /* -webkit-line-clamp: 3; */
-  /* -webkit-box-orient: vertical; */
-  /* overflow: hidden; */
-}
-
-/* Responsive – on mobile, keep one card, adjust padding */
+/* Mobile – reduce padding, keep one card */
 @media (max-width: 760px) {
   .vf-car-viewport {
     padding: 0 20px;
+    max-width: none;
   }
   .vf-car-track {
     gap: 20px;
   }
   .vf-card {
-    flex: 0 0 calc(100% - 40px); /* 100% minus mobile padding */
+    flex: 0 0 calc(100% - 40px); /* full width minus padding */
   }
 }
 
@@ -410,4 +379,27 @@ section[id] {
   .vf-section {
     padding-top: 70px;
   }
+}
+
+/* Carousel & Card Titles – Prevent intra-word wrapping & clipping */
+.vf-card-title {
+  font-size: clamp(8px, 0.95vw, 13px);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 800;
+  margin: 0 0 8px;
+  
+  /* FIX: Allow natural word wrapping, no mid-word breaks */
+  white-space: normal;
+  word-break: normal;
+  hyphens: auto;
+  overflow-wrap: break-word;
+  
+  /* Prevent clipping – allow height to expand */
+  overflow: visible;
+  text-overflow: initial;
+  min-height: 2.6em;
+  max-height: none;
+  line-height: 1.25;
 }
