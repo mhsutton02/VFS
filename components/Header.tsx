@@ -1,4 +1,3 @@
-// components/Header.tsx
 "use client";
 
 import Link from "next/link";
@@ -6,7 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 const NAV_ITEMS = [
-  { href: "/", label: "Home" },                   // ← NEW: goes to homepage root
+  { href: "/", label: "Home" },
   { href: "#what-we-do", label: "What We Do" },
   { href: "#who-we-serve", label: "Who We Serve" },
   { href: "#ai-alignment", label: "AI Alignment" },
@@ -23,9 +22,6 @@ export function Header() {
   const handleLinkClick = () => {
     setOpen(false);
   };
-
-  // Add debug logging to confirm state change
-  console.log("Mobile menu state:", open); // Debug: check if state toggles in console
 
   return (
     <header className="vf-site-header">
@@ -51,10 +47,7 @@ export function Header() {
           aria-expanded={open}
           aria-label="Toggle navigation menu"
           className="vf-nav-toggle min-w-touch min-h-touch px-touch py-touch focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent"
-          onClick={() => {
-            setOpen((v) => !v); // Toggle state
-            console.log("Menu toggled to:", !open); // Debug: confirm click handler fires
-          }}
+          onClick={() => setOpen((v) => !v)}
         >
           Menu
         </button>
