@@ -28,7 +28,6 @@ export default function HomePage() {
           intro={whatWeDo.intro}
           ctaText={whatWeDo.bottomCta}
           items={whatWeDo.cards}
-          priority={true}
         />
 
         <CarouselSection
