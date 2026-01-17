@@ -22,7 +22,7 @@ export default function HomePage() {
 
         <CarouselSection
           id="what-we-do"
-          imageSrc="/assets/img/getty-images-MCOxTPW6MJI-unsplash.jpg"
+          imageSrc="/assets/img/whatwedo.jpg"
           imageAlt={whatWeDo.imageAlt}
           title={whatWeDo.title}
           intro={whatWeDo.intro}
@@ -42,7 +42,7 @@ export default function HomePage() {
 
         <CarouselSection
           id="ai-alignment"
-          imageSrc="/assets/img/pexels-tara-winstead-8386440.jpg"
+          imageSrc="/assets/img/aialigned.jpg"
           imageAlt={aiAlignment.imageAlt}
           title={aiAlignment.title}
           intro={aiAlignment.intro}
@@ -50,9 +50,10 @@ export default function HomePage() {
           items={aiAlignment.cards}
         />
 
-        <ContactSection />
+
         <GivingBackSection />    {/* Now before About */}
         <AboutSection />
+        <ContactSection />
       </main>
       <Footer />
     </>
