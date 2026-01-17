@@ -12,7 +12,7 @@ export function GivingBackSection() {
         {/* Image frame first (left on desktop, top on mobile) */}
         <div className="vf-section-media">
           <Image
-            src="/assets/img/givingback.png"  // your existing image file
+            src="/assets/img/givingback.jpg"  // your existing image file
             alt={givingBack.imageAlt}
             className="vf-media-img"
             width={800}
