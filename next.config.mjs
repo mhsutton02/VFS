@@ -58,13 +58,9 @@ const nextConfig = {
 // #4: PWA wrapper – disabled in development to avoid service worker caching issues during dev
 const withPWA = (await import('next-pwa')).default({
   dest: 'public',
-  disable: process.env.NODE_ENV === 'development',  // ← This line already disables it in dev
+  disable: process.env.NODE_ENV === 'development',
   register: true,
   skipWaiting: true,
-  // Extra safety: completely disable SW registration in dev mode
-  devOptions: {
-    enabled: false,  // ← NEW: explicitly disable service worker registration in dev
-  },
 });
 
 export default withPWA(nextConfig);
