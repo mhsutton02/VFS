@@ -1,15 +1,7 @@
-import { Carousel, CarouselItem } from "./Carousel";
-import { SectionFrames } from "./SectionFrames";
+"use client";
 
-type CarouselSectionProps = {
-  id: string;
-  imageSrc?: string;
-  imageAlt?: string;
-  title: string;
-  intro: string;
-  ctaText?: string;
-  items: CarouselItem[];
-};
+import Link from "next/link";
+// ...existing imports...
 
 export function CarouselSection({
   id,
