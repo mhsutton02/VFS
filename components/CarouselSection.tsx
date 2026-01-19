@@ -3,20 +3,16 @@ import { SectionFrames } from "./SectionFrames";
 
 type CarouselSectionProps = {
   id: string;
-  altBackground?: boolean;
-  reverse?: boolean;
-  imageSrc: string;
-  imageAlt: string;
+  imageSrc?: string;
+  imageAlt?: string;
   title: string;
   intro: string;
-  ctaText: string;
+  ctaText?: string;
   items: CarouselItem[];
 };
 
 export function CarouselSection({
   id,
-  altBackground,
-  reverse,
   imageSrc,
   imageAlt,
   title,
@@ -24,9 +20,10 @@ export function CarouselSection({
   ctaText,
   items
 }: CarouselSectionProps) {
-  const sectionBgClass = altBackground
-    ? "vf-section vf-section-carousels vf-section-carousels-alt"
-    : "vf-section vf-section-carousels";
+  const sectionBgClass =
+    id === "who-we-serve"
+      ? "vf-section vf-section-carousels vf-section-alt-bg"
+      : "vf-section vf-section-carousels";
 
   return (
     <section id={id} className={sectionBgClass}>
@@ -40,10 +37,7 @@ export function CarouselSection({
           }
           MID={
             <div style={{ width: "100%" }}>
-              <Carousel
-                items={items}
-                ariaLabel={title + " carousel"}
-              />
+              <Carousel items={items} ariaLabel={title + " carousel"} />
             </div>
           }
           BUT={

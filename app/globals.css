@@ -708,3 +708,49 @@ section[id] {
 .vf-frame-but {
   overflow: hidden;
 }
+
+/* Mobile text sizing adjustments */
+@media (max-width: 768px) {
+  .vf-h1 {
+    font-size: 32px;
+  }
+  
+  .vf-h2 {
+    font-size: 24px;
+  }
+  
+  .vf-h3 {
+    font-size: 18px;
+  }
+  
+  .vf-kicker {
+    font-size: 14px;
+  }
+  
+  .vf-body {
+    font-size: 16px;
+  }
+  
+  .vf-lead {
+    font-size: 16px;
+  }
+  
+  .vf-card-title {
+    font-size: clamp(16px, 4vw, 20px);
+  }
+  
+  .vf-card-body {
+    font-size: 14px;
+  }
+  
+  /* Fix card width on mobile */
+  .vf-card {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .vf-carousel-container {
+    width: 100%;
+    padding: 0;
+  }
+}
