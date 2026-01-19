@@ -489,7 +489,7 @@ a {
 
 .vf-frame-top {
   width: 100%;
-  height: clamp(250px, 31.25vw, 360px);
+  height: clamp(200px, 25vw, 288px); /* revert to original size */
   max-width: min(768px, 95vw);
   margin: 0 auto clamp(12px, 2vw, 20px);
   flex-direction: column;
@@ -501,6 +501,15 @@ a {
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
+
+  /* Force taller hero frame on mobile (hero only) */
+  .vf-section-hero .vf-frame-top {
+    height: clamp(250px, 31.25vw, 360px) !important;
+    padding: clamp(12px, 3vw, 18px) !important;
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
 
 .vf-frame-mid {
   width: 100%;
