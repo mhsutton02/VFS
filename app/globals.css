@@ -597,10 +597,10 @@ section[id] {
   .vf-frame-top {
     height: clamp(120px, 24vw, 200px);
   }
-  .vf-frame-mid { 
+  .vf-frame-mid {
     height: clamp(180px, 56vw, 300px);
   }
-  .vf-frame-but { 
+  .vf-frame-but {
     height: clamp(48px, 12vw, 80px);
   }
 }
@@ -610,6 +610,7 @@ section[id] {
   /* Typography mobile sizing */
   .vf-h1 {
     font-size: 28px;
+    line-height: 1.2;
     word-wrap: break-word;
     overflow-wrap: break-word;
   }
@@ -635,14 +636,23 @@ section[id] {
     word-wrap: break-word;
     overflow-wrap: break-word;
   }
-  
+
+  /* Force taller hero frame on mobile */
+  .vf-frame-top {
+    height: clamp(250px, 31.25vw, 360px) !important;
+    padding: clamp(12px, 3vw, 18px) !important;
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
   /* Carousel mobile: 1 card */
   .vf-carousel-container {
     grid-template-columns: 1fr;
     width: 100%;
     padding: 0;
   }
-  
+
   /* Card mobile sizing */
   .vf-card {
     flex: 0 0 100% !important;
@@ -651,34 +661,34 @@ section[id] {
     min-width: 0 !important;
     height: clamp(224px, 64vw, 280px);
   }
-  
+
   .vf-card-title {
     font-size: clamp(16px, 4vw, 20px);
   }
-  
+
   .vf-card-body {
     font-size: 14px;
   }
-  
+
   /* Carousel mobile adjustments */
   .vf-carousel {
     width: 100%;
     padding: 0 clamp(8px, 2vw, 16px);
   }
-  
+
   .vf-car-viewport {
     width: 100%;
     overflow: visible;
   }
-  
+
   .vf-car-track {
     width: 100%;
   }
-  
+
   section[id] {
     scroll-margin-top: 80px;
   }
-  
+
   .vf-section {
     padding-top: 70px;
   }
