@@ -257,6 +257,56 @@ a {
   justify-content: flex-start;
 }
 
+/* Under Construction Page */
+.vf-construction-page {
+  min-height: 100vh;
+  padding: 80px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vf-construction-container {
+  width: 100%;
+  max-width: var(--max);
+  padding: 0 20px;
+}
+
+.vf-construction-top {
+  margin-bottom: 2rem;
+}
+
+.vf-construction-mid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.vf-construction-content {
+  text-align: center;
+  width: 100%;
+}
+
+.vf-construction-content .vf-lead {
+  margin-bottom: 2rem;
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .vf-construction-page {
+    padding: 60px 0;
+  }
+
+  .vf-construction-mid {
+    min-height: 240px;
+  }
+
+  .vf-construction-content .vf-lead {
+    font-size: 16px;
+  }
+}
+
 /* Carousel */
 .vf-carousel {
   margin-top: 14px;
@@ -329,6 +379,7 @@ a {
   text-overflow: ellipsis;
   line-height: 1.25;
 }
+
 .vf-card-body {
   color: var(--muted);
   font-size: 16px;
@@ -540,7 +591,7 @@ a {
 
 .vf-frame-top {
   width: 100%;
-  height: clamp(200px, 25vw, 288px); /* revert to original size */
+  height: clamp(200px, 25vw, 288px);
   max-width: min(768px, 95vw);
   margin: 0 auto clamp(12px, 2vw, 20px);
   flex-direction: column;
@@ -553,14 +604,13 @@ a {
   overflow-wrap: break-word;
 }
 
-  /* Force taller hero frame on mobile (hero only) */
-  .vf-section-hero .vf-frame-top {
-    height: clamp(250px, 31.25vw, 360px) !important;
-    padding: clamp(12px, 3vw, 18px) !important;
-    overflow: hidden;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-  }
+.vf-section-hero .vf-frame-top {
+  height: clamp(250px, 31.25vw, 360px) !important;
+  padding: clamp(12px, 3vw, 18px) !important;
+  overflow: hidden;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
 
 .vf-frame-mid {
   width: 100%;
@@ -697,15 +747,6 @@ section[id] {
     overflow-wrap: break-word;
   }
 
-  /* Force taller hero frame on mobile */
-  .vf-frame-top {
-    height: clamp(250px, 31.25vw, 360px) !important;
-    padding: clamp(12px, 3vw, 18px) !important;
-    overflow: hidden;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-  }
-
   /* Carousel mobile: 1 card */
   .vf-carousel-container {
     grid-template-columns: 1fr;
@@ -713,13 +754,13 @@ section[id] {
     padding: 0;
   }
 
-  /* Card mobile sizing */
+  /* Card mobile sizing – REDUCED 30% */
   .vf-card {
     flex: 0 0 100% !important;
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
-    height: clamp(224px, 64vw, 280px);
+    height: clamp(156px, 44.8vw, 196px);
   }
 
   .vf-card-title {

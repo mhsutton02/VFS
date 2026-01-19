@@ -15,6 +15,10 @@ export function Footer() {
     { href: "/careers", label: "Careers" },
   ];
 
+  const handleLinkClick = () => {
+    setMenuOpen(false);
+  };
+
   return (
     <footer className="vf-site-footer">
       <div className="vf-container vf-footer-inner">
@@ -58,7 +62,7 @@ export function Footer() {
                 key={link.href}
                 href={link.href}
                 className="vf-footer-mobile-link"
-                onClick={() => setMenuOpen(false)}
+                onMouseDown={handleLinkClick}
               >
                 {link.label}
               </Link>
