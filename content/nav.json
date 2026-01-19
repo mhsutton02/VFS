@@ -1,0 +1,58 @@
+{
+  "items": [
+    {
+      "label": "Home",
+      "type": "dropdown",
+      "submenu": [
+        {
+          "label": "What We Do",
+          "href": "/#what-we-do"
+        },
+        {
+          "label": "Who We Serve",
+          "href": "/#who-we-serve"
+        },
+        {
+          "label": "AI Alignment",
+          "href": "/#ai-alignment"
+        },
+        {
+          "label": "Giving Back",
+          "href": "/#giving-back"
+        },
+        {
+          "label": "About",
+          "href": "/#about"
+        }
+      ]
+    },
+    {
+      "label": "Capabilities",
+      "type": "dropdown",
+      "submenu": [
+        {
+          "label": "Strategic IT Consulting",
+          "href": "/capabilities/strategic-it-consulting"
+        },
+        {
+          "label": "Modernization & Integration",
+          "href": "/capabilities/modernization-integration"
+        },
+        {
+          "label": "Program Delivery & PMO",
+          "href": "/capabilities/program-delivery"
+        }
+      ]
+    },
+    {
+      "label": "Careers",
+      "type": "route",
+      "href": "/careers"
+    },
+    {
+      "label": "Contact Us",
+      "type": "contact",
+      "href": "/#contact"
+    }
+  ]
+}

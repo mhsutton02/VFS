@@ -1,0 +1,33 @@
+{
+  "siteName": "ValorForge Solutions",
+  "siteUrl": "https://valorforgesolutions.com",
+  "defaultTitle": "ValorForge Solutions | Mission-Focused Technology Solutions",
+  "defaultDescription": "Veteran-owned SDVOSB delivering mission-critical technology strategy, implementation, and transformation for high-stakes environments.",
+  "defaultOgImage": "/placeholder-og-image.jpg",
+  "twitterHandle": "@valorforge",
+  "organization": {
+    "name": "ValorForge Solutions",
+    "legalName": "ValorForge Solutions LLC",
+    "url": "https://valorforgesolutions.com",
+    "logo": "https://valorforgesolutions.com/vf-logo.jpg",
+    "foundingDate": "2024",
+    "contactPoint": {
+      "telephone": "+1-703-555-0123",
+      "email": "info@valorforgesolutions.com",
+      "contactType": "customer service",
+      "areaServed": "US"
+    },
+    "address": {
+      "streetAddress": "",
+      "addressLocality": "Rockwall",
+      "addressRegion": "TX",
+      "postalCode": "75032",
+      "addressCountry": "US"
+    },
+    "sameAs": [
+      "https://linkedin.com/company/valorforgesolutions",
+      "https://twitter.com/valorforge",
+      "https://github.com/valorforge"
+    ]
+  }
+}

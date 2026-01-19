@@ -16,32 +16,54 @@ export const metadata: Metadata = {
   alternates: {
     canonical: seoDefaults.siteUrl,
   },
+  openGraph: {
+    title: seoDefaults.defaultTitle,
+    description: seoDefaults.defaultDescription,
+    url: seoDefaults.siteUrl,
+    type: "website",
+    images: [
+      {
+        url: seoDefaults.defaultOgImage,
+        width: 1200,
+        height: 630,
+        alt: seoDefaults.siteName,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: seoDefaults.defaultTitle,
+    description: seoDefaults.defaultDescription,
+    images: [seoDefaults.defaultOgImage],
+  },
 };
 
 export default function Home() {
   return (
     <main>
-      <div className="vf-block">
+      <div className="vf-block" id="hero">
         <Banner />
       </div>
 
-      <div className="vf-block">
+      <hr />
+
+      <div className="vf-block" id="what-we-do">
         <Section data={whatWeDoData} />
       </div>
 
-      <div className="vf-block">
+      <div className="vf-block" id="who-we-serve">
         <Section data={whoWeServeData} />
       </div>
 
-      <div className="vf-block">
+      <div className="vf-block" id="ai-alignment">
         <Section data={aiAlignmentData} />
       </div>
 
-      <div className="vf-block">
+      <div className="vf-block" id="giving-back">
         <Section data={givingBackData} />
       </div>
 
-      <div className="vf-block">
+      <div className="vf-block" id="about">
         <Section data={aboutData} />
       </div>
 
