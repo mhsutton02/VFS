@@ -363,7 +363,7 @@ a {
   flex-direction: column;
   justify-content: flex-start;
   height: clamp(300px, 40vw, 400px);
-  width: calc(((100% - clamp(16px, 2vw, 24px)) / 2)* 0.95)
+  width: calc((100% - clamp(16px, 2vw, 24px)) / 2);
 }
 
 .vf-card-title {
@@ -754,12 +754,13 @@ section[id] {
     padding: 0;
   }
 
-  /* Card mobile sizing – REDUCED 30% */
+  /* Card mobile sizing – STATIC WIDTH */
   .vf-card {
-    flex: 0 0 100% !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
+    flex: 0 0 calc(100% - 24px);
+    width: calc(100% - 24px) !important;
+    max-width: calc(100% - 24px) !important;
+    min-width: calc(100% - 24px) !important;
+    margin: 0 12px;
     height: clamp(156px, 44.8vw, 196px);
   }
 
