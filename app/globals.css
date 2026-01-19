@@ -489,7 +489,7 @@ a {
 
 .vf-frame-top {
   width: 100%;
-  height: clamp(200px, 25vw, 288px);
+  height: clamp(250px, 31.25vw, 360px);
   max-width: min(768px, 95vw);
   margin: 0 auto clamp(12px, 2vw, 20px);
   flex-direction: column;
