@@ -19,7 +19,7 @@ export function HeroSection() {
           MID={
             <Image
               src="/assets/img/hero.jpg"
-              alt={heroContent.imageAlt}
+              alt="Hero image"
               width={800}
               height={600}
               style={{ width: "100%", height: "auto", objectFit: "cover" }}
