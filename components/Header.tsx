@@ -11,6 +11,7 @@ export function Header() {
   const pathname = usePathname();
 
   const navLinks = [
+    { href: "/", label: "Home" },
     { href: "/#what-we-do", label: "What We Do" },
     { href: "/#who-we-serve", label: "Who We Serve" },
     { href: "/#ai-alignment", label: "AI Alignment" },
@@ -30,10 +31,10 @@ export function Header() {
 
   return (
     <header className="vf-site-header">
-      <div className="vf-container vf-header-inner">
-        <Link href="/">
+      <div className="vf-header-inner">
+        <Link href="/" style={{ display: "flex", alignItems: "center" }}>
           <Image
-            src="/vf-logo.jpg"
+            src="/assets/img/vf-logo.jpg"
             alt="ValorForge Solutions"
             width={180}
             height={60}

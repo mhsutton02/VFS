@@ -100,13 +100,16 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 0;
+  padding: 14px 20px;
+  gap: 20px;
+  width: 100%;
 }
 
 .vf-logo {
   height: 60px;
   width: auto;
   display: block;
+  flex-shrink: 0;
 }
 
 /* Nav */
@@ -118,27 +121,55 @@ a {
   border-radius: 999px;
   padding: 8px 12px;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .vf-nav-list {
   list-style: none;
   display: flex;
-  gap: 22px;
+  gap: 16px;
   margin: 0;
   padding: 0;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .vf-nav-list a {
   text-decoration: none;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  white-space: nowrap;
+  padding: 6px 8px;
+  transition: color 0.2s ease;
 }
 
 .vf-nav-list a:hover {
   color: var(--text);
+}
+
+@media (max-width: 1200px) {
+  .vf-nav-list {
+    gap: 12px;
+  }
+
+  .vf-nav-list a {
+    font-size: 11px;
+    padding: 4px 6px;
+  }
+}
+
+@media (max-width: 1050px) {
+  .vf-nav-list {
+    gap: 10px;
+  }
+
+  .vf-nav-list a {
+    font-size: 10px;
+    padding: 4px 5px;
+  }
 }
 
 /* Grid layout */
@@ -367,17 +398,16 @@ a {
 }
 
 .vf-card-title {
-  font-size: clamp(16px, 2vw, 24px);
+  font-size: clamp(14px, 1.5vw, 18px);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   text-align: center;
   font-weight: 800;
-  margin: 0 0 8px;
+  margin: 0 0 12px;
   color: var(--accent);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.25;
+  line-height: 1.3;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .vf-card-body {

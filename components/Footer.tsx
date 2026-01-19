@@ -2,11 +2,15 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
 
 export function Footer() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const footerLinks = [
+    { href: "/", label: "Home" },
     { href: "/#what-we-do", label: "What We Do" },
     { href: "/#who-we-serve", label: "Who We Serve" },
     { href: "/#ai-alignment", label: "AI Alignment" },
@@ -16,8 +20,12 @@ export function Footer() {
     { href: "/careers", label: "Careers" },
   ];
 
-  const handleLinkClick = () => {
+  const handleLinkClick = (href: string) => {
     setMenuOpen(false);
+    
+    if (href.includes("#") && pathname !== "/") {
+      router.push(href);
+    }
   };
 
   return (
@@ -37,6 +45,7 @@ export function Footer() {
               key={link.href}
               href={link.href}
               className="vf-footer-link"
+              onClick={() => handleLinkClick(link.href)}
             >
               {link.label}
             </Link>
@@ -63,7 +72,7 @@ export function Footer() {
                 key={link.href}
                 href={link.href}
                 className="vf-footer-mobile-link"
-                onMouseDown={handleLinkClick}
+                onClick={() => handleLinkClick(link.href)}
               >
                 {link.label}
               </Link>
