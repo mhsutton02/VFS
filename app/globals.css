@@ -191,7 +191,7 @@ a {
   border: none;
   border-radius: 0;
   box-shadow: none;
-  list-style: none
+  list-style: none;
 }
 
 .vf-nav-item-dropdown.open .vf-nav-dropdown-menu {
@@ -215,6 +215,10 @@ a {
   border-radius: 6px;
   margin-bottom: 8px;
   box-sizing: border-box;
+}
+
+.vf-nav-dropdown-item:last-child {
+  margin-bottom: 0;
 }
 
 .vf-nav-dropdown-item:hover {
@@ -276,10 +280,10 @@ a {
   outline-offset: 2px;
 }
 
-/* Banner / Hero */
+/* Banner */
 .vf-banner {
   width: 100%;
-  min-height: 380px;
+  min-height: 200px;
   position: relative;
   background: var(--surface);
   overflow: hidden;
@@ -304,43 +308,35 @@ a {
   align-items: center;
   justify-content: center;
   text-align: center;
-  min-height: 380px;
-  padding: var(--block-y) var(--page-x);
-  max-width: var(--max);
-  margin: 0 auto;
+  min-height: 200px;
+  padding: 48px var(--page-x);
+  width: 100%;
 }
 
 .vf-banner-kicker {
-  font-size: 24px;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
+  font-size: 14px;
+  font-weight: 700;
   color: var(--accent2);
-  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 12px;
 }
 
 .vf-banner-headline {
-  font-size: clamp(32px, 6vw, 52px);
+  font-size: clamp(24px, 5vw, 40px);
   font-weight: 900;
-  line-height: 1.15;
+  line-height: 1.2;
   color: var(--text);
-  margin: 0 0 20px;
+  margin: 0 0 16px;
   max-width: 900px;
 }
 
 .vf-banner-body {
-  font-size: clamp(16px, 2.8vw, 20px);
+  font-size: clamp(15px, 2.6vw, 18px);
   line-height: 1.6;
   color: var(--muted);
-  margin: 0 0 40px;
+  margin: 0;
   max-width: 700px;
-}
-
-.vf-banner-ctas {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 
 /* Section */
@@ -396,6 +392,7 @@ a {
   border-radius: 8px;
   padding: 36px 28px;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .vf-section-card:hover {
@@ -435,6 +432,64 @@ a {
   align-items: center;
   gap: 16px;
   flex-wrap: wrap;
+}
+
+/* Section Frames (Hero Section) */
+.vf-section-frames {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.vf-frame-top {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.vf-kicker {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+
+.vf-h1 {
+  font-size: clamp(32px, 6vw, 52px);
+  font-weight: 900;
+  line-height: 1.15;
+  color: var(--text);
+  margin: 0;
+}
+
+.vf-h1 .vf-accent {
+  color: var(--accent2);
+}
+
+.vf-body {
+  font-size: clamp(16px, 2.8vw, 20px);
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0;
+  max-width: 700px;
+}
+
+.vf-frame-but {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 /* Forms */
@@ -716,19 +771,20 @@ hr {
     font-size: 12px;
   }
 
-  .vf-banner-content {
-    min-height: 320px;
-    padding: 48px var(--page-x);
+  .vf-section-frames {
+    gap: 24px;
   }
 
-  .vf-banner-ctas {
-    flex-direction: column;
-    width: 100%;
-    max-width: 280px;
+  .vf-frame-but {
+    gap: 8px;
   }
 
-  .vf-banner-ctas .vf-btn {
-    width: 100%;
+  .vf-h1 {
+    font-size: clamp(24px, 5vw, 36px);
+  }
+
+  .vf-body {
+    font-size: clamp(14px, 2.4vw, 16px);
   }
 
   .vf-section-cards {

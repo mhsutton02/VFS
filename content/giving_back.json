@@ -11,7 +11,7 @@
   ],
   "footerCtas": [
     { "label": "Home", "type": "home", "href": "#hero", "priority": "secondary" },
-    { "label": "Learn More", "type": "route", "href": "/wcoming-soon" },
+    { "label": "Learn More", "type": "route", "href": "/coming-soon" },
     { "label": "Contact Us", "type": "contact", "href": "/#contact" }
   ]
 }

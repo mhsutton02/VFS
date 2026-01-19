@@ -1,138 +1,80 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
+import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import navData from "@/content/nav.json";
-
-const sectionIdForHref = (href: string) => {
-  const clean = href.replace(/^\/|^#/, "").toLowerCase();
-  switch (clean) {
-    case "":
-    case "home":
-    case "hero":
-      return "hero";
-    case "what-we-do":
-      return "what-we-do";
-    case "who-we-serve":
-      return "who-we-serve";
-    case "ai-alignment":
-    case "ai alignment":
-      return "ai-alignment";
-    case "giving-back":
-    case "giving back":
-      return "giving-back";
-    case "about":
-      return "about";
-    case "contact":
-    case "contact-us":
-    case "contact us":
-      return "contact";
-    default:
-      return null;
-  }
-};
+import Image from "next/image";
 
 export function Header() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const navRef = useRef<HTMLDivElement | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
 
-  const closeAll = () => {
-    setMobileOpen(false);
-    setOpenDropdown(null);
+  // Scroll to top of page (just landed)
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const toggleDropdown = (label: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    setOpenDropdown(openDropdown === label ? null : label);
-  };
-
-  const scrollToId = (id: string) => {
-    setTimeout(() => {
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-      }
-    }, 50);
-  };
-
-  const handleNavigation = (href: string, e?: React.MouseEvent) => {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
+  const handleLogoClick = () => {
+    if (pathname === "/") {
+      scrollToTop();
+    } else {
+      router.push("/");
+      setTimeout(() => scrollToTop(), 100);
     }
-
-    // Check if it's a section link (starts with /#)
-    if (href.startsWith("/#")) {
-      const sectionId = href.replace("/#", "");
-      
-      if (pathname === "/") {
-        // Already on home, just scroll
-        scrollToId(sectionId);
-      } else {
-        // On different page, navigate to home first
-        router.push(`/#${sectionId}`);
-        setTimeout(() => scrollToId(sectionId), 200);
-      }
-      closeAll();
-      return;
-    }
-
-    // Check if it's a section name without hash (from nav.json)
-    const sectionId = sectionIdForHref(href);
-    if (sectionId) {
-      if (pathname === "/") {
-        scrollToId(sectionId);
-      } else {
-        router.push(`/#${sectionId}`);
-        setTimeout(() => scrollToId(sectionId), 200);
-      }
-      closeAll();
-      return;
-    }
-
-    // It's an external route like /careers
-    router.push(href);
-    closeAll();
+    setMobileMenuOpen(false);
+    setDropdownOpen(false);
   };
 
-  // Close on outside click
-  useEffect(() => {
-    const onClick = (e: MouseEvent) => {
-      if (navRef.current && !navRef.current.contains(e.target as Node)) {
-        closeAll();
-      }
-    };
-    document.addEventListener("mousedown", onClick);
-    return () => document.removeEventListener("mousedown", onClick);
-  }, []);
+  const handleHomeClick = () => {
+    if (pathname === "/") {
+      scrollToTop();
+    } else {
+      router.push("/");
+      setTimeout(() => scrollToTop(), 100);
+    }
+    setMobileMenuOpen(false);
+    setDropdownOpen(false);
+  };
 
-  // Close on Escape
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeAll();
-    };
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, []);
+  const handleContactClick = () => {
+    if (pathname === "/") {
+      const el = document.getElementById("contact");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      router.push("/#contact");
+      setTimeout(() => {
+        const el = document.getElementById("contact");
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+    setMobileMenuOpen(false);
+    setDropdownOpen(false);
+  };
+
+  const handleNavigation = (path: string) => {
+    router.push(path);
+    setMobileMenuOpen(false);
+    setDropdownOpen(false);
+  };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
 
   return (
     <header className="vf-site-header">
-      <div className="vf-header-inner" ref={navRef}>
+      <div className="vf-header-inner">
         <button
-          onClick={(e) => handleNavigation("hero", e)}
+          onClick={handleLogoClick}
           className="vf-logo-button"
           aria-label="ValorForge Solutions Home"
         >
           <Image
-            src="/assets/img/vf-logo.jpg"
-            alt="ValorForge Solutions Logo"
+            src="/logo.svg"
+            alt="ValorForge Solutions"
             width={120}
-            height={60}
+            height={54}
             className="vf-logo"
             priority
           />
@@ -140,66 +82,72 @@ export function Header() {
 
         <button
           className="vf-nav-toggle"
-          onClick={() => setMobileOpen((v) => !v)}
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle navigation menu"
-          aria-expanded={mobileOpen}
+          aria-expanded={mobileMenuOpen}
         >
-          {mobileOpen ? "✕" : "☰"}
+          {mobileMenuOpen ? "✕" : "☰"}
         </button>
 
         <nav aria-label="Main navigation">
-          <ul className={`vf-nav-list ${mobileOpen ? "open" : ""}`}>
-            {navData.items.map((item) => {
-              // Dropdown items
-              if (item.type === "dropdown" && item.submenu) {
-                const isOpen = openDropdown === item.label;
-                return (
-                  <li
-                    key={item.label}
-                    className={`vf-nav-item-dropdown ${isOpen ? "open" : ""}`}
+          <ul className={`vf-nav-list ${mobileMenuOpen ? "open" : ""}`}>
+            <li>
+              <button onClick={handleHomeClick} className="vf-nav-list-button">
+                Home ▼
+              </button>
+            </li>
+
+            <li className={`vf-nav-item-dropdown ${dropdownOpen ? "open" : ""}`}>
+              <button
+                onClick={toggleDropdown}
+                className="vf-nav-list-button vf-nav-dropdown-toggle"
+                aria-expanded={dropdownOpen}
+                aria-haspopup="true"
+              >
+                Capabilities <span>▲</span>
+              </button>
+              <ul className="vf-nav-dropdown-menu" role="menu">
+                <li role="none">
+                  <button
+                    onClick={() => handleNavigation("/capabilities/strategic-it-consulting")}
+                    className="vf-nav-dropdown-item"
+                    role="menuitem"
                   >
-                    <button
-                      className="vf-nav-dropdown-toggle"
-                      onClick={(e) => toggleDropdown(item.label, e)}
-                      aria-expanded={isOpen}
-                      aria-haspopup="true"
-                    >
-                      {item.label}
-                      <span aria-hidden="true">{isOpen ? "▲" : "▼"}</span>
-                    </button>
-                    <ul className="vf-nav-dropdown-menu" role="menu">
-                      {item.submenu.map((sub) => (
-                        <li key={sub.label} role="none">
-                          <button
-                            className="vf-nav-dropdown-item"
-                            onClick={(e) => handleNavigation(sub.href, e)}
-                            role="menuitem"
-                          >
-                            {sub.label}
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
-                );
-              }
+                    Strategic IT Consulting
+                  </button>
+                </li>
+                <li role="none">
+                  <button
+                    onClick={() => handleNavigation("/capabilities/modernization-integration")}
+                    className="vf-nav-dropdown-item"
+                    role="menuitem"
+                  >
+                    Modernization &amp; Integration
+                  </button>
+                </li>
+                <li role="none">
+                  <button
+                    onClick={() => handleNavigation("/capabilities/program-delivery")}
+                    className="vf-nav-dropdown-item"
+                    role="menuitem"
+                  >
+                    Program Delivery &amp; PMO
+                  </button>
+                </li>
+              </ul>
+            </li>
 
-              // Regular route/contact items
-              if (item.type === "route" || item.type === "contact") {
-                return (
-                  <li key={item.label}>
-                    <button
-                      className="vf-nav-list-button"
-                      onClick={(e) => handleNavigation(item.href, e)}
-                    >
-                      {item.label}
-                    </button>
-                  </li>
-                );
-              }
+            <li>
+              <button onClick={() => handleNavigation("/careers")} className="vf-nav-list-button">
+                Careers
+              </button>
+            </li>
 
-              return null;
-            })}
+            <li>
+              <button onClick={handleContactClick} className="vf-nav-list-button">
+                Contact Us
+              </button>
+            </li>
           </ul>
         </nav>
       </div>
