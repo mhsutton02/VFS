@@ -607,22 +607,22 @@ section[id] {
 @media (max-width: 768px) {
   /* Typography mobile sizing */
   .vf-h1 {
-    font-size: 32px;
+    font-size: 28px;
   }
   .vf-h2 {
-    font-size: 24px;
+    font-size: 20px;
   }
   .vf-h3 {
-    font-size: 18px;
+    font-size: 16px;
   }
   .vf-kicker {
-    font-size: 14px;
+    font-size: 12px;
   }
   .vf-body {
-    font-size: 16px;
+    font-size: 14px;
   }
   .vf-lead {
-    font-size: 16px;
+    font-size: 14px;
   }
   
   /* Carousel mobile: 1 card */
@@ -638,7 +638,7 @@ section[id] {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
-    height: clamp(280px, 80vw, 350px);
+    height: clamp(224px, 64vw, 280px);
   }
   
   .vf-card-title {
