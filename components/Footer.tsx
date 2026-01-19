@@ -1,4 +1,3 @@
-// components/Footer.tsx
 import Link from "next/link";
 
 export function Footer() {
@@ -39,10 +38,16 @@ export function Footer() {
             About
           </Link>
           <Link
-            href="/contact"
+            href="/#contact"
             className="min-w-touch min-h-touch px-touch py-2 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
             Contact
+          </Link>
+          <Link
+            href="/careers"
+            className="min-w-touch min-h-touch px-touch py-2 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
+            Careers
           </Link>
         </div>
       </div>

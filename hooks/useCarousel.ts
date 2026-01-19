@@ -1,4 +1,3 @@
-// hooks/useCarousel.ts
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -6,9 +5,21 @@ import { useEffect, useRef, useState } from "react";
 export function useCarousel<T>(items: T[], intervalMs = 5000) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const visibleCount = 2;
+  // Detect mobile on mount and window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize(); // Set initial value
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const visibleCount = isMobile ? 1 : 2;
 
   const next = () => {
     setIndex((prev) => (prev + 1) % items.length);
@@ -27,12 +38,11 @@ export function useCarousel<T>(items: T[], intervalMs = 5000) {
     return () => {
       timerRef.current && clearInterval(timerRef.current);
     };
-  }, [paused, items.length, intervalMs]);
+  }, [paused, items.length, intervalMs, visibleCount]);
 
   const onMouseEnter = () => setPaused(true);
   const onMouseLeave = () => setPaused(false);
 
-  // Compute a slice of items (2 visible + 1 extra for seamless feel if needed)
   const getVisibleItems = () => {
     const result: T[] = [];
     for (let i = 0; i < visibleCount; i++) {

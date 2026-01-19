@@ -52,7 +52,7 @@ export function Header() {
             console.log("Menu open state:", !open);
           }}
         >
-          Menu
+          <span style={{ fontSize: "24px", lineHeight: "1" }}>☰</span>
         </button>
 
         <nav aria-label="Primary navigation" className="relative" role="navigation">
