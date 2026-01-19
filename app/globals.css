@@ -56,6 +56,15 @@ a {
   );
 }
 
+.vf-section-alt-bg {
+  background: radial-gradient(
+    circle at top right,
+    rgba(245, 183, 74, 0.12) 0%,
+    rgba(43, 114, 255, 0.10) 40%,
+    var(--bg2) 100%
+  );
+}
+
 /* Carousels background alternation */
 .vf-section-carousels {
   background: radial-gradient(
@@ -250,8 +259,21 @@ a {
   grid-template-columns: 42px 1fr 42px;
   gap: 10px;
   align-items: center;
-    padding: 0 32px; /* Add space for navigation buttons */
+  padding: 0 32px; /* Add space for navigation buttons */
   box-sizing: border-box;
+}
+
+.vf-carousel-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .vf-carousel-container {
+    grid-template-columns: 1fr;
+  }
 }
 
 .vf-car-btn {
