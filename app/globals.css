@@ -259,23 +259,23 @@ a {
 .vf-carousel {
   margin-top: 14px;
   display: grid;
-  grid-template-columns: 42px 1fr 42px;
-  gap: 10px;
+  grid-template-columns: clamp(36px, 5vw, 48px) 1fr clamp(36px, 5vw, 48px);
+  gap: clamp(8px, 1.5vw, 12px);
   align-items: center;
-  padding: 0 32px;
+  padding: 0 clamp(16px, 3vw, 32px);
   box-sizing: border-box;
 }
 
 .vf-carousel-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: clamp(16px, 2vw, 24px);
   width: 100%;
 }
 
 .vf-car-btn {
-  height: 42px;
-  width: 42px;
+  height: clamp(36px, 5vw, 48px);
+  width: clamp(36px, 5vw, 48px);
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.24);
   background: rgba(0, 0, 0, 0.18);
@@ -286,12 +286,12 @@ a {
 .vf-car-viewport {
   overflow: hidden;
   width: 100%;
-  padding: 0 8px;
+  padding: 0 clamp(4px, 1vw, 8px);
 }
 
 .vf-car-track {
   display: flex;
-  gap: 10px;
+  gap: clamp(8px, 2vw, 16px);
   transform: translateX(0);
   transition: transform 0.5s ease;
   padding: 2px 0;
@@ -299,7 +299,7 @@ a {
 
 /* Card */
 .vf-card {
-  flex: 0 0 calc((100% - 14px) / 2);
+  flex: 0 0 calc((100% - clamp(16px, 2vw, 24px)) / 2);
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 16px;
@@ -310,8 +310,8 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: 350px;
-  width: 240px;
+  height: clamp(300px, 40vw, 400px);
+  width: calc((100% - clamp(16px, 2vw, 24px)) / 2);
 }
 
 .vf-card-title {
@@ -478,15 +478,14 @@ a {
   justify-content: center;
   margin-bottom: 0.75rem;
   width: 100%;
-  max-width: 8in;
+  max-width: min(768px, 95vw);
   overflow: hidden;
 }
 
 .vf-frame-top {
-  width: 8in;
-  height: 3in;
+  width: min(768px, 95vw);
+  height: clamp(200px, 25vw, 288px);
   max-width: 100vw;
-  max-height: 3in;
   min-height: 48px;
   margin-bottom: 0.75rem;
   flex-direction: column;
@@ -496,10 +495,9 @@ a {
 }
 
 .vf-frame-mid {
-  width: 8in;
-  height: 4.5in;
+  width: min(768px, 95vw);
+  height: clamp(300px, 40vw, 432px);
   max-width: 100vw;
-  max-height: 4.5in;
   min-height: 180px;
   margin-bottom: 0.75rem;
   border: none !important;
@@ -516,10 +514,9 @@ a {
 }
 
 .vf-frame-but {
-  width: 8in;
-  height: 1in;
+  width: min(768px, 95vw);
+  height: clamp(60px, 10vw, 96px);
   max-width: 100vw;
-  max-height: 1in;
   min-height: 48px;
   margin-bottom: 0.75rem;
   display: flex;
@@ -532,10 +529,9 @@ a {
 }
 
 .vf-frame-form {
-  width: 8in;
-  height: calc(3in + 4.5in + 0.75rem);
+  width: min(768px, 95vw);
+  height: clamp(560px, 65vw, 720px);
   max-width: 100vw;
-  max-height: none;
   min-height: 400px;
   margin-bottom: 0.75rem;
   flex-direction: column;
@@ -596,9 +592,15 @@ section[id] {
     width: 100vw;
     max-width: 100vw;
   }
-  .vf-frame-top { height: 24vw; max-height: 120px; }
-  .vf-frame-mid { height: 56vw; max-height: 60vw; }
-  .vf-frame-but { height: 12vw; max-height: 60px; }
+  .vf-frame-top { 
+    height: clamp(120px, 24vw, 200px);
+  }
+  .vf-frame-mid { 
+    height: clamp(180px, 56vw, 300px);
+  }
+  .vf-frame-but { 
+    height: clamp(48px, 12vw, 80px);
+  }
 }
 
 /* Mobile breakpoint */
@@ -632,9 +634,11 @@ section[id] {
   
   /* Card mobile sizing */
   .vf-card {
+    flex: 0 0 100% !important;
     width: 100% !important;
     max-width: 100% !important;
-    min-width: auto !important;
+    min-width: 0 !important;
+    height: clamp(280px, 80vw, 350px);
   }
   
   .vf-card-title {
@@ -648,7 +652,7 @@ section[id] {
   /* Carousel mobile adjustments */
   .vf-carousel {
     width: 100%;
-    padding: 0 16px;
+    padding: 0 clamp(8px, 2vw, 16px);
   }
   
   .vf-car-viewport {
