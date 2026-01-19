@@ -1,0 +1,27 @@
+{
+  "title": "Strategic IT Consulting",
+  "intro": "End-to-end strategy and execution for complex technology portfolios with multi-year, multimillion-dollar impacts.",
+  "contentType": "text",
+  "items": [
+    {
+      "id": "planning",
+      "title": "Technology Roadmapping",
+      "body": "Develop multi-year technology strategies aligned with organizational goals, risk posture, and budget constraints."
+    },
+    {
+      "id": "assessment",
+      "title": "Portfolio Assessment",
+      "body": "Evaluate current systems, identify gaps, and recommend modernization or replacement strategies."
+    },
+    {
+      "id": "execution",
+      "title": "Implementation Planning",
+      "body": "Detailed execution plans with governance, timelines, resource allocation, and success metrics."
+    }
+  ],
+  "footerCtas": [
+    { "label": "Home", "type": "home" },
+    { "label": "Learn More", "type": "route", "href": "/what-we-do" },
+    { "label": "Contact Us", "type": "contact", "href": "/#contact" }
+  ]
+}

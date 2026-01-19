@@ -1,24 +1,15 @@
 {
   "title": "About",
   "intro": "ValorForge Solutions is a veteran-owned SDVOSB founded by retired senior military leadership and a seasoned executive team with extensive experience IT Project delivery",
-  
-  "imageAlt": "ValorForge leadership and team collaboration",
-  "bottomCta": "Contact",
-  "cards": [
-    {
-      "id": "mission",
-      "title": "Mission",
-      "body": "To forge durable, high-confidence technology outcomes for organizations whose missions cannot fail."
-    },
-    {
-      "id": "vision",
-      "title": "Vision Statement",
-      "body": "A world where mission-led teams confidently harness technology and AI, grounded in trust, discipline, and alignment."
-    },
-    {
-      "id": "values",
-      "title": "Core Values",
-      "body": "Service, discipline, integrity, and stewardship—applied to every engagement we lead."
-    }
+  "contentType": "text",
+  "items": [
+    { "id": "mission", "title": "Mission", "body": "To forge durable, high-confidence technology outcomes for organizations whose missions cannot fail." },
+    { "id": "vision", "title": "Vision Statement", "body": "A world where mission-led teams confidently harness technology and AI, grounded in trust, discipline, and alignment." },
+    { "id": "values", "title": "Core Values", "body": "Service, discipline, integrity, and stewardship—applied to every engagement we lead." }
+  ],
+  "footerCtas": [
+    { "label": "Home", "type": "home" },
+    { "label": "Learn More", "type": "route", "href": "/about" },
+    { "label": "Contact Us", "type": "contact", "href": "/#contact" }
   ]
 }

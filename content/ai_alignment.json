@@ -1,9 +1,8 @@
 {
   "title": "AI Alignment",
   "intro": "We align AI capabilities to your mission, governance, and risk posture—never as experiments, always as engineered outcomes.",
-  "imageAlt": "AI systems aligned with human intent and governance",
-  "bottomCta": "Align with the plan",
-  "cards": [
+  "contentType": "text",
+  "items": [
     {
       "id": "governance",
       "title": "Governance & Controls",
@@ -19,5 +18,10 @@
       "title": "Systems Integration",
       "body": "Safely integrating AI components into existing architectures without compromising reliability."
     }
+  ],
+  "footerCtas": [
+    { "label": "Home", "type": "home" },
+    { "label": "Learn More", "type": "route", "href": "/ai-alignment" },
+    { "label": "Contact Us", "type": "contact", "href": "/#contact" }
   ]
 }

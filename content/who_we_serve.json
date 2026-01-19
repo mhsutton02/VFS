@@ -1,9 +1,8 @@
 {
   "title": "Who We Serve",
   "intro": "We partner with organizations whose missions demand reliability, resilience, and trust.",
-  "imageAlt": "Teams aligned around a mission",
-  "bottomCta": "See fit for your mission",
-  "cards": [
+  "contentType": "text",
+  "items": [
     {
       "id": "federal",
       "title": "Federal & Public Sector",
@@ -19,5 +18,10 @@
       "title": "Strategic Partners",
       "body": "Prime contractors and integrators seeking a trusted SDVOSB ally at the edge of delivery."
     }
+  ],
+  "footerCtas": [
+    { "label": "Home", "type": "home" },
+    { "label": "Learn More", "type": "route", "href": "/who-we-serve" },
+    { "label": "Contact Us", "type": "contact", "href": "/#contact" }
   ]
 }

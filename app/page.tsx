@@ -1,65 +1,55 @@
-// app/page.tsx
-import { Header } from "../components/Header";
-import { Footer } from "../components/Footer";
-import { CarouselSection } from "../components/CarouselSection";
-import { AboutSection } from "../components/AboutSection";
-import { ContactSection } from "../components/ContactSection";
-import { GivingBackSection } from "../components/GivingBackSection";
-import { HeroSection } from "../components/HeroSection";
+import { Metadata } from "next";
+import { Banner } from "@/components/Banner";
+import { Section } from "@/components/Section";
+import { ContactForm } from "@/components/ContactForm";
+import whatWeDoData from "@/content/what_we_do.json";
+import whoWeServeData from "@/content/who_we_serve.json";
+import aiAlignmentData from "@/content/ai_alignment.json";
+import givingBackData from "@/content/giving_back.json";
+import aboutData from "@/content/about.json";
+import contactData from "@/content/contact.json";
+import seoDefaults from "@/content/seo_defaults.json";
 
-import whatWeDo from "../content/what_we_do.json";
-import whoWeServe from "../content/who_we_serve.json";
-import aiAlignment from "../content/ai_alignment.json";
+export const metadata: Metadata = {
+  title: seoDefaults.defaultTitle,
+  description: seoDefaults.defaultDescription,
+  alternates: {
+    canonical: seoDefaults.siteUrl,
+  },
+};
 
-import Image from 'next/image';
-
-
-
-export default function HomePage() {
+export default function Home() {
   return (
-    <>
-      <Header />
-      <main>
-        <HeroSection />
+    <main>
+      <div className="vf-block">
+        <Banner />
+      </div>
 
-        <CarouselSection
-          id="what-we-do"
-          imageSrc="/assets/img/whatwedo.jpg"
-          imageAlt={whatWeDo.imageAlt}
-          title={whatWeDo.title}
-          intro={whatWeDo.intro}
-          ctaText={whatWeDo.bottomCta}
-          ctaHref="/construction"
-          items={whatWeDo.cards}
-        />
+      <div className="vf-block">
+        <Section data={whatWeDoData} />
+      </div>
 
-        <CarouselSection
-          id="who-we-serve"
-          imageSrc="/assets/img/whoweserve.jpg"
-          imageAlt={whoWeServe.imageAlt}
-          title={whoWeServe.title}
-          intro={whoWeServe.intro}
-          ctaText={whoWeServe.bottomCta}
-          ctaHref="/construction"
-          items={whoWeServe.cards}
-        />
+      <div className="vf-block">
+        <Section data={whoWeServeData} />
+      </div>
 
-        <CarouselSection
-          id="ai-alignment"
-          imageSrc="/assets/img/aialigned.jpg"
-          imageAlt={aiAlignment.imageAlt}
-          title={aiAlignment.title}
-          intro={aiAlignment.intro}
-          ctaText={aiAlignment.bottomCta}
-          ctaHref="/construction"
-          items={aiAlignment.cards}
-        />
+      <div className="vf-block">
+        <Section data={aiAlignmentData} />
+      </div>
 
-        <GivingBackSection />
-        <AboutSection />
-        <ContactSection />
-      </main>
-      <Footer />
-    </>
+      <div className="vf-block">
+        <Section data={givingBackData} />
+      </div>
+
+      <div className="vf-block">
+        <Section data={aboutData} />
+      </div>
+
+      <div className="vf-block" id="contact">
+        <Section data={contactData}>
+          <ContactForm />
+        </Section>
+      </div>
+    </main>
   );
 }

@@ -1,5 +1,8 @@
 {
-  "title": "Contact Valor Forge Solutions",
-  "intro": "How can we help?",
-  "imageAlt": "Professional contact and communication imagery"
+  "title": "Contact ValorForge",
+  "intro": "Ready to discuss how we can support your mission? Reach out to our team.",
+  "contentType": "form",
+  "footerCtas": [
+    { "label": "Back to Top", "type": "home" }
+  ]
 }

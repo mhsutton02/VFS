@@ -1,58 +1,75 @@
-import React from "react";
+"use client";
 
 export function ContactForm() {
   return (
     <form
       name="contact"
       method="POST"
-      action="/success"
       data-netlify="true"
-      netlify-honeypot="bot-field"
-      style={{ display: "grid", gap: "12px", maxWidth: "640px", margin: "0 auto", textAlign: "left" }}
+      action="/success"
+      className="vf-form"
     >
-      {/* Netlify form-name hidden field */}
       <input type="hidden" name="form-name" value="contact" />
-      {/* Honeypot field (hidden) */}
-      <input type="text" name="bot-field" style={{ display: "none" }} aria-hidden="true" tabIndex={-1} />
 
-      <label className="vf-body">
-        Your Name
+      <div className="vf-form-group">
+        <label htmlFor="name" className="vf-label">
+          Name *
+        </label>
         <input
           type="text"
+          id="name"
           name="name"
           required
           className="vf-input"
-          placeholder="Jane Doe"
-          style={{ width: "100%", padding: "10px", borderRadius: "8px" }}
+          placeholder="Your full name"
+          aria-required="true"
         />
-      </label>
+      </div>
 
-      <label className="vf-body">
-        Email
+      <div className="vf-form-group">
+        <label htmlFor="email" className="vf-label">
+          Email *
+        </label>
         <input
           type="email"
+          id="email"
           name="email"
           required
           className="vf-input"
-          placeholder="jane@example.com"
-          style={{ width: "100%", padding: "10px", borderRadius: "8px" }}
+          placeholder="your.email@example.com"
+          aria-required="true"
         />
-      </label>
+      </div>
 
-      <label className="vf-body">
-        Message
+      <div className="vf-form-group">
+        <label htmlFor="phone" className="vf-label">
+          Phone
+        </label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          className="vf-input"
+          placeholder="(555) 123-4567"
+        />
+      </div>
+
+      <div className="vf-form-group">
+        <label htmlFor="message" className="vf-label">
+          Message *
+        </label>
         <textarea
+          id="message"
           name="message"
           required
-          rows={6}
-          className="vf-input"
-          placeholder="Tell us about your mission and challenges…"
-          style={{ width: "100%", padding: "10px", borderRadius: "8px" }}
+          className="vf-textarea"
+          placeholder="Tell us about your project or inquiry..."
+          aria-required="true"
         />
-      </label>
+      </div>
 
-      <button type="submit" className="vf-btn vf-btn-primary" style={{ alignSelf: "start" }}>
-        Submit
+      <button type="submit" className="vf-btn vf-btn-primary vf-form-submit">
+        Send Message
       </button>
     </form>
   );

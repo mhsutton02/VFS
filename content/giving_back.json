@@ -1,33 +1,17 @@
 {
   "title": "Giving Back",
   "intro": "We invest time and resources to support local communities and causes aligned with our mission. This section highlights our ongoing initiatives and how you can get involved.",
-  "imageAlt": "Veteran Support Orgs We Support",
-  "bottomCta": "Learn how to help",
-  "cards": [
-    {
-      "id": "Vets Who Code",
-      "title": "Vets Who Code",
-      "body": "A nonprofit that teaches veterans software development and coding skills to help them transition into tech careers."
-    },
-    {
-      "id": "Commit Foundation",
-      "title": "Commit Foundation",
-      "body": "Provides personalized transition support, mentorship, and career resources to help veterans and military spouses find meaningful civilian careers."
-    },
-    {
-      "id": "Hiring Our Heroes",
-      "title": "Hiring Our Heroes",
-      "body": "An initiative of the U.S. Chamber of Commerce Foundation that connects veterans, service members, and military spouses with meaningful employment opportunities."
-    },
-    {
-      "id": "Bunker Labs",
-      "title": "Bunker Labs",
-      "body": "A national network of veteran and military spouse entrepreneurs dedicated to helping the military-connected community start and grow businesses."
-    },
-    {
-      "id": "Code Platoon",
-      "title": "Code Platoon",
-      "body": "A nonprofit coding bootcamp that prepares veterans and military spouses for software engineering careers through immersive training and internships."
-    }
+  "contentType": "text",
+  "items": [
+    { "id": "vets-who-code", "title": "Vets Who Code", "body": "A nonprofit that teaches veterans software development and coding skills to help them transition into tech careers." },
+    { "id": "commit-foundation", "title": "Commit Foundation", "body": "Provides personalized transition support, mentorship, and career resources to help veterans and military spouses find meaningful civilian careers." },
+    { "id": "hiring-our-heroes", "title": "Hiring Our Heroes", "body": "An initiative of the U.S. Chamber of Commerce Foundation that connects veterans, service members, and military spouses with meaningful employment opportunities." },
+    { "id": "bunker-labs", "title": "Bunker Labs", "body": "A national network of veteran and military spouse entrepreneurs dedicated to helping the military-connected community start and grow businesses." },
+    { "id": "code-platoon", "title": "Code Platoon", "body": "A nonprofit coding bootcamp that prepares veterans and military spouses for software engineering careers through immersive training and internships." }
+  ],
+  "footerCtas": [
+    { "label": "Home", "type": "home" },
+    { "label": "Learn More", "type": "route", "href": "/giving-back" },
+    { "label": "Contact Us", "type": "contact", "href": "/#contact" }
   ]
 }

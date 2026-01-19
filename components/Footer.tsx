@@ -1,85 +1,66 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import footerData from "@/content/footer.json";
 
 export function Footer() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const router = useRouter();
-  const pathname = usePathname();
+  const handleBackToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
-  const footerLinks = [
-    { href: "/", label: "Home" },
-    { href: "/#what-we-do", label: "What We Do" },
-    { href: "/#who-we-serve", label: "Who We Serve" },
-    { href: "/#ai-alignment", label: "AI Alignment" },
-    { href: "/#giving-back", label: "Giving Back" },
-    { href: "/#about", label: "About" },
-    { href: "/#contact", label: "Contact" },
-    { href: "/careers", label: "Careers" },
-  ];
-
-  const handleLinkClick = (href: string) => {
-    setMenuOpen(false);
-    
-    if (href.includes("#") && pathname !== "/") {
-      router.push(href);
-    }
+  const getSocialIcon = (icon: string) => {
+    const icons: { [key: string]: string } = {
+      in: "in",
+      tw: "𝕏",
+      gh: "⚙",
+    };
+    return icons[icon] || icon;
   };
 
   return (
     <footer className="vf-site-footer">
-      <div className="vf-container vf-footer-inner">
-        <div>
-          <div className="vf-footer-title">ValorForge Solutions</div>
-          <div className="vf-footer-sub">
-            Veteran-owned SDVOSB • Rockwall, TX
+      <div className="vf-footer-inner">
+        <div className="vf-footer-contact">
+          <div className="vf-footer-contact-company">
+            {footerData.contact.company}
+          </div>
+          <div className="vf-footer-contact-item">
+            {footerData.contact.address}
+          </div>
+          <div className="vf-footer-contact-item">
+            <a href={`tel:${footerData.contact.phone}`}>
+              {footerData.contact.phone}
+            </a>
+          </div>
+          <div className="vf-footer-contact-item">
+            <a href={`mailto:${footerData.contact.email}`}>
+              {footerData.contact.email}
+            </a>
           </div>
         </div>
 
-        {/* Desktop footer links */}
-        <div className="vf-footer-right vf-footer-desktop">
-          {footerLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="vf-footer-link"
-              onClick={() => handleLinkClick(link.href)}
+        <div className="vf-footer-back-to-top">
+          <button className="vf-btn-back-to-top" onClick={handleBackToTop}>
+            Back to Top
+          </button>
+        </div>
+
+        <div className="vf-footer-social">
+          {footerData.social.map((social) => (
+            <a
+              key={social.name}
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="vf-footer-social-link"
+              aria-label={social.name}
+              title={social.name}
             >
-              {link.label}
-            </Link>
+              {getSocialIcon(social.icon)}
+            </a>
           ))}
         </div>
-
-        {/* Mobile footer toggle */}
-        <button
-          className="vf-footer-toggle"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle footer menu"
-          aria-expanded={menuOpen}
-        >
-          ☰
-        </button>
       </div>
-
-      {/* Mobile footer menu */}
-      {menuOpen && (
-        <div className="vf-footer-mobile-menu">
-          <nav>
-            {footerLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="vf-footer-mobile-link"
-                onClick={() => handleLinkClick(link.href)}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      )}
     </footer>
   );
 }

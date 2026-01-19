@@ -1,9 +1,8 @@
 {
   "title": "What We Do",
   "intro": "We deliver mission-critical technology strategy, implementation, and transformation for high-stakes environments.",
-  "imageAlt": "Consulting and strategy collaboration",
-  "bottomCta": "Discuss capabilities",
-  "cards": [
+  "contentType": "text",
+  "items": [
     {
       "id": "strategy",
       "title": "Strategic IT Consulting",
@@ -19,5 +18,10 @@
       "title": "Program Delivery",
       "body": "Disciplined program leadership to ensure on-time, on-budget delivery aligned to operational outcomes."
     }
+  ],
+  "footerCtas": [
+    { "label": "Home", "type": "home" },
+    { "label": "Learn More", "type": "route", "href": "/what-we-do" },
+    { "label": "Contact Us", "type": "contact", "href": "/#contact" }
   ]
 }

@@ -1,22 +1,22 @@
 {
   "title": "Careers",
   "intro": "We're building a mission-driven team. Below are placeholder listings for roles we commonly hire for — real openings will be added here when available.",
-  "jobs": [
+  "contentType": "text",
+  "items": [
     {
-      "id": "1",
-      "title": "Software Engineer",
-      "location": "Remote / US",
-      "type": "Full-time",
-      "summary": "Work on full-stack web applications, partner with product and design to deliver mission-focused solutions.",
-      "howToApply": "Send resume and cover letter to careers@example.com"
+      "id": "software-engineer",
+      "title": "Software Engineer — Remote / US (Full-time)",
+      "body": "Work on full-stack web applications, partner with product and design to deliver mission-focused solutions. Apply: careers@example.com"
     },
     {
-      "id": "2",
-      "title": "Program Manager",
-      "location": "Hybrid / Arlington, VA",
-      "type": "Full-time",
-      "summary": "Coordinate cross-functional teams, manage program timelines, and support customer engagements.",
-      "howToApply": "Send resume and brief summary of experience to careers@example.com"
+      "id": "program-manager",
+      "title": "Program Manager — Hybrid / Arlington, VA (Full-time)",
+      "body": "Coordinate cross-functional teams, manage program timelines, and support customer engagements. Apply: careers@example.com"
     }
+  ],
+  "footerCtas": [
+    { "label": "Home", "type": "home" },
+    { "label": "Learn More", "type": "route", "href": "/careers" },
+    { "label": "Contact Us", "type": "contact", "href": "/#contact" }
   ]
 }

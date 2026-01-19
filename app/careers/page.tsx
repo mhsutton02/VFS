@@ -1,106 +1,57 @@
-import { Header } from "../../components/Header";
-import { Footer } from "../../components/Footer";
-import careers from "../../content/careers.json";
-import Link from "next/link";
+import { Metadata } from "next";
+import { Banner } from "@/components/Banner";
+import { Section } from "@/components/Section";
+import whatWeDoData from "@/content/what_we_do.json";
+import whoWeServeData from "@/content/who_we_serve.json";
+import aiAlignmentData from "@/content/ai_alignment.json";
+import givingBackData from "@/content/giving_back.json";
+import aboutData from "@/content/about.json";
+import contactData from "@/content/contact.json";
+import seoDefaults from "@/content/seo_defaults.json";
 
-export default function CareersPage() {
+export const metadata: Metadata = {
+  title: seoDefaults.defaultTitle,
+  description: seoDefaults.defaultDescription,
+  alternates: {
+    canonical: seoDefaults.siteUrl,
+  },
+};
+
+export default function Home() {
   return (
-    <>
-      <Header />
-      <main className="vf-container" style={{ padding: "clamp(40px, 8vw, 80px) clamp(16px, 4vw, 20px)", maxWidth: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <h1 className="vf-h1" style={{ textAlign: "center", marginBottom: "clamp(24px, 5vw, 40px)" }}>
-          {careers.title}
-        </h1>
+    <main>
+      <div className="vf-block">
+        <Banner />
+      </div>
 
-        <p className="vf-body" style={{ textAlign: "center", margin: "0 auto clamp(40px, 8vw, 60px)", maxWidth: "min(768px, 95vw)" }}>
-          {careers.intro}
-        </p>
+      <div className="vf-block">
+        <Section data={whatWeDoData} />
+      </div>
 
-        {/* Three stacked cards – each with title, text, and buttons */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "clamp(24px, 5vw, 40px)", width: "100%", maxWidth: "min(768px, 95vw)" }}>
-          {/* Our Culture */}
-          <div
-            className="vf-card"
-            style={{
-              padding: "clamp(20px, 4vw, 32px)",
-              minHeight: "auto",
-              height: "auto",
-              width: "100%",
-              maxWidth: "100%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              textAlign: "center",
-            }}
-          >
-            <div>
-              <h3 className="vf-h3" style={{ marginBottom: "clamp(12px, 2vw, 16px)" }}>Our Culture</h3>
-              <p className="vf-body">
-                At ValorForge, we cultivate a disciplined, mission-first environment where integrity, service, and stewardship drive every decision. Our veteran-led team thrives on trust, collaboration, and excellence—building solutions that matter.
-              </p>
-            </div>
-            <div className="vf-section-bottom" style={{ justifyContent: "center", gap: "clamp(12px, 2vw, 20px)", marginTop: "clamp(16px, 3vw, 20px)", flexWrap: "wrap" }}>
-              <Link href="/#contact" className="vf-btn vf-btn-primary">Contact</Link>
-              <Link href="/careers" className="vf-btn vf-btn-ghost">Back to Top</Link>
-            </div>
-          </div>
+      <div className="vf-block">
+        <Section data={whoWeServeData} />
+      </div>
 
-          {/* Our Benefits */}
-          <div
-            className="vf-card"
-            style={{
-              padding: "clamp(20px, 4vw, 32px)",
-              minHeight: "auto",
-              height: "auto",
-              width: "100%",
-              maxWidth: "100%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              textAlign: "center",
-            }}
-          >
-            <div>
-              <h3 className="vf-h3" style={{ marginBottom: "clamp(12px, 2vw, 16px)" }}>Our Benefits</h3>
-              <p className="vf-body">
-                We offer competitive compensation, comprehensive health coverage, flexible remote/hybrid options, professional development support, and meaningful work-life balance—because our team's mission deserves the best support.
-              </p>
-            </div>
-            <div className="vf-section-bottom" style={{ justifyContent: "center", gap: "clamp(12px, 2vw, 20px)", marginTop: "clamp(16px, 3vw, 20px)", flexWrap: "wrap" }}>
-              <Link href="/#contact" className="vf-btn vf-btn-primary">Contact</Link>
-              <Link href="/careers" className="vf-btn vf-btn-ghost">Back to Top</Link>
-            </div>
-          </div>
+      <div className="vf-block">
+        <Section data={aiAlignmentData} />
+      </div>
 
-          {/* Our Opportunities */}
-          <div
-            className="vf-card"
-            style={{
-              padding: "clamp(20px, 4vw, 32px)",
-              minHeight: "auto",
-              height: "auto",
-              width: "100%",
-              maxWidth: "100%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              textAlign: "center",
-            }}
-          >
-            <div>
-              <h3 className="vf-h3" style={{ marginBottom: "clamp(12px, 2vw, 16px)" }}>Our Opportunities</h3>
-              <p className="vf-body">
-                Join us in high-impact roles across software engineering, program management, AI alignment, and strategic delivery. Work on real missions, grow with cutting-edge technology, and contribute to outcomes that matter.
-              </p>
-            </div>
-            <div className="vf-section-bottom" style={{ justifyContent: "center", gap: "clamp(12px, 2vw, 20px)", marginTop: "clamp(16px, 3vw, 20px)", flexWrap: "wrap" }}>
-              <Link href="/#contact" className="vf-btn vf-btn-primary">Contact</Link>
-              <Link href="/careers" className="vf-btn vf-btn-ghost">Back to Top</Link>
-            </div>
-          </div>
-        </div>
-      </main>
-      <Footer />
-    </>
+      <div className="vf-block">
+        <Section data={givingBackData} />
+      </div>
+
+      <div className="vf-block">
+        <Section data={aboutData} />
+      </div>
+
+      <div className="vf-block" id="contact">
+        <Section data={contactData}>
+          {/* Existing contact form component goes here */}
+          <p style={{ textAlign: "center", color: "var(--muted)" }}>
+            [Contact form component will be integrated here]
+          </p>
+        </Section>
+      </div>
+    </main>
   );
 }

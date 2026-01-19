@@ -1,6 +1,14 @@
 {
   "kicker": "Veteran-Owned SDVOSB",
-  "headlineLine1": "Mission-Focused Technology Solutions",
+  "headline": "Mission-Focused Technology Solutions",
   "body": "Forging operational advantage for America's warfigheters",
-  "bottomCta": "Contact Valor Forge"
+  "contentType": "text-image",
+  "image": {
+    "src": "/placeholder-hero.jpg",
+    "alt": "Service members collaborating with technology"
+  },
+  "ctas": [
+    { "label": "Contact Valor Forge", "type": "contact", "href": "/#contact", "priority": "primary" },
+    { "label": "Learn More", "type": "route", "href": "/what-we-do", "priority": "secondary" }
+  ]
 }

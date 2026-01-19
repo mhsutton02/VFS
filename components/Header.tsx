@@ -1,40 +1,47 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import whatWeDoData from "@/content/what_we_do.json";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [capabilitiesOpen, setCapabilitiesOpen] = useState(false);
   const router = useRouter();
-  const pathname = usePathname();
 
-  const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/#what-we-do", label: "What We Do" },
-    { href: "/#who-we-serve", label: "Who We Serve" },
-    { href: "/#ai-alignment", label: "AI Alignment" },
-    { href: "/#giving-back", label: "Giving Back" },
-    { href: "/#about", label: "About" },
-    { href: "/#contact", label: "Contact" },
-    { href: "/careers", label: "Careers" },
+  const navItems = [
+    { label: "Home", href: "/", type: "link" },
+    { label: "Capabilities", type: "dropdown" },
+    { label: "Careers", href: "/careers", type: "link" },
+    { label: "About", href: "/about", type: "link" },
+    { label: "Contact", href: "/#contact", type: "link" },
   ];
 
-  const handleNavClick = (href: string) => {
+  const handleContactClick = (e: React.MouseEvent) => {
+    e.preventDefault();
     setMenuOpen(false);
-    
-    if (href.includes("#") && pathname !== "/") {
-      router.push(href);
-    }
+    const contactSection = document.getElementById("contact");
+    contactSection?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleCapabilityClick = (slug: string) => {
+    setMenuOpen(false);
+    setCapabilitiesOpen(false);
+    router.push(`/capabilities/${slug}`);
+  };
+
+  const generateSlug = (title: string) => {
+    return title.toLowerCase().replace(/\s+&\s+/g, "-").replace(/\s+/g, "-");
   };
 
   return (
     <header className="vf-site-header">
       <div className="vf-header-inner">
-        <Link href="/" style={{ display: "flex", alignItems: "center" }}>
+        <Link href="/">
           <Image
-            src="/assets/img/vf-logo.jpg"
+            src="/vf-logo.jpg"
             alt="ValorForge Solutions"
             width={180}
             height={60}
@@ -53,18 +60,58 @@ export function Header() {
         </button>
 
         <nav>
-          <ul className={`vf-nav-list ${menuOpen ? "vf-nav-list-open" : ""}`}>
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  onClick={() => handleNavClick(link.href)}
-                  className="min-w-touch min-h-touch px-touch py-2 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
+          <ul className={`vf-nav-list ${menuOpen ? "open" : ""}`}>
+            {navItems.map((item) => {
+              if (item.type === "link") {
+                return (
+                  <li key={item.label}>
+                    <Link
+                      href={item.href!}
+                      onClick={(e) => {
+                        if (item.href === "/#contact") {
+                          handleContactClick(e);
+                        } else {
+                          setMenuOpen(false);
+                        }
+                      }}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              } else if (item.type === "dropdown") {
+                return (
+                  <li
+                    key={item.label}
+                    className={`vf-nav-item-dropdown ${capabilitiesOpen ? "open" : ""}`}
+                  >
+                    <button
+                      className="vf-nav-dropdown-toggle"
+                      onClick={() => setCapabilitiesOpen(!capabilitiesOpen)}
+                      aria-expanded={capabilitiesOpen}
+                    >
+                      {item.label}
+                      <span>▼</span>
+                    </button>
+                    <div className="vf-nav-dropdown-menu">
+                      {whatWeDoData.items.map((capability) => (
+                        <button
+                          key={capability.id}
+                          className="vf-nav-dropdown-item"
+                          onClick={() =>
+                            handleCapabilityClick(
+                              generateSlug(capability.title)
+                            )
+                          }
+                        >
+                          {capability.title}
+                        </button>
+                      ))}
+                    </div>
+                  </li>
+                );
+              }
+            })}
           </ul>
         </nav>
       </div>

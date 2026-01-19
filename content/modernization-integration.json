@@ -1,0 +1,27 @@
+{
+  "title": "Modernization & Integration",
+  "intro": "Integrating legacy platforms with cloud-native architectures while preserving mission continuity.",
+  "contentType": "text",
+  "items": [
+    {
+      "id": "cloud-migration",
+      "title": "Cloud Migration",
+      "body": "Safely migrate workloads to cloud platforms with minimal downtime and risk."
+    },
+    {
+      "id": "api-integration",
+      "title": "API & Integration Architecture",
+      "body": "Design and implement integration layers connecting disparate systems into cohesive ecosystems."
+    },
+    {
+      "id": "data-modernization",
+      "title": "Data Modernization",
+      "body": "Modernize data pipelines, warehousing, and analytics for real-time insights and decision-making."
+    }
+  ],
+  "footerCtas": [
+    { "label": "Home", "type": "home" },
+    { "label": "Learn More", "type": "route", "href": "/what-we-do" },
+    { "label": "Contact Us", "type": "contact", "href": "/#contact" }
+  ]
+}
