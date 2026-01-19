@@ -1,5 +1,4 @@
-// components/ContactForm.tsx
-"use client";
+import React from "react";
 
 export function ContactForm() {
   return (
@@ -9,143 +8,51 @@ export function ContactForm() {
       action="/success"
       data-netlify="true"
       netlify-honeypot="bot-field"
-      className="vf-form"
-      style={{
-        display: "grid",
-        gap: "24px",
-        background: "rgba(255, 255, 255, 0.04)",
-        border: "1px solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "var(--radius)",
-        padding: "32px",
-        maxWidth: "600px",
-        margin: "0 auto",
-      }}
+      style={{ display: "grid", gap: "12px", maxWidth: "640px", margin: "0 auto", textAlign: "left" }}
     >
+      {/* Netlify form-name hidden field */}
       <input type="hidden" name="form-name" value="contact" />
-      <p className="hidden">
-        <label>
-          Don’t fill this out: <input name="bot-field" />
-        </label>
-      </p>
+      {/* Honeypot field (hidden) */}
+      <input type="text" name="bot-field" style={{ display: "none" }} aria-hidden="true" tabIndex={-1} />
 
-      {/* Name & Organization – side-by-side on desktop, stacked on mobile */}
-      <div className="vf-contact-meta" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
-        <label>
-          Name
-          <input
-            name="name"
-            type="text"
-            required
-            placeholder="Your full name"
-            style={{
-              width: "100%",
-              padding: "14px",
-              fontSize: "1rem",
-              borderRadius: "10px",
-              border: "1px solid rgba(255, 255, 255, 0.18)",
-              background: "rgba(0, 0, 0, 0.18)",
-              color: "var(--text)",
-              boxSizing: "border-box",
-            }}
-          />
-        </label>
+      <label className="vf-body">
+        Your Name
+        <input
+          type="text"
+          name="name"
+          required
+          className="vf-input"
+          placeholder="Jane Doe"
+          style={{ width: "100%", padding: "10px", borderRadius: "8px" }}
+        />
+      </label>
 
-        <label>
-          Organization
-          <input
-            name="organization"
-            type="text"
-            placeholder="Your company or organization (optional)"
-            style={{
-              width: "100%",
-              padding: "14px",
-              fontSize: "1rem",
-              borderRadius: "10px",
-              border: "1px solid rgba(255, 255, 255, 0.18)",
-              background: "rgba(0, 0, 0, 0.18)",
-              color: "var(--text)",
-              boxSizing: "border-box",
-            }}
-          />
-        </label>
-      </div>
+      <label className="vf-body">
+        Email
+        <input
+          type="email"
+          name="email"
+          required
+          className="vf-input"
+          placeholder="jane@example.com"
+          style={{ width: "100%", padding: "10px", borderRadius: "8px" }}
+        />
+      </label>
 
-      {/* Email & Phone – side-by-side on desktop, stacked on mobile */}
-      <div className="vf-contact-meta" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
-        <label>
-          Email
-          <input
-            name="email"
-            type="email"
-            required
-            placeholder="your.email@example.com"
-            style={{
-              width: "100%",
-              padding: "14px",
-              fontSize: "1rem",
-              borderRadius: "10px",
-              border: "1px solid rgba(255, 255, 255, 0.18)",
-              background: "rgba(0, 0, 0, 0.18)",
-              color: "var(--text)",
-              boxSizing: "border-box",
-            }}
-          />
-        </label>
-
-        <label>
-          Phone
-          <input
-            name="phone"
-            type="tel"
-            placeholder="Your phone number"
-            style={{
-              width: "100%",
-              padding: "14px",
-              fontSize: "1rem",
-              borderRadius: "10px",
-              border: "1px solid rgba(255, 255, 255, 0.18)",
-              background: "rgba(0, 0, 0, 0.18)",
-              color: "var(--text)",
-              boxSizing: "border-box",
-            }}
-          />
-        </label>
-      </div>
-
-      {/* Message */}
-      <label>
+      <label className="vf-body">
         Message
         <textarea
           name="message"
           required
           rows={6}
-          placeholder="Tell us about your needs or project..."
-          style={{
-            width: "100%",
-            padding: "14px",
-            fontSize: "1rem",
-            borderRadius: "10px",
-            border: "1px solid rgba(255, 255, 255, 0.18)",
-            background: "rgba(0, 0, 0, 0.18)",
-            color: "var(--text)",
-            resize: "vertical",
-            minHeight: "140px",
-          }}
+          className="vf-input"
+          placeholder="Tell us about your mission and challenges…"
+          style={{ width: "100%", padding: "10px", borderRadius: "8px" }}
         />
       </label>
 
-      {/* Send Button */}
-      <button
-        className="vf-btn vf-btn-primary"
-        type="submit"
-        style={{
-          width: "100%",
-          padding: "16px",
-          fontSize: "1.1rem",
-          marginTop: "20px",
-        }}
-      >
-        Send
+      <button type="submit" className="vf-btn vf-btn-primary" style={{ alignSelf: "start" }}>
+        Submit
       </button>
     </form>
   );
