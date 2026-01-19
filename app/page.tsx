@@ -29,6 +29,7 @@ export default function HomePage() {
           title={whatWeDo.title}
           intro={whatWeDo.intro}
           ctaText={whatWeDo.bottomCta}
+          ctaHref="/construction"
           items={whatWeDo.cards}
         />
 
@@ -39,6 +40,7 @@ export default function HomePage() {
           title={whoWeServe.title}
           intro={whoWeServe.intro}
           ctaText={whoWeServe.bottomCta}
+          ctaHref="/construction"
           items={whoWeServe.cards}
         />
 
@@ -49,11 +51,11 @@ export default function HomePage() {
           title={aiAlignment.title}
           intro={aiAlignment.intro}
           ctaText={aiAlignment.bottomCta}
+          ctaHref="/construction"
           items={aiAlignment.cards}
         />
 
-
-        <GivingBackSection />    {/* Now before About */}
+        <GivingBackSection />
         <AboutSection />
         <ContactSection />
       </main>

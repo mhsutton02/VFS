@@ -1,0 +1,44 @@
+import Link from "next/link";
+
+export const metadata = {
+  title: "Coming Soon - ValorForge Solutions",
+  description: "This page is under construction. Check back soon.",
+};
+
+export default function ConstructionPage() {
+  return (
+    <div className="vf-construction-page">
+      <div className="vf-construction-container">
+        {/* Top accent frame */}
+        <div className="vf-frame vf-frame-top vf-construction-top">
+          <div>
+            <h1 className="vf-h1 vf-accent">Under Construction</h1>
+            <p className="vf-body">
+              This page is being crafted with the same precision we bring to our
+              mission-focused solutions.
+            </p>
+          </div>
+        </div>
+
+        {/* Middle content frame */}
+        <div className="vf-frame vf-frame-mid vf-construction-mid">
+          <div className="vf-construction-content">
+            <p className="vf-lead">
+              We're working to bring you something exceptional. In the meantime,
+              explore our core offerings or get in touch with our team.
+            </p>
+
+            <div className="vf-cta-row">
+              <Link href="/" className="vf-btn vf-btn-primary">
+                Return Home
+              </Link>
+              <Link href="/#contact" className="vf-btn vf-btn-ghost">
+                Contact Us
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
