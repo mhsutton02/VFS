@@ -24,7 +24,8 @@ export default function CareersPage() {
             style={{
               padding: "clamp(20px, 4vw, 32px)",
               minHeight: "auto",
-              height: "auto",
+              height: "clamp(auto, 80vw, 100%)",
+              maxHeight: "80vh",
               width: "100%",
               maxWidth: "100%",
               display: "flex",
@@ -51,7 +52,8 @@ export default function CareersPage() {
             style={{
               padding: "clamp(20px, 4vw, 32px)",
               minHeight: "auto",
-              height: "auto",
+              height: "clamp(auto, 80vw, 100%)",
+              maxHeight: "80vh",
               width: "100%",
               maxWidth: "100%",
               display: "flex",
@@ -78,7 +80,8 @@ export default function CareersPage() {
             style={{
               padding: "clamp(20px, 4vw, 32px)",
               minHeight: "auto",
-              height: "auto",
+              height: "clamp(auto, 80vw, 100%)",
+              maxHeight: "80vh",
               width: "100%",
               maxWidth: "100%",
               display: "flex",

@@ -619,7 +619,8 @@ section[id] {
     font-size: 12px;
   }
   .vf-body {
-    font-size: 14px;
+    font-size: 12px;
+    line-height: 1.6;
   }
   .vf-lead {
     font-size: 14px;
@@ -670,53 +671,5 @@ section[id] {
   
   .vf-section {
     padding-top: 70px;
-  }
-}
-
-/* Mobile navigation */
-@media (max-width: 760px) {
-  .vf-container {
-    max-width: 100vw;
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .vf-nav-toggle {
-    display: inline-flex !important;
-    z-index: 1001;
-  }
-
-  .vf-nav-list {
-    display: none !important;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    max-width: 420px;
-    width: 94vw;
-    background: rgba(5, 8, 18, 0.98);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 0 0 18px 18px;
-    padding: 20px 0;
-    box-sizing: border-box;
-    z-index: 1000;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .vf-nav-list.vf-nav-list-open {
-    display: flex !important;
-  }
-
-  .vf-nav-list-open li {
-    width: 100%;
-  }
-
-  .vf-nav-list-open a {
-    display: block;
-    width: 100%;
-    padding: 16px 24px;
-    font-size: 1.1rem;
-    text-align: left;
   }
 }
