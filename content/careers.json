@@ -1,7 +1,6 @@
 {
   "title": "Careers",
-  "intro": "We're building a mission-driven team. Below are placeholder listings for roles we commonly hire for — real openings will be added here when available.",
-  "contentType": "text",
+  "intro": "Help us forge operational advantage for America's warfighters.",
   "items": [
     {
       "id": "software-engineer",
@@ -15,8 +14,7 @@
     }
   ],
   "footerCtas": [
-    { "label": "Home", "type": "home" },
-    { "label": "Learn More", "type": "route", "href": "/careers" },
+    { "label": "Home", "type": "home", "href": "#hero", "priority": "secondary" },
     { "label": "Contact Us", "type": "contact", "href": "/#contact" }
   ]
 }

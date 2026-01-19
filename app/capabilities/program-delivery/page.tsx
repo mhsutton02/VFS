@@ -1,27 +1,35 @@
 import { Metadata } from "next";
+import { Banner } from "@/components/Banner";
 import { Section } from "@/components/Section";
-import programDeliveryData from "@/content/capabilities/program-delivery.json";
-import seoDefaults from "@/content/seo_defaults.json";
+import { ContactForm } from "@/components/ContactForm";
+import bannerData from "@/content/banner.json";
+import contentData from "@/content/capabilities/program-delivery.json";
+import contactData from "@/content/contact.json";
 
 export const metadata: Metadata = {
-  title: `${programDeliveryData.title} | ${seoDefaults.siteName}`,
-  description: programDeliveryData.intro,
-  alternates: {
-    canonical: `${seoDefaults.siteUrl}/capabilities/program-delivery`,
-  },
-  openGraph: {
-    title: `${programDeliveryData.title} | ${seoDefaults.siteName}`,
-    description: programDeliveryData.intro,
-    url: `${seoDefaults.siteUrl}/capabilities/program-delivery`,
-    type: "website",
-  },
+  title: "Program Delivery & PMO | ValorForge Solutions",
+  description: "Disciplined program leadership for on-time, on-budget delivery.",
 };
 
 export default function ProgramDeliveryPage() {
   return (
     <main>
-      <div className="vf-block">
-        <Section data={programDeliveryData} />
+      <div className="vf-block" id="banner">
+        <Banner data={bannerData} />
+      </div>
+
+      <hr />
+
+      <div className="vf-block" id="content">
+        <Section data={contentData} />
+      </div>
+
+      <hr />
+
+      <div className="vf-block" id="contact">
+        <Section data={contactData}>
+          <ContactForm />
+        </Section>
       </div>
     </main>
   );

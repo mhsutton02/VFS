@@ -99,6 +99,29 @@ a {
   background: var(--accent2-pale);
 }
 
+/* Logo Button */
+.vf-logo-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+}
+
+.vf-logo-button:hover {
+  opacity: 0.8;
+}
+
+.vf-logo-button:focus-visible {
+  outline: 3px solid var(--accent2);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+
 /* Nav List */
 .vf-nav-list {
   list-style: none;
@@ -112,7 +135,8 @@ a {
 }
 
 .vf-nav-list a,
-.vf-nav-list button {
+.vf-nav-list button,
+.vf-nav-list-button {
   color: var(--accent2);
   font-size: 11px;
   font-weight: 700;
@@ -136,14 +160,16 @@ a {
 }
 
 .vf-nav-list a:hover,
-.vf-nav-list button:hover {
+.vf-nav-list button:hover,
+.vf-nav-list-button:hover {
   background: var(--accent2);
   color: var(--accent);
   border-color: var(--accent2);
 }
 
 .vf-nav-list a:focus-visible,
-.vf-nav-list button:focus-visible {
+.vf-nav-list button:focus-visible,
+.vf-nav-list-button:focus-visible {
   outline: 3px solid var(--accent);
   outline-offset: 2px;
 }
@@ -160,6 +186,7 @@ a {
   gap: 4px;
   width: 100%;
   height: 100%;
+  padding: 14px 12px !important;
 }
 
 .vf-nav-dropdown-toggle span {
@@ -172,12 +199,12 @@ a {
   position: absolute;
   top: calc(100% + 8px);
   left: 0;
-  background: var(--surface);
-  border: 2px solid var(--accent2);
-  border-radius: 8px;
-  min-width: 260px;
-  box-shadow: 0 8px 24px rgba(43, 114, 255, 0.15);
-  z-index: 1000;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  min-width: 280px;
+  box-shadow: none;
+  z-index: 1001;
   padding: 8px 0;
 }
 
@@ -195,15 +222,17 @@ a {
   letter-spacing: 0.02em;
   text-align: left;
   text-transform: uppercase;
-  background: none;
-  border: none;
+  background: var(--accent2-pale);
+  border: 2px solid var(--accent2);
   cursor: pointer;
   transition: all 0.2s ease;
+  border-radius: 6px;
+  margin-bottom: 8px;
 }
 
 .vf-nav-dropdown-item:hover {
-  background: var(--accent2-pale);
-  color: var(--accent2);
+  background: var(--accent2);
+  color: var(--accent);
 }
 
 .vf-nav-dropdown-item:focus-visible {
@@ -678,7 +707,8 @@ hr {
   }
 
   .vf-nav-list a,
-  .vf-nav-list button {
+  .vf-nav-list button,
+  .vf-nav-list-button {
     width: 100%;
     min-height: auto;
     min-width: auto;

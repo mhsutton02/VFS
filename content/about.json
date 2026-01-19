@@ -8,8 +8,8 @@
     { "id": "values", "title": "Core Values", "body": "Service, discipline, integrity, and stewardship—applied to every engagement we lead." }
   ],
   "footerCtas": [
-    { "label": "Home", "type": "home" },
-    { "label": "Learn More", "type": "route", "href": "/about" },
+    { "label": "Home", "type": "home", "href": "#hero", "priority": "secondary" },
+    { "label": "Learn More", "type": "route", "href": "/what-we-do" },
     { "label": "Contact Us", "type": "contact", "href": "/#contact" }
   ]
 }

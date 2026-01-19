@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import type { SectionData } from "@/types/section";
 
 interface SectionProps {
@@ -9,36 +9,66 @@ interface SectionProps {
 }
 
 export function Section({ data, children }: SectionProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const scrollToId = (id: string) => {
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }, 50);
+  };
+
+  const resolveHref = (cta: SectionData["footerCtas"][0]) => {
+    if (!cta) return undefined;
+    if (cta.href) return cta.href;
+
+    if (cta.type === "home") return "#hero";
+    if (cta.type === "contact") return "#contact";
+
+    return undefined;
+  };
+
+  const handleNavigation = (href?: string) => {
+    if (!href) return;
+
+    if (href === "#hero") {
+      if (pathname === "/") {
+        scrollToId("hero");
+      } else {
+        router.push("/#hero");
+        setTimeout(() => scrollToId("hero"), 200);
+      }
+      return;
+    }
+
+    if (href === "#contact") {
+      if (pathname === "/") {
+        scrollToId("contact");
+      } else {
+        router.push("/#contact");
+        setTimeout(() => scrollToId("contact"), 200);
+      }
+      return;
+    }
+
+    if (href.startsWith("#")) {
+      scrollToId(href.replace("#", ""));
+      return;
+    }
+
+    router.push(href);
+  };
+
   const renderCta = (cta: SectionData["footerCtas"][0]) => {
-    const className = cta.priority === "primary" ? "vf-btn vf-btn-primary" : "vf-btn vf-btn-secondary";
-
-    if (cta.type === "contact") {
-      const handleContactClick = (e: React.MouseEvent) => {
-        e.preventDefault();
-        document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-      };
-      return (
-        <button key={cta.label} className={className} onClick={handleContactClick}>
-          {cta.label}
-        </button>
-      );
-    }
-
-    if (cta.type === "home") {
-      const handleHomeClick = () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      };
-      return (
-        <button key={cta.label} className={className} onClick={handleHomeClick}>
-          {cta.label}
-        </button>
-      );
-    }
+    const href = resolveHref(cta);
+    const className =
+      cta.priority === "primary" ? "vf-btn vf-btn-primary" : "vf-btn vf-btn-secondary";
 
     return (
-      <Link key={cta.label} href={cta.href} className={className}>
+      <button key={cta.label} className={className} onClick={() => handleNavigation(href)}>
         {cta.label}
-      </Link>
+      </button>
     );
   };
 

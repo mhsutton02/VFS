@@ -19,9 +19,10 @@
       "body": "Keep stakeholders aligned, informed, and engaged throughout program lifecycle."
     }
   ],
+
   "footerCtas": [
-    { "label": "Home", "type": "home" },
-    { "label": "Learn More", "type": "route", "href": "/what-we-do" },
+    { "label": "Home", "type": "home", "href": "#hero", "priority": "secondary" },
+    { "label": "Learn More", "type": "route", "href": "/coming-soon" },
     { "label": "Contact Us", "type": "contact", "href": "/#contact" }
   ]
 }

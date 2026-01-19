@@ -1,27 +1,35 @@
 import { Metadata } from "next";
+import { Banner } from "@/components/Banner";
 import { Section } from "@/components/Section";
-import modernizationData from "@/content/capabilities/modernization-integration.json";
-import seoDefaults from "@/content/seo_defaults.json";
+import { ContactForm } from "@/components/ContactForm";
+import bannerData from "@/content/banner.json";
+import contentData from "@/content/capabilities/modernization-integration.json";
+import contactData from "@/content/contact.json";
 
 export const metadata: Metadata = {
-  title: `${modernizationData.title} | ${seoDefaults.siteName}`,
-  description: modernizationData.intro,
-  alternates: {
-    canonical: `${seoDefaults.siteUrl}/capabilities/modernization-integration`,
-  },
-  openGraph: {
-    title: `${modernizationData.title} | ${seoDefaults.siteName}`,
-    description: modernizationData.intro,
-    url: `${seoDefaults.siteUrl}/capabilities/modernization-integration`,
-    type: "website",
-  },
+  title: "Modernization & Integration | ValorForge Solutions",
+  description: "Integrating legacy platforms with cloud-native architectures.",
 };
 
 export default function ModernizationIntegrationPage() {
   return (
     <main>
-      <div className="vf-block">
-        <Section data={modernizationData} />
+      <div className="vf-block" id="banner">
+        <Banner data={bannerData} />
+      </div>
+
+      <hr />
+
+      <div className="vf-block" id="content">
+        <Section data={contentData} />
+      </div>
+
+      <hr />
+
+      <div className="vf-block" id="contact">
+        <Section data={contactData}>
+          <ContactForm />
+        </Section>
       </div>
     </main>
   );

@@ -7,26 +7,27 @@ import { usePathname, useRouter } from "next/navigation";
 import navData from "@/content/nav.json";
 
 const sectionIdForHref = (href: string) => {
-  // strip leading slash and hash
-  const clean = href.replace(/^\/|^#/, "");
+  const clean = href.replace(/^\/|^#/, "").toLowerCase();
   switch (clean) {
     case "":
     case "home":
+    case "hero":
       return "hero";
     case "what-we-do":
       return "what-we-do";
     case "who-we-serve":
       return "who-we-serve";
     case "ai-alignment":
+    case "ai alignment":
       return "ai-alignment";
     case "giving-back":
+    case "giving back":
       return "giving-back";
     case "about":
       return "about";
-    case "careers":
-      return "careers"; // if you add a careers section later; otherwise falls back to route
     case "contact":
     case "contact-us":
+    case "contact us":
       return "contact";
     default:
       return null;
@@ -35,52 +36,82 @@ const sectionIdForHref = (href: string) => {
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const navRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
   const pathname = usePathname();
 
   const closeAll = () => {
     setMobileOpen(false);
-    setDropdownOpen(false);
+    setOpenDropdown(null);
+  };
+
+  const toggleDropdown = (label: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setOpenDropdown(openDropdown === label ? null : label);
   };
 
   const scrollToId = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 50);
   };
 
-  const goToHomeSection = (id: string) => {
-    if (pathname === "/") {
-      scrollToId(id);
-      closeAll();
-    } else {
-      router.push(`/#${id}`);
-      // allow time for navigation, then scroll
-      setTimeout(() => scrollToId(id), 50);
-      closeAll();
+  const handleNavigation = (href: string, e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
     }
+
+    // Check if it's a section link (starts with /#)
+    if (href.startsWith("/#")) {
+      const sectionId = href.replace("/#", "");
+      
+      if (pathname === "/") {
+        // Already on home, just scroll
+        scrollToId(sectionId);
+      } else {
+        // On different page, navigate to home first
+        router.push(`/#${sectionId}`);
+        setTimeout(() => scrollToId(sectionId), 200);
+      }
+      closeAll();
+      return;
+    }
+
+    // Check if it's a section name without hash (from nav.json)
+    const sectionId = sectionIdForHref(href);
+    if (sectionId) {
+      if (pathname === "/") {
+        scrollToId(sectionId);
+      } else {
+        router.push(`/#${sectionId}`);
+        setTimeout(() => scrollToId(sectionId), 200);
+      }
+      closeAll();
+      return;
+    }
+
+    // It's an external route like /careers
+    router.push(href);
+    closeAll();
   };
 
-  const handleContact = (e: React.MouseEvent) => {
-    e.preventDefault();
-    goToHomeSection("contact");
-  };
-
-  const handleHome = () => {
-    goToHomeSection("hero");
-  };
-
-  // close on outside click
+  // Close on outside click
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
-      if (navRef.current && !navRef.current.contains(e.target as Node)) closeAll();
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        closeAll();
+      }
     };
     document.addEventListener("mousedown", onClick);
     return () => document.removeEventListener("mousedown", onClick);
   }, []);
 
-  // close on Escape
+  // Close on Escape
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") closeAll();
@@ -92,7 +123,11 @@ export function Header() {
   return (
     <header className="vf-site-header">
       <div className="vf-header-inner" ref={navRef}>
-        <Link href="/" onClick={handleHome} aria-label="ValorForge Solutions Home">
+        <button
+          onClick={(e) => handleNavigation("hero", e)}
+          className="vf-logo-button"
+          aria-label="ValorForge Solutions Home"
+        >
           <Image
             src="/assets/img/vf-logo.jpg"
             alt="ValorForge Solutions Logo"
@@ -101,7 +136,7 @@ export function Header() {
             className="vf-logo"
             priority
           />
-        </Link>
+        </button>
 
         <button
           className="vf-nav-toggle"
@@ -115,32 +150,33 @@ export function Header() {
         <nav aria-label="Main navigation">
           <ul className={`vf-nav-list ${mobileOpen ? "open" : ""}`}>
             {navData.items.map((item) => {
+              // Dropdown items
               if (item.type === "dropdown" && item.submenu) {
+                const isOpen = openDropdown === item.label;
                 return (
                   <li
                     key={item.label}
-                    className={`vf-nav-item-dropdown ${dropdownOpen ? "open" : ""}`}
+                    className={`vf-nav-item-dropdown ${isOpen ? "open" : ""}`}
                   >
                     <button
                       className="vf-nav-dropdown-toggle"
-                      onClick={() => setDropdownOpen((v) => !v)}
-                      aria-expanded={dropdownOpen}
+                      onClick={(e) => toggleDropdown(item.label, e)}
+                      aria-expanded={isOpen}
                       aria-haspopup="true"
                     >
                       {item.label}
-                      <span aria-hidden="true">{dropdownOpen ? "▲" : "▼"}</span>
+                      <span aria-hidden="true">{isOpen ? "▲" : "▼"}</span>
                     </button>
                     <ul className="vf-nav-dropdown-menu" role="menu">
                       {item.submenu.map((sub) => (
                         <li key={sub.label} role="none">
-                          <Link
-                            href={sub.href}
+                          <button
                             className="vf-nav-dropdown-item"
-                            onClick={closeAll}
+                            onClick={(e) => handleNavigation(sub.href, e)}
                             role="menuitem"
                           >
                             {sub.label}
-                          </Link>
+                          </button>
                         </li>
                       ))}
                     </ul>
@@ -148,42 +184,16 @@ export function Header() {
                 );
               }
 
-              // Home top
-              if (item.type === "home") {
+              // Regular route/contact items
+              if (item.type === "route" || item.type === "contact") {
                 return (
                   <li key={item.label}>
-                    <button onClick={handleHome}>{item.label}</button>
-                  </li>
-                );
-              }
-
-              // Contact scroll
-              if (item.type === "contact") {
-                return (
-                  <li key={item.label}>
-                    <button onClick={handleContact}>{item.label}</button>
-                  </li>
-                );
-              }
-
-              // Other items: try to scroll to home sections; fall back to route
-              if (item.type === "route") {
-                const sectionId = sectionIdForHref(item.href);
-                if (sectionId) {
-                  return (
-                    <li key={item.label}>
-                      <button onClick={() => goToHomeSection(sectionId)}>
-                        {item.label}
-                      </button>
-                    </li>
-                  );
-                }
-                // fallback: normal navigation (e.g., standalone pages)
-                return (
-                  <li key={item.label}>
-                    <Link href={item.href} onClick={closeAll}>
+                    <button
+                      className="vf-nav-list-button"
+                      onClick={(e) => handleNavigation(item.href, e)}
+                    >
                       {item.label}
-                    </Link>
+                    </button>
                   </li>
                 );
               }

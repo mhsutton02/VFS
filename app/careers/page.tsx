@@ -1,55 +1,43 @@
 import { Metadata } from "next";
 import { Banner } from "@/components/Banner";
 import { Section } from "@/components/Section";
-import whatWeDoData from "@/content/what_we_do.json";
-import whoWeServeData from "@/content/who_we_serve.json";
-import aiAlignmentData from "@/content/ai_alignment.json";
-import givingBackData from "@/content/giving_back.json";
-import aboutData from "@/content/about.json";
+import { ContactForm } from "@/components/ContactForm";
+import bannerData from "@/content/banner.json";
+import careersData from "@/content/careers.json";
 import contactData from "@/content/contact.json";
-import seoDefaults from "@/content/seo_defaults.json";
 
 export const metadata: Metadata = {
-  title: seoDefaults.defaultTitle,
-  description: seoDefaults.defaultDescription,
+  title: "Careers | ValorForge Solutions",
+  description: "Join our team. We're hiring mission-focused technologists.",
   alternates: {
-    canonical: seoDefaults.siteUrl,
+    canonical: "https://valorforge.com/careers",
+  },
+  openGraph: {
+    title: "Careers | ValorForge Solutions",
+    description: "Join our team. We're hiring mission-focused technologists.",
+    url: "https://valorforge.com/careers",
+    type: "website",
   },
 };
 
-export default function Home() {
+export default function CareersPage() {
   return (
     <main>
-      <div className="vf-block">
-        <Banner />
+      <div className="vf-block" id="banner">
+        <Banner data={bannerData} />
       </div>
 
-      <div className="vf-block">
-        <Section data={whatWeDoData} />
+      <hr />
+
+      <div className="vf-block" id="careers">
+        <Section data={careersData} />
       </div>
 
-      <div className="vf-block">
-        <Section data={whoWeServeData} />
-      </div>
-
-      <div className="vf-block">
-        <Section data={aiAlignmentData} />
-      </div>
-
-      <div className="vf-block">
-        <Section data={givingBackData} />
-      </div>
-
-      <div className="vf-block">
-        <Section data={aboutData} />
-      </div>
+      <hr />
 
       <div className="vf-block" id="contact">
         <Section data={contactData}>
-          {/* Existing contact form component goes here */}
-          <p style={{ textAlign: "center", color: "var(--muted)" }}>
-            [Contact form component will be integrated here]
-          </p>
+          <ContactForm />
         </Section>
       </div>
     </main>

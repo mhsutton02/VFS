@@ -1,27 +1,35 @@
 import { Metadata } from "next";
+import { Banner } from "@/components/Banner";
 import { Section } from "@/components/Section";
-import strategicItData from "@/content/capabilities/strategic-it-consulting.json";
-import seoDefaults from "@/content/seo_defaults.json";
+import { ContactForm } from "@/components/ContactForm";
+import bannerData from "@/content/banner.json";
+import contentData from "@/content/capabilities/strategic-it-consulting.json";
+import contactData from "@/content/contact.json";
 
 export const metadata: Metadata = {
-  title: `${strategicItData.title} | ${seoDefaults.siteName}`,
-  description: strategicItData.intro,
-  alternates: {
-    canonical: `${seoDefaults.siteUrl}/capabilities/strategic-it-consulting`,
-  },
-  openGraph: {
-    title: `${strategicItData.title} | ${seoDefaults.siteName}`,
-    description: strategicItData.intro,
-    url: `${seoDefaults.siteUrl}/capabilities/strategic-it-consulting`,
-    type: "website",
-  },
+  title: "Strategic IT Consulting | ValorForge Solutions",
+  description: "End-to-end IT strategy and execution for complex technology portfolios.",
 };
 
-export default function StrategicItConsultingPage() {
+export default function StrategicITConsultingPage() {
   return (
     <main>
-      <div className="vf-block">
-        <Section data={strategicItData} />
+      <div className="vf-block" id="banner">
+        <Banner data={bannerData} />
+      </div>
+
+      <hr />
+
+      <div className="vf-block" id="content">
+        <Section data={contentData} />
+      </div>
+
+      <hr />
+
+      <div className="vf-block" id="contact">
+        <Section data={contactData}>
+          <ContactForm />
+        </Section>
       </div>
     </main>
   );

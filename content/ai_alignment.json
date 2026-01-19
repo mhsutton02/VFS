@@ -20,8 +20,8 @@
     }
   ],
   "footerCtas": [
-    { "label": "Home", "type": "home" },
-    { "label": "Learn More", "type": "route", "href": "/ai-alignment" },
+    { "label": "Home", "type": "home", "href": "#hero", "priority": "secondary" },
+    { "label": "Learn More", "type": "route", "href": "/coming-soon" },
     { "label": "Contact Us", "type": "contact", "href": "/#contact" }
   ]
 }

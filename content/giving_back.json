@@ -10,8 +10,8 @@
     { "id": "code-platoon", "title": "Code Platoon", "body": "A nonprofit coding bootcamp that prepares veterans and military spouses for software engineering careers through immersive training and internships." }
   ],
   "footerCtas": [
-    { "label": "Home", "type": "home" },
-    { "label": "Learn More", "type": "route", "href": "/giving-back" },
+    { "label": "Home", "type": "home", "href": "#hero", "priority": "secondary" },
+    { "label": "Learn More", "type": "route", "href": "/wcoming-soon" },
     { "label": "Contact Us", "type": "contact", "href": "/#contact" }
   ]
 }

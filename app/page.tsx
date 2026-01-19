@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { Banner } from "@/components/Banner";
 import { Section } from "@/components/Section";
 import { ContactForm } from "@/components/ContactForm";
+import bannerData from "@/content/banner.json";
 import whatWeDoData from "@/content/what_we_do.json";
 import whoWeServeData from "@/content/who_we_serve.json";
 import aiAlignmentData from "@/content/ai_alignment.json";
@@ -41,33 +42,33 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main>
-      <div className="vf-block" id="hero">
-        <Banner />
+      <div className="vf-block" id="banner">
+        <Banner data={bannerData} />
       </div>
 
       <hr />
 
-      <div className="vf-block" id="what-we-do">
+      <div className="vf-block" id="hero">
         <Section data={whatWeDoData} />
       </div>
 
-      <div className="vf-block" id="who-we-serve">
+      <div className="vf-block" id="what-we-do">
         <Section data={whoWeServeData} />
       </div>
 
-      <div className="vf-block" id="ai-alignment">
+      <div className="vf-block" id="who-we-serve">
         <Section data={aiAlignmentData} />
       </div>
 
-      <div className="vf-block" id="giving-back">
+      <div className="vf-block" id="ai-alignment">
         <Section data={givingBackData} />
       </div>
 
-      <div className="vf-block" id="about">
+      <div className="vf-block" id="giving-back">
         <Section data={aboutData} />
       </div>
 
-      <div className="vf-block" id="contact">
+      <div className="vf-block" id="about">
         <Section data={contactData}>
           <ContactForm />
         </Section>
