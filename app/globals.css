@@ -363,7 +363,7 @@ a {
   flex-direction: column;
   justify-content: flex-start;
   height: clamp(300px, 40vw, 400px);
-  width: calc((100% - clamp(16px, 2vw, 24px)) / 2);
+  width: calc(((100% - clamp(16px, 2vw, 24px)) / 2)* 0.95)
 }
 
 .vf-card-title {
