@@ -21,7 +21,7 @@
   ],
   "footerCtas": [
     { "label": "Home", "type": "home" },
-    { "label": "Learn More", "type": "route", "href": "/what-we-do" },
+    { "label": "Learn More", "type": "route", "href": "/coming-soon" },
     { "label": "Contact Us", "type": "contact", "href": "/#contact" }
   ]
 }

@@ -2,20 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --max: 1120px;
-  --page-x: 20px;
-  --block-y: 64px;
-  --bg: #f9fafb;
-  --surface: #ffffff;
-  --text: #0c111d;
-  --muted: #4b5565;
-  --accent: #f5b74a;
-  --accent2: #2b72ff;
-  --accent2-pale: #e8f0ff;
-  --font-primary: "Roboto", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-}
-
 html,
 body {
   margin: 0;
@@ -121,7 +107,6 @@ a {
   border-radius: 4px;
 }
 
-
 /* Nav List */
 .vf-nav-list {
   list-style: none;
@@ -199,13 +184,14 @@ a {
   position: absolute;
   top: calc(100% + 8px);
   left: 0;
+  min-width: 280px;
+  padding: 8px 0;
+  z-index: 1001;
   background: transparent;
   border: none;
   border-radius: 0;
-  min-width: 280px;
   box-shadow: none;
-  z-index: 1001;
-  padding: 8px 0;
+  list-style: none
 }
 
 .vf-nav-item-dropdown.open .vf-nav-dropdown-menu {
@@ -228,11 +214,12 @@ a {
   transition: all 0.2s ease;
   border-radius: 6px;
   margin-bottom: 8px;
+  box-sizing: border-box;
 }
 
 .vf-nav-dropdown-item:hover {
   background: var(--accent2);
-  color: var(--accent);
+  color: var(--surface);
 }
 
 .vf-nav-dropdown-item:focus-visible {
@@ -675,6 +662,13 @@ hr {
   outline-offset: 2px;
 }
 
+/* Hide dropdown children in mobile menu */
+@media (max-width: 900px) {
+  .vf-nav-dropdown-menu {
+    display: none !important;
+  }
+}
+
 /* Mobile breakpoint */
 @media (max-width: 760px) {
   .vf-site-header {
@@ -714,21 +708,6 @@ hr {
     min-width: auto;
     padding: 12px 14px;
     font-size: 12px;
-  }
-
-  .vf-nav-dropdown-menu {
-    position: static;
-    display: none;
-    border: none;
-    background: rgba(43, 114, 255, 0.04);
-    box-shadow: none;
-    min-width: auto;
-    margin-top: 0;
-    padding: 8px 0;
-  }
-
-  .vf-nav-item-dropdown.open .vf-nav-dropdown-menu {
-    display: block;
   }
 
   .vf-nav-dropdown-item {
