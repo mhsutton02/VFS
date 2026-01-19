@@ -7,25 +7,24 @@ export default function CareersPage() {
   return (
     <>
       <Header />
-      <main className="vf-container" style={{ padding: "clamp(40px, 8vw, 80px) clamp(16px, 4vw, 20px)", maxWidth: "100%" }}>
+      <main className="vf-container" style={{ padding: "clamp(40px, 8vw, 80px) clamp(16px, 4vw, 20px)", maxWidth: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
         <h1 className="vf-h1" style={{ textAlign: "center", marginBottom: "clamp(24px, 5vw, 40px)" }}>
           {careers.title}
         </h1>
 
-        <p className="vf-body" style={{ textAlign: "center", margin: "0 auto clamp(40px, 8vw, 60px)" }}>
+        <p className="vf-body" style={{ textAlign: "center", margin: "0 auto clamp(40px, 8vw, 60px)", maxWidth: "min(768px, 95vw)" }}>
           {careers.intro}
         </p>
 
         {/* Three stacked cards – each with title, text, and buttons */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "clamp(24px, 5vw, 40px)", width: "100%" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "clamp(24px, 5vw, 40px)", width: "100%", maxWidth: "min(768px, 95vw)" }}>
           {/* Our Culture */}
           <div
             className="vf-card"
             style={{
               padding: "clamp(20px, 4vw, 32px)",
               minHeight: "auto",
-              height: "clamp(auto, 80vw, 100%)",
-              maxHeight: "80vh",
+              height: "auto",
               width: "100%",
               maxWidth: "100%",
               display: "flex",
@@ -52,8 +51,7 @@ export default function CareersPage() {
             style={{
               padding: "clamp(20px, 4vw, 32px)",
               minHeight: "auto",
-              height: "clamp(auto, 80vw, 100%)",
-              maxHeight: "80vh",
+              height: "auto",
               width: "100%",
               maxWidth: "100%",
               display: "flex",
@@ -80,8 +78,7 @@ export default function CareersPage() {
             style={{
               padding: "clamp(20px, 4vw, 32px)",
               minHeight: "auto",
-              height: "clamp(auto, 80vw, 100%)",
-              maxHeight: "80vh",
+              height: "auto",
               width: "100%",
               maxWidth: "100%",
               display: "flex",

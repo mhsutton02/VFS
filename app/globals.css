@@ -477,6 +477,7 @@ a {
   text-decoration: none;
   color: var(--muted);
   font-size: 13px;
+  text-transform: uppercase;
 }
 
 .vf-footer-right a:hover {
@@ -512,6 +513,7 @@ a {
   text-decoration: none;
   font-size: 13px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  text-transform: uppercase;
 }
 
 .vf-footer-mobile-link:hover {

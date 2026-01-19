@@ -1,73 +1,66 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
-
-const NAV_ITEMS = [
-  { href: "/", label: "Home" },
-  { href: "#what-we-do", label: "What We Do" },
-  { href: "#who-we-serve", label: "Who We Serve" },
-  { href: "#ai-alignment", label: "AI Alignment" },
-  { href: "#giving-back", label: "Giving Back" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
-  { href: "/careers", label: "Careers" }
-];
+import { useRouter, usePathname } from "next/navigation";
+import Image from "next/image";
 
 export function Header() {
-  const [open, setOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
-  // Close mobile menu when any link is clicked
-  const handleLinkClick = () => {
-    setOpen(false);
+  const navLinks = [
+    { href: "/#what-we-do", label: "What We Do" },
+    { href: "/#who-we-serve", label: "Who We Serve" },
+    { href: "/#ai-alignment", label: "AI Alignment" },
+    { href: "/#giving-back", label: "Giving Back" },
+    { href: "/#about", label: "About" },
+    { href: "/#contact", label: "Contact" },
+    { href: "/careers", label: "Careers" },
+  ];
+
+  const handleNavClick = (href: string) => {
+    setMenuOpen(false);
+    
+    if (href.includes("#") && pathname !== "/") {
+      router.push(href);
+    }
   };
 
   return (
     <header className="vf-site-header">
-      <div className="vf-container vf-header-inner" style={{ position: "relative" }}>
-        <Link
-          href="/"
-          aria-label="Go to homepage – ValorForge Solutions"
-          className="inline-flex items-center min-w-touch min-h-touch focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent"
-          onClick={handleLinkClick}
-        >
+      <div className="vf-container vf-header-inner">
+        <Link href="/">
           <Image
-            src="/assets/img/vf-logo.jpeg"
-            alt="ValorForge Solutions logo"
+            src="/vf-logo.jpg"
+            alt="ValorForge Solutions"
+            width={180}
+            height={60}
             className="vf-logo"
-            width={240}
-            height={120}
             priority
-            sizes="(max-width: 768px) 120px, 240px"
           />
         </Link>
 
         <button
-          aria-expanded={open}
+          className="vf-nav-toggle"
+          onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle navigation menu"
-          className="vf-nav-toggle min-w-touch min-h-touch px-touch py-touch focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent"
-          onClick={() => {
-            setOpen((v) => !v);
-            console.log("Menu open state:", !open);
-          }}
+          aria-expanded={menuOpen}
         >
-          <span style={{ fontSize: "24px", lineHeight: "1" }}>☰</span>
+          ☰
         </button>
 
-        <nav aria-label="Primary navigation" className="relative" role="navigation">
-          <ul
-            className={`vf-nav-list${open ? " vf-nav-list-open" : ""}`}
-            aria-hidden={!open}
-          >
-            {NAV_ITEMS.map((item) => (
-              <li key={item.href}>
+        <nav>
+          <ul className={`vf-nav-list ${menuOpen ? "vf-nav-list-open" : ""}`}>
+            {navLinks.map((link) => (
+              <li key={link.href}>
                 <Link
-                  href={item.href}
-                  onClick={handleLinkClick}
+                  href={link.href}
+                  onClick={() => handleNavClick(link.href)}
                   className="min-w-touch min-h-touch px-touch py-2 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 >
-                  {item.label}
+                  {link.label}
                 </Link>
               </li>
             ))}
