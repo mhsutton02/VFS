@@ -14,7 +14,7 @@ export function GivingBackSection() {
             </div>
           }
           MID={
-            <Carousel items={givingBack.cards} ariaLabel={givingBack.title + " carousel"} />
+            <Carousel items={givingBack.items} ariaLabel={givingBack.title + " carousel"} />
           }
           BUT={
             <div style={{ display: "flex", gap: "12px", justifyContent: "center" }}>

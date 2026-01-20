@@ -9,7 +9,7 @@ export function HeroSection() {
           <div className="vf-frame-top">
             <div className="vf-kicker">{heroContent.kicker}</div>
             <h1 className="vf-h1">
-              <span className="vf-accent">{heroContent.headlineLine1}</span>
+              <span className="vf-accent">{heroContent.headline}</span>
             </h1>
             <p className="vf-body">{heroContent.body}</p>
           </div>

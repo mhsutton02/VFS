@@ -14,7 +14,7 @@ export function WhoWeServeSection() {
         <div>
           <h2 className="vf-h2">{whoWeServe.title}</h2>
           <p className="vf-body">{whoWeServe.intro}</p>
-          <Carousel items={whoWeServe.cards} ariaLabel="Who We Serve carousel" />
+          <Carousel items={whoWeServe.items} ariaLabel="Who We Serve carousel" />
 
           {/* Space below carousel */}
           <div style={{ height: "48px" }} />
@@ -28,16 +28,6 @@ export function WhoWeServeSection() {
             margin: "0 auto",
           }}
         >
-          <Image
-            src="/assets/img/whoweserve.jpg"
-            alt={whoWeServe.imageAlt}
-            className="vf-media-img"
-            width={800}
-            height={600}
-            loading="lazy"
-            sizes="(max-width: 768px) 100vw, 50vw"
-            quality={85}
-          />
         </div>
       </div>
     </section>
