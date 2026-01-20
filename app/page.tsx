@@ -8,7 +8,7 @@ import aboutData from "../content/about.json";
 import contactData from "../content/contact.json";
 
 import { HeroSection } from "../components/HeroSection";
-import { Section } from "../components/Section";
+import { Section } from "../components/section";
 import { ContactForm } from "../components/ContactForm";
 
 export default function Home() {
