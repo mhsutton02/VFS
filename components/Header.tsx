@@ -167,44 +167,48 @@ export function Header() {
               >
                 Capabilities <span>▼</span>
               </button>
-<ul className="vf-nav-dropdown-menu" role="menu">
-  <li role="none">
-    <button
-      onClick={() => handleNavigation("/capabilities/strategic-it-consulting")}
-      className="vf-nav-dropdown-item"
-      role="menuitem"
-    >
-      Strategic IT Consulting
-    </button>
-  </li>
-  <li role="none">
-    <button
-      onClick={() => handleNavigation("/capabilities/modernization-integration")}
-      className="vf-nav-dropdown-item"
-      role="menuitem"
-    >
-      Modernization &amp; Integration
-    </button>
-  </li>
-  <li role="none">
-    <button
-      onClick={() => handleNavigation("/capabilities/program-delivery")}
-      className="vf-nav-dropdown-item"
-      role="menuitem"
-    >
-      Program Delivery &amp; PMO
-    </button>
-  </li>
-  <li role="none">
-    <button
-      onClick={() => handleNavigation("/capabilities/CMMC")}
-      className="vf-nav-dropdown-item"
-      role="menuitem"
-    >
-      CMMC Compliance &amp; Enclave Services
-    </button>
-  </li>
-</ul>
+              <ul className="vf-nav-dropdown-menu" role="menu">
+                <li role="none">
+                  <button
+                    onClick={() => handleNavigation("/capabilities/strategic-it-consulting")}
+                    className="vf-nav-dropdown-item"
+                    role="menuitem"
+                  >
+                    Strategic IT Consulting
+                  </button>
+                </li>
+
+                <li role="none">
+                  <button
+                    onClick={() => handleNavigation("/capabilities/modernization-integration")}
+                    className="vf-nav-dropdown-item"
+                    role="menuitem"
+                  >
+                    Modernization &amp; Integration
+                  </button>
+                </li>
+
+                <li role="none">
+                  <button
+                    onClick={() => handleNavigation("/capabilities/program-delivery")}
+                    className="vf-nav-dropdown-item"
+                    role="menuitem"
+                  >
+                    Program Delivery &amp; PMO
+                  </button>
+                </li>
+
+                <li role="none">
+                  <button
+                    onClick={() => handleNavigation("/capabilities/CMMC")}
+                    className="vf-nav-dropdown-item"
+                    role="menuitem"
+                  >
+                    CMMC Compliance &amp; Enclave Services
+                  </button>
+                </li>
+              </ul>
+              
             </li>
 
             <li>
