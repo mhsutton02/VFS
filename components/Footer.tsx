@@ -28,11 +28,6 @@ export function Footer() {
             {footerData.contact.address}
           </div>
           <div className="vf-footer-contact-item">
-            <a href={`tel:${footerData.contact.phone}`}>
-              {footerData.contact.phone}
-            </a>
-          </div>
-          <div className="vf-footer-contact-item">
             <a href={`mailto:${footerData.contact.email}`}>
               {footerData.contact.email}
             </a>
