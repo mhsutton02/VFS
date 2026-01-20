@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import { Banner } from "@/components/Banner";
-import bannerData from "@/content/banner.json";
-import contentData from "@/content/capabilities/strategic-it-consulting.json";
+import { Banner } from "../../../components/banner";
+import bannerData from "../../../content/banner.json";
+import contentData from "../../../content/capabilities/strategic-it-consulting.json";
 
 export const metadata: Metadata = {
   title: "Strategic IT Consulting | ValorForge Solutions",

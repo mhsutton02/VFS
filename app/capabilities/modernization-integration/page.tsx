@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { Metadata } from "next";
-import { Banner } from "@/components/Banner";
-import bannerData from "@/content/banner.json";
-import contentData from "@/content/capabilities/modernization-integration.json";
+import { Banner } from "../../../components/banner";
+import bannerData from "../../../content/banner.json";
+import contentData from "../../../content/capabilities/modernization-integration.json";
 
 export const metadata: Metadata = {
   title: "Modernization & Integration | ValorForge Solutions",
