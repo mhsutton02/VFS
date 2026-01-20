@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import { Section } from "@/components/Section";
-import aiAlignmentData from "@/content/ai_alignment.json";
-import seoDefaults from "@/content/seo_defaults.json";
+import { Section } from "../../components/section";
+import aiAlignmentData from "../../content/ai_alignment.json";
+import seoDefaults from "../../content/seo_defaults.json";
 
 export const metadata: Metadata = {
   title: `${aiAlignmentData.title} | ${seoDefaults.siteName}`,
