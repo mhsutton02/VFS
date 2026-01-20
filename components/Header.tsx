@@ -200,11 +200,11 @@ export function Header() {
 
                 <li role="none">
                   <button
-                    onClick={() => handleNavigation("/capabilities/CMMC")}
+                    onClick={() => handleNavigation("/capabilities/cmmc")}
                     className="vf-nav-dropdown-item"
                     role="menuitem"
                   >
-                    CMMC Compliance &amp; Enclave Services
+                    cmmc Compliance &amp; Enclave Services
                   </button>
                 </li>
               </ul>

@@ -4,11 +4,11 @@ import bannerData from "../../../content/banner.json";
 import contentData from "../../../content/capabilities/cmmc.json";
 
 export const metadata: Metadata = {
-  title: "CMMC Compliance & Enclave Services | ValorForge Solutions",
-  description: "Belcan delivers CMMC 2.0 Level 2 readiness with a customer-owned, Microsoft-powered enclave for Controlled Unclassified Information (CUI).",
+  title: "cmmc Compliance & Enclave Services | ValorForge Solutions",
+  description: "Belcan delivers cmmc 2.0 Level 2 readiness with a customer-owned, Microsoft-powered enclave for Controlled Unclassified Information (CUI).",
 };
 
-export default function CMMCPage() {
+export default function cmmcPage() {
   return (
     <main>
       <div className="vf-block" id="banner">

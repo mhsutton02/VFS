@@ -3,7 +3,7 @@
   "headline": "Mission-Focused Technology Solutions",
   "body": "Forging operational advantage for America's warfigheters",
   "ctas": [
-    { "label": "Contact Valor Forge", "type": "contact", "href": "/#contact", "priority": "primary" },
+    { "label": "Contact ValorForge", "type": "contact", "href": "/#contact", "priority": "primary" },
     { "label": "Learn More", "type": "route", "href": "/what-we-do", "priority": "secondary" }
   ]
 }
