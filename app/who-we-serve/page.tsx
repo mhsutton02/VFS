@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import { Section } from "@/components/Section";
-import whoWeServeData from "@/content/who_we_serve.json";
-import seoDefaults from "@/content/seo_defaults.json";
+import { Section } from "../../components/section";
+import whoWeServeData from "../../content/who_we_serve.json";
+import seoDefaults from "../../content/seo_defaults.json";
 
 export const metadata: Metadata = {
   title: `${whoWeServeData.title} | ${seoDefaults.siteName}`,

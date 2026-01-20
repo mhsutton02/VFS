@@ -1,5 +1,5 @@
 import Head from "next/head";
-import seoDefaults from "@/content/seo_defaults.json";
+import seoDefaults from "../content/seo_defaults.json";
 
 interface SeoHeadProps {
   title?: string;

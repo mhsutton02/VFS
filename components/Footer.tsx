@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import footerData from "@/content/footer.json";
+import footerData from "../content/footer.json";
 
 export function Footer() {
   const handleBackToTop = () => {

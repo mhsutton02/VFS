@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import { Section } from "@/components/Section";
-import givingBackData from "@/content/giving_back.json";
-import seoDefaults from "@/content/seo_defaults.json";
+import { Section } from "../../components/section";
+import givingBackData from "../../content/giving_back.json";
+import seoDefaults from "../../content/seo_defaults.json";
 
 export const metadata: Metadata = {
   title: `${givingBackData.title} | ${seoDefaults.siteName}`,

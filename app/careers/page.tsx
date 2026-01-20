@@ -1,9 +1,9 @@
 import { Metadata } from "next";
-import { Banner } from "@/components/Banner";
-import { Section } from "@/components/Section";
+import { Banner } from "../../components/banner";
+import { Section } from "../../components/section";
 
-import bannerData from "@/content/banner.json";
-import careersData from "@/content/careers.json";
+import bannerData from "../../content/banner.json";
+import careersData from "../../content/careers.json";
 
 
 export const metadata: Metadata = {
