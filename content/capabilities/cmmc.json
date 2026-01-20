@@ -1,0 +1,28 @@
+{
+  "title": "CMMC Compliance & Enclave Services",
+  "intro": "ValorForge delivers CMMC 2.0 Level 2 readiness with in your Tenant or ours, managed or not, via a Microsoft-powered enclave for Controlled Unclassified Information (CUI).",
+  
+  "contentType": "text",
+  "items": [
+    {
+      "id": "enclave-launcher",
+      "title": "Enclave Launcher",
+      "body": "One-time onboarding to stand up a secure, Level 2-aligned CUI enclave. Includes boundary definition, dataflow diagrams, asset inventory, Microsoft reference architecture (Entra ID, Intune, Defender, Purview, SharePoint/Teams restrictions), SSP skeleton, core policies/SOPs, and evidence room structure—ensuring anti-sprawl guardrails and clear shared responsibilities."
+    },
+    {
+      "id": "evidence-ops",
+      "title": "Evidence Ops as a Service",
+      "body": "Ongoing managed operations producing audit-ready evidence as a byproduct of security cadences. Weekly alert triage and vuln reviews; monthly access/patch/log/backup attestations; quarterly IR tabletops and policy checks; automated/semi-automated exports, traceability matrix, and monthly evidence packs—plus micro-training, governance calls, and drift/change control."
+    },
+    {
+      "id": "certify-ready",
+      "title": "Certify-Ready Handoff",
+      "body": "Pre-assessment readiness checks, remediation plans, final SSP/policies, mapped evidence index, interview prep, live demo scripts, and boundary package. Includes introduction to 3–5 trusted C3PAOs for client-led assessment scheduling—ensuring predictable, fast certification without us acting as the assessor."
+    }
+  ],
+  "footerCtas": [
+    { "label": "Home", "type": "home", "href": "#hero", "priority": "secondary" },
+    { "label": "Learn More", "type": "route", "href": "/coming-soon" },
+    { "label": "Contact Us", "type": "contact", "href": "/#contact" }
+  ]
+}
