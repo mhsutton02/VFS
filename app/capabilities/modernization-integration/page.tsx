@@ -22,10 +22,10 @@ export default function ModernizationIntegrationPage() {
         <div className="vf-container" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
           {/* Section Title and Intro */}
           {(contentData.title || contentData.intro) && (
-            <div className="vf-section-intro" style={{ textAlign: "center", marginBottom: 48 }}>
-              {contentData.title && <h2 className="vf-h2">{contentData.title}</h2>}
-              {contentData.intro && <p className="vf-body">{contentData.intro}</p>}
-            </div>
+<div className="vf-section-intro">
+  {contentData.title && <h2 className="vf-section-title">{contentData.title}</h2>}
+  {contentData.intro && <p className="vf-section-intro-text">{contentData.intro}</p>}
+</div>
           )}
           {/* Cards as links to /coming-soon */}
           {contentData.items && (

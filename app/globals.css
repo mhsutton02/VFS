@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --max: 1120px;
+  --page-x: 20px;
+  --block-y: 64px;
+  --bg: #f9fafb;
+  --surface: #ffffff;
+  --text: #0c111d;
+  --muted: #4b5565;
+  --accent: #f5b74a;
+  --accent2: #2b72ff;
+  --font-primary: 'Roboto', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+}
+
 html,
 body {
   margin: 0;
