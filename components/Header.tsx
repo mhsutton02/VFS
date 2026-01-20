@@ -6,13 +6,30 @@ import Image from "next/image";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [homeDropdownOpen, setHomeDropdownOpen] = useState(false);
+  const [capabilitiesDropdownOpen, setCapabilitiesDropdownOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
 
   // Scroll to top of page (just landed)
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const scrollToSection = (id: string) => {
+    if (pathname === "/") {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      router.push(`/#${id}`);
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+    setMobileMenuOpen(false);
+    setHomeDropdownOpen(false);
+    setCapabilitiesDropdownOpen(false);
   };
 
   const handleLogoClick = () => {
@@ -23,43 +40,25 @@ export function Header() {
       setTimeout(() => scrollToTop(), 100);
     }
     setMobileMenuOpen(false);
-    setDropdownOpen(false);
-  };
-
-  const handleHomeClick = () => {
-    if (pathname === "/") {
-      scrollToTop();
-    } else {
-      router.push("/");
-      setTimeout(() => scrollToTop(), 100);
-    }
-    setMobileMenuOpen(false);
-    setDropdownOpen(false);
-  };
-
-  const handleContactClick = () => {
-    if (pathname === "/") {
-      const el = document.getElementById("contact");
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-      router.push("/#contact");
-      setTimeout(() => {
-        const el = document.getElementById("contact");
-        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 100);
-    }
-    setMobileMenuOpen(false);
-    setDropdownOpen(false);
+    setHomeDropdownOpen(false);
+    setCapabilitiesDropdownOpen(false);
   };
 
   const handleNavigation = (path: string) => {
     router.push(path);
     setMobileMenuOpen(false);
-    setDropdownOpen(false);
+    setHomeDropdownOpen(false);
+    setCapabilitiesDropdownOpen(false);
   };
 
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
+  const toggleHomeDropdown = () => {
+    setHomeDropdownOpen(!homeDropdownOpen);
+    setCapabilitiesDropdownOpen(false);
+  };
+
+  const toggleCapabilitiesDropdown = () => {
+    setCapabilitiesDropdownOpen(!capabilitiesDropdownOpen);
+    setHomeDropdownOpen(false);
   };
 
   return (
@@ -71,13 +70,14 @@ export function Header() {
           aria-label="ValorForge Solutions Home"
         >
           <Image
-            src="/logo.svg"
+            src="/assets/img/vf-logo.jpg"
             alt="ValorForge Solutions"
-            width={120}
+            width={54}
             height={54}
             className="vf-logo"
             priority
           />
+          <span className="vf-company-name">ValorForge Solutions</span>
         </button>
 
         <button
@@ -91,20 +91,81 @@ export function Header() {
 
         <nav aria-label="Main navigation">
           <ul className={`vf-nav-list ${mobileMenuOpen ? "open" : ""}`}>
-            <li>
-              <button onClick={handleHomeClick} className="vf-nav-list-button">
-                Home ▼
-              </button>
-            </li>
-
-            <li className={`vf-nav-item-dropdown ${dropdownOpen ? "open" : ""}`}>
+            <li className={`vf-nav-item-dropdown ${homeDropdownOpen ? "open" : ""}`}>
               <button
-                onClick={toggleDropdown}
+                onClick={toggleHomeDropdown}
                 className="vf-nav-list-button vf-nav-dropdown-toggle"
-                aria-expanded={dropdownOpen}
+                aria-expanded={homeDropdownOpen}
                 aria-haspopup="true"
               >
-                Capabilities <span>▲</span>
+                Home <span>▼</span>
+              </button>
+              <ul className="vf-nav-dropdown-menu" role="menu">
+                <li role="none">
+                  <button
+                    onClick={() => scrollToSection("what-we-do")}
+                    className="vf-nav-dropdown-item"
+                    role="menuitem"
+                  >
+                    What We Do
+                  </button>
+                </li>
+                <li role="none">
+                  <button
+                    onClick={() => scrollToSection("who-we-serve")}
+                    className="vf-nav-dropdown-item"
+                    role="menuitem"
+                  >
+                    Who We Serve
+                  </button>
+                </li>
+                <li role="none">
+                  <button
+                    onClick={() => scrollToSection("ai-alignment")}
+                    className="vf-nav-dropdown-item"
+                    role="menuitem"
+                  >
+                    AI Alignment
+                  </button>
+                </li>
+                <li role="none">
+                  <button
+                    onClick={() => scrollToSection("giving-back")}
+                    className="vf-nav-dropdown-item"
+                    role="menuitem"
+                  >
+                    Giving Back
+                  </button>
+                </li>
+                <li role="none">
+                  <button
+                    onClick={() => scrollToSection("about")}
+                    className="vf-nav-dropdown-item"
+                    role="menuitem"
+                  >
+                    About
+                  </button>
+                </li>
+                <li role="none">
+                  <button
+                    onClick={() => scrollToSection("contact")}
+                    className="vf-nav-dropdown-item"
+                    role="menuitem"
+                  >
+                    Contact
+                  </button>
+                </li>
+              </ul>
+            </li>
+
+            <li className={`vf-nav-item-dropdown ${capabilitiesDropdownOpen ? "open" : ""}`}>
+              <button
+                onClick={toggleCapabilitiesDropdown}
+                className="vf-nav-list-button vf-nav-dropdown-toggle"
+                aria-expanded={capabilitiesDropdownOpen}
+                aria-haspopup="true"
+              >
+                Capabilities <span>▼</span>
               </button>
               <ul className="vf-nav-dropdown-menu" role="menu">
                 <li role="none">
@@ -144,7 +205,7 @@ export function Header() {
             </li>
 
             <li>
-              <button onClick={handleContactClick} className="vf-nav-list-button">
+              <button onClick={() => scrollToSection("contact")} className="vf-nav-list-button">
                 Contact Us
               </button>
             </li>

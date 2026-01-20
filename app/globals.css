@@ -57,12 +57,50 @@ a {
   gap: 28px;
 }
 
+/* Logo Button */
+.vf-logo-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: opacity 0.2s ease;
+  height: 56px;
+}
+
+.vf-logo-button:hover {
+  opacity: 0.8;
+}
+
+.vf-logo-button:focus-visible {
+  outline: 3px solid var(--accent2);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
 .vf-logo {
   height: 54px;
   width: auto;
   display: block;
   flex-shrink: 0;
   object-fit: contain;
+}
+
+.vf-company-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #003366;
+  white-space: nowrap;
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .vf-company-name {
+    display: inline;
+  }
 }
 
 /* Nav Toggle (mobile) */
@@ -85,28 +123,6 @@ a {
   background: var(--accent2-pale);
 }
 
-/* Logo Button */
-.vf-logo-button {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.2s ease;
-}
-
-.vf-logo-button:hover {
-  opacity: 0.8;
-}
-
-.vf-logo-button:focus-visible {
-  outline: 3px solid var(--accent2);
-  outline-offset: 4px;
-  border-radius: 4px;
-}
-
 /* Nav List */
 .vf-nav-list {
   list-style: none;
@@ -122,16 +138,16 @@ a {
 .vf-nav-list a,
 .vf-nav-list button,
 .vf-nav-list-button {
-  color: var(--accent2);
+  color: #FFFFFF;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  background: var(--accent2-pale);
-  border: 2px solid var(--accent2);
+  background: #003366;
+  border: none;
   cursor: pointer;
   padding: 14px 12px;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   position: relative;
   display: flex;
   align-items: center;
@@ -147,15 +163,15 @@ a {
 .vf-nav-list a:hover,
 .vf-nav-list button:hover,
 .vf-nav-list-button:hover {
-  background: var(--accent2);
-  color: var(--accent);
-  border-color: var(--accent2);
+  background: #003366;
+  color: #FFFFFF;
+  box-shadow: 0 0 16px rgba(43, 114, 255, 0.6);
 }
 
 .vf-nav-list a:focus-visible,
 .vf-nav-list button:focus-visible,
 .vf-nav-list-button:focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--accent2);
   outline-offset: 2px;
 }
 
@@ -176,7 +192,7 @@ a {
 
 .vf-nav-dropdown-toggle span {
   font-size: 10px;
-  color: var(--accent2);
+  color: #FFFFFF;
 }
 
 .vf-nav-dropdown-menu {
@@ -185,11 +201,10 @@ a {
   top: calc(100% + 8px);
   left: 0;
   min-width: 280px;
-  padding: 8px 0;
+  padding: 0;
   z-index: 1001;
   background: transparent;
   border: none;
-  border-radius: 0;
   box-shadow: none;
   list-style: none;
 }
@@ -201,24 +216,25 @@ a {
 .vf-nav-dropdown-item {
   display: block;
   width: 100%;
-  padding: 12px 18px;
+  padding: 14px 20px;
   color: var(--text);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.02em;
   text-align: left;
   text-transform: uppercase;
-  background: var(--accent2-pale);
+  background: var(--surface);
   border: 2px solid var(--accent2);
+  border-top: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  border-radius: 6px;
-  margin-bottom: 8px;
+  border-radius: 0;
+  margin: 0;
   box-sizing: border-box;
 }
 
-.vf-nav-dropdown-item:last-child {
-  margin-bottom: 0;
+.vf-nav-dropdown-item:first-child {
+  border-top: 2px solid var(--accent2);
 }
 
 .vf-nav-dropdown-item:hover {
@@ -308,9 +324,7 @@ a {
   align-items: center;
   justify-content: center;
   text-align: center;
-  min-height: 200px;
-  padding: 48px var(--page-x);
-  width: 100%;
+  padding: 48px 0;
 }
 
 .vf-banner-kicker {
