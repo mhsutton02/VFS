@@ -1,10 +1,10 @@
 import { Metadata } from "next";
 import { Banner } from "@/components/Banner";
 import { Section } from "@/components/Section";
-import { ContactForm } from "@/components/ContactForm";
+
 import bannerData from "@/content/banner.json";
 import careersData from "@/content/careers.json";
-import contactData from "@/content/contact.json";
+
 
 export const metadata: Metadata = {
   title: "Careers | ValorForge Solutions",
@@ -35,11 +35,7 @@ export default function CareersPage() {
 
       <hr />
 
-      <div className="vf-block" id="contact">
-        <Section data={contactData}>
-          <ContactForm />
-        </Section>
-      </div>
+
     </main>
   );
 }
