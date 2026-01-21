@@ -34,15 +34,18 @@ export function Section({ data, children }: SectionProps) {
 
   const getDerivedHref = (title: string): string | undefined => {
     const isWhatWeDo = (data.title || "").toLowerCase().includes("what we do");
-    if (!isWhatWeDo) return undefined;
+    if (isWhatWeDo) {
+      const slug = titleToSlug(title);
+      const overrides: Record<string, string> = {
+        "modernization-and-integration": "modernization-integration",
+        "program-delivery-pmo": "program-delivery",
+      };
+      const path = overrides[slug] ?? slug;
+      return `/capabilities/${path}`;
+    }
 
-    const slug = titleToSlug(title);
-    const overrides: Record<string, string> = {
-      "modernization-and-integration": "modernization-integration",
-      "program-delivery-pmo": "program-delivery",
-    };
-    const path = overrides[slug] ?? slug;
-    return `/capabilities/${path}`;
+    // For who-we-serve, ai-alignment, giving-back, and about sections
+    return "/coming-soon";
   };
 
   const scrollToId = (id: string) => {

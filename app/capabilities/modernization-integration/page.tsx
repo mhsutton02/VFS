@@ -19,7 +19,7 @@ export default function ModernizationIntegrationPage() {
       <hr />
 
       <div className="vf-block" id="content">
-        <div className="vf-container" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div className="vf-container">
           {/* Section Title and Intro */}
           {(contentData.title || contentData.intro) && (
 <div className="vf-section-intro">
@@ -29,7 +29,7 @@ export default function ModernizationIntegrationPage() {
           )}
           {/* Cards as links to /coming-soon */}
           {contentData.items && (
-            <div className="vf-section-cards" style={{ marginTop: 24 }}>
+            <div className="vf-section-cards">
               {contentData.items.map((item) => (
                 <a
                   href="/coming-soon"
@@ -44,8 +44,8 @@ export default function ModernizationIntegrationPage() {
             </div>
           )}
           {/* Footer Buttons */}
-          <div className="vf-section-footer" style={{ marginTop: 32, paddingBottom: 40 }}>
-            <a href="/#hero" className="vf-btn vf-btn-secondary">Home</a>
+          <div className="vf-section-footer">
+            <a href="/" className="vf-btn vf-btn-secondary">Home</a>
             <a href="/coming-soon" className="vf-btn vf-btn-primary">Learn More</a>
             <a href="/#contact" className="vf-btn vf-btn-secondary">Contact Us</a>
           </div>

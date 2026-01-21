@@ -1,7 +1,7 @@
 {
-  "kicker": "Veteran-Owned SDVOSB",
-  "headline": "Mission-Focused Technology Solutions",
-  "body": "Forging operational advantage for America's warfigheters",
+  "kicker": "ValrForge is",
+  "headline": "CMMC 2.0 L2 Certified",
+  "body": "We'll get you there safely",
   "ctas": [
     { "label": "Contact ValorForge", "type": "contact", "href": "/#contact", "priority": "primary" },
     { "label": "Learn More", "type": "route", "href": "/what-we-do", "priority": "secondary" }

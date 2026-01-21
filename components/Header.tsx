@@ -97,7 +97,7 @@ export function Header() {
               onMouseLeave={() => setHomeDropdownOpen(false)}
             >
               <button
-                onClick={toggleHomeDropdown}
+                onClick={handleLogoClick}
                 className="vf-nav-list-button vf-nav-dropdown-toggle"
                 aria-expanded={homeDropdownOpen}
                 aria-haspopup="true"

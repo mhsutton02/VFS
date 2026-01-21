@@ -13,6 +13,8 @@
   --accent: #f5b74a;
   --accent2: #2b72ff;
   --accent2-pale: rgba(43, 114, 255, 0.1);
+  --navy: #1a2332;
+  --navy-light: rgba(26, 35, 50, 0.08);
   --font-primary: 'Roboto', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
 }
 
@@ -52,7 +54,7 @@ a {
   width: 100%;
   height: auto;
   background: var(--surface);
-  border-bottom: 2px solid var(--accent);
+  border-bottom: 3px solid var(--accent);
   position: sticky;
   top: 0;
   z-index: 50;
@@ -96,7 +98,7 @@ a {
 }
 
 .vf-logo {
-  height: 54px;
+  height: 88px;
   width: auto;
   display: block;
   flex-shrink: 0;
@@ -104,7 +106,7 @@ a {
 }
 
 .vf-company-name {
-  font-size: 14px;
+  font-size: 28px;
   font-weight: 700;
   color: #003366;
   white-space: nowrap;
@@ -152,13 +154,13 @@ a {
 .vf-nav-list a,
 .vf-nav-list button,
 .vf-nav-list-button {
-  color: var(--accent2);
+  color: var(--navy);
   font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  background: var(--accent2-pale);
-  border: 2px solid var(--accent2);
+  background: #f0f0f0;
+  border: none;
   cursor: pointer;
   padding: 14px 12px;
   transition: all 0.3s ease;
@@ -177,15 +179,15 @@ a {
 .vf-nav-list a:hover,
 .vf-nav-list button:hover,
 .vf-nav-list-button:hover {
-  background: var(--accent2);
-  color: var(--surface);
-  box-shadow: 0 0 16px rgba(43, 114, 255, 0.6);
+  background: var(--navy);
+  color: var(--accent);
+  box-shadow: 0 0 16px rgba(26, 35, 50, 0.6);
 }
 
 .vf-nav-list a:focus-visible,
 .vf-nav-list button:focus-visible,
 .vf-nav-list-button:focus-visible {
-  outline: 3px solid var(--accent2);
+  outline: 3px solid var(--navy);
   outline-offset: 2px;
 }
 
@@ -206,18 +208,18 @@ a {
 
 .vf-nav-dropdown-toggle span {
   font-size: 10px;
-  color: var(--accent2);
+  color: var(--navy);
 }
 
 .vf-nav-dropdown-menu {
   display: none;
   position: absolute;
-  top: calc(100% + 2px);
+  top: calc(100% + 0px);
   left: 0;
   min-width: 280px;
-  padding: 8px;
+  padding: 12px 8px 8px 8px;
   z-index: 1001;
-  background: transparent;
+  background: var(--bg);
   border: none;
   box-shadow: none;
   list-style: none;
@@ -233,14 +235,14 @@ a {
   display: block;
   width: 100%;
   padding: 14px 20px;
-  color: var(--accent2);
+  color: var(--navy);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 900;
   letter-spacing: 0.02em;
   text-align: left;
   text-transform: uppercase;
-  background: var(--surface);
-  border: 2px solid var(--accent2);
+  background: #f0f0f0;
+  border: none;
   cursor: pointer;
   transition: all 0.2s ease;
   border-radius: 4px;
@@ -259,12 +261,12 @@ a {
 }
 
 .vf-nav-dropdown-item:hover {
-  background: var(--accent2);
-  color: var(--surface);
+  background: var(--navy);
+  color: var(--accent);
 }
 
 .vf-nav-dropdown-item:focus-visible {
-  outline: 3px solid var(--accent2);
+  outline: 3px solid var(--navy);
   outline-offset: -2px;
 }
 
@@ -286,34 +288,34 @@ a {
 }
 
 .vf-btn-primary {
-  background: var(--accent2-pale);
-  color: var(--accent2);
-  border: 2px solid var(--accent2);
+  background: #f0f0f0;
+  color: var(--navy);
+  border: none;
 }
 
 .vf-btn-primary:hover {
-  background: var(--accent2);
-  color: var(--surface);
+  background: var(--navy);
+  color: var(--accent);
 }
 
 .vf-btn-primary:focus-visible {
-  outline: 3px solid var(--accent2);
+  outline: 3px solid var(--navy);
   outline-offset: 2px;
 }
 
 .vf-btn-secondary {
-  background: var(--accent2-pale);
-  border: 2px solid var(--accent2);
-  color: var(--accent2);
+  background: #f0f0f0;
+  border: none;
+  color: var(--navy);
 }
 
 .vf-btn-secondary:hover {
-  background: var(--accent2);
-  color: var(--surface);
+  background: var(--navy);
+  color: var(--accent);
 }
 
 .vf-btn-secondary:focus-visible {
-  outline: 3px solid var(--accent2);
+  outline: 3px solid var(--navy);
   outline-offset: 2px;
 }
 
@@ -346,31 +348,32 @@ a {
   justify-content: center;
   text-align: center;
   padding: 48px 0;
+  gap: clamp(16px, 3vw, 24px);
 }
 
 .vf-banner-kicker {
   font-size: clamp(20px, 2.6vw, 36px);
   font-weight: 700;
-  color: var(--accent2);
+  color: var(--text);
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  margin: 0 0 12px;
+  margin: 0;
 }
 
 .vf-banner-headline {
-  font-size: clamp(28px, 2.6vw, 36px);
+  font-size: clamp(32px, 6vw, 52px);
   font-weight: 900;
-  line-height: 1.2;
-  color: var(--text);
-  margin: 0 0 16px;
+  line-height: 1.15;
+  color: var(--accent2);
+  margin: 0;
   max-width: 900px;
 }
 
 .vf-banner-body {
-  font-size: clamp(12px, 2.6vw, 20px);
+  font-size: clamp(16px, 2.8vw, 24px);
   font-weight: 700;
   line-height: 1.6;
-  color: var(--accent2);
+  color: var(--text);
   margin: 0;
   max-width: 700px;
 }
@@ -381,13 +384,19 @@ a {
   padding: var(--block-y) 0;
 }
 
+.vf-section .vf-container {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(48px, 5vw, 60px);
+}
+
 .vf-section-intro {
   text-align: center;
-  margin-bottom: 48px;
-  min-height: 140px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: clamp(16px, 2.5vw, 24px);
+  padding-top: clamp(24px, 3vw, 32px);
 }
 
 .vf-section-title {
@@ -395,7 +404,7 @@ a {
   font-weight: 900;
   line-height: 1.2;
   color: var(--text);
-  margin: 24 0 16px;
+  margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -413,27 +422,28 @@ a {
   display: flex;
   flex-direction: column;
   gap: 32px;
-  margin-bottom: 48px;
 }
 
 .vf-section-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 28px;
+  gap: clamp(40px, 4vw, 56px);
+  margin-top: clamp(24px, 3vw, 32px);
+  margin-bottom: clamp(24px, 3vw, 32px);
 }
 
 .vf-section-card {
-  background: var(--surface);
+  background: #f0f0f0;
   border: 2px solid rgba(43, 114, 255, 0.2);
   border-radius: 8px;
-  padding: 36px 28px;
+  padding: clamp(48px, 6vw, 64px) clamp(36px, 5vw, 48px);
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
 .vf-section-card:hover {
-  border-color: var(--accent2);
-  box-shadow: 0 8px 24px rgba(43, 114, 255, 0.15);
+  border-color: var(--accent);
+  box-shadow: 0 8px 24px rgba(26, 35, 50, 0.3);
   transform: translateY(-2px);
 }
 
@@ -463,12 +473,12 @@ a {
 }
 
 .vf-section-footer {
-  min-height: 72px;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 16px;
   flex-wrap: wrap;
+  padding-bottom: clamp(24px, 3vw, 32px);
 }
 
 /* Section Frames (Hero Section) */
@@ -476,7 +486,7 @@ a {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: clamp(16px, 3vw, 24px);
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -485,16 +495,16 @@ a {
 .vf-frame-top {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: clamp(16px, 3vw, 24px);
   align-items: center;
   justify-content: center;
   width: 100%;
 }
 
 .vf-kicker {
-  font-size: 14px;
+  font-size: clamp(20px, 2.6vw, 36px);
   font-weight: 700;
-  color: var(--accent2);
+  color: var(--text);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin: 0;
@@ -513,9 +523,10 @@ a {
 }
 
 .vf-body {
-  font-size: clamp(16px, 2.8vw, 20px);
+  font-size: clamp(16px, 2.8vw, 24px);
+  font-weight: 700;
   line-height: 1.6;
-  color: var(--muted);
+  color: var(--text);
   margin: 0;
   max-width: 700px;
 }
@@ -671,9 +682,9 @@ a {
   justify-content: center;
   border-radius: 6px;
   padding: 12px 24px;
-  background: var(--accent2-pale);
-  color: var(--accent2);
-  border: 2px solid var(--accent2);
+  background: #f0f0f0;
+  color: var(--navy);
+  border: none;
   font-weight: 700;
   font-size: 12px;
   text-transform: uppercase;
@@ -683,12 +694,12 @@ a {
 }
 
 .vf-btn-back-to-top:hover {
-  background: var(--accent2);
-  color: var(--surface);
+  background: var(--navy);
+  color: var(--accent);
 }
 
 .vf-btn-back-to-top:focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--navy);
   outline-offset: 2px;
 }
 
@@ -708,8 +719,9 @@ a {
   width: 44px;
   height: 44px;
   border-radius: 6px;
-  border: 2px solid var(--accent2);
-  color: var(--accent2);
+  border: none;
+  background: #f0f0f0;
+  color: var(--navy);
   text-decoration: none;
   transition: all 0.2s ease;
   font-weight: 700;
@@ -717,20 +729,19 @@ a {
 }
 
 .vf-footer-social-link:hover {
-  border-color: var(--accent2);
-  color: var(--surface);
-  background: var(--accent2);
+  background: var(--navy);
+  color: var(--accent);
 }
 
 .vf-footer-social-link:focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--navy);
   outline-offset: 2px;
 }
 
 /* Separator */
 hr {
   width: 100%;
-  height: 2px;
+  height: 3px;
   background: var(--accent);
   border: none;
   margin: 0;

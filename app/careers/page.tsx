@@ -32,7 +32,7 @@ export default function CareersPage() {
       <div className="vf-block" id="careers">
         <Section data={careersData}>
           <div className="vf-section-footer">
-            <a href="/#hero" className="vf-btn vf-btn-secondary">Home</a>
+            <a href="/" className="vf-btn vf-btn-secondary">Home</a>
             <a href="/#contact" className="vf-btn vf-btn-primary">Contact Us</a>
           </div>
         </Section>
