@@ -220,7 +220,7 @@ export function Header() {
                     className="vf-nav-dropdown-item"
                     role="menuitem"
                   >
-                    cmmc Compliance &amp; Enclave Services
+                    CMMC Compliance &amp; Enclave Services
                   </button>
                 </li>
               </ul>
