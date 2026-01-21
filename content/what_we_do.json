@@ -20,3 +20,10 @@
     }
   ]
 }
+
+  ,
+  {
+    "id": "cmmc",
+    "title": "CMMC Compliance & Enclave Services",
+    "body": "CMMC 2.0 Level 2 readiness delivered via secure Microsoft-powered enclaves, managed evidence operations, and certification handoff for Controlled Unclassified Information (CUI)."
+  }

@@ -5,7 +5,7 @@ import bannerData from "../../../content/banner.json";
 import contentData from "../../../content/capabilities/modernization-integration.json";
 
 export const metadata: Metadata = {
-  title: "Modernization & Integration | ValorForge Solutions",
+  title: "Modernization & Integration | Valor Forge Solutions",
   description: "Integrating legacy platforms with cloud-native architectures.",
 };
 

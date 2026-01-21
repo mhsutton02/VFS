@@ -4,7 +4,7 @@ import bannerData from "../../../content/banner.json";
 import contentData from "../../../content/capabilities/program-delivery.json";
 
 export const metadata: Metadata = {
-  title: "Program Delivery & PMO | ValorForge Solutions",
+  title: "Program Delivery & PMO | Valor Forge Solutions",
   description: "Disciplined program leadership for on-time, on-budget delivery.",
 };
 

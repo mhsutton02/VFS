@@ -67,17 +67,17 @@ export function Header() {
         <button
           onClick={handleLogoClick}
           className="vf-logo-button"
-          aria-label="ValorForge Solutions Home"
+          aria-label="Valor Forge Solutions Home"
         >
           <Image
             src="/assets/img/vf-logo.jpg"
-            alt="ValorForge Solutions"
+            alt="Valor Forge Solutions"
             width={54}
             height={54}
             className="vf-logo"
             priority
           />
-          <span className="vf-company-name">ValorForge Solutions</span>
+
         </button>
 
         <button
