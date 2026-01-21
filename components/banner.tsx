@@ -22,10 +22,12 @@ export function Banner({ data }: BannerProps) {
 
   return (
     <section className="vf-banner" aria-label="Banner">
-      <div className="vf-banner-content">
-        <div className="vf-banner-kicker">{data.kicker}</div>
-        <h1 className="vf-banner-headline">{data.headline}</h1>
-        <p className="vf-banner-body">{data.body}</p>
+      <div className="vf-container">
+        <div className="vf-banner-content">
+          <div className="vf-banner-kicker">{data.kicker}</div>
+          <h1 className="vf-banner-headline">{data.headline}</h1>
+          <p className="vf-banner-body">{data.body}</p>
+        </div>
       </div>
     </section>
   );

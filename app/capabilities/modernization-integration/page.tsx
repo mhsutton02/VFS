@@ -46,7 +46,6 @@ export default function ModernizationIntegrationPage() {
           {/* Footer Buttons */}
           <div className="vf-section-footer">
             <a href="/" className="vf-btn vf-btn-secondary">Home</a>
-            <a href="/coming-soon" className="vf-btn vf-btn-primary">Learn More</a>
             <a href="/#contact" className="vf-btn vf-btn-secondary">Contact Us</a>
           </div>
         </div>
