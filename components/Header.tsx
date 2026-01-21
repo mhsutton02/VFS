@@ -97,7 +97,15 @@ export function Header() {
               onMouseLeave={() => setHomeDropdownOpen(false)}
             >
               <button
-                onClick={handleLogoClick}
+                onClick={(e) => {
+                  // On mobile, toggle dropdown. On desktop, go home
+                  if (window.innerWidth < 1024) {
+                    e.stopPropagation();
+                    toggleHomeDropdown();
+                  } else {
+                    handleLogoClick();
+                  }
+                }}
                 className="vf-nav-list-button vf-nav-dropdown-toggle"
                 aria-expanded={homeDropdownOpen}
                 aria-haspopup="true"
