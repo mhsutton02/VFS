@@ -1,9 +1,5 @@
 {
-  "kicker": "ValrForge is",
+  "kicker": "ValorForge is",
   "headline": "CMMC 2.0 L2 Certified",
-  "body": "We'll get you there safely",
-  "ctas": [
-    { "label": "Contact ValorForge", "type": "contact", "href": "/#contact", "priority": "primary" },
-    { "label": "Learn More", "type": "route", "href": "/what-we-do", "priority": "secondary" }
-  ]
+  "body": "We'll get you there safely"
 }
