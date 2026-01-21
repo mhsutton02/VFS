@@ -17,13 +17,11 @@
       "id": "delivery",
       "title": "Program Delivery",
       "body": "Disciplined program leadership to ensure on-time, on-budget delivery aligned to operational outcomes."
+    },
+    {
+      "id": "cmmc",
+      "title": "CMMC Compliance & Enclave Services",
+      "body": "CMMC 2.0 Level 2 readiness delivered via secure Microsoft-powered enclaves, managed evidence operations, and certification handoff for Controlled Unclassified Information (CUI)."
     }
-  ]
+    ]
 }
-
-  ,
-  {
-    "id": "cmmc",
-    "title": "CMMC Compliance & Enclave Services",
-    "body": "CMMC 2.0 Level 2 readiness delivered via secure Microsoft-powered enclaves, managed evidence operations, and certification handoff for Controlled Unclassified Information (CUI)."
-  }

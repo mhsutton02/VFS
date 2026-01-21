@@ -4,8 +4,8 @@ import bannerData from "../../../content/banner.json";
 import contentData from "../../../content/capabilities/cmmc.json";
 
 export const metadata: Metadata = {
-  title: "CMMC Compliance & Enclave Services | Valor Forge Solutions",
-  description: "Valor Forge delivers CMMC 2.0 Level 2 readiness with a customer-owned, Microsoft-powered enclave for Controlled Unclassified Information (CUI).",
+  title: "CMMC Compliance & Enclave Services | VALOR FORGE Solutions",
+  description: "VALOR FORGE delivers CMMC 2.0 Level 2 readiness with a customer-owned, Microsoft-powered enclave for Controlled Unclassified Information (CUI).",
 };
 
 export default function cmmcPage() {

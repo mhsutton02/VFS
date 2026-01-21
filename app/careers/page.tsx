@@ -7,13 +7,13 @@ import careersData from "../../content/careers.json";
 
 
 export const metadata: Metadata = {
-  title: "Careers | Valor Forge Solutions",
+  title: "Careers | VALOR FORGE Solutions",
   description: "Join our team. We're hiring mission-focused technologists.",
   alternates: {
     canonical: "https://valorforge.com/careers",
   },
   openGraph: {
-    title: "Careers | Valor Forge Solutions",
+    title: "Careers | VALOR FORGE Solutions",
     description: "Join our team. We're hiring mission-focused technologists.",
     url: "https://valorforge.com/careers",
     type: "website",

@@ -67,11 +67,11 @@ export function Header() {
         <button
           onClick={handleLogoClick}
           className="vf-logo-button"
-          aria-label="Valor Forge Solutions Home"
+          aria-label="VALOR FORGE Solutions Home"
         >
           <Image
             src="/assets/img/vf-logo.jpg"
-            alt="Valor Forge Solutions"
+            alt="VALOR FORGE Solutions"
             width={54}
             height={54}
             className="vf-logo"
@@ -110,7 +110,7 @@ export function Header() {
                 aria-expanded={homeDropdownOpen}
                 aria-haspopup="true"
               >
-                Home <span>▼</span>
+                VALOR FORGE <span>▼</span>
               </button>
               <ul className="vf-nav-dropdown-menu" role="menu">
                 <li role="none">

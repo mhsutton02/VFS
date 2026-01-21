@@ -1,6 +1,6 @@
 {
   "name": "ValorForge Solutions",
-  "short_name": "Valor Forge",
+  "short_name": "VALOR FORGE",
   "description": "Veteran-owned SDVOSB providing strategic IT consulting, AI alignment, and mission-focused technology solutions.",
   "start_url": "/",
   "display": "standalone",
@@ -27,14 +27,14 @@
       "sizes": "1080x1920",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "Valor Forge mobile view"
+      "label": "VALOR FORGE mobile view"
     },
     {
       "src": "/screenshot-desktop.png",
       "sizes": "1920x1080",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "Valor Forge desktop view"
+      "label": "VALOR FORGE desktop view"
     }
   ]
 }

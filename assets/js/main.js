@@ -189,7 +189,7 @@ async function init(){
   document.getElementById("heroL0").textContent = hero.headline_l0 || "";
   document.getElementById("heroL1").textContent = hero.headline_l1 || "";
   document.getElementById("heroBody").textContent = hero.body || "";
-    document.getElementById("heroBottomCta").textContent = "Contact Valor Forge";
+    document.getElementById("heroBottomCta").textContent = "Contact VALOR FORGE";
   const heroImg = document.getElementById("heroImg");
   heroImg.src = hero.image || "";
   heroImg.alt = "ValorForge hero image";
