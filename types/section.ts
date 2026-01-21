@@ -11,20 +11,12 @@ export interface SectionImage {
   alt: string;
 }
 
-export interface SectionCta {
-  label: string;
-  type: "home" | "route" | "contact";
-  href?: string;
-  priority?: "primary" | "secondary";
-}
-
 export interface SectionData {
   title: string;
   intro: string;
   contentType: "text" | "image" | "form";
   items?: SectionItem[];
   image?: SectionImage;
-  footerCtas?: SectionCta[];
 }
 
 export interface BannerCta {

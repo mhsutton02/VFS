@@ -18,10 +18,5 @@
       "title": "Strategic Partners",
       "body": "Prime contractors and integrators seeking a trusted SDVOSB ally at the edge of delivery."
     }
-  ],
-  "footerCtas": [
-    { "label": "Home", "type": "home" },
-    { "label": "Learn More", "type": "route", "href": "/coming-soon" },
-    { "label": "Contact Us", "type": "contact", "href": "/#contact" }
   ]
 }

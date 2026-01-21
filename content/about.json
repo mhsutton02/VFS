@@ -6,10 +6,5 @@
     { "id": "mission", "title": "Mission", "body": "To forge durable, high-confidence technology outcomes for organizations whose missions cannot fail." },
     { "id": "vision", "title": "Vision Statement", "body": "A world where mission-led teams confidently harness technology and AI, grounded in trust, discipline, and alignment." },
     { "id": "values", "title": "Core Values", "body": "Service, discipline, integrity, and stewardship—applied to every engagement we lead." }
-  ],
-  "footerCtas": [
-    { "label": "Home", "type": "home", "href": "#hero", "priority": "secondary" },
-    { "label": "Learn More", "type": "route", "href": "/what-we-do" },
-    { "label": "Contact Us", "type": "contact", "href": "/#contact" }
   ]
 }

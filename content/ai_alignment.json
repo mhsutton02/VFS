@@ -18,10 +18,5 @@
       "title": "Systems Integration",
       "body": "Safely integrating AI components into existing architectures without compromising reliability."
     }
-  ],
-  "footerCtas": [
-    { "label": "Home", "type": "home", "href": "#hero", "priority": "secondary" },
-    { "label": "Learn More", "type": "route", "href": "/coming-soon" },
-    { "label": "Contact Us", "type": "contact", "href": "/#contact" }
   ]
 }

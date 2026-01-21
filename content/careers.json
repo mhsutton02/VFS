@@ -12,9 +12,5 @@
       "title": "Program Manager — Hybrid / Arlington, VA (Full-time)",
       "body": "Coordinate cross-functional teams, manage program timelines, and support customer engagements. Apply: careers@example.com"
     }
-  ],
-  "footerCtas": [
-    { "label": "Home", "type": "home", "href": "#hero", "priority": "secondary" },
-    { "label": "Contact Us", "type": "contact", "href": "/#contact" }
   ]
 }

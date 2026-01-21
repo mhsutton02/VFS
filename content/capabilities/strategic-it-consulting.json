@@ -18,10 +18,5 @@
       "title": "Implementation Planning",
       "body": "Detailed execution plans with governance, timelines, resource allocation, and success metrics."
     }
-  ],
-  "footerCtas": [
-    { "label": "Home", "type": "home", "href": "#hero", "priority": "secondary" },
-    { "label": "Learn More", "type": "route", "href": "/coming-soon" },
-    { "label": "Contact Us", "type": "contact", "href": "/#contact" }
   ]
 }

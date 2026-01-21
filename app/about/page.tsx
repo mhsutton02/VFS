@@ -21,7 +21,13 @@ export default function AboutPage() {
   return (
     <main>
       <div className="vf-block">
-        <Section data={aboutData} />
+        <Section data={aboutData}>
+          <div className="vf-section-footer">
+            <a href="/#hero" className="vf-btn vf-btn-secondary">Home</a>
+            <a href="/what-we-do" className="vf-btn vf-btn-primary">Learn More</a>
+            <a href="/#contact" className="vf-btn vf-btn-secondary">Contact Us</a>
+          </div>
+        </Section>
       </div>
     </main>
   );

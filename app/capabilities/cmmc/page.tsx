@@ -43,20 +43,8 @@ export default function cmmcPage() {
             </div>
           )}
           {/* Footer Buttons */}
-          <div
-            className="cmmc-btns"
-            style={{
-              marginTop: 32,
-              textAlign: "center",
-              paddingBottom: 40,
-              display: "flex",
-              flexDirection: "column",
-              gap: 16,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <a href="#hero" className="vf-btn vf-btn-secondary">Home</a>
+          <div className="vf-section-footer" style={{ marginTop: 32, paddingBottom: 40 }}>
+            <a href="/#hero" className="vf-btn vf-btn-secondary">Home</a>
             <a href="/coming-soon" className="vf-btn vf-btn-primary">Learn More</a>
             <a href="/#contact" className="vf-btn vf-btn-secondary">Contact Us</a>
           </div>

@@ -21,7 +21,12 @@ export default function WhatWeDoPage() {
   return (
     <main>
       <div className="vf-block">
-        <Section data={whatWeDoData} />
+        <Section data={whatWeDoData}>
+          <div className="vf-section-footer">
+            <a href="/#hero" className="vf-btn vf-btn-secondary">Home</a>
+            <a href="/#contact" className="vf-btn vf-btn-primary">Contact Us</a>
+          </div>
+        </Section>
       </div>
     </main>
   );

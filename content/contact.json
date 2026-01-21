@@ -1,8 +1,5 @@
 {
   "title": "Contact ValorForge",
   "intro": "Ready to discuss how we can support your mission? Reach out to our team.",
-  "contentType": "form",
-  "footerCtas": [
-    { "label": "Home", "type": "home", "href": "#hero", "priority": "secondary" }
-  ]
+  "contentType": "form"
 }

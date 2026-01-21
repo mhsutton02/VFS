@@ -21,7 +21,13 @@ export default function GivingBackPage() {
   return (
     <main>
       <div className="vf-block">
-        <Section data={givingBackData} />
+        <Section data={givingBackData}>
+          <div className="vf-section-footer">
+            <a href="/#hero" className="vf-btn vf-btn-secondary">Home</a>
+            <a href="/coming-soon" className="vf-btn vf-btn-primary">Learn More</a>
+            <a href="/#contact" className="vf-btn vf-btn-secondary">Contact Us</a>
+          </div>
+        </Section>
       </div>
     </main>
   );

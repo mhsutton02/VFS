@@ -19,10 +19,5 @@
       "title": "Certify-Ready Handoff",
       "body": "Pre-assessment readiness checks, remediation plans, final SSP/policies, mapped evidence index, interview prep, live demo scripts, and boundary package. Includes introduction to 3–5 trusted C3PAOs for client-led assessment scheduling—ensuring predictable, fast certification without us acting as the assessor."
     }
-  ],
-  "footerCtas": [
-    { "label": "Home", "type": "home", "href": "#hero", "priority": "secondary" },
-    { "label": "Learn More", "type": "route", "href": "/coming-soon" },
-    { "label": "Contact Us", "type": "contact", "href": "/#contact" }
   ]
 }

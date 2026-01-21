@@ -18,9 +18,5 @@
       "title": "Program Delivery",
       "body": "Disciplined program leadership to ensure on-time, on-budget delivery aligned to operational outcomes."
     }
-  ],
-  "footerCtas": [
-    { "label": "Home", "type": "home" },
-    { "label": "Contact Us", "type": "contact", "href": "/#contact" }
   ]
 }
