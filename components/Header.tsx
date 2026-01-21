@@ -91,7 +91,11 @@ export function Header() {
 
         <nav aria-label="Main navigation">
           <ul className={`vf-nav-list ${mobileMenuOpen ? "open" : ""}`}>
-            <li className={`vf-nav-item-dropdown ${homeDropdownOpen ? "open" : ""}`}>
+            <li 
+              className={`vf-nav-item-dropdown ${homeDropdownOpen ? "open" : ""}`}
+              onMouseEnter={() => setHomeDropdownOpen(true)}
+              onMouseLeave={() => setHomeDropdownOpen(false)}
+            >
               <button
                 onClick={toggleHomeDropdown}
                 className="vf-nav-list-button vf-nav-dropdown-toggle"
@@ -158,7 +162,11 @@ export function Header() {
               </ul>
             </li>
 
-            <li className={`vf-nav-item-dropdown ${capabilitiesDropdownOpen ? "open" : ""}`}>
+            <li 
+              className={`vf-nav-item-dropdown ${capabilitiesDropdownOpen ? "open" : ""}`}
+              onMouseEnter={() => setCapabilitiesDropdownOpen(true)}
+              onMouseLeave={() => setCapabilitiesDropdownOpen(false)}
+            >
               <button
                 onClick={toggleCapabilitiesDropdown}
                 className="vf-nav-list-button vf-nav-dropdown-toggle"

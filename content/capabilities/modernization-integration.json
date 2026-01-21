@@ -18,10 +18,5 @@
       "title": "Data Modernization",
       "body": "Modernize data pipelines, warehousing, and analytics for real-time insights and decision-making."
     }
-  ],
-  "footerCtas": [
-    { "label": "Home", "type": "home", "href": "#hero", "priority": "secondary" },
-    { "label": "Learn More", "type": "route", "href": "/coming-soon" },
-    { "label": "Contact Us", "type": "contact", "href": "/#contact" }
   ]
 }

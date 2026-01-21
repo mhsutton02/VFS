@@ -5,7 +5,7 @@ import contentData from "../../../content/capabilities/cmmc.json";
 
 export const metadata: Metadata = {
   title: "cmmc Compliance & Enclave Services | ValorForge Solutions",
-  description: "Belcan delivers cmmc 2.0 Level 2 readiness with a customer-owned, Microsoft-powered enclave for Controlled Unclassified Information (CUI).",
+  description: "ValorForge delivers CMMC 2.0 Level 2 readiness with a customer-owned, Microsoft-powered enclave for Controlled Unclassified Information (CUI).",
 };
 
 export default function cmmcPage() {

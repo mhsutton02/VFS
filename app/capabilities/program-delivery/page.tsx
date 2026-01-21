@@ -21,10 +21,10 @@ export default function ProgramDeliveryPage() {
         <div className="vf-container" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
           {/* Section Title and Intro */}
           {(contentData.title || contentData.intro) && (
-<div className="vf-section-intro">
-  {contentData.title && <h2 className="vf-section-title">{contentData.title}</h2>}
-  {contentData.intro && <p className="vf-section-intro-text">{contentData.intro}</p>}
-</div>
+            <div className="vf-section-intro">
+              {contentData.title && <h2 className="vf-section-title">{contentData.title}</h2>}
+              {contentData.intro && <p className="vf-section-intro-text">{contentData.intro}</p>}
+            </div>
           )}
           {/* Cards as links to /coming-soon */}
           {contentData.items && (
@@ -56,8 +56,8 @@ export default function ProgramDeliveryPage() {
               alignItems: "center",
             }}
           >
-            <a href="/" className="vf-btn vf-btn-primary">Home</a>
-            <a href="/#contact" className="vf-btn vf-btn-primary">Contact Me</a>
+            <a href="/" className="vf-btn vf-btn-secondary">Home</a>
+            <a href="/#contact" className="vf-btn vf-btn-secondary">Contact Me</a>
           </div>
         </div>
       </div>

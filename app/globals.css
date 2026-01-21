@@ -12,6 +12,7 @@
   --muted: #4b5565;
   --accent: #f5b74a;
   --accent2: #2b72ff;
+  --accent2-pale: rgba(43, 114, 255, 0.1);
   --font-primary: 'Roboto', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
 }
 
@@ -151,13 +152,13 @@ a {
 .vf-nav-list a,
 .vf-nav-list button,
 .vf-nav-list-button {
-  color: #FFFFFF;
-  font-size: 11px;
+  color: var(--accent2);
+  font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  background: #003366;
-  border: none;
+  background: var(--accent2-pale);
+  border: 2px solid var(--accent2);
   cursor: pointer;
   padding: 14px 12px;
   transition: all 0.3s ease;
@@ -176,8 +177,8 @@ a {
 .vf-nav-list a:hover,
 .vf-nav-list button:hover,
 .vf-nav-list-button:hover {
-  background: #003366;
-  color: #FFFFFF;
+  background: var(--accent2);
+  color: var(--surface);
   box-shadow: 0 0 16px rgba(43, 114, 255, 0.6);
 }
 
@@ -205,21 +206,23 @@ a {
 
 .vf-nav-dropdown-toggle span {
   font-size: 10px;
-  color: #FFFFFF;
+  color: var(--accent2);
 }
 
 .vf-nav-dropdown-menu {
   display: none;
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 2px);
   left: 0;
   min-width: 280px;
-  padding: 0;
+  padding: 8px;
   z-index: 1001;
   background: transparent;
   border: none;
   box-shadow: none;
   list-style: none;
+  border-radius: 6px;
+  overflow: hidden;
 }
 
 .vf-nav-item-dropdown.open .vf-nav-dropdown-menu {
@@ -230,24 +233,29 @@ a {
   display: block;
   width: 100%;
   padding: 14px 20px;
-  color: var(--text);
-  font-size: 13px;
+  color: var(--accent2);
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.02em;
   text-align: left;
   text-transform: uppercase;
   background: var(--surface);
   border: 2px solid var(--accent2);
-  border-top: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  border-radius: 0;
-  margin: 0;
+  border-radius: 4px;
+  margin: 0 0 8px 0;
   box-sizing: border-box;
+  opacity: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .vf-nav-dropdown-item:first-child {
-  border-top: 2px solid var(--accent2);
+  border-top: none;
+}
+
+.vf-nav-dropdown-item:last-child {
+  margin-bottom: 0;
 }
 
 .vf-nav-dropdown-item:hover {
@@ -341,7 +349,7 @@ a {
 }
 
 .vf-banner-kicker {
-  font-size: 14px;
+  font-size: clamp(20px, 2.6vw, 36px);
   font-weight: 700;
   color: var(--accent2);
   text-transform: uppercase;
@@ -350,7 +358,7 @@ a {
 }
 
 .vf-banner-headline {
-  font-size: clamp(24px, 5vw, 40px);
+  font-size: clamp(28px, 2.6vw, 36px);
   font-weight: 900;
   line-height: 1.2;
   color: var(--text);
@@ -359,9 +367,10 @@ a {
 }
 
 .vf-banner-body {
-  font-size: clamp(15px, 2.6vw, 18px);
+  font-size: clamp(12px, 2.6vw, 20px);
+  font-weight: 700;
   line-height: 1.6;
-  color: var(--muted);
+  color: var(--accent2);
   margin: 0;
   max-width: 700px;
 }
@@ -386,13 +395,13 @@ a {
   font-weight: 900;
   line-height: 1.2;
   color: var(--text);
-  margin: 0 0 16px;
+  margin: 24 0 16px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
 .vf-section-intro-text {
-  font-size: clamp(15px, 2.6vw, 18px);
+  font-size: clamp(18px, 2.6vw, 24px);
   line-height: 1.6;
   color: var(--muted);
   margin: 0 auto;
@@ -434,10 +443,11 @@ a {
   line-height: 1.3;
   color: var(--text);
   margin: 0 0 12px;
+  text-align: center;
 }
 
 .vf-section-card-body {
-  font-size: 15px;
+  font-size: clamp(14px, 3vw, 18px);
   line-height: 1.6;
   color: var(--muted);
   margin: 0;
