@@ -16,15 +16,12 @@ interface BannerProps {
 }
 
 export function Banner({ data }: BannerProps) {
-  console.log('Banner data:', data); // Debug log
-  
   if (!data || !data.kicker || !data.headline) {
-    console.error('Banner: Missing required data');
     return null;
   }
 
   return (
-    <section className="vf-banner" aria-label="Banner" style={{ border: '2px solid red' }}>
+    <section className="vf-banner" aria-label="Banner">
       <div className="vf-container">
         <div className="vf-banner-content">
           <div className="vf-banner-kicker">{data.kicker}</div>
