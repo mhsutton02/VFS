@@ -823,12 +823,17 @@ hr {
     position: static;
     width: 100%;
     min-width: 100%;
-    padding: 0;
-    background: transparent;
+    padding: 8px 0;
+    background: var(--bg);
     box-shadow: none;
+    border-radius: 0;
   }
 
   .vf-nav-item-dropdown {
+    width: 100%;
+  }
+
+  .vf-nav-item-dropdown .vf-nav-dropdown-toggle {
     width: 100%;
   }
 

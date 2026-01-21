@@ -86,7 +86,7 @@ export function Header() {
           aria-label="Toggle navigation menu"
           aria-expanded={mobileMenuOpen}
         >
-          {mobileMenuOpen ? "✕" : "☰"}
+          {mobileMenuOpen ? "✕" : "≡"}
         </button>
 
         <nav aria-label="Main navigation">
