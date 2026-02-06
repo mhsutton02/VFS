@@ -26,14 +26,14 @@ export function CarouselSection({
   items
 }: CarouselSectionProps) {
   const sectionBgClass = altBackground
-    ? "vf-section vf-section-carousels vf-section-carousels-alt"
-    : "vf-section vf-section-carousels";
+    ? "vf-section vf-bg-blue-accent"
+    : "vf-section vf-bg-gold-accent";
 
   return (
     <section id={id} className={sectionBgClass}>
       <div
         className={`vf-container ${
-          reverse ? "vf-section-grid-even" : "vf-section-grid"
+          reverse ? "vf-grid-image-left" : "vf-grid-image-right"
         }`}
       >
         {!reverse && (
@@ -68,11 +68,6 @@ export function CarouselSection({
             />
           </div>
         )}
-      </div>
-      <div className="vf-container vf-section-bottom">
-        <a href="/contact" className="vf-btn vf-btn-ghost">
-          {ctaText}
-        </a>
       </div>
     </section>
   );

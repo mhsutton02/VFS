@@ -8,28 +8,18 @@ export function ContactForm() {
       method="POST"
       action="/success"
       data-netlify="true"
-      netlify-honeypot="bot-field"
+      netlify-honeypot="website"
       className="vf-form"
-      style={{
-        display: "grid",
-        gap: "24px",
-        background: "rgba(255, 255, 255, 0.04)",
-        border: "1px solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "var(--radius)",
-        padding: "32px",
-        maxWidth: "600px",
-        margin: "0 auto",
-      }}
     >
       <input type="hidden" name="form-name" value="contact" />
       <p className="hidden">
         <label>
-          Don’t fill this out: <input name="bot-field" />
+          Website (leave blank): <input name="website" />
         </label>
       </p>
 
       {/* Name & Organization – side-by-side on desktop, stacked on mobile */}
-      <div className="vf-contact-meta" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
+      <div className="vf-form-row">
         <label>
           Name
           <input
@@ -37,16 +27,7 @@ export function ContactForm() {
             type="text"
             required
             placeholder="Your full name"
-            style={{
-              width: "100%",
-              padding: "14px",
-              fontSize: "1rem",
-              borderRadius: "10px",
-              border: "1px solid rgba(255, 255, 255, 0.18)",
-              background: "rgba(0, 0, 0, 0.18)",
-              color: "var(--text)",
-              boxSizing: "border-box",
-            }}
+            maxLength={100}
           />
         </label>
 
@@ -56,22 +37,13 @@ export function ContactForm() {
             name="organization"
             type="text"
             placeholder="Your company or organization (optional)"
-            style={{
-              width: "100%",
-              padding: "14px",
-              fontSize: "1rem",
-              borderRadius: "10px",
-              border: "1px solid rgba(255, 255, 255, 0.18)",
-              background: "rgba(0, 0, 0, 0.18)",
-              color: "var(--text)",
-              boxSizing: "border-box",
-            }}
+            maxLength={100}
           />
         </label>
       </div>
 
       {/* Email & Phone – side-by-side on desktop, stacked on mobile */}
-      <div className="vf-contact-meta" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
+      <div className="vf-form-row">
         <label>
           Email
           <input
@@ -79,16 +51,8 @@ export function ContactForm() {
             type="email"
             required
             placeholder="your.email@example.com"
-            style={{
-              width: "100%",
-              padding: "14px",
-              fontSize: "1rem",
-              borderRadius: "10px",
-              border: "1px solid rgba(255, 255, 255, 0.18)",
-              background: "rgba(0, 0, 0, 0.18)",
-              color: "var(--text)",
-              boxSizing: "border-box",
-            }}
+            maxLength={100}
+            pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
           />
         </label>
 
@@ -98,16 +62,7 @@ export function ContactForm() {
             name="phone"
             type="tel"
             placeholder="Your phone number"
-            style={{
-              width: "100%",
-              padding: "14px",
-              fontSize: "1rem",
-              borderRadius: "10px",
-              border: "1px solid rgba(255, 255, 255, 0.18)",
-              background: "rgba(0, 0, 0, 0.18)",
-              color: "var(--text)",
-              boxSizing: "border-box",
-            }}
+            maxLength={20}
           />
         </label>
       </div>
@@ -120,17 +75,7 @@ export function ContactForm() {
           required
           rows={6}
           placeholder="Tell us about your needs or project..."
-          style={{
-            width: "100%",
-            padding: "14px",
-            fontSize: "1rem",
-            borderRadius: "10px",
-            border: "1px solid rgba(255, 255, 255, 0.18)",
-            background: "rgba(0, 0, 0, 0.18)",
-            color: "var(--text)",
-            resize: "vertical",
-            minHeight: "140px",
-          }}
+          maxLength={2000}
         />
       </label>
 
@@ -138,12 +83,6 @@ export function ContactForm() {
       <button
         className="vf-btn vf-btn-primary"
         type="submit"
-        style={{
-          width: "100%",
-          padding: "16px",
-          fontSize: "1.1rem",
-          marginTop: "20px",
-        }}
       >
         Send
       </button>

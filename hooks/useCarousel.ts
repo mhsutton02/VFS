@@ -1,24 +1,37 @@
 // hooks/useCarousel.ts
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export function useCarousel<T>(items: T[], intervalMs = 5000) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [transitioning, setTransitioning] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const visibleCount = 2;
 
-  const next = () => {
-    setIndex((prev) => (prev + 1) % items.length);
-  };
+  const triggerTransition = useCallback((updateFn: () => void) => {
+    setTransitioning(true);
+    setTimeout(() => {
+      updateFn();
+      setTransitioning(false);
+    }, 200);
+  }, []);
 
-  const prev = () => {
-    setIndex((prev) =>
-      (prev - 1 + items.length) % items.length
-    );
-  };
+  const next = useCallback(() => {
+    triggerTransition(() => {
+      setIndex((prev) => (prev + 1) % items.length);
+    });
+  }, [items.length, triggerTransition]);
+
+  const prev = useCallback(() => {
+    triggerTransition(() => {
+      setIndex((prev) =>
+        (prev - 1 + items.length) % items.length
+      );
+    });
+  }, [items.length, triggerTransition]);
 
   useEffect(() => {
     if (paused || items.length <= visibleCount) return;
@@ -27,12 +40,11 @@ export function useCarousel<T>(items: T[], intervalMs = 5000) {
     return () => {
       timerRef.current && clearInterval(timerRef.current);
     };
-  }, [paused, items.length, intervalMs]);
+  }, [paused, items.length, intervalMs, next]);
 
   const onMouseEnter = () => setPaused(true);
   const onMouseLeave = () => setPaused(false);
 
-  // Compute a slice of items (2 visible + 1 extra for seamless feel if needed)
   const getVisibleItems = () => {
     const result: T[] = [];
     for (let i = 0; i < visibleCount; i++) {
@@ -43,6 +55,7 @@ export function useCarousel<T>(items: T[], intervalMs = 5000) {
 
   return {
     index,
+    transitioning,
     next,
     prev,
     onMouseEnter,

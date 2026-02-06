@@ -4,21 +4,32 @@ import type { Metadata } from "next";
 import { GeistSans } from 'geist/font/sans';  // ← Correct import for Geist Sans
 
 export const metadata: Metadata = {
-  title: "ValorForge Solutions",
+  metadataBase: new URL('https://valorforgesolutions.com'),
+  title: {
+    default: "ValorForge Solutions",
+    template: "%s | ValorForge Solutions",
+  },
   description:
-    "ValorForge Solutions – Veteran-owned SDVOSB providing strategic IT consulting, AI alignment, and mission-focused technology solutions.",
+    "ValorForge Solutions – SDVOSB providing strategic IT consulting, AI alignment, and mission-focused technology solutions.",
   openGraph: {
     title: "ValorForge Solutions",
     description:
-      "Veteran-owned SDVOSB providing strategic IT consulting, AI alignment, and mission-focused technology solutions.",
-    url: "https://valorforge.com/",
+      "SDVOSB providing strategic IT consulting, AI alignment, and mission-focused technology solutions.",
+    url: "https://valorforgesolutions.com/",
     type: "website",
+    images: ['/og-image.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ValorForge Solutions',
+    description: 'SDVOSB providing strategic IT consulting, AI alignment, and mission-focused technology solutions.',
+    images: ['/og-image.jpg'],
   },
   manifest: "/manifest.json",
 };
 
 export const viewport = {
-  themeColor: "#070b14",
+  themeColor: "#0a0a0a",
   width: "device-width",
   initialScale: 1,
 };
@@ -26,13 +37,32 @@ export const viewport = {
 // ... imports and metadata/viewport as before
 
 export default function RootLayout({ children }) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'ValorForge Solutions',
+    url: 'https://valorforgesolutions.com',
+    logo: 'https://valorforgesolutions.com/logo.png',
+    description: 'SDVOSB providing strategic IT consulting, AI alignment, and mission-focused technology solutions.',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Rockwall',
+      addressRegion: 'TX',
+      addressCountry: 'US',
+    },
+    sameAs: [],
+    additionalType: 'https://schema.org/ServiceDisabledVeteranOwnedSmallBusiness',
+  };
+
   return (
     <html lang="en">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {/* ...other head tags... */}
-      </head>
-      <body>{children}</body>
+      <body className={GeistSans.className}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

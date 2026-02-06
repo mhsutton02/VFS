@@ -2,21 +2,34 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 const NAV_ITEMS = [
-  { href: "/", label: "Home" },
-  { href: "#what-we-do", label: "What We Do" },
-  { href: "#who-we-serve", label: "Who We Serve" },
-  { href: "#ai-alignment", label: "AI Alignment" },
-  { href: "#giving-back", label: "Giving Back" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
-  { href: "/careers", label: "Careers" }
+  { href: "/#what-we-do", label: "What We Do" },
+  { href: "/#who-we-serve", label: "Who We Serve" },
+  { href: "/#ai-alignment", label: "AI Alignment" },
+  { href: "/#about", label: "About" },
+  { href: "/#contact", label: "Contact" }
 ];
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  // On page navigation, scroll to hash target or top
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      // Small delay so the DOM renders the target section first
+      const timer = setTimeout(() => {
+        const el = document.querySelector(hash);
+        if (el) el.scrollIntoView({ behavior: "instant" });
+      }, 80);
+      return () => clearTimeout(timer);
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [pathname]);
 
   // Close mobile menu when any link is clicked
   const handleLinkClick = () => {
@@ -33,7 +46,7 @@ export function Header() {
           onClick={handleLinkClick}
         >
           <Image
-            src="/assets/img/vf-logo.jpeg"
+            src="/assets/img/vf-logo-v2.png"
             alt="ValorForge Solutions logo"
             className="vf-logo"
             width={240}
@@ -45,14 +58,24 @@ export function Header() {
 
         <button
           aria-expanded={open}
-          aria-label="Toggle navigation menu"
-          className="vf-nav-toggle min-w-touch min-h-touch px-touch py-touch focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent"
-          onClick={() => {
-            setOpen((v) => !v);
-            console.log("Menu open state:", !open);
-          }}
+          aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+          className="vf-nav-toggle min-w-touch min-h-touch focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          onClick={() => setOpen((v) => !v)}
         >
-          Menu
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            {open ? (
+              <>
+                <line x1="6" y1="6" x2="18" y2="18" />
+                <line x1="6" y1="18" x2="18" y2="6" />
+              </>
+            ) : (
+              <>
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </>
+            )}
+          </svg>
         </button>
 
         <nav aria-label="Primary navigation" className="relative" role="navigation">

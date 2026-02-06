@@ -9,8 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#070b14",
-        bg2: "#0b1222",
+        bg: "#0a0a0a",
+        bg2: "#0a0a0a",
         surface: "rgba(255,255,255,0.06)",
         border: "rgba(255,255,255,0.12)",
         text: "#f4f6fb",
@@ -61,6 +61,9 @@ const config: Config = {
         'fluid-base': "clamp(1rem, 4.5vw + 0.2rem, 1.125rem)",
         'fluid-lg': "clamp(1.125rem, 5vw + 0.25rem, 1.25rem)",
         'fluid-xl': "clamp(1.25rem, 5.5vw + 0.3rem, 1.5rem)",
+        'fluid-2xl': "clamp(1.5rem, 6vw + 0.4rem, 1.875rem)",
+        'fluid-3xl': "clamp(1.875rem, 7vw + 0.5rem, 2.25rem)",
+        'fluid-4xl': "clamp(2.25rem, 8vw + 0.6rem, 3rem)",
       },
       // Optional: If you want even better contrast/accessibility (#6),
       // you could add a high-contrast mode later via dark mode or custom variant

@@ -6,9 +6,9 @@ export function GivingBackSection() {
   return (
     <section
       id="giving-back"
-      className="vf-section vf-section-alt vf-section-carousels-alt"
+      className="vf-section vf-bg-gold-accent"
     >
-      <div className="vf-container vf-section-grid vf-section-grid-even">
+      <div className="vf-container vf-grid-image-right">
         {/* Image frame first (left on desktop, top on mobile) */}
         <div className="vf-section-media">
           <Image
@@ -28,16 +28,6 @@ export function GivingBackSection() {
           <h2 className="vf-h2">{givingBack.title}</h2>
           <p className="vf-body">{givingBack.intro}</p>
 
-          {/* CTA at bottom */}
-          <div className="vf-section-bottom">
-            <a
-              href="/contact"
-              className="vf-btn vf-btn-ghost min-w-touch min-h-touch px-touch py-touch focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent"
-              aria-label={`${givingBack.bottomCta} – Get involved with ValorForge community efforts`}
-            >
-              {givingBack.bottomCta}
-            </a>
-          </div>
         </div>
       </div>
     </section>

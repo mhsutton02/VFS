@@ -16,6 +16,7 @@ interface CarouselProps {
 
 export function Carousel({ items, ariaLabel }: CarouselProps) {
   const {
+    transitioning,
     next,
     prev,
     onMouseEnter,
@@ -32,12 +33,9 @@ export function Carousel({ items, ariaLabel }: CarouselProps) {
       aria-label={ariaLabel}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      // NEW: role="region" for better screen reader context
       role="region"
-      // NEW: aria-roledescription to clarify it's a carousel
       aria-roledescription="carousel"
     >
-      {/* Previous button – add touch target size & better focus */}
       <button
         type="button"
         aria-label="Previous slide"
@@ -49,15 +47,13 @@ export function Carousel({ items, ariaLabel }: CarouselProps) {
 
       <div className="vf-car-viewport">
         <div
-          className="vf-car-track"
-          // NEW: aria-live="polite" so screen readers announce slide changes
+          className={`vf-car-track${transitioning ? " vf-car-track-exit" : " vf-car-track-enter"}`}
           aria-live="polite"
         >
           {visible.map((item) => (
             <article
               key={item.id}
               className="vf-card vf-card-active"
-              // NEW: role="group" + aria-roledescription for card grouping
               role="group"
               aria-roledescription="carousel slide"
             >
@@ -68,7 +64,6 @@ export function Carousel({ items, ariaLabel }: CarouselProps) {
         </div>
       </div>
 
-      {/* Next button – same touch & focus improvements */}
       <button
         type="button"
         aria-label="Next slide"

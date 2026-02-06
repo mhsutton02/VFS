@@ -8,7 +8,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**',  // Broad allow – tighten to your domains later (e.g. 'example.com')
+        hostname: 'valorforgesolutions.com',
       },
     ],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],

@@ -11,7 +11,6 @@ import whatWeDo from "../content/what_we_do.json";
 import whoWeServe from "../content/who_we_serve.json";
 import aiAlignment from "../content/ai_alignment.json";
 
-import Image from 'next/image';
 
 export default function HomePage() {
   return (
@@ -28,6 +27,8 @@ export default function HomePage() {
           intro={whatWeDo.intro}
           ctaText={whatWeDo.bottomCta}
           items={whatWeDo.cards}
+          reverse={false}
+          altBackground={false}
         />
 
         <CarouselSection
@@ -38,6 +39,8 @@ export default function HomePage() {
           intro={whoWeServe.intro}
           ctaText={whoWeServe.bottomCta}
           items={whoWeServe.cards}
+          reverse={true}
+          altBackground={true}
         />
 
         <CarouselSection
@@ -48,6 +51,8 @@ export default function HomePage() {
           intro={aiAlignment.intro}
           ctaText={aiAlignment.bottomCta}
           items={aiAlignment.cards}
+          reverse={false}
+          altBackground={false}
         />
 
 
