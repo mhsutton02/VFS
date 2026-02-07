@@ -1,5 +1,6 @@
 // components/AboutSection.tsx
 import Image from "next/image";
+import Link from "next/link";
 import aboutContent from "../content/about.json";
 import { Carousel } from "./Carousel";
 
@@ -40,6 +41,11 @@ export function AboutSection() {
           <h2 className="vf-h2">{aboutContent.title}</h2>
           <p className="vf-body">{aboutContent.intro}</p>
           <Carousel items={aboutContent.cards} ariaLabel="About carousel" />
+          <div className="vf-cta-row" style={{ justifyContent: "center" }}>
+            <Link href="/leadership" className="vf-btn vf-btn-primary">
+              Meet Our Leadership
+            </Link>
+          </div>
         </div>
       </div>
     </section>

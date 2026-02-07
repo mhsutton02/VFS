@@ -374,6 +374,11 @@ a {
   transform: translateY(6px);
 }
 
+/* Mobile-only track is hidden on desktop */
+.vf-car-track-mobile {
+  display: none;
+}
+
 /* Card */
 .vf-card {
   flex: 0 0 calc((100% - 14px) / 2);
@@ -454,6 +459,41 @@ a {
   border-radius: var(--radius);
   padding: 16px;
   margin: 10px 0 16px;
+}
+
+/* Leadership photos — uniform square placeholder */
+.vf-leader-photo {
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+.vf-leader-photo .vf-media-img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Partner Logos (Giving Back) */
+.vf-partners-logos {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.vf-partners-logos a {
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.vf-partners-logos a:hover {
+  filter: grayscale(0%);
+  opacity: 1;
 }
 
 .vf-contact-meta {
@@ -766,6 +806,52 @@ a {
   .vf-car-btn {
     width: 36px;
     height: 36px;
+  }
+
+  /* Partner logos mobile */
+  .vf-partners-logos {
+    gap: 20px;
+  }
+  .vf-partners-logos img {
+    max-height: 36px;
+  }
+
+  /* Mobile: drop carousel, show all items as plain stacked content */
+  .vf-carousel {
+    display: block;
+  }
+  .vf-car-btn {
+    display: none;
+  }
+  .vf-car-viewport {
+    padding: 0;
+  }
+  .vf-car-track-desktop {
+    display: none;
+  }
+  .vf-car-track-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .vf-card {
+    display: block;
+    flex: none;
+    width: 100%;
+    min-height: auto;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+  .vf-card-title {
+    font-size: 20px;
+    text-align: left;
+    color: var(--accent);
+    min-height: auto;
+  }
+  .vf-card-body {
+    text-align: left;
   }
 }
 

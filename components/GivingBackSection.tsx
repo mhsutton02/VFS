@@ -8,26 +8,28 @@ export function GivingBackSection() {
       id="giving-back"
       className="vf-section vf-bg-gold-accent"
     >
-      <div className="vf-container vf-grid-image-right">
-        {/* Image frame first (left on desktop, top on mobile) */}
-        <div className="vf-section-media">
-          <Image
-            src="/assets/img/givingback.jpg"  // your existing image file
-            alt={givingBack.imageAlt}
-            className="vf-media-img"
-            width={800}
-            height={600}
-            loading="lazy"
-            sizes="(max-width: 768px) 100vw, 50vw"
-            quality={85}
-          />
-        </div>
+      <div className="vf-container" style={{ textAlign: "center" }}>
+        <h2 className="vf-h2">{givingBack.title}</h2>
+        <p className="vf-body" style={{ maxWidth: "none", margin: "0 auto 18px" }}>{givingBack.intro}</p>
 
-        {/* Text content */}
-        <div>
-          <h2 className="vf-h2">{givingBack.title}</h2>
-          <p className="vf-body">{givingBack.intro}</p>
-
+        <div className="vf-partners-logos">
+          {givingBack.partners.map((partner) => (
+            <a
+              key={partner.name}
+              href={partner.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Visit ${partner.name} website`}
+            >
+              <Image
+                src={partner.logo}
+                alt={partner.name}
+                width={200}
+                height={50}
+                loading="lazy"
+              />
+            </a>
+          ))}
         </div>
       </div>
     </section>

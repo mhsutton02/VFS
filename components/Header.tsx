@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { href: "/#who-we-serve", label: "Who We Serve" },
   { href: "/#ai-alignment", label: "AI Alignment" },
   { href: "/#about", label: "About" },
+  { href: "/leadership", label: "Leadership" },
   { href: "/#contact", label: "Contact" }
 ];
 

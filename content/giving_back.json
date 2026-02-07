@@ -1,6 +1,31 @@
 {
   "title": "Giving Back",
-  "intro": "We invest time and resources to support local communities and causes aligned with our mission. This section highlights our ongoing initiatives and how you can get involved.",
-  "imageAlt": "Illustration representing community giving",
-  "bottomCta": "Learn how to help"
+  "intro": "ValorForge invests a percentage of profits in veteran and community causes, and prioritizes hiring veterans and first responders.",
+  "partners": [
+    {
+      "name": "Vets Who Code",
+      "url": "https://vetswhocode.io",
+      "logo": "/assets/img/logos/vetswhocode.svg"
+    },
+    {
+      "name": "Commit Foundation",
+      "url": "https://commitfoundation.org",
+      "logo": "/assets/img/logos/commitfoundation.svg"
+    },
+    {
+      "name": "Bunker Labs",
+      "url": "https://bunkerlabs.org",
+      "logo": "/assets/img/logos/bunkerlabs.svg"
+    },
+    {
+      "name": "Hiring Our Heroes",
+      "url": "https://www.hiringourheroes.org",
+      "logo": "/assets/img/logos/hiringourheroes.svg"
+    },
+    {
+      "name": "Code Platoon",
+      "url": "https://www.codeplatoon.org",
+      "logo": "/assets/img/logos/codeplatoon.svg"
+    }
+  ]
 }

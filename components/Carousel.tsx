@@ -46,8 +46,9 @@ export function Carousel({ items, ariaLabel }: CarouselProps) {
       </button>
 
       <div className="vf-car-viewport">
+        {/* Desktop: rotating 2-at-a-time carousel */}
         <div
-          className={`vf-car-track${transitioning ? " vf-car-track-exit" : " vf-car-track-enter"}`}
+          className={`vf-car-track vf-car-track-desktop${transitioning ? " vf-car-track-exit" : " vf-car-track-enter"}`}
           aria-live="polite"
         >
           {visible.map((item) => (
@@ -57,6 +58,15 @@ export function Carousel({ items, ariaLabel }: CarouselProps) {
               role="group"
               aria-roledescription="carousel slide"
             >
+              <h3 className="vf-card-title">{item.title}</h3>
+              <p className="vf-card-body">{item.body}</p>
+            </article>
+          ))}
+        </div>
+        {/* Mobile: all items displayed statically */}
+        <div className="vf-car-track vf-car-track-mobile">
+          {items.map((item) => (
+            <article key={item.id} className="vf-card">
               <h3 className="vf-card-title">{item.title}</h3>
               <p className="vf-card-body">{item.body}</p>
             </article>
