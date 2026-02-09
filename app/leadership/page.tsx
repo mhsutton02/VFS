@@ -67,6 +67,7 @@ export default function LeadershipPage() {
               </div>
               <p className="vf-body">{leader.paragraph1}</p>
               <p className="vf-body">{leader.paragraph2}</p>
+              {leader.paragraph3 && <p className="vf-body">{leader.paragraph3}</p>}
             </div>
           );
 
