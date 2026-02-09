@@ -1,16 +1,16 @@
 {
   "title": "Leadership",
-  "intro": "ValorForge Solutions is led by a team of seasoned executives with deep expertise in telecommunications, cybersecurity, IT modernization, and strategic consulting. Our leaders bring decades of federal and commercial sector experience, combining military discipline with Big Four rigor.",
+  "intro": "ValorForge Solutions is led by seasoned executives with deep expertise in telecommunications, cybersecurity, IT modernization, and strategic consulting. Our leaders bring decades of federal and commercial sector experience, combining military discipline with enterprise-grade rigor.",
   "leaders": [
     {
-      "id": "darryl-wilkerson",
-      "name": "Darryl Wilkerson",
-      "title": "Strategic Operations & Cybersecurity Infrastructure Leader",
+      "id": "daryl-wilkerson",
+      "name": "Daryl Wilkerson",
+      "title": "Managing Partner | Cybersecurity & IT Operations",
       "imagePath": "/assets/img/hero.jpg",
-      "paragraph1": "Darryl Wilkerson is an executive leader with over 40 years of experience managing global telecommunications, network security, and the federal consulting marketplace. A retired Senior Officer in the United States Navy, Darryl's professional foundation was built on high-level military leadership and mission-critical operations. He has led high-stakes P&L management and strategic business turnarounds within the GovCon sector, with deep expertise in large-scale system integration and secure communications.",
-      "paragraph2": "His career includes complex technical portfolios at L-3 Communications and Teledyne Brown Engineering, bringing a disciplined approach to solving connectivity and data protection challenges. With advanced degrees in business and organizational management, Darryl champions a culture of innovation prioritizing transparency, integrity, and proactive risk management. His mastery of Security-by-Design ensures federal agencies and enterprise partners navigate the digital landscape with operational clarity and resilience."
+      "paragraph1": "Daryl Wilkerson is a technology and operations executive with over 20 years of experience leading enterprise-wide transformation across cybersecurity, IT infrastructure, and large-scale operations. A retired Navy Commander with 23 years of military service — including support of Operations Enduring Freedom and Iraqi Freedom — Daryl brings a rare combination of operational discipline, strategic vision, and technical depth. He has delivered over $1B in projected value through strategic execution and led organizations spanning hundreds of personnel across global operations.",
+      "paragraph2": "During nearly two decades at a Fortune 10 telecommunications company, Daryl rose to Assistant Vice President of Cybersecurity and Director of Technology, overseeing enterprise identity access management, GenAI adoption strategy, and end-user computing for 200,000+ employees. He holds a U.S. patent in authentication technology, is a Lean Six Sigma Black Belt, and is a certified SAFe Agilist. Daryl founded ValorForge to bring that same standard of mission-critical execution to federal agencies and enterprise partners navigating complex IT, cybersecurity, and operational challenges."
     }
   ],
   "seoTitle": "Leadership | ValorForge Solutions",
-  "seoDescription": "Meet the executive leadership team at ValorForge Solutions. Veteran-led expertise in cybersecurity, AI modernization, telecommunications, and strategic IT consulting."
+  "seoDescription": "Meet Daryl Wilkerson, Managing Partner of ValorForge Solutions. Retired Navy Commander and cybersecurity executive with 20+ years leading enterprise IT transformation."
 }

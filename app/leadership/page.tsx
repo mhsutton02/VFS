@@ -7,10 +7,10 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Leadership",
-  description: "Meet the executive leadership team at ValorForge Solutions. Veteran-led expertise in cybersecurity, AI modernization, telecommunications, and strategic IT consulting.",
+  description: "Meet Daryl Wilkerson, Managing Partner of ValorForge Solutions. Retired Navy Commander and cybersecurity executive with 20+ years leading enterprise IT transformation.",
   openGraph: {
     title: "Leadership | ValorForge Solutions",
-    description: "Meet the executive leadership team at ValorForge Solutions. Veteran-led expertise in cybersecurity, AI modernization, telecommunications, and strategic IT consulting.",
+    description: "Meet Daryl Wilkerson, Managing Partner of ValorForge Solutions. Retired Navy Commander and cybersecurity executive with 20+ years leading enterprise IT transformation.",
     url: "https://valorforgesolutions.com/leadership",
     type: "website",
     images: ['/og-image.jpg'],
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Leadership | ValorForge Solutions',
-    description: 'Meet the executive leadership team at ValorForge Solutions. Veteran-led expertise in cybersecurity, AI modernization, telecommunications, and strategic IT consulting.',
+    description: 'Meet Daryl Wilkerson, Managing Partner of ValorForge Solutions. Retired Navy Commander and cybersecurity executive with 20+ years leading enterprise IT transformation.',
     images: ['/og-image.jpg'],
   },
 };
