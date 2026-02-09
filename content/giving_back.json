@@ -5,7 +5,7 @@
     {
       "name": "Vets Who Code",
       "url": "https://vetswhocode.io",
-      "logo": "/assets/img/logos/vetswhocode.svg"
+      "logo": "/assets/img/logos/vetswhocode.png"
     },
     {
       "name": "Commit Foundation",
@@ -15,7 +15,7 @@
     {
       "name": "Bunker Labs",
       "url": "https://bunkerlabs.org",
-      "logo": "/assets/img/logos/bunkerlabs.svg"
+      "logo": "/assets/img/logos/bunkerlabs.png"
     },
     {
       "name": "Hiring Our Heroes",
@@ -25,7 +25,7 @@
     {
       "name": "Code Platoon",
       "url": "https://www.codeplatoon.org",
-      "logo": "/assets/img/logos/codeplatoon.svg"
+      "logo": "/assets/img/logos/codeplatoon.png"
     }
   ]
 }

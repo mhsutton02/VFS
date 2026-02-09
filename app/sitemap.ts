@@ -21,7 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: 'https://valorforgesolutions.com/partners',
+      url: 'https://valorforgesolutions.com/contact',
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,

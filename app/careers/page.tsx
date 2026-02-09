@@ -9,6 +9,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Careers",
   description: "Join the ValorForge Solutions team. Explore open positions in software engineering, program management, AI alignment, and strategic delivery. Work on missions that matter.",
+  alternates: { canonical: "https://valorforgesolutions.com/careers" },
   openGraph: {
     title: "Careers | ValorForge Solutions",
     description: "Join the ValorForge Solutions team. Explore open positions in software engineering, program management, AI alignment, and strategic delivery.",

@@ -3,7 +3,7 @@
   "short_name": "ValorForge",
   "description": "SDVOSB providing strategic IT consulting, AI alignment, and mission-focused technology solutions.",
   "start_url": "/",
-  "display": "browser",
+  "display": "minimal-ui",
   "background_color": "#0a0a0a",
   "theme_color": "#0a0a0a",
   "orientation": "portrait-primary",

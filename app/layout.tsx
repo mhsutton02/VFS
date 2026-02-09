@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   },
   description:
     "ValorForge Solutions – SDVOSB providing strategic IT consulting, AI alignment, and mission-focused technology solutions.",
+  alternates: { canonical: "https://valorforgesolutions.com" },
   openGraph: {
     title: "ValorForge Solutions",
     description:

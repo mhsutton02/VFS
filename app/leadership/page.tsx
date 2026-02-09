@@ -8,6 +8,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Leadership",
   description: "Meet Daryl Wilkerson, Managing Partner of ValorForge Solutions. Retired Navy Commander and cybersecurity executive with 20+ years leading enterprise IT transformation.",
+  alternates: { canonical: "https://valorforgesolutions.com/leadership" },
   openGraph: {
     title: "Leadership | ValorForge Solutions",
     description: "Meet Daryl Wilkerson, Managing Partner of ValorForge Solutions. Retired Navy Commander and cybersecurity executive with 20+ years leading enterprise IT transformation.",
