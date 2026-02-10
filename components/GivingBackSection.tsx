@@ -27,6 +27,7 @@ export function GivingBackSection() {
                 width={200}
                 height={50}
                 loading="lazy"
+                style={{ objectFit: "contain" }}
               />
             </a>
           ))}

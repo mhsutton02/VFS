@@ -31,7 +31,17 @@ export default function LeadershipPage() {
       <main>
         {/* Hero Section */}
         <section className="vf-section vf-section-hero">
-          <div className="vf-container">
+          <div className="vf-hero-bg">
+            <Image
+              src="/assets/img/leadership-hero.jpg"
+              alt="Washington D.C. — Capitol Building"
+              fill
+              priority
+              quality={75}
+              style={{ objectFit: "cover" }}
+            />
+          </div>
+          <div className="vf-container" style={{ position: "relative", zIndex: 2 }}>
             <div className="vf-kicker">Meet the Team</div>
             <h1 className="vf-h1">{leadership.title}</h1>
             <p className="vf-lead">{leadership.intro}</p>

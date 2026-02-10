@@ -814,6 +814,7 @@ a {
   }
   .vf-partners-logos img {
     max-height: 36px;
+    object-fit: contain;
   }
 
   /* Mobile: drop carousel, show all items as plain stacked content */

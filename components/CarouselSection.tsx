@@ -44,6 +44,7 @@ export function CarouselSection({
               className="vf-media-img"
               width={800}
               height={600}
+              style={{ objectFit: "contain" }}
             />
           </div>
         )}
@@ -65,6 +66,7 @@ export function CarouselSection({
               className="vf-media-img"
               width={800}
               height={600}
+              style={{ objectFit: "contain" }}
             />
           </div>
         )}
