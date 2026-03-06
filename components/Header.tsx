@@ -32,6 +32,7 @@ const CAPABILITIES_ITEMS = [
 
 const NAV_ITEMS = [
   { href: "/leadership", label: "Leadership" },
+  { href: "/partners", label: "Partners" },
   { href: "/careers", label: "Careers" },
   { href: "/#contact", label: "Contact" },
 ];

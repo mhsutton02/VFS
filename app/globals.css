@@ -1219,6 +1219,65 @@ section[id] {
 }
 
 /* ═══════════════════════════════════════════ */
+/* Partner Cards                              */
+/* ═══════════════════════════════════════════ */
+.vf-partner-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.vf-partner-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.vf-partner-card-logo {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.vf-partner-focus {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+.vf-partner-card .vf-body {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+  flex: 1;
+}
+
+.vf-partner-card .vf-btn-gold {
+  align-self: flex-start;
+  margin-top: 8px;
+}
+
+@media (max-width: 980px) {
+  .vf-partner-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .vf-partner-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ═══════════════════════════════════════════ */
 /* Case Study Cards                           */
 /* ═══════════════════════════════════════════ */
 .vf-case-study {

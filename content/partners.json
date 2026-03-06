@@ -1,0 +1,27 @@
+{
+  "title": "Our Partners",
+  "intro": "ValorForge partners with best-in-class technology and teaming partners to deliver mission-ready solutions across the federal landscape.",
+  "partners": [
+    {
+      "id": "iqgeo",
+      "name": "IQGeo",
+      "url": "https://www.iqgeo.com",
+      "focus": "Geospatial Network Management",
+      "body": "AI-powered geospatial software for the full telecom and utility network lifecycle — planning, design, construction, and operations. Trusted by AT&T, Deutsche Telekom, and Brightspeed for national-scale deployments."
+    },
+    {
+      "id": "aavya",
+      "name": "Aavya",
+      "url": "https://www.aavya.com",
+      "focus": "Digital Transformation & IT Consulting",
+      "body": "Business intelligence, cloud modernization, managed services, and AI-driven solutions that accelerate enterprise growth. Headquartered in Fairfax, VA with global delivery from the U.S. and Japan."
+    },
+    {
+      "id": "blue-heron-defense",
+      "name": "Blue Heron Defense",
+      "url": "https://www.blueherondefense.com",
+      "focus": "CMMC 2.0 & Cybersecurity Execution",
+      "body": "SDVOSB delivering assessor-aligned CMMC 2.0 readiness, enclave engineering, zero-trust architecture, and evidence operations for federal contractors operating in high-consequence environments."
+    }
+  ]
+}
