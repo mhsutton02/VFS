@@ -3,7 +3,8 @@
 
 import { useState, useRef, FormEvent } from "react";
 
-const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "";
+const WEB3FORMS_KEY =
+  process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "027f833b-0442-48e9-9b29-184a71f3a057";
 const THROTTLE_MS = 60_000; // 60 seconds between submissions
 
 interface ApplicationFormProps {
@@ -63,10 +64,12 @@ export function ApplicationForm({ jobTitle, notifyEmails }: ApplicationFormProps
         setStatus("success");
         form.reset();
       } else {
+        console.error("Web3Forms error:", data);
         setErrorMsg("Submission failed. Please try again or email us directly.");
         setStatus("error");
       }
-    } catch {
+    } catch (err) {
+      console.error("Application form fetch failed:", err);
       setErrorMsg("Network error. Please try again or email us directly.");
       setStatus("error");
     } finally {
