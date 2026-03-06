@@ -1815,7 +1815,12 @@ section[id] {
   border-bottom: 1px solid #1a1a1a;
   vertical-align: middle;
 }
-.adm-td-num {\n  color: var(--fg-muted);\n  font-size: 13px;\n  font-variant-numeric: tabular-nums;\n}\n.adm-td-title {
+.adm-td-num {
+  color: var(--fg-muted);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.adm-td-title {
   font-weight: 600;
   color: var(--accent);
   cursor: pointer;
