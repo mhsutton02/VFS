@@ -1,13 +1,12 @@
 // hooks/useCarousel.ts
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export function useCarousel<T>(items: T[], intervalMs = 5000) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [transitioning, setTransitioning] = useState(false);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const visibleCount = 2;
 
@@ -19,28 +18,27 @@ export function useCarousel<T>(items: T[], intervalMs = 5000) {
     }, 200);
   }, []);
 
+  const len = items.length;
+
   const next = useCallback(() => {
     triggerTransition(() => {
-      setIndex((prev) => (prev + 1) % items.length);
+      setIndex((prev) => (prev + 1) % len);
     });
-  }, [items.length, triggerTransition]);
+  }, [len, triggerTransition]);
 
   const prev = useCallback(() => {
     triggerTransition(() => {
       setIndex((prev) =>
-        (prev - 1 + items.length) % items.length
+        (prev - 1 + len) % len
       );
     });
-  }, [items.length, triggerTransition]);
+  }, [len, triggerTransition]);
 
   useEffect(() => {
-    if (paused || items.length <= visibleCount) return;
-    timerRef.current && clearInterval(timerRef.current);
-    timerRef.current = setInterval(next, intervalMs);
-    return () => {
-      timerRef.current && clearInterval(timerRef.current);
-    };
-  }, [paused, items.length, intervalMs, next]);
+    if (paused || len <= visibleCount) return;
+    const id = setInterval(next, intervalMs);
+    return () => clearInterval(id);
+  }, [paused, len, intervalMs, next]);
 
   const onMouseEnter = () => setPaused(true);
   const onMouseLeave = () => setPaused(false);
