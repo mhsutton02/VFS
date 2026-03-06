@@ -9,6 +9,7 @@ import { useState, useEffect, useCallback, FormEvent } from "react";
 
 interface Job {
   id: string;
+  jobNumber?: number;
   title: string;
   department: string;
   location: string;
@@ -28,6 +29,7 @@ interface Job {
 
 const EMPTY_JOB: Omit<Job, "_sha"> = {
   id: "",
+  jobNumber: undefined,
   title: "",
   department: "",
   location: "Remote / US",
@@ -146,7 +148,9 @@ export default function AdminJobsPage() {
 
   /* ---- CRUD ---- */
   function openNew() {
-    setEditing({ ...EMPTY_JOB, posted: new Date().toISOString().slice(0, 10) });
+    // Auto-assign next job number
+    const maxNum = jobs.reduce((max, j) => Math.max(max, j.jobNumber ?? 0), 0);
+    setEditing({ ...EMPTY_JOB, jobNumber: maxNum + 1, posted: new Date().toISOString().slice(0, 10) });
     setIsNew(true);
     setSaveMsg("");
   }
@@ -337,6 +341,11 @@ export default function AdminJobsPage() {
         <main className="adm-main">
           <h2 className="adm-h2">
             {isNew ? "New Job Posting" : `Edit: ${editing.title}`}
+            {editing.jobNumber != null && (
+              <span style={{ fontSize: "14px", color: "var(--fg-muted)", marginLeft: "12px" }}>
+                Job #{editing.jobNumber}
+              </span>
+            )}
           </h2>
 
           <div className="adm-form">
@@ -591,6 +600,7 @@ export default function AdminJobsPage() {
           <table className="adm-table">
             <thead>
               <tr>
+                <th>#</th>
                 <th>Title</th>
                 <th>Department</th>
                 <th>Location</th>
@@ -602,6 +612,7 @@ export default function AdminJobsPage() {
             <tbody>
               {filtered.map((job) => (
                 <tr key={job.id}>
+                  <td className="adm-td-num">{job.jobNumber ?? "—"}</td>
                   <td className="adm-td-title" onClick={() => openEdit(job)}>
                     {job.title}
                   </td>

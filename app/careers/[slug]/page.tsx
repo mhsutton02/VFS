@@ -10,6 +10,7 @@ import path from "path";
 
 interface JobDetail {
   id: string;
+  jobNumber?: number;
   title: string;
   department: string;
   location: string;
@@ -114,6 +115,9 @@ export default function JobDetailPage({
             </Link>
             <h1 className="vf-h1">{job.title}</h1>
             <div className="vf-job-meta-row">
+              {job.jobNumber != null && (
+                <span className="vf-job-badge">Job #{job.jobNumber}</span>
+              )}
               <span className="vf-job-badge">{job.department}</span>
               <span className="vf-job-meta">{job.location}</span>
               <span className="vf-job-meta">{job.type}</span>
