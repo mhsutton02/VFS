@@ -1,0 +1,167 @@
+{
+  "seoTitle": "Program Management & Federal Delivery | ValorForge Solutions",
+  "seoDescription": "CMMC 2.0 Level 2 Self-Attest certified program management for multi-year federal contracts. ValorForge delivers disciplined project leadership, quality assurance, cybersecurity compliance, and stakeholder coordination for national-scale broadband and technology programs.",
+  "hero": {
+    "badge": "CMMC 2.0 Level 2 Self-Attest · SDVOSB",
+    "headline": "Disciplined Delivery for Programs That Cannot Fail",
+    "subheadline": "Multi-year, multimillion-dollar federal programs demand more than good intentions. They demand repeatable processes, rigorous quality assurance, and program leadership that keeps complex stakeholder environments aligned from kickoff to closeout."
+  },
+  "sections": [
+    {
+      "id": "federal-contract-management",
+      "heading": "Federal Contract Management",
+      "body": "ValorForge provides program management for federal contracts where accuracy, compliance, and coordination across multiple government bureaus are non-negotiable.\n\nOur approach is grounded in disciplined process maturity and CMMC 2.0 Level 2 Self-Attest cybersecurity certification — ensuring that every project plan, risk register, status report, and deliverable follows documented, repeatable processes that scale from contract award through final transition-out, while maintaining the cybersecurity posture required for handling sensitive national-scale datasets.",
+      "capabilities": [
+        {
+          "icon": "📋",
+          "title": "Project Management Planning",
+          "body": "Detailed project plans with timelines, milestones, staffing, risk management, subcontractor management, and communication frameworks — delivered at proposal and maintained throughout the contract lifecycle."
+        },
+        {
+          "icon": "👥",
+          "title": "Integrated Product Team Coordination",
+          "body": "Leading monthly and weekly coordination meetings across multiple government bureaus, offices, and stakeholder groups — synthesizing technical progress, policy implications, and program risks into actionable decision frameworks."
+        },
+        {
+          "icon": "📊",
+          "title": "Performance Reporting",
+          "body": "Monthly status reports covering all activities, deliverables, risks, staffing, and financial status. Meeting minutes delivered within 48 hours. Transparent, complete, and on time — every cycle."
+        },
+        {
+          "icon": "⚠️",
+          "title": "Risk Management",
+          "body": "Proactive identification, assessment, and mitigation of program risks — from data source disruptions to stakeholder coordination challenges to transition timeline compression."
+        },
+        {
+          "icon": "🤝",
+          "title": "Subcontractor Oversight",
+          "body": "Managing multi-partner teaming arrangements with clear responsibility matrices, performance monitoring, and integrated delivery schedules."
+        }
+      ]
+    },
+    {
+      "id": "quality-assurance",
+      "heading": "Quality Assurance & Surveillance",
+      "body": "For national-scale datasets where a single error can redirect millions in federal funding, quality isn't a phase — it's a discipline applied to every deliverable, every release, and every interaction.",
+      "capabilities": [
+        {
+          "icon": "📐",
+          "title": "QASP Development & Execution",
+          "body": "Quality Assurance Surveillance Plans that define performance objectives, monitoring methodologies, reporting cadences, and corrective action triggers — delivered with the proposal and refined throughout the contract."
+        },
+        {
+          "icon": "🔍",
+          "title": "Data Quality Assessment",
+          "body": "Systematic evaluation of dataset completeness, accuracy of individual fields, prevalence of over-inclusion (false positives) and under-inclusion (false negatives), and version-over-version change analysis."
+        },
+        {
+          "icon": "📝",
+          "title": "Process Documentation",
+          "body": "Comprehensive methodology documentation describing how data is sourced, how structures are identified, how BSL determinations are made, how unit counts are estimated, and how challenges are adjudicated — written for both technical and policy audiences."
+        },
+        {
+          "icon": "🔄",
+          "title": "Continuous Improvement",
+          "body": "Analysis of challenge patterns to identify systematic methodology issues. Root cause evaluation of significant cross-version changes. Formal proposals for data source and methodology improvements — always in consultation with the government."
+        }
+      ]
+    },
+    {
+      "id": "cybersecurity-compliance",
+      "heading": "Cybersecurity, Compliance & PII Protection",
+      "body": "Broadband mapping datasets contain location-specific information for every home and business in the country. Handling this data demands rigorous cybersecurity controls, privacy protocols, and personnel security aligned with federal requirements.\n\nValorForge holds CMMC 2.0 Level 2 Self-Attest certification and maintains a CMMC-AB Registered Practitioner on staff — ensuring that our cybersecurity posture meets the standards required for handling controlled unclassified information and sensitive national-scale location data throughout the contract lifecycle.",
+      "capabilities": [
+        {
+          "icon": "🔒",
+          "title": "CMMC 2.0 Level 2 Self-Attest Cybersecurity Certification",
+          "body": "Verified compliance with the Cybersecurity Maturity Model Certification framework. Our cybersecurity practices meet the standards required for federal contracts handling sensitive data at scale."
+        },
+        {
+          "icon": "🛡️",
+          "title": "CMMC-AB Registered Practitioner",
+          "body": "In-house registered practitioner providing ongoing cybersecurity assessment, compliance monitoring, and readiness assurance — not outsourced, not ad hoc."
+        },
+        {
+          "icon": "🔐",
+          "title": "PII Protection",
+          "body": "Protocols aligned with 5 U.S.C. § 552a and contract-specific privacy requirements. No selling, leasing, or unauthorized disclosure of personally identifiable information developed or accessed under the contract. Subcontractor flow-down provisions ensure end-to-end PII protection across the entire teaming arrangement."
+        },
+        {
+          "icon": "👤",
+          "title": "Security Clearance Coordination",
+          "body": "FCC Security Office onboarding within 30-day timelines. All key personnel are U.S. citizens eligible for expedited 10-day clearance processing."
+        },
+        {
+          "icon": "📋",
+          "title": "Federal Procurement Compliance",
+          "body": "Full FAR compliance. Transparent invoicing and financial reporting. Travel management within federal guidelines."
+        }
+      ]
+    },
+    {
+      "id": "license-administration",
+      "heading": "Multi-Tier License Administration",
+      "body": "The Broadband Fabric serves thousands of distinct users — from Tier 1 carriers to individual consumers — each with different access needs, usage rights, and compliance obligations. Managing this licensing ecosystem requires precision, responsiveness, and a deep understanding of how different stakeholders use the data.",
+      "capabilities": [
+        {
+          "icon": "📄",
+          "title": "License Framework Management",
+          "body": "Development and administration of multi-tier licensing agreements for federal agencies, ISPs, state and Tribal governments, researchers, and the general public. All license content developed in consultation with and approved by the FCC."
+        },
+        {
+          "icon": "🎯",
+          "title": "Eligibility Determination",
+          "body": "Coordination with FCC stakeholders to determine appropriate license tier for each requesting entity. Clear, documented criteria applied consistently."
+        },
+        {
+          "icon": "⚖️",
+          "title": "Dispute Resolution",
+          "body": "Direct resolution of disputes between contractor and licensees — without requiring FCC mediation. Fair, timely, and documented."
+        },
+        {
+          "icon": "🚀",
+          "title": "Licensee Onboarding",
+          "body": "Support for new and transitioning licensees including data format guidance, access provisioning, and usage rights clarification. Scaled to serve thousands of entities across every filing cycle."
+        },
+        {
+          "icon": "🔄",
+          "title": "Transition Continuity",
+          "body": "Ensuring all existing licensees maintain uninterrupted data access during contract transitions — with clear communication, format documentation, and dedicated support throughout the changeover period."
+        }
+      ]
+    },
+    {
+      "id": "cost-optimization",
+      "heading": "Cost Management & Optimization",
+      "body": "Federal broadband mapping should become more cost-effective over time — not more expensive. As new government data sources become available, they should reduce reliance on commercial data and generate real savings for the taxpayer.",
+      "capabilities": [
+        {
+          "icon": "💡",
+          "title": "Cost Reduction Identification",
+          "body": "Continuous evaluation of where new government data sources — from the Census Bureau, USPS, NSDI, and other federal and state agencies — can replace commercially licensed data at lower cost."
+        },
+        {
+          "icon": "📉",
+          "title": "Formal Reduction Proposals",
+          "body": "When government data reduces commercial dependence, we submit formal cost reduction plans with implementation timelines and price adjustments — not just for the next option year, but proactively within the current period."
+        },
+        {
+          "icon": "📊",
+          "title": "Transparent Financial Reporting",
+          "body": "Clear invoicing aligned to contract CLINs, with activity-level detail that enables the government to verify value delivered against cost incurred."
+        }
+      ]
+    }
+  ],
+  "credentials": [
+    { "title": "SDVOSB", "subtitle": "SBA Certified" },
+    { "title": "CMMC 2.0 Level 2", "subtitle": "Self-Attest" },
+    { "title": "CMMC-AB RP", "subtitle": "Registered Practitioner" }
+  ],
+  "credentialsSub": "CAGE Code: 1P3C5          SAM.gov UEI: DT8KJHZXVJH5",
+  "footerCta": {
+    "text": "Let's discuss how ValorForge brings discipline to your most critical programs.",
+    "buttonText": "Contact ValorForge",
+    "buttonHref": "/#contact"
+  }
+}

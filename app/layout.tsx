@@ -6,24 +6,24 @@ import { GeistSans } from 'geist/font/sans';  // ← Correct import for Geist Sa
 export const metadata: Metadata = {
   metadataBase: new URL('https://valorforgesolutions.com'),
   title: {
-    default: "ValorForge Solutions",
+    default: "ValorForge Solutions | Federal Broadband Programs & SDVOSB Program Management",
     template: "%s | ValorForge Solutions",
   },
   description:
-    "ValorForge Solutions – SDVOSB providing strategic IT consulting, AI alignment, and mission-focused technology solutions.",
+    "ValorForge Solutions is a CMMC 2.0 Level 2 Self-Attest certified, SDVOSB delivering federal broadband program management, FCC Fabric operations expertise, transition planning, stakeholder engagement, and open-data strategy for national-scale broadband mapping.",
   alternates: { canonical: "https://valorforgesolutions.com" },
   openGraph: {
-    title: "ValorForge Solutions",
+    title: "ValorForge Solutions | Federal Broadband Programs & SDVOSB Program Management",
     description:
-      "SDVOSB providing strategic IT consulting, AI alignment, and mission-focused technology solutions.",
+      "CMMC 2.0 Level 2 Self-Attest certified SDVOSB delivering federal broadband program management, FCC Fabric operations expertise, and national-scale broadband mapping.",
     url: "https://valorforgesolutions.com/",
     type: "website",
     images: ['/og-image.jpg'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ValorForge Solutions',
-    description: 'SDVOSB providing strategic IT consulting, AI alignment, and mission-focused technology solutions.',
+    title: 'ValorForge Solutions | Federal Broadband Programs & SDVOSB Program Management',
+    description: 'CMMC 2.0 Level 2 Self-Attest certified SDVOSB delivering federal broadband program management, FCC Fabric operations expertise, and national-scale broadband mapping.',
     images: ['/og-image.jpg'],
   },
   manifest: "/manifest.json",

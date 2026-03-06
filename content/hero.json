@@ -1,8 +1,16 @@
 {
-  "kicker": "SDVOSB",
+  "kicker": "SDVOSB · CMMC 2.0 Level 2 Self-Attest",
   "headlineLine0": "Engineered for Impact",
   "headlineLine1": "Mission-Focused Technology Solutions",
   "body": "Forging operational advantage for America",
-  "imageAlt": "Abstract representation of strategic collaboration and technology execution",
-  "bottomCta": "Contact ValorForge"
+  "imageAlt": "Federal broadband program management and technology strategy",
+  "bottomCta": "Contact ValorForge",
+  "trustBar": [
+    "SDVOSB",
+    "CMMC 2.0 Level 2 Self-Attest",
+    "Federal Broadband Programs",
+    "FCC Fabric Experience",
+    "Transition Management",
+    "Open Data Advocacy"
+  ]
 }

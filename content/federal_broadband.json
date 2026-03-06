@@ -1,0 +1,97 @@
+{
+  "seoTitle": "Federal Broadband Programs | ValorForge Solutions",
+  "seoDescription": "Hands-on FCC Broadband Fabric experience from the filer side. ValorForge delivers broadband program management, stakeholder engagement, transition planning, and open-data strategy for national broadband mapping.",
+  "hero": {
+    "badge": "SDVOSB · CMMC 2.0 Level 2 Self-Attest",
+    "headline": "We've Been on the Other Side of the Fabric",
+    "subheadline": "Most contractors know the Broadband Serviceable Location Fabric from the build side. We know it from the operations side — filing availability data, matching addresses to location IDs, submitting challenges, and managing the real-world consequences when the data is wrong. That perspective changes everything.",
+    "cta": "Contact Us",
+    "ctaHref": "/#contact"
+  },
+  "sections": [
+    {
+      "id": "fabric-operations",
+      "heading": "Fabric Operations Experience",
+      "subheading": "From BDC Filing to Challenge Resolution",
+      "body": "Our team has operated inside the FCC's Broadband Data Collection as availability data filers for a Tier 1 national carrier — one of the largest broadband providers in the country. We've navigated every stage of the Fabric workflow:\n\nReceiving and processing the Fabric dataset from the FCC's contractor. Matching tens of thousands of ISP service addresses against Fabric location IDs — and documenting every mismatch. Identifying missing broadband serviceable locations in rural, Tribal, and newly developed areas where the Fabric undercounted. Preparing and submitting bulk Fabric challenges with supporting evidence. Filing biannual availability data into the BDC system on deadline.\n\nWe've experienced firsthand the pain points that thousands of ISPs, state broadband offices, and Tribal entities face every filing cycle. Address matching failures where the Fabric's address format doesn't align with how providers maintain their records. Locations placed miles from their actual position. MDU unit counts that don't reflect the buildings we serve. Challenge corrections that were accepted — then reverted in the next release. Opaque adjudication processes that left filers guessing why their evidence was rejected.\n\nThis isn't secondhand knowledge. We've sat where the filers sit. That operational perspective is the foundation of every solution we design."
+    },
+    {
+      "id": "federal-programs",
+      "heading": "Federal Program Expertise",
+      "subheading": "Understanding the Ecosystem the Fabric Supports",
+      "body": "The Broadband Serviceable Location Fabric isn't just a dataset — it's the load-bearing infrastructure for virtually every federal broadband program in the country. Accuracy in the Fabric directly determines how tens of billions of dollars are allocated, how deployment obligations are calculated, and whether the right communities receive the connectivity they've been promised.\n\nWe understand how the Fabric flows through the federal broadband ecosystem and what's at stake when the data is wrong.",
+      "cards": [
+        {
+          "id": "bead",
+          "title": "BEAD",
+          "subtitle": "Broadband Equity, Access & Deployment",
+          "funding": "$42.45 billion",
+          "body": "The Fabric determines which locations are unserved or underserved in each state — directly driving NTIA's funding allocations. A missing location means a missing household in a state's BEAD count. An inaccurate classification can redirect millions."
+        },
+        {
+          "id": "rdof",
+          "title": "RDOF",
+          "subtitle": "Rural Digital Opportunity Fund",
+          "funding": "$9.2 billion",
+          "body": "Carriers now report deployment progress using Fabric Location IDs. The Fabric sets the location counts that define each carrier's 100% deployment obligation. Inaccurate counts create compliance risk for carriers and coverage gaps for communities."
+        },
+        {
+          "id": "acam",
+          "title": "A-CAM",
+          "subtitle": "Alternative Connect America Cost Model (I, Revised I, II)",
+          "funding": "",
+          "body": "The FCC uses the Fabric to verify deployment compliance and adjust location totals for support recipients. Fabric accuracy determines whether carriers receive the support they need — or face clawbacks they don't deserve."
+        },
+        {
+          "id": "usf",
+          "title": "Universal Service Fund",
+          "subtitle": "USF High-Cost Programs",
+          "funding": "",
+          "body": "The Fabric is now the data source for verifying compliance with deployment obligations across all high-cost support mechanisms. Every location counts — literally — when the FCC conducts compliance reviews."
+        },
+        {
+          "id": "funding-map",
+          "title": "Broadband Funding Map",
+          "subtitle": "Interagency Coordination",
+          "funding": "",
+          "body": "The Fabric serves as the coordination layer across 5+ federal agencies tracking broadband infrastructure spending — NTIA, USDA, Treasury, HHS, HUD, IMLS, EDA, and regional commissions. One dataset, one truth."
+        },
+        {
+          "id": "national-map",
+          "title": "National Broadband Map",
+          "subtitle": "Public Accountability",
+          "funding": "",
+          "body": "Every location point on the FCC's public-facing National Broadband Map comes from the Fabric. When consumers, state officials, or Congress question whether the map is accurate, they're questioning the Fabric."
+        }
+      ]
+    },
+    {
+      "id": "stakeholder-engagement",
+      "heading": "Stakeholder Engagement at Scale",
+      "subheading": "Because We've Been a Stakeholder",
+      "body": "Managing the Broadband Fabric means serving a diverse and demanding user base. Approximately 2,500 to 3,000 ISPs and telecom providers who file availability data every six months. Fifty-six state and territorial broadband offices managing BEAD allocations worth billions. Tribal nations with unique sovereignty considerations and some of the most challenging mapping conditions in the country. Federal agencies coordinating across programs. Researchers and community organizations working to verify coverage claims. Individual consumers challenging the map for their own homes.\n\nWe don't approach stakeholder engagement as a help desk function. We approach it as a trust-building exercise — because we've been on the receiving end of a process that didn't always earn that trust. When a rural electric cooperative submits 5,000 challenge locations and only 700 are accepted without clear explanation, trust erodes. When a state broadband office discovers 220,000 missing locations, trust erodes. When a challenge is accepted one cycle and silently reverted the next, trust erodes.\n\nOur engagement model is built on transparency, responsiveness, and respect for the expertise that stakeholders bring to the table. ISPs know their service areas. States know their communities. Tribal entities know their lands. The Fabric should reflect that knowledge, not override it.",
+      "stats": [
+        { "value": "2,500+", "label": "ISPs Filing Biannually" },
+        { "value": "56", "label": "State & Territory Broadband Offices" },
+        { "value": "200M+", "label": "Locations Nationwide" }
+      ]
+    },
+    {
+      "id": "transition-management",
+      "heading": "Seamless Contract Transitions",
+      "subheading": "Zero Disruption to the Programs That Depend on the Fabric",
+      "body": "Transitioning a national-scale dataset that underpins tens of billions of dollars in federal programs requires more than a project plan. It requires intimate knowledge of how the current system works — and where it breaks.\n\nOur transition approach is built on three principles:\n\nContinuity of location identity. Every Fabric location has a unique ID that carriers, states, and federal programs have built into their systems. Our transition methodology preserves these identifiers across the change — so that an RDOF carrier's deployment records, a state's BEAD challenge history, and every BDC filing reference remain valid.\n\nContinuity of stakeholder access. Thousands of licensees depend on receiving Fabric data on schedule, in a format they can process. Our transition plan ensures that every ISP, every state office, every federal agency, and every researcher experiences an uninterrupted data flow from day one.\n\nContinuity of the release schedule. The FCC's biannual update cycle — June and December — cannot slip. Our transition is designed around these immovable milestones, with risk buffers and contingency plans that protect the schedule even if unexpected complications arise during knowledge transfer.\n\nWe know what the crosswalk looks like because we've lived with the data it maps to. That's an advantage no other bidder can claim."
+    },
+    {
+      "id": "open-data",
+      "heading": "The Case for Open Broadband Data",
+      "subheading": "Taxpayer-Funded Data Should Serve the Taxpayers",
+      "body": "The federal government has invested hundreds of millions of dollars in broadband mapping. The Broadband Serviceable Location Fabric is the product of that investment. Yet for much of its existence, the Fabric's underlying data has been locked behind restrictive licensing tiers that limit who can access it, how it can be used, and whether the public can independently verify its accuracy.\n\nWe believe this model is at odds with the Fabric's mission.\n\nWhen states can freely access and analyze location data, they make better funding decisions. When researchers can independently audit the dataset, accuracy improves faster. When ISPs can work with transparent, well-documented data, filing compliance increases and challenge volumes decrease. When communities can see exactly what the Fabric says about their neighborhoods, public trust in the broadband map grows.\n\nValorForge advocates for the broadest possible data access rights — reducing dependence on restrictively-licensed commercial data sources, maximizing use of open government data, and enabling the FCC to publish record-level Fabric data in service of its broadband mission.\n\nThis isn't just a policy position. It's an architectural choice. We design our approach to favor data sources and methods that enable openness — so that broader access isn't a concession, it's a feature."
+    }
+  ],
+  "footerCta": {
+    "text": "Ready to build the next generation of broadband mapping?",
+    "buttonText": "Contact ValorForge",
+    "buttonHref": "/#contact"
+  }
+}

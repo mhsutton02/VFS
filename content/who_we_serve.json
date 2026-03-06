@@ -1,23 +1,23 @@
 {
   "title": "Who We Serve",
   "intro": "We partner with organizations whose missions demand reliability, resilience, and trust.",
-  "imageAlt": "Earth from space at night showing interconnected city lights",
+  "imageAlt": "National broadband connectivity and infrastructure mapping",
   "bottomCta": "See fit for your mission",
   "cards": [
     {
       "id": "federal",
-      "title": "Federal & Public Sector",
-      "body": "Agencies and commands with complex compliance, security, and mission readiness requirements."
+      "title": "Federal Broadband & Public Sector",
+      "body": "Federal agencies managing broadband infrastructure, geospatial intelligence, and national-scale data programs. We bring direct FCC Broadband Data Collection experience to agencies where mapping accuracy determines how billions in funding are allocated."
     },
     {
-      "id": "enterprise",
-      "title": "Enterprise Leaders",
-      "body": "Large-scale communication, media, and telecom organizations navigating transformation."
+      "id": "telecom",
+      "title": "Telecom & Broadband Operators",
+      "body": "ISPs and broadband providers navigating FCC compliance, Broadband Data Collection filing, and the Fabric challenge process — from Tier 1 national carriers to rural cooperatives and Tribal networks. We've been where you are. We know what works."
     },
     {
       "id": "partners",
       "title": "Strategic Partners",
-      "body": "Prime contractors and integrators seeking a trusted SDVOSB ally at the edge of delivery."
+      "body": "Prime contractors, technology partners, and integrators seeking a trusted SDVOSB ally with federal broadband domain expertise, proven program management, and the ability to operate at national scale."
     }
   ]
 }

@@ -2,27 +2,50 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 
+const CAPABILITIES_ITEMS = [
+  {
+    href: "/capabilities/federal-broadband",
+    label: "Federal Broadband Programs",
+    sections: [
+      { href: "/capabilities/federal-broadband#fabric-operations", label: "Fabric Operations Experience" },
+      { href: "/capabilities/federal-broadband#federal-programs", label: "Federal Program Expertise" },
+      { href: "/capabilities/federal-broadband#stakeholder-engagement", label: "Stakeholder Engagement" },
+      { href: "/capabilities/federal-broadband#transition-management", label: "Transition Management" },
+      { href: "/capabilities/federal-broadband#open-data", label: "Open Broadband Data" },
+    ],
+  },
+  {
+    href: "/capabilities/program-management",
+    label: "Program Management & Delivery",
+    sections: [
+      { href: "/capabilities/program-management#federal-contract-management", label: "Federal Contract Management" },
+      { href: "/capabilities/program-management#quality-assurance", label: "Quality Assurance" },
+      { href: "/capabilities/program-management#cybersecurity-compliance", label: "Cybersecurity & Compliance" },
+      { href: "/capabilities/program-management#license-administration", label: "License Administration" },
+      { href: "/capabilities/program-management#cost-optimization", label: "Cost Optimization" },
+    ],
+  },
+];
+
 const NAV_ITEMS = [
-  { href: "/#what-we-do", label: "What We Do" },
-  { href: "/#who-we-serve", label: "Who We Serve" },
-  { href: "/#ai-alignment", label: "AI Alignment" },
-  { href: "/#about", label: "About" },
   { href: "/leadership", label: "Leadership" },
-  { href: "/#contact", label: "Contact" }
+  { href: "/careers", label: "Careers" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const pathname = usePathname();
+  const dropdownRef = useRef<HTMLLIElement>(null);
 
   // On page navigation, scroll to hash target or top
   useEffect(() => {
     const hash = window.location.hash;
     if (hash) {
-      // Small delay so the DOM renders the target section first
       const timer = setTimeout(() => {
         const el = document.querySelector(hash);
         if (el) el.scrollIntoView({ behavior: "instant" });
@@ -32,9 +55,20 @@ export function Header() {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [pathname]);
 
-  // Close mobile menu when any link is clicked
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const handleLinkClick = () => {
     setOpen(false);
+    setDropdownOpen(false);
   };
 
   return (
@@ -84,6 +118,48 @@ export function Header() {
             className={`vf-nav-list${open ? " vf-nav-list-open" : ""}`}
             aria-hidden={!open}
           >
+            {/* Capabilities Dropdown */}
+            <li
+              ref={dropdownRef}
+              className={`vf-nav-dropdown${dropdownOpen ? " open" : ""}`}
+            >
+              <button
+                type="button"
+                className="vf-nav-dropdown-trigger min-w-touch min-h-touch px-touch py-2 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                onClick={() => setDropdownOpen((v) => !v)}
+                aria-expanded={dropdownOpen}
+                aria-haspopup="true"
+              >
+                Capabilities <span className="vf-nav-dropdown-arrow">▾</span>
+              </button>
+              <div className="vf-nav-dropdown-menu" role="menu">
+                {CAPABILITIES_ITEMS.map((item) => (
+                  <div key={item.href}>
+                    <Link
+                      href={item.href}
+                      role="menuitem"
+                      onClick={handleLinkClick}
+                      className="vf-nav-dropdown-parent"
+                    >
+                      {item.label}
+                    </Link>
+                    {item.sections.map((sub) => (
+                      <Link
+                        key={sub.href}
+                        href={sub.href}
+                        role="menuitem"
+                        onClick={handleLinkClick}
+                        className="vf-nav-dropdown-sub"
+                      >
+                        {sub.label}
+                      </Link>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </li>
+
+            {/* Standard Nav Items */}
             {NAV_ITEMS.map((item) => (
               <li key={item.href}>
                 <Link

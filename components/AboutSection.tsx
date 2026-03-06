@@ -36,10 +36,30 @@ export function AboutSection() {
           />
         </div>
 
-        {/* Text + carousel */}
+        {/* Text + credentials + achievements + carousel */}
         <div>
           <h2 className="vf-h2">{aboutContent.title}</h2>
           <p className="vf-body">{aboutContent.intro}</p>
+
+          {/* Credentials Row */}
+          <div className="vf-credentials-row">
+            {aboutContent.credentials.map((cred) => (
+              <div key={cred.title} className="vf-credential-badge">
+                <div className="vf-credential-badge-title">{cred.title}</div>
+                <div className="vf-credential-badge-sub">{cred.subtitle}</div>
+              </div>
+            ))}
+          </div>
+          <div className="vf-credentials-sub">{aboutContent.credentialsSub}</div>
+
+          {/* Achievements */}
+          <div className="vf-achievements-heading">What Our Team Has Delivered</div>
+          <ul className="vf-achievements-list">
+            {aboutContent.achievements.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+
           <Carousel items={aboutContent.cards} ariaLabel="About carousel" />
           <div className="vf-cta-row" style={{ justifyContent: "center" }}>
             <Link href="/leadership" className="vf-btn vf-btn-primary">

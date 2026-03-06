@@ -1,7 +1,7 @@
 {
   "title": "AI Alignment",
   "intro": "We align AI capabilities to your mission, governance, and risk posture—never as experiments, always as engineered outcomes.",
-  "imageAlt": "AI systems aligned with human intent and governance",
+  "imageAlt": "AI governance for broadband mapping and geospatial data quality",
   "bottomCta": "Align with the plan",
   "cards": [
     {
@@ -18,6 +18,11 @@
       "id": "integration",
       "title": "Systems Integration",
       "body": "Safely integrating AI components into existing architectures without compromising reliability."
+    },
+    {
+      "id": "geospatial-ai",
+      "title": "Geospatial AI Governance",
+      "body": "Auditable, explainable AI governance for geospatial datasets driving broadband mapping and public funding decisions."
     }
   ]
 }

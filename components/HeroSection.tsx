@@ -39,6 +39,16 @@ export function HeroSection() {
           {heroContent.bottomCta}
         </a>
       </div>
+
+      {/* Trust Bar */}
+      <div className="vf-trust-bar">
+        {heroContent.trustBar.map((item, i) => (
+          <span key={item}>
+            {i > 0 && <span className="vf-trust-bar-sep"> · </span>}
+            {item}
+          </span>
+        ))}
+      </div>
     </section>
   );
 }
