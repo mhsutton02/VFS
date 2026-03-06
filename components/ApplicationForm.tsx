@@ -40,7 +40,6 @@ export function ApplicationForm({ jobTitle, notifyEmails }: ApplicationFormProps
       access_key: WEB3FORMS_KEY,
       subject: `Application: ${jobTitle} — ${formData.get("name") as string}`,
       from_name: "ValorForge Careers",
-      ccemail: "careers@valorforgesolutions.com",
       replyto: formData.get("email") as string,
       name: formData.get("name") as string,
       email: formData.get("email") as string,

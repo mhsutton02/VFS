@@ -6,6 +6,7 @@
   "type": "Full-time",
   "clearance": "None required",
   "posted": "2026-03-01",
+  "status": "published",
   "summary": "Build and maintain full-stack web applications powering federal broadband programs, partner platforms, and internal tooling. Work closely with program managers and designers to deliver mission-focused solutions.",
   "responsibilities": [
     "Design, develop, and maintain Next.js and React applications",

@@ -16,6 +16,7 @@ interface JobDetail {
   type: string;
   clearance: string;
   posted: string;
+  status?: "draft" | "published";
   summary: string;
   responsibilities: string[];
   qualifications: string[];
@@ -30,7 +31,10 @@ function getJob(slug: string): JobDetail | null {
   const filePath = path.join(JOBS_DIR, `${slug}.json`);
   if (!fs.existsSync(filePath)) return null;
   const raw = fs.readFileSync(filePath, "utf-8");
-  return JSON.parse(raw);
+  const job = JSON.parse(raw);
+  // Hide draft jobs from public view
+  if (job.status === "draft") return null;
+  return job;
 }
 
 function getAllSlugs(): string[] {

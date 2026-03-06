@@ -35,6 +35,7 @@ interface Job {
   type: string;
   clearance: string;
   posted: string;
+  status?: "draft" | "published";
   summary: string;
 }
 
@@ -46,8 +47,10 @@ function getJobs(): Job[] {
     const raw = fs.readFileSync(path.join(jobsDir, file), "utf-8");
     return JSON.parse(raw);
   });
-  // Sort newest first
-  return jobs.sort((a, b) => b.posted.localeCompare(a.posted));
+  // Only show published jobs, sort newest first
+  return jobs
+    .filter((j) => (j.status ?? "published") === "published")
+    .sort((a, b) => b.posted.localeCompare(a.posted));
 }
 
 function daysAgo(dateStr: string): string {
