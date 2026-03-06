@@ -6,7 +6,7 @@
   "type": "Full-time",
   "clearance": "Secret (or obtainable)",
   "posted": "2026-03-01",
-  "status": "published",
+  "status": "draft",
   "summary": "Lead cross-functional delivery of federal broadband and IT programs. Coordinate teams, manage timelines, and serve as the primary interface between ValorForge and government stakeholders.",
   "responsibilities": [
     "Manage program schedules, milestones, risks, and deliverables",
@@ -30,5 +30,7 @@
     "Experience managing SDVOSB or small business set-aside contracts"
   ],
   "compensation": "Competitive salary, comprehensive health coverage, 401(k), flexible PTO",
-  "notifyEmails": ["careers@valorforgesolutions.com"]
+  "notifyEmails": [
+    "careers@valorforgesolutions.com"
+  ]
 }
