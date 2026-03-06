@@ -5,6 +5,8 @@ import careers from "../../content/careers.json";
 import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";
+import fs from "fs";
+import path from "path";
 
 export const metadata: Metadata = {
   title: "Careers",
@@ -25,6 +27,38 @@ export const metadata: Metadata = {
   },
 };
 
+interface Job {
+  id: string;
+  title: string;
+  department: string;
+  location: string;
+  type: string;
+  clearance: string;
+  posted: string;
+  summary: string;
+}
+
+function getJobs(): Job[] {
+  const jobsDir = path.join(process.cwd(), "content", "jobs");
+  if (!fs.existsSync(jobsDir)) return [];
+  const files = fs.readdirSync(jobsDir).filter((f) => f.endsWith(".json"));
+  const jobs: Job[] = files.map((file) => {
+    const raw = fs.readFileSync(path.join(jobsDir, file), "utf-8");
+    return JSON.parse(raw);
+  });
+  // Sort newest first
+  return jobs.sort((a, b) => b.posted.localeCompare(a.posted));
+}
+
+function daysAgo(dateStr: string): string {
+  const diff = Math.floor(
+    (Date.now() - new Date(dateStr).getTime()) / (1000 * 60 * 60 * 24)
+  );
+  if (diff === 0) return "Today";
+  if (diff === 1) return "1 day ago";
+  return `${diff} days ago`;
+}
+
 const CARDS = [
   {
     title: "Our Culture",
@@ -41,6 +75,8 @@ const CARDS = [
 ];
 
 export default function CareersPage() {
+  const jobs = getJobs();
+
   return (
     <>
       <Header />
@@ -78,33 +114,44 @@ export default function CareersPage() {
           </div>
         </section>
 
-        {/* Open Roles */}
+        {/* Open Positions */}
         <section className="vf-section vf-bg-blue-accent">
           <div className="vf-container">
             <h2 className="vf-h2 vf-careers-section-title">Open Positions</h2>
-            <div className="vf-careers-roles">
-              {careers.jobs.map((job) => (
-                <div key={job.id} className="vf-careers-role">
-                  <div className="vf-careers-role-header">
-                    <h3 className="vf-h3">{job.title}</h3>
-                    <div className="vf-careers-role-meta">
-                      <span>{job.location}</span>
-                      <span>{job.type}</span>
-                    </div>
-                  </div>
-                  <p className="vf-body">{job.summary}</p>
-                </div>
-              ))}
-            </div>
 
-            <div className="vf-careers-cta">
-              <p className="vf-body">
-                Interested? Reach out — we&apos;d love to hear from you.
-              </p>
-              <Link href="/#contact" className="vf-btn vf-btn-primary">
-                Get in Touch
-              </Link>
-            </div>
+            {jobs.length === 0 ? (
+              <div className="vf-careers-empty">
+                <p className="vf-body">
+                  No open positions right now — check back soon or{" "}
+                  <Link href="/#contact" style={{ color: "var(--accent)" }}>
+                    reach out
+                  </Link>{" "}
+                  to express interest.
+                </p>
+              </div>
+            ) : (
+              <div className="vf-careers-roles">
+                {jobs.map((job) => (
+                  <Link
+                    key={job.id}
+                    href={`/careers/${job.id}`}
+                    className="vf-careers-role vf-careers-role-link"
+                  >
+                    <div className="vf-careers-role-header">
+                      <h3 className="vf-h3">{job.title}</h3>
+                      <div className="vf-careers-role-meta">
+                        <span className="vf-job-badge">{job.department}</span>
+                        <span>{job.location}</span>
+                        <span>{job.type}</span>
+                        {job.clearance && <span>{job.clearance}</span>}
+                      </div>
+                    </div>
+                    <p className="vf-body">{job.summary}</p>
+                    <div className="vf-job-posted">Posted {daysAgo(job.posted)}</div>
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       </main>

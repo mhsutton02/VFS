@@ -50,7 +50,6 @@ export function AboutSection() {
               </div>
             ))}
           </div>
-          <div className="vf-credentials-sub">{aboutContent.credentialsSub}</div>
 
           {/* Achievements */}
           <div className="vf-achievements-heading">What Our Team Has Delivered</div>

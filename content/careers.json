@@ -1,22 +1,4 @@
 {
   "title": "Careers",
-  "intro": "We're building a mission-driven team. Below are roles we commonly hire for. Contact us to learn about current openings.",
-  "jobs": [
-    {
-      "id": "1",
-      "title": "Software Engineer",
-      "location": "Remote / US",
-      "type": "Full-time",
-      "summary": "Work on full-stack web applications, partner with product and design to deliver mission-focused solutions.",
-      "howToApply": "Send resume and cover letter to contact@valorforgesolutions.com"
-    },
-    {
-      "id": "2",
-      "title": "Program Manager",
-      "location": "Hybrid / Arlington, VA",
-      "type": "Full-time",
-      "summary": "Coordinate cross-functional teams, manage program timelines, and support customer engagements.",
-      "howToApply": "Send resume and brief summary of experience to contact@valorforgesolutions.com"
-    }
-  ]
+  "intro": "We're building a mission-driven team. Explore our open positions below — or check back soon for new opportunities."
 }

@@ -1,0 +1,33 @@
+{
+  "id": "program-manager",
+  "title": "Program Manager",
+  "department": "Operations",
+  "location": "Hybrid / Arlington, VA",
+  "type": "Full-time",
+  "clearance": "Secret (or obtainable)",
+  "posted": "2026-03-01",
+  "summary": "Lead cross-functional delivery of federal broadband and IT programs. Coordinate teams, manage timelines, and serve as the primary interface between ValorForge and government stakeholders.",
+  "responsibilities": [
+    "Manage program schedules, milestones, risks, and deliverables",
+    "Serve as primary point of contact for federal agency stakeholders",
+    "Coordinate across engineering, compliance, and executive teams",
+    "Prepare and present program status reviews and executive briefings",
+    "Ensure adherence to federal contract requirements and quality standards",
+    "Support proposal development and capture management efforts"
+  ],
+  "qualifications": [
+    "5+ years program or project management experience in federal IT or telecom",
+    "PMP, PgMP, or equivalent certification preferred",
+    "Direct experience with federal contract lifecycle (FAR/DFARS)",
+    "Strong written and verbal communication skills",
+    "U.S. citizenship required"
+  ],
+  "preferred": [
+    "Experience with FCC Broadband Data Collection or Fabric programs",
+    "Familiarity with CMMC 2.0 compliance and NIST 800-171",
+    "Active Secret clearance",
+    "Experience managing SDVOSB or small business set-aside contracts"
+  ],
+  "compensation": "Competitive salary, comprehensive health coverage, 401(k), flexible PTO",
+  "notifyEmails": ["careers@valorforgesolutions.com"]
+}

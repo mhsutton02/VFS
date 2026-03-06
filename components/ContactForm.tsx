@@ -29,6 +29,7 @@ export function ContactForm() {
     formData.append("access_key", WEB3FORMS_KEY);
     formData.append("subject", "New contact from ValorForge Solutions website");
     formData.append("from_name", "ValorForge Website");
+    formData.append("ccemail", "info@valorforgesolutions.com");
 
     try {
       const res = await fetch("https://api.web3forms.com/submit", {

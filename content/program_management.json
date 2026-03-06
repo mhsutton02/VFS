@@ -1,8 +1,8 @@
 {
   "seoTitle": "Program Management & Federal Delivery | ValorForge Solutions",
-  "seoDescription": "CMMC 2.0 Level 2 Self-Attest certified program management for multi-year federal contracts. ValorForge delivers disciplined project leadership, quality assurance, cybersecurity compliance, and stakeholder coordination for national-scale broadband and technology programs.",
+  "seoDescription": "CMMC 2.0 Level 2 Certified program management for multi-year federal contracts. ValorForge delivers disciplined project leadership, quality assurance, cybersecurity compliance, and stakeholder coordination for national-scale broadband and technology programs.",
   "hero": {
-    "badge": "CMMC 2.0 Level 2 Self-Attest · SDVOSB",
+    "badge": "CMMC 2.0 Level 2 Certified · SDVOSB",
     "headline": "Disciplined Delivery for Programs That Cannot Fail",
     "subheadline": "Multi-year, multimillion-dollar federal programs demand more than good intentions. They demand repeatable processes, rigorous quality assurance, and program leadership that keeps complex stakeholder environments aligned from kickoff to closeout."
   },
@@ -10,7 +10,7 @@
     {
       "id": "federal-contract-management",
       "heading": "Federal Contract Management",
-      "body": "ValorForge provides program management for federal contracts where accuracy, compliance, and coordination across multiple government bureaus are non-negotiable.\n\nOur approach is grounded in disciplined process maturity and CMMC 2.0 Level 2 Self-Attest cybersecurity certification — ensuring that every project plan, risk register, status report, and deliverable follows documented, repeatable processes that scale from contract award through final transition-out, while maintaining the cybersecurity posture required for handling sensitive national-scale datasets.",
+      "body": "ValorForge provides program management for federal contracts where accuracy, compliance, and coordination across multiple government bureaus are non-negotiable.\n\nOur approach is grounded in disciplined process maturity and CMMC 2.0 Level 2 Certified cybersecurity certification — ensuring that every project plan, risk register, status report, and deliverable follows documented, repeatable processes that scale from contract award through final transition-out, while maintaining the cybersecurity posture required for handling sensitive national-scale datasets.",
       "capabilities": [
         {
           "icon": "📋",
@@ -69,11 +69,11 @@
     {
       "id": "cybersecurity-compliance",
       "heading": "Cybersecurity, Compliance & PII Protection",
-      "body": "Broadband mapping datasets contain location-specific information for every home and business in the country. Handling this data demands rigorous cybersecurity controls, privacy protocols, and personnel security aligned with federal requirements.\n\nValorForge holds CMMC 2.0 Level 2 Self-Attest certification and maintains a CMMC-AB Registered Practitioner on staff — ensuring that our cybersecurity posture meets the standards required for handling controlled unclassified information and sensitive national-scale location data throughout the contract lifecycle.",
+      "body": "Broadband mapping datasets contain location-specific information for every home and business in the country. Handling this data demands rigorous cybersecurity controls, privacy protocols, and personnel security aligned with federal requirements.\n\nValorForge holds CMMC 2.0 Level 2 Certified certification and maintains a CMMC-AB Registered Practitioner on staff — ensuring that our cybersecurity posture meets the standards required for handling controlled unclassified information and sensitive national-scale location data throughout the contract lifecycle.",
       "capabilities": [
         {
           "icon": "🔒",
-          "title": "CMMC 2.0 Level 2 Self-Attest Cybersecurity Certification",
+          "title": "CMMC 2.0 Level 2 Certified Cybersecurity Certification",
           "body": "Verified compliance with the Cybersecurity Maturity Model Certification framework. Our cybersecurity practices meet the standards required for federal contracts handling sensitive data at scale."
         },
         {
@@ -155,10 +155,9 @@
   ],
   "credentials": [
     { "title": "SDVOSB", "subtitle": "SBA Certified" },
-    { "title": "CMMC 2.0 Level 2", "subtitle": "Self-Attest" },
+    { "title": "CMMC 2.0 Level 2", "subtitle": "Certified" },
     { "title": "CMMC-AB RP", "subtitle": "Registered Practitioner" }
   ],
-  "credentialsSub": "CAGE Code: 1P3C5          SAM.gov UEI: DT8KJHZXVJH5",
   "footerCta": {
     "text": "Let's discuss how ValorForge brings discipline to your most critical programs.",
     "buttonText": "Contact ValorForge",

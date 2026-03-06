@@ -5,11 +5,10 @@
   "bottomCta": "Contact",
   "credentials": [
     { "title": "SDVOSB", "subtitle": "SBA Certified" },
-    { "title": "CMMC 2.0 Level 2", "subtitle": "Self-Attest" },
+    { "title": "CMMC 2.0 Level 2", "subtitle": "Certified" },
     { "title": "CMMC-AB RP", "subtitle": "Registered Practitioner" },
     { "title": "SAM.gov", "subtitle": "Registered" }
   ],
-  "credentialsSub": "CAGE Code: 1P3C5 · UEI: DT8KJHZXVJH5",
   "achievements": [
     "Led broadband availability data operations and Fabric challenge management for a Tier 1 national carrier — one of the largest BDC filers in the country",
     "Drove national-scale geospatial dataset development for broadband infrastructure programs serving hundreds of millions of locations",

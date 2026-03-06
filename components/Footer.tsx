@@ -8,10 +8,7 @@ export function Footer() {
         <div>
           <div className="vf-footer-title">ValorForge Solutions</div>
           <div className="vf-footer-sub">
-            SDVOSB · CMMC 2.0 Level 2 Self-Attest · Rockwall, TX
-          </div>
-          <div className="vf-footer-sub" style={{ marginTop: "4px" }}>
-            CAGE: 1P3C5 · UEI: DT8KJHZXVJH5
+            SDVOSB · CMMC 2.0 Level 2 Certified
           </div>
         </div>
 

@@ -1,0 +1,33 @@
+{
+  "id": "software-engineer",
+  "title": "Software Engineer",
+  "department": "Engineering",
+  "location": "Remote / US",
+  "type": "Full-time",
+  "clearance": "None required",
+  "posted": "2026-03-01",
+  "summary": "Build and maintain full-stack web applications powering federal broadband programs, partner platforms, and internal tooling. Work closely with program managers and designers to deliver mission-focused solutions.",
+  "responsibilities": [
+    "Design, develop, and maintain Next.js and React applications",
+    "Integrate geospatial data sources and REST/GraphQL APIs",
+    "Write clean, tested, well-documented TypeScript code",
+    "Collaborate with program managers on federal project deliverables",
+    "Participate in code reviews and architectural planning",
+    "Support CI/CD pipelines and deployment to cloud environments"
+  ],
+  "qualifications": [
+    "3+ years professional experience with TypeScript and React",
+    "Proficiency with Next.js App Router, server components, and SSG/SSR",
+    "Experience with REST APIs, databases, and cloud platforms (AWS/Azure)",
+    "Strong understanding of web accessibility (WCAG 2.2) and responsive design",
+    "U.S. citizenship required"
+  ],
+  "preferred": [
+    "Experience with geospatial data, GIS systems, or FCC broadband programs",
+    "Familiarity with federal compliance frameworks (CMMC, FedRAMP)",
+    "Active or obtainable security clearance",
+    "Experience with Tailwind CSS, PostCSS, or design system development"
+  ],
+  "compensation": "Competitive salary, comprehensive health coverage, 401(k), flexible PTO",
+  "notifyEmails": ["careers@valorforgesolutions.com"]
+}

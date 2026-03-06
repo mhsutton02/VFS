@@ -10,12 +10,12 @@ export const metadata: Metadata = {
     template: "%s | ValorForge Solutions",
   },
   description:
-    "ValorForge Solutions is a CMMC 2.0 Level 2 Self-Attest certified, SDVOSB delivering federal broadband program management, FCC Fabric operations expertise, transition planning, stakeholder engagement, and open-data strategy for national-scale broadband mapping.",
+    "ValorForge Solutions is a CMMC 2.0 Level 2 Certified, SDVOSB delivering federal broadband program management, FCC Fabric operations expertise, transition planning, stakeholder engagement, and open-data strategy for national-scale broadband mapping.",
   alternates: { canonical: "https://valorforgesolutions.com" },
   openGraph: {
     title: "ValorForge Solutions | Federal Broadband Programs & SDVOSB Program Management",
     description:
-      "CMMC 2.0 Level 2 Self-Attest certified SDVOSB delivering federal broadband program management, FCC Fabric operations expertise, and national-scale broadband mapping.",
+      "CMMC 2.0 Level 2 Certified SDVOSB delivering federal broadband program management, FCC Fabric operations expertise, and national-scale broadband mapping.",
     url: "https://valorforgesolutions.com/",
     type: "website",
     images: ['/og-image.jpg'],
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'ValorForge Solutions | Federal Broadband Programs & SDVOSB Program Management',
-    description: 'CMMC 2.0 Level 2 Self-Attest certified SDVOSB delivering federal broadband program management, FCC Fabric operations expertise, and national-scale broadband mapping.',
+    description: 'CMMC 2.0 Level 2 Certified SDVOSB delivering federal broadband program management, FCC Fabric operations expertise, and national-scale broadband mapping.',
     images: ['/og-image.jpg'],
   },
   manifest: "/manifest.json",
