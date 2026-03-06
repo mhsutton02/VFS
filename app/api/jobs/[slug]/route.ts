@@ -1,6 +1,6 @@
 // app/api/jobs/[slug]/route.ts — Get, Update, Delete a single job
 import { NextRequest, NextResponse } from "next/server";
-import { verifyToken } from "../../auth/route";
+import { verifyToken } from "../../../../lib/auth";
 import { getJobFile, putJobFile, deleteJobFile, triggerNetlifyBuild } from "../../../../lib/github";
 
 /** GET /api/jobs/[slug] */

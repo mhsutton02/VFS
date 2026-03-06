@@ -1,6 +1,6 @@
 // app/api/jobs/route.ts — List all jobs, Create a job
 import { NextRequest, NextResponse } from "next/server";
-import { verifyToken } from "../auth/route";
+import { verifyToken } from "../../../lib/auth";
 import { listJobFiles, getJobFile, putJobFile, triggerNetlifyBuild } from "../../../lib/github";
 
 function slugify(title: string): string {
