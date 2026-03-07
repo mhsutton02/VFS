@@ -3,8 +3,7 @@
 
 import { useState, useRef, FormEvent } from "react";
 
-const WEB3FORMS_KEY =
-  process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "027f833b-0442-48e9-9b29-184a71f3a057";
+const WEB3FORMS_KEY = "cc195155-68ba-4e20-8e94-65dd50d09bc4";
 const THROTTLE_MS = 60_000; // 60 seconds between submissions
 
 interface ApplicationFormProps {

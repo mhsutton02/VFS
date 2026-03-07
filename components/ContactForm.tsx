@@ -3,8 +3,7 @@
 
 import { useState, useRef, FormEvent } from "react";
 
-const WEB3FORMS_KEY =
-  process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "027f833b-0442-48e9-9b29-184a71f3a057";
+const WEB3FORMS_KEY = "54b092ac-9d78-491b-8dd1-b3de81a5ed57";
 const THROTTLE_MS = 30_000; // 30 seconds between submissions
 
 export function ContactForm() {
