@@ -181,6 +181,7 @@ export default function JobDetailPage({
             </h2>
             <ApplicationForm
               jobTitle={job.title}
+              jobNumber={job.jobNumber}
               notifyEmails={job.notifyEmails}
             />
           </div>

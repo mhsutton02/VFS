@@ -273,7 +273,8 @@ export default function AdminJobsPage() {
     (j) =>
       j.title.toLowerCase().includes(search.toLowerCase()) ||
       j.department.toLowerCase().includes(search.toLowerCase()) ||
-      j.id.toLowerCase().includes(search.toLowerCase())
+      j.id.toLowerCase().includes(search.toLowerCase()) ||
+      String(j.jobNumber ?? "").includes(search)
   );
 
   /* ================================================================ */
@@ -349,6 +350,20 @@ export default function AdminJobsPage() {
           </h2>
 
           <div className="adm-form">
+            {/* Job ID (read-only) */}
+            {editing.jobNumber != null && (
+              <div className="adm-row">
+                <label className="adm-field">
+                  Job ID
+                  <input
+                    value={`VFS-${String(editing.jobNumber).padStart(4, "0")}`}
+                    readOnly
+                    style={{ opacity: 0.7, cursor: "default" }}
+                  />
+                </label>
+              </div>
+            )}
+
             {/* Row: Title + Department */}
             <div className="adm-row">
               <label className="adm-field">

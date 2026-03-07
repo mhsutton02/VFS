@@ -8,10 +8,11 @@ const THROTTLE_MS = 60_000; // 60 seconds between submissions
 
 interface ApplicationFormProps {
   jobTitle: string;
+  jobNumber?: number;
   notifyEmails: string[];
 }
 
-export function ApplicationForm({ jobTitle, notifyEmails }: ApplicationFormProps) {
+export function ApplicationForm({ jobTitle, jobNumber, notifyEmails }: ApplicationFormProps) {
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -36,15 +37,17 @@ export function ApplicationForm({ jobTitle, notifyEmails }: ApplicationFormProps
     const formData = new FormData(form);
 
     // Build JSON payload (Web3Forms free plan does not support file uploads)
+    const jobId = jobNumber ? `VFS-${String(jobNumber).padStart(4, "0")}` : "—";
     const payload: Record<string, string> = {
       access_key: WEB3FORMS_KEY,
-      subject: `Application: ${jobTitle} — ${formData.get("name") as string}`,
+      subject: `Application [${jobId}]: ${jobTitle} — ${formData.get("name") as string}`,
       from_name: "ValorForge Careers",
       replyto: formData.get("email") as string,
       name: formData.get("name") as string,
       email: formData.get("email") as string,
       phone: (formData.get("phone") as string) || "—",
       linkedin: (formData.get("linkedin") as string) || "—",
+      "Job ID": jobId,
       position: jobTitle,
       resumeText: (formData.get("resumeText") as string) || "—",
       coverLetterText: (formData.get("coverLetterText") as string) || "—",
