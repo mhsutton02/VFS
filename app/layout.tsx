@@ -27,12 +27,21 @@ export const metadata: Metadata = {
     images: ['/og-image.jpg'],
   },
   manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "ValorForge Solutions",
+  },
+  formatDetection: {
+    telephone: false,
+  },
 };
 
 export const viewport = {
   themeColor: "#0a0a0a",
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
 };
 
 // ... imports and metadata/viewport as before
