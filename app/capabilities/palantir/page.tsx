@@ -104,7 +104,7 @@ export default function PalantirPage() {
         {/* Closing Statement */}
         <section className="vf-section vf-bg-default vf-content-section">
           <div className="vf-container">
-            <p className="vf-body">{content.closingStatement}</p>
+            <p className="vf-lead" style={{ textAlign: "center", fontSize: "22px", maxWidth: "52ch", margin: "0 auto" }}>{content.closingStatement}</p>
           </div>
         </section>
 
