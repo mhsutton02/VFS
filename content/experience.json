@@ -22,7 +22,7 @@
       "id": "palantir-foundry",
       "label": "Geospatial Intelligence",
       "title": "National-Scale Telecom Topology Mapping — Palantir Foundry",
-      "situation": "A major telecom operator required unified geospatial visibility across its network planning, construction, operations, and resilience functions at national scale. Existing systems were siloed, with no single source of truth for network topology or infrastructure status.",
+      "situation": "A major telecom operator required unified geospatial visibility across its network planning, construction, operations, and resilience functions at national scale. Existing systems were siloed, with no single source of truth for network topology or infrastructure status. Palantir Foundry was selected as one of several platform options to deliver this capability.",
       "role": "Program management and delivery leadership for a Palantir Foundry implementation that created a real-time digital twin of the operator's telecom infrastructure. Coordinated cross-functional data integration from planning systems, construction management, field operations, and environmental risk sources. Managed stakeholder alignment across engineering, operations, and executive leadership.",
       "outcome": "[To be populated — e.g., unified visibility across X million network assets, Y% reduction in planning cycle time, Z improvement in disaster response readiness, consolidated N previously siloed data sources]",
       "capabilities": [

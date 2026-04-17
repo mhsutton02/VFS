@@ -1,0 +1,99 @@
+{
+  "seoTitle": "Lonestar Commercial Palantir Services | ValorForge Solutions",
+  "seoDescription": "The commercial Palantir partner that disrupts the entire service provider market. National-scale proof, veteran discipline, and federal-grade backbone.",
+  "hero": {
+    "badge": "Commercial Division of ValorForge Solutions",
+    "headline": "Lonestar: The Commercial Palantir Partner That Disrupts the Entire Service Provider Market",
+    "subheadline": "National-scale telecom digital-twin proof, military-rooted execution discipline, and enterprise governance standards — with independent agility and federal-grade backbone."
+  },
+  "intro": [
+    "Palantir's service providers each excel in one area: ex-Palantir depth, senior-only speed, embedded engineering, self-sufficiency training, or fast ROI. ValorForge Lonestar takes the absolute best from all of them — and adds what the market has been missing: national-scale telecom digital-twin proof at petabyte levels, military-rooted execution discipline, enterprise governance standards inherited from CMMC 2.0, and an independent commercial focus backed by federal-grade backbone. We are not limited by boutique scope, big-firm bureaucracy, or ex-Palantir alumni networks. We deliver faster, more sustainable, cross-industry results with accountability that cannot fail."
+  ],
+  "comparisonTable": {
+    "competitors": [
+      "ValorForge Lonestar",
+      "Boutique Implementer A",
+      "Acquired-Firm Integrator",
+      "Senior-Only Consultancy",
+      "Ex-Palantir / FDE Firm",
+      "Embedded Engineering / ROI Firms",
+      "AI & Training Specialists"
+    ],
+    "rows": [
+      {
+        "capability": "SDVOSB-Backed Federal-Grade Backbone",
+        "ratings": ["Yes", "No", "No", "No", "No", "No", "No"]
+      },
+      {
+        "capability": "CMMC-Derived Enterprise Governance & Guide Rails (built-in)",
+        "ratings": ["Yes", "Partial", "Good", "Partial", "Good", "Partial", "Moderate"]
+      },
+      {
+        "capability": "Veteran-Led Execution Discipline + Military Tempo",
+        "ratings": ["Yes", "No", "No", "No", "Partial", "No", "No"]
+      },
+      {
+        "capability": "Big Four Methodological Rigor",
+        "ratings": ["Yes", "Strong", "Partial", "Strong", "Strong", "Good", "Varies"]
+      },
+      {
+        "capability": "Trusted AI + Palantir as the Operating System",
+        "ratings": ["Yes (Optional service)", "Strong", "Good", "Good", "Good", "Moderate", "Strong"]
+      },
+      {
+        "capability": "End-to-End Implementation & Rapid Time-to-Value",
+        "ratings": ["Yes", "Strong", "Strong", "Strong", "Strong", "Strong", "Yes"]
+      },
+      {
+        "capability": "Production Sustainment & Long-Term Optimization",
+        "ratings": ["Yes", "Yes", "Strong", "Moderate", "Yes", "Yes", "Moderate"]
+      },
+      {
+        "capability": "Self-Sufficiency Training & Enablement",
+        "ratings": ["Yes", "Yes", "Strong", "Strong", "Yes", "Yes", "Yes"]
+      },
+      {
+        "capability": "Independent Agility (No Acquired-Firm Bureaucracy)",
+        "ratings": ["Yes", "Yes", "No (Accenture-owned)", "Yes", "Yes", "Varies", "Yes"]
+      }
+    ]
+  },
+  "advantages": [
+    {
+      "header": "National-Scale Telecom Digital Twin Proof as Your Blueprint",
+      "parenthetical": "(surpasses boutique implementers and embedded-engineering firms)",
+      "body": "We have already delivered one of the largest Palantir Foundry deployments in U.S. history. That exact ontology-first, simplification-first architecture is now replicable to healthcare networks, banking risk platforms, manufacturing supply chains, energy logistics, and any regulated enterprise — delivering lower risk and faster time-to-value than any boutique or acquired firm."
+    },
+    {
+      "header": "Senior Expertise + Veteran Discipline That Cannot Fail",
+      "parenthetical": "(beats senior-only consultancies, ex-Palantir firms, and ROI-focused providers)",
+      "body": "Military-rooted accountability and Big Four methodological rigor ensure every engagement meets deadlines, mitigates risks, and drives compounding ROI — with the personal commitment only a veteran-led team delivers."
+    },
+    {
+      "header": "End-to-End + Production Sustainment Excellence",
+      "parenthetical": "(exceeds full-lifecycle providers and acquired-firm integrators)",
+      "body": "From ontology design and AIP agent orchestration to 24/7 monitoring, optimization, and long-term evolution — we keep your Palantir environment sharp for years, reducing vendor reliance while maximizing uptime and returns."
+    },
+    {
+      "header": "Trusted AI Governance & Guide-Rail Controls",
+      "parenthetical": "(outperforms AI-focused and competitive-advantage service providers)",
+      "body": "Palantir as the secure operating system for enterprise AI: data wrangling, model orchestration, policy-enforced guide rails, and full auditability — all with CMMC-derived standards applied commercially from day one."
+    },
+    {
+      "header": "Self-Sufficiency + Rapid Enablement",
+      "parenthetical": "(surpasses training-focused specialists and condensed-timeline firms)",
+      "body": "Hands-on delivery plus best-in-class user enablement and training so your teams own the platform long-term — delivered with startup speed and enterprise discipline."
+    },
+    {
+      "header": "Independent Agility with Federal-Grade Backbone",
+      "parenthetical": "(disrupts every player on Palantir's list)",
+      "body": "As ValorForge's dedicated commercial arm, we move faster than acquired firms and deliver deeper scale and compliance than pure-play boutiques — without ever compromising on governance or outcomes."
+    }
+  ],
+  "closingStatement": "TBD",
+  "footerCta": {
+    "text": "Ready to disrupt your industry with Palantir Foundry or AIP?",
+    "buttonText": "Contact Lonestar",
+    "buttonHref": "/#contact"
+  }
+}

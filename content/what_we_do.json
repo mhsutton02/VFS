@@ -33,6 +33,11 @@
       "id": "ai-consulting",
       "title": "Applied AI Solutions",
       "body": "Strategic AI consulting, workforce training, and custom solution development to accelerate mission outcomes."
+    },
+    {
+      "id": "palantir-foundry",
+      "title": "Palantir Foundry & AIP Options",
+      "body": "As an optional platform capability, we deliver Palantir Foundry and AIP implementation, integration, and sustainment for federal missions requiring trusted AI and real-time operational command."
     }
   ]
 }

@@ -23,6 +23,11 @@
       "id": "geospatial-ai",
       "title": "Geospatial AI Governance",
       "body": "Auditable, explainable AI governance for geospatial datasets driving broadband mapping and public funding decisions."
+    },
+    {
+      "id": "platform-agnostic-ai",
+      "title": "Platform-Agnostic AI Integration",
+      "body": "We design AI solutions that are platform-agnostic by default, with optional Palantir Foundry and AIP integration when mission requirements demand trusted, enterprise-grade AI infrastructure."
     }
   ]
 }

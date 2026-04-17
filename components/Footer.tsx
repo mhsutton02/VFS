@@ -43,6 +43,17 @@ export function Footer() {
           >
             Contact
           </Link>
+          <Link
+            href="/lonestar"
+            className="min-w-touch min-h-touch px-touch py-2 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
+            Lonestar
+          </Link>
+        </div>
+        <div style={{ width: "100%", marginTop: "12px" }}>
+          <p style={{ fontSize: "13px", color: "var(--muted)", margin: 0 }}>
+            ValorForge also offers Palantir Foundry and AIP as an optional capability within our broader federal technology solutions.
+          </p>
         </div>
       </div>
     </footer>

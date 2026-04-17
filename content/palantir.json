@@ -1,0 +1,95 @@
+{
+  "seoTitle": "Federal Palantir Services | ValorForge Solutions",
+  "seoDescription": "The only SDVOSB Palantir partner engineered for federal missions that cannot fail. CMMC 2.0 Level 2 certified Palantir Foundry and AIP implementation.",
+  "hero": {
+    "badge": "SDVOSB · CMMC 2.0 Level 2 Certified",
+    "headline": "The Only SDVOSB Palantir Partner Engineered for Federal Missions That Cannot Fail",
+    "subheadline": "National-scale Palantir Foundry delivery, trusted AI with guide-rail controls, and military-rooted accountability — with compliance built in from day one."
+  },
+  "intro": [
+    "Palantir's trusted service providers each bring something valuable — deep technical expertise, rapid delivery, training excellence, or end-to-end support. ValorForge takes the best of every approach and adds what none of them can match: certified Service-Disabled Veteran-Owned Small Business status, CMMC 2.0 Level 2 compliance baked in from day one, national-scale Palantir Foundry delivery in critical infrastructure, and military-rooted execution discipline fused with Big Four rigor.",
+    "We are not another ex-Palantir boutique chasing projects. We are the federal-first partner that delivers Palantir Foundry and AIP as an optional, high-impact capability layered directly onto our core federal broadband program management, modernization, AI governance, and CMMC services — with accountability that missions demand."
+  ],
+  "comparisonTable": {
+    "competitors": [
+      "ValorForge Solutions",
+      "Boutique Implementer A",
+      "Acquired-Firm Integrator",
+      "Senior-Only Consultancy",
+      "Ex-Palantir / FDE Firm",
+      "Full-Lifecycle Provider",
+      "AI & Training Specialists"
+    ],
+    "rows": [
+      {
+        "capability": "SDVOSB Certified + Federal Set-Aside / Sole-Source Advantage",
+        "ratings": ["Yes", "No", "No", "No", "No", "No", "No"]
+      },
+      {
+        "capability": "CMMC 2.0 Level 2 Certified (built-in from day one)",
+        "ratings": ["Yes", "No", "No", "No", "No", "No", "No"]
+      },
+      {
+        "capability": "Veteran-Led + Military Execution Discipline",
+        "ratings": ["Yes", "No", "No", "No", "Partial", "No", "No"]
+      },
+      {
+        "capability": "Big Four Methodological Rigor",
+        "ratings": ["Yes", "Strong", "Partial", "Strong", "Strong", "Partial", "Varies"]
+      },
+      {
+        "capability": "Trusted AI Deployment with Palantir as the Operating System + Guide-Rail Controls",
+        "ratings": ["Yes (Optional consulting & implementation service)", "Strong", "Good", "Good", "Good", "Moderate", "Strong"]
+      },
+      {
+        "capability": "End-to-End Implementation & Integration",
+        "ratings": ["Yes", "Strong", "Strong", "Strong", "Strong", "Strong", "Yes"]
+      },
+      {
+        "capability": "Production Sustainment, Optimization & 24/7 Support",
+        "ratings": ["Yes", "Yes", "Strong", "Moderate", "Yes", "Strong", "Moderate"]
+      },
+      {
+        "capability": "Self-Sufficiency Training & Enablement",
+        "ratings": ["Yes", "Yes", "Strong", "Strong", "Yes", "Strong", "Yes"]
+      },
+      {
+        "capability": "Regulated / Mission-Critical Governance Focus",
+        "ratings": ["Yes", "Moderate", "Moderate", "Moderate", "Moderate", "Moderate", "Moderate"]
+      }
+    ]
+  },
+  "advantages": [
+    {
+      "header": "National-Scale Proven Delivery",
+      "parenthetical": "(beats boutique implementers and embedded-engineering firms)",
+      "body": "We executed one of the largest Palantir digital-twin deployments in U.S. critical infrastructure history — unifying 1,000+ data sources into real-time operational command centers. This same ontology-first framework is replicable across federal programs, delivering scale that pure-play implementers rarely achieve."
+    },
+    {
+      "header": "Ironclad Compliance & Governance Built In",
+      "parenthetical": "(beats every competitor, including AI-focused and full-lifecycle providers)",
+      "body": "CMMC 2.0 Level 2 certified with zero-trust principles and guide-rail controls from the first day. Every Palantir engagement inherits federal-grade security, auditability, and risk management — no retrofitting required."
+    },
+    {
+      "header": "Veteran-Led Discipline & Federal Contracting Superpower",
+      "parenthetical": "(beats all ex-Palantir / FDE firms and senior-only consultancies)",
+      "body": "SDVOSB set-aside and sole-source vehicles + military-rooted accountability ensure deadlines are met and outcomes are flawless. We combine senior expertise with the personal commitment only veterans bring."
+    },
+    {
+      "header": "Trusted AI with Palantir as the Operating System",
+      "parenthetical": "(beats AI-focused service providers)",
+      "body": "Consulting and implementation for enterprise trusted AI models, data wrangling, agent orchestration, and policy-enforced guide rails — all while maintaining full auditability and mission alignment."
+    },
+    {
+      "header": "End-to-End + Self-Sufficiency Focus",
+      "parenthetical": "(surpasses full-lifecycle providers, training specialists, and acquired-firm integrators)",
+      "body": "Full lifecycle support plus training and enablement so your teams become self-sufficient — without creating long-term vendor dependency."
+    }
+  ],
+  "closingStatement": "When your federal mission requires Palantir Foundry or AIP, partner with the only provider that combines the best technical depth, training excellence, and rapid delivery of Palantir's service network with the compliance, contracting advantage, and mission discipline that only ValorForge delivers.",
+  "footerCta": {
+    "text": "Ready to deploy Palantir Foundry or AIP with federal-grade accountability?",
+    "buttonText": "Contact ValorForge",
+    "buttonHref": "/#contact"
+  }
+}

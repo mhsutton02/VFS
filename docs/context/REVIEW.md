@@ -1,84 +1,53 @@
 # Code Review
-**Date:** 2026-02-05
-**Scope:** VFS codebase SEO and security audit — app/layout.tsx, app/page.tsx, app/careers/page.tsx, next.config.mjs, components/ContactForm.tsx, app/globals.css
+**Date:** 2026-04-16
+**Scope:** Pre-implementation review for Palantir/Lonestar upgrade — existing patterns, carousel capacity, navigation sync, and design system readiness
 
-## Verdict: NEEDS WORK
+## Verdict: APPROVE
 
 ## Critical (P0)
-
-- **Missing robots.txt** — No robots.txt file exists in /public or /app. Search engines have no crawl directives. Create /app/robots.ts to export default function returning `{ rules: { userAgent: '*', allow: '/' }, sitemap: 'https://valorforge.com/sitemap.xml' }`.
-
-- **Missing sitemap.xml** — No sitemap exists. Critical for SEO discoverability and crawl efficiency. Create /app/sitemap.ts exporting default function that returns array of URL objects with loc, lastModified, changeFrequency, priority for all routes (/, /careers, /partners).
-
-- **C:\Users\Veteran\Documents\dev\VFS\app\careers\page.tsx:1-94** — Missing metadata export. Page has no title, description, or Open Graph tags. Inherits only root metadata from layout.tsx. Add `export const metadata: Metadata = { title: 'Careers - ValorForge Solutions', description: '[85-char summary of careers page]', openGraph: {...} }`.
-
-- **C:\Users\Veteran\Documents\dev\VFS\app\layout.tsx:6-18** — Missing Twitter Card metadata. Open Graph exists but no twitter:card, twitter:title, twitter:description. Add twitter object to metadata: `twitter: { card: 'summary_large_image', title: '...', description: '...', images: ['...'] }`.
-
-- **C:\Users\Veteran\Documents\dev\VFS\app\layout.tsx:14** — Missing canonical URL property. Add `metadataBase: new URL('https://valorforge.com')` and `alternates: { canonical: '/' }` to metadata export to prevent duplicate content issues.
-
-- **C:\Users\Veteran\Documents\dev\VFS\components\ContactForm.tsx:6-83** — No client-side form validation or sanitization. Relies entirely on Netlify honeypot. No XSS protection on user input. Add maxLength attributes to inputs (name: 100, org: 100, email: 254, phone: 20, message: 2000). Add pattern attribute to email input for regex validation. Consider adding rate limiting or CSRF token.
-
-- **C:\Users\Veteran\Documents\dev\VFS\next.config.mjs:11** — Overly permissive image hostname config. `hostname: '**'` allows any remote image source, creating XSS and phishing vector. Tighten to specific trusted domains: `hostname: 'valorforge.com'` or remove if no remote images used.
+None. The existing architecture supports the planned changes.
 
 ## Important (P1)
 
-- **C:\Users\Veteran\Documents\dev\VFS\app\layout.tsx:28-38** — Manual viewport meta tag in head conflicts with viewport export. Next.js 14 exports viewport separately (line 20-24). Remove duplicate `<meta name="viewport".../>` from head JSX to avoid hydration issues.
+- **C:/Users/mhsut/DevProjects/VFSsite/hooks/useCarousel.ts:11** — Carousel `visibleCount` is hardcoded to 2. Adding a 7th card to what_we_do.json or 5th to ai_alignment.json is safe (carousel rotates 2-at-a-time, mobile displays all). No overflow risk. No changes needed.
 
-- **C:\Users\Veteran\Documents\dev\VFS\app\page.tsx:15-66** — No structured data (JSON-LD). Search engines cannot parse business type, services, contact info. Add Organization schema to layout.tsx or page.tsx with `<script type="application/ld+json">` containing name, url, logo, sameAs (social links), contactPoint, address.
+- **C:/Users/mhsut/DevProjects/VFSsite/components/Header.tsx:8-31** — CAPABILITIES_ITEMS dropdown uses vertical menu with subsections. Adding a 3rd capability (Palantir) will increase menu height. Current styling supports this (vf-nav-dropdown-menu is height: auto). Test on mobile to ensure dropdown doesn't exceed viewport height at 760px breakpoint where nav becomes full-screen overlay.
 
-- **C:\Users\Veteran\Documents\dev\VFS\app\layout.tsx:6-7** — Generic page title "ValorForge Solutions" with no suffix. Sub-pages will show only root title in browser tabs. Change to template: `title: { default: 'ValorForge Solutions', template: '%s | ValorForge Solutions' }`.
+- **C:/Users/mhsut/DevProjects/VFSsite/components/Header.tsx:33-38** — NAV_ITEMS array holds 4 items (Leadership, Partners, Careers, Contact). Adding "Lonestar" creates 5 items at 22px gap (line 204, globals.css). Desktop nav uses flexbox with 22px gap — no overflow risk. Verify mobile hamburger menu layout accommodates 5 items cleanly.
 
-- **C:\Users\Veteran\Documents\dev\VFS\app\careers\page.tsx:23-94** — Semantic HTML issue. No <main> wrapper around sections. Search engines may not identify primary content vs navigation. Wrap all sections in <main> (currently wrapped in layout, but local main would be clearer).
-
-- **C:\Users\Veteran\Documents\dev\VFS\app\page.tsx:19** — Missing semantic landmark. `<main>` exists but no aria-label. Good practice to add `aria-label="Main content"` for screen readers, though not critical since <main> is implicit landmark.
-
-- **C:\Users\Veteran\Documents\dev\VFS\next.config.mjs:42-50** — CSP allows 'unsafe-inline' and 'unsafe-eval' for scripts. Weakens XSS protection. If Netlify forms or analytics require it, add nonce-based CSP. If not required, remove 'unsafe-inline' and 'unsafe-eval' from script-src.
-
-- **C:\Users\Veteran\Documents\dev\VFS\app\globals.css:1-846** — No CSS injection concerns found. Uses CSS custom properties and standard Tailwind. No user-controlled class names or inline styles from props. Security posture is good.
-
-- **C:\Users\Veteran\Documents\dev\VFS\components\ContactForm.tsx:11** — Honeypot field named "bot-field" is predictable. Sophisticated bots can detect and skip it. Rename to something less obvious like "website" or "company_url" and label it innocuously.
+- **C:/Users/mhsut/DevProjects/VFSsite/app/sitemap.ts:3-47** — Sitemap uses hardcoded array of MetadataRoute.Sitemap objects. Must add two new entries: `/capabilities/palantir` (priority 0.9) and `/lonestar` (priority 0.8 or 0.9, align with existing top-level pages). Follow existing canonical URL pattern.
 
 ## Suggestions (P2)
 
-- **C:\Users\Veteran\Documents\dev\VFS\app\layout.tsx:17** — Manifest path "/manifest.json" exists in /public but is not verified. Ensure icons in manifest.json match /public/icon-192.png and /public/icon-512.png. Verify theme_color matches viewport themeColor (#0a0a0a).
+- **C:/Users/mhsut/DevProjects/VFSsite/app/globals.css:1338-1391** — Existing `.vf-card-grid` is optimized for 6-card layouts (3x2 desktop, 2x? tablet, 1x? mobile). New pages plan comparison tables and advantages grids. Consider whether these new UI elements should reuse `.vf-card-grid` or get dedicated class names (`.vf-comparison-table`, `.vf-advantage-grid`) to avoid semantic conflicts.
 
-- **C:\Users\Veteran\Documents\dev\VFS\next.config.mjs:26** — HSTS header is strong (1 year + preload) but consider adding to HSTS preload list at hstspreload.org for browsers to enforce HTTPS before first visit.
+- **C:/Users/mhsut/DevProjects/VFSsite/content/experience.json:22-33** — Palantir Foundry case study currently says "National-Scale Telecom Topology Mapping — Palantir Foundry." Update to add "one of several platform options" framing as planned. Ensure this doesn't create positioning conflict with new Palantir capability page — distinguish between case study (past engagement) and capability page (service offering).
 
-- **C:\Users\Veteran\Documents\dev\VFS\app\careers\page.tsx:84** — CTA link uses hash navigation `href="/#contact"` which may break if user is already on homepage. Use `href={pathname === '/' ? '#contact' : '/#contact'}` logic or absolute path to avoid scroll issues.
-
-- **C:\Users\Veteran\Documents\dev\VFS\components\HeroSection.tsx:14** — Image alt text pulled from JSON (`heroContent.imageAlt`). Verify JSON content for descriptive alt text (not just "hero image"). Same for all CarouselSection images.
-
-- **C:\Users\Veteran\Documents\dev\VFS\app\page.tsx:24-56** — Image paths hardcoded. If image files are renamed or moved, will break. Consider moving to config or verifying file existence in build step.
-
-- **C:\Users\Veteran\Documents\dev\VFS\app\layout.tsx:30** — Head tag usage in app router is not recommended by Next.js docs. Metadata should be fully declarative via exports. Move favicon link to metadata: `icons: { icon: '/favicon.ico' }` and remove <head> wrapper.
-
-- **C:\Users\Veteran\Documents\dev\VFS\next.config.mjs:44** — Googletagmanager and analytics in CSP but no GTM code found in codebase. If not used, remove from CSP to tighten policy. If planned, ensure GTM script uses nonce for CSP compliance.
-
-- **C:\Users\Veteran\Documents\dev\VFS\components\ContactForm.tsx:77-82** — Submit button has no loading state or disabled state during submission. User can double-submit. Add state management: `const [submitting, setSubmitting] = useState(false)` and `disabled={submitting}` on button.
+- **C:/Users/mhsut/DevProjects/VFSsite/components/Footer.tsx:6-49** — Footer has simple 2-column layout (title block left, links right). Adding "Lonestar" and "Palantir" requires updating links. Current Footer only links to "Capabilities" (line 16-21, points to /capabilities/federal-broadband). Consider whether Footer should link to all capabilities individually or create a capabilities landing page pattern.
 
 ## What's Good
 
-- Security headers are comprehensive (HSTS, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, CSP)
-- All images use Next.js Image component with proper width/height (prevents CLS)
-- Alt text is sourced from JSON content files (centralized and maintainable)
-- Honeypot field exists for basic bot protection
-- Semantic HTML landmarks present (<header>, <main>, <footer>, <nav>)
-- Dark theme with proper contrast ratios (meets WCAG AA)
-- Accessible focus states defined (:focus-visible with 3px accent outline)
-- Mobile responsive nav with aria-expanded and aria-label
-- PWA configured with manifest and service worker (next-pwa)
+- **Capability page pattern is clean and consistent.** Both existing pages (federal-broadband/page.tsx and program-management/page.tsx) follow the same structure: Hero + content sections + footer CTA. New pages can clone this pattern with zero risk.
+
+- **Design system is comprehensive.** The vf-* CSS classes cover all needed primitives: `.vf-h2`, `.vf-kicker`, `.vf-body`, `.vf-section`, background accents (`.vf-bg-gold-accent`, `.vf-bg-blue-accent`, `.vf-bg-default`), `.vf-card-grid`, `.vf-stat-row`, `.vf-capability-list`, `.vf-credential-badge`, `.vf-program-card`. New content can be styled without adding CSS (unless comparison tables and advantage grids are genuinely new patterns).
+
+- **JSON-driven content model is robust.** All existing pages load metadata and sections from JSON files. The new pages (palantir.json, lonestar.json) follow this pattern cleanly. TypeScript won't complain as long as JSON structure matches usage in TSX.
+
+- **Navigation is modular and extensible.** CAPABILITIES_ITEMS and NAV_ITEMS are clean arrays. Adding Palantir to dropdown and Lonestar to top-level nav is a 2-line change each. Dropdown CSS is height-adaptive, not fixed.
 
 ## Action Items
 
-1. Create /app/robots.ts with crawl rules and sitemap reference (P0)
-2. Create /app/sitemap.ts with all routes and metadata (P0)
-3. Add metadata export to /app/careers/page.tsx with title, description, OG tags (P0)
-4. Add Twitter Card metadata to /app/layout.tsx (P0)
-5. Add canonical URL and metadataBase to /app/layout.tsx metadata (P0)
-6. Add input validation (maxLength, pattern) to ContactForm.tsx (P0)
-7. Tighten next.config.mjs image remotePatterns to specific domains or remove (P0)
-8. Remove duplicate viewport meta tag from layout.tsx head (P1)
-9. Add Organization JSON-LD structured data to layout or page (P1)
-10. Change root title to template format for sub-page differentiation (P1)
-11. Review and reduce CSP 'unsafe-inline'/'unsafe-eval' if possible (P1)
-12. Rename honeypot field to less obvious name (P1)
+1. Add 7th card to C:/Users/mhsut/DevProjects/VFSsite/content/what_we_do.json (safe, carousel rotates)
+2. Add 5th card to C:/Users/mhsut/DevProjects/VFSsite/content/ai_alignment.json (safe, carousel rotates)
+3. Update "Palantir Foundry" case study in C:/Users/mhsut/DevProjects/VFSsite/content/experience.json with "one of several platform options" framing
+4. Create C:/Users/mhsut/DevProjects/VFSsite/content/palantir.json and C:/Users/mhsut/DevProjects/VFSsite/content/lonestar.json
+5. Create C:/Users/mhsut/DevProjects/VFSsite/app/capabilities/palantir/page.tsx (clone federal-broadband pattern)
+6. Create C:/Users/mhsut/DevProjects/VFSsite/app/lonestar/page.tsx (clone existing capability page pattern, but top-level route)
+7. Add Palantir to CAPABILITIES_ITEMS array in C:/Users/mhsut/DevProjects/VFSsite/components/Header.tsx (line 8-31)
+8. Add Lonestar to NAV_ITEMS array in C:/Users/mhsut/DevProjects/VFSsite/components/Header.tsx (line 33-38)
+9. Add Lonestar + Palantir links to C:/Users/mhsut/DevProjects/VFSsite/components/Footer.tsx (decide: individual links or capabilities landing page)
+10. Add subtle Palantir note to C:/Users/mhsut/DevProjects/VFSsite/components/Footer.tsx as planned
+11. Add `/capabilities/palantir` and `/lonestar` entries to C:/Users/mhsut/DevProjects/VFSsite/app/sitemap.ts
+12. Define CSS for comparison tables and advantage grids in C:/Users/mhsut/DevProjects/VFSsite/app/globals.css (if new UI patterns; else reuse `.vf-card-grid`)
+13. Test dropdown menu height on mobile (760px breakpoint) with 3 capability items
+14. Test mobile nav with 5 NAV_ITEMS (4 existing + Lonestar)

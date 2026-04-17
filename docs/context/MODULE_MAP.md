@@ -1,54 +1,41 @@
-# Module Map — VFS Components & Pages
+# Module Map — VFS Website Navigation & Layout
 
-## app/layout.tsx
-- `RootLayout({ children }): JSX.Element` — Root HTML wrapper, Geist font, JSON-LD schema, metadata
+## Navigation Components
 
-## app/page.tsx
-- `HomePage(): JSX.Element` — Header, Hero, 3x CarouselSection, GivingBack, About, Contact, Footer
+### components/Header.tsx
+- `CAPABILITIES_ITEMS[]` — Dropdown menu data: Federal Broadband (5 sections), Program Management (5 sections)
+- `NAV_ITEMS[]` — Top-level links: Leadership, Partners, Careers, Contact
+- `Header()` — Client component with mobile hamburger, capabilities dropdown, standard nav links
 
-## app/careers/page.tsx
-- `CareersPage(): JSX.Element` — Header, Hero, card grid (3 cards), role list, CTA, Footer
-- `metadata: Metadata` — SEO metadata export pattern (template for new pages)
+### components/Footer.tsx
+- `Footer()` — Footer with links: Capabilities, Leadership, Careers, Partners, Contact
 
-## app/partners/page.tsx
-- `PartnersPage(): JSX.Element` — Header, section, Footer (placeholder page)
+## Route Pages (app/**/page.tsx)
+- `app/page.tsx` — Homepage
+- `app/capabilities/federal-broadband/page.tsx` — Federal Broadband capability
+- `app/capabilities/program-management/page.tsx` — Program Management capability
+- `app/careers/page.tsx` — Careers listing
+- `app/careers/[slug]/page.tsx` — Individual job detail
+- `app/leadership/page.tsx` — Leadership team
+- `app/partners/page.tsx` — Partners
+- `app/contact/page.tsx` — Contact
+- `app/experience/page.tsx` — Experience
+- `app/admin/jobs/page.tsx` — Admin job editor
 
-## app/sitemap.ts
-- `sitemap(): MetadataRoute.Sitemap` — Returns array: /, /careers, /partners
+## Shared Layout
+- `app/layout.tsx` — Root layout: Geist Sans, JSON-LD structured data, metadata/viewport
+- `app/globals.css` — Global styles (vf-* design system)
+- `app/sitemap.ts` — Sitemap generator (7 public URLs)
+- `app/robots.ts` — Robots.txt config
 
-## components/Header.tsx ("use client")
-- `NAV_ITEMS: Array<{href, label}>` — Navigation links array
-- `Header(): JSX.Element` — Sticky header with logo, nav, mobile toggle
+## Content Files (content/*.json)
+- hero.json, about.json, careers.json, contact.json, experience.json
+- leadership.json, partners.json, what_we_do.json, who_we_serve.json
+- giving_back.json, federal_broadband.json, program_management.json, ai_alignment.json
+- jobs/ — Individual job posting JSON files
 
-## components/Footer.tsx
-- `Footer(): JSX.Element` — Company name, SDVOSB, location, Careers link
-
-## components/AboutSection.tsx
-- `AboutSection(): JSX.Element` — About section with image + carousel from about.json
-
-## components/CarouselSection.tsx
-- `CarouselSection({ id, altBackground?, reverse?, imageSrc, imageAlt, title, intro, ctaText, items }): JSX.Element`
-
-## components/Carousel.tsx ("use client")
-- `Carousel({ items: CarouselItem[], ariaLabel }): JSX.Element` — 2-card auto-advancing carousel
-
-## components/HeroSection.tsx
-- `HeroSection(): JSX.Element` — Hero with kicker, headline, body, image, CTA
-
-## components/GivingBackSection.tsx
-- `GivingBackSection(): JSX.Element` — Image + text + CTA
-
-## components/ContactSection.tsx / ContactForm.tsx
-- Contact section with Netlify form
-
-## hooks/useCarousel.ts
-- `useCarousel<T>(items, intervalMs?): { index, next, prev, onMouseEnter, onMouseLeave, getVisibleItems }`
-
-## CSS Classes (globals.css, ~869 lines)
-- Layout: vf-container, vf-section, vf-section-hero
-- Backgrounds: vf-bg-default, vf-bg-gold-accent, vf-bg-blue-accent
-- Typography: vf-kicker, vf-h1, vf-h2, vf-h3, vf-lead, vf-body, vf-accent
-- Cards: vf-card, vf-card-title, vf-card-body, vf-careers-card
-- Grid: vf-grid-image-left, vf-grid-image-right
-- Buttons: vf-btn, vf-btn-primary, vf-btn-ghost
-- Responsive: 980px (tablet), 760px (mobile)
+## Key Sync Points (must update when adding pages)
+1. `components/Header.tsx` — NAV_ITEMS[] or CAPABILITIES_ITEMS[]
+2. `components/Footer.tsx` — Footer link list
+3. `app/sitemap.ts` — Public URL entries
+4. `app/globals.css` — Any new page-specific styles

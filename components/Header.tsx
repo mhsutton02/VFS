@@ -28,6 +28,14 @@ const CAPABILITIES_ITEMS = [
       { href: "/capabilities/program-management#cost-optimization", label: "Cost Optimization" },
     ],
   },
+  {
+    href: "/capabilities/palantir",
+    label: "Palantir Foundry & AIP",
+    sections: [
+      { href: "/capabilities/palantir#comparison", label: "Competitor Comparison" },
+      { href: "/capabilities/palantir#advantages", label: "Disruptive Advantages" },
+    ],
+  },
 ];
 
 const NAV_ITEMS = [
@@ -35,6 +43,7 @@ const NAV_ITEMS = [
   { href: "/partners", label: "Partners" },
   { href: "/careers", label: "Careers" },
   { href: "/#contact", label: "Contact" },
+  { href: "/lonestar", label: "Lonestar" },
 ];
 
 export function Header() {

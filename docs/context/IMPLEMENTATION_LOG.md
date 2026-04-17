@@ -181,3 +181,72 @@ Route (app)                              Size     First Load JS
 ```
 
 All 11 routes including new /leadership page generated successfully in static build.
+
+---
+
+# Implementation Log
+**Date:** 2026-04-16
+**Plan Reference:** PLAN.md -- Palantir Content Integration & New Pages (Lonestar + Federal Palantir), Phases 1-5
+
+## Changes Made
+
+### Phase 1: Content Updates (4 files)
+
+- **content/what_we_do.json** -- Added 7th carousel card object after "ai-consulting": id "palantir-foundry", title "Palantir Foundry & AIP Options", body with "optional platform capability" framing. No link field, consistent with existing cards.
+
+- **content/ai_alignment.json** -- Added 5th carousel card object after "geospatial-ai": id "platform-agnostic-ai", title "Platform-Agnostic AI Integration", body describing platform-agnostic approach with optional Palantir integration.
+
+- **content/experience.json:L25** -- Appended "Palantir Foundry was selected as one of several platform options to deliver this capability." to palantir-foundry case study situation text. Preserved existing situation/role/outcome structure.
+
+- **components/Footer.tsx:L46-57** -- Added Lonestar link (href="/lonestar") to vf-footer-right div after Contact link, using identical className pattern. Added Palantir note as small text (13px, var(--muted)) below footer links in a full-width div.
+
+### Phase 2: New Content Files (2 files)
+
+- **content/palantir.json** -- Created full JSON file with seoTitle, seoDescription, hero (badge/headline/subheadline), intro (2 paragraphs), comparisonTable (7 competitors, 9 capability rows), advantages (5 items each with header/parenthetical/body), closingStatement, footerCta. Content copied exactly from PLAN.md.
+
+- **content/lonestar.json** -- Created full JSON file with seoTitle, seoDescription, hero (badge/headline/subheadline), intro (1 paragraph), comparisonTable (7 competitors, 9 capability rows), advantages (6 items each with header/parenthetical/body), closingStatement "TBD", footerCta. Content copied exactly from PLAN.md.
+
+### Phase 3: New Page Routes (2 files)
+
+- **app/capabilities/palantir/page.tsx** -- Created page component cloning federal-broadband/page.tsx pattern. Imports palantir.json. Renders: HeroSection (badge, headline, subheadline), intro section (2 paragraphs mapped from intro array), comparison table section (id="comparison") with vf-comparison-table class, advantages section (id="advantages") with vf-advantage-grid class mapping 5 advantages, closing statement section, footer CTA. Exports metadata (title, description, OpenGraph, Twitter).
+
+- **app/lonestar/page.tsx** -- Created top-level route (not under /capabilities). Imports lonestar.json. Same page pattern as palantir/page.tsx but with lonestar content: hero, intro (1 paragraph), comparison table (id="comparison"), 6 advantages (id="advantages"), closing "TBD", footerCta. Exports metadata.
+
+### Phase 4: Navigation Sync (3 files)
+
+- **components/Header.tsx:L31-38** -- Added Palantir item to CAPABILITIES_ITEMS array: href "/capabilities/palantir", label "Palantir Foundry & AIP", 2 sections (Competitor Comparison -> #comparison, Disruptive Advantages -> #advantages).
+
+- **components/Header.tsx:L46** -- Added Lonestar to NAV_ITEMS array: { href: "/lonestar", label: "Lonestar" }.
+
+- **app/sitemap.ts:L47-58** -- Added 2 entries: /capabilities/palantir (priority 0.9, monthly) and /lonestar (priority 0.9, monthly).
+
+- **components/Footer.tsx** -- Already completed in Phase 1 Step 4. Lonestar link and Palantir note both present.
+
+### Phase 5: CSS Design System (1 file)
+
+- **app/globals.css:L1452-1553** -- Added .vf-comparison-table class (full width, border-collapse, dark theme, gold accent first column header, 1px borders, striped even rows) with mobile responsive horizontal scroll at <760px. Added .vf-advantage-grid class (2-col grid, 24px gap) with .vf-advantage-card (blue/gold alternating backgrounds, border-radius, padding), .vf-advantage-header (20px bold), .vf-advantage-parenthetical (14px italic muted), .vf-advantage-body (15px muted). Mobile responsive 1-col at <760px.
+
+## Deviations from Plan
+
+- **Sitemap domain:** PLAN.md step 11 code block used "valorforgellc.com" but the existing sitemap.ts uses "valorforgesolutions.com" throughout. Per user instruction to "use whichever domain is already there," used valorforgesolutions.com for both new entries. This matches all 7 existing sitemap entries.
+
+- **Hero CTA button omitted on new pages:** The federal-broadband/page.tsx template includes a CTA button in the hero section (content.hero.cta / content.hero.ctaHref), but the palantir.json and lonestar.json hero objects do not include cta/ctaHref fields. The new pages omit the hero CTA button accordingly. The plan does not specify a hero CTA for these pages.
+
+## Testing Notes
+
+**Needs Testing:**
+- Carousel rotation: verify 7th card in What We Do and 5th in AI Alignment rotate correctly at 2-at-a-time visibleCount
+- Header dropdown: verify 3 capabilities (Federal Broadband, Program Management, Palantir Foundry & AIP) render without overflow at 760px mobile breakpoint
+- NAV_ITEMS: verify 5 items (Leadership, Partners, Careers, Contact, Lonestar) display in mobile hamburger menu
+- Comparison tables: test horizontal scroll on mobile (320px, 375px, 760px) for all 7 competitor columns
+- Advantage grid: verify 2-col desktop (>760px), 1-col mobile (<=760px) with alternating gold/blue backgrounds
+- Sitemap: verify /capabilities/palantir and /lonestar appear in generated sitemap.xml
+- Footer: verify Lonestar link navigates to /lonestar, Palantir note displays below links
+- SEO metadata: verify new pages export metadata for title/description, check OpenGraph tags in View Source
+- Anchor links: test Header subsection links navigate to #comparison and #advantages without header clipping
+- Run `npm run build` to confirm no TypeScript/build errors
+
+## Open Items
+
+- Lonestar closing CTA text remains "TBD" per plan specification. Awaiting final copy.
+- No dedicated hero images for Palantir or Lonestar pages; both use existing /assets/img/hero.jpg placeholder.
