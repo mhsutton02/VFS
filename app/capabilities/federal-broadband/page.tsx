@@ -1,6 +1,7 @@
 // app/capabilities/federal-broadband/page.tsx
 import { Header } from "../../../components/Header";
 import { Footer } from "../../../components/Footer";
+import { Breadcrumb } from "../../../components/Breadcrumb";
 import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";
@@ -35,6 +36,7 @@ export default function FederalBroadbandPage() {
   return (
     <>
       <Header />
+      <Breadcrumb />
       <main>
         {/* Hero */}
         <section className="vf-section vf-section-hero">

@@ -1,6 +1,7 @@
 // app/contact/page.tsx
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
+import { Breadcrumb } from "../../components/Breadcrumb";
 import { ContactSection } from "../../components/ContactSection";
 import { Metadata } from "next";
 
@@ -27,6 +28,7 @@ export default function ContactPage() {
   return (
     <>
       <Header />
+      <Breadcrumb />
       <main>
         <ContactSection />
       </main>

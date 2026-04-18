@@ -1,158 +1,98 @@
 # Research Summary
 **Date:** 2026-04-18
-**Query:** Scroll-triggered animations, CSS background textures, and section dividers for Next.js 14 App Router
-**Sources:** 5 web search queries
+**Query:** Tier 2 design polish best practices for Next.js 14 App Router sites
+**Sources:** 4 web searches conducted
 
 ## Key Findings
 
-1. **IntersectionObserver must be client-side** — Use `"use client"` wrapper components around elements that need scroll animation. Server components handle initial data/layout; client components wrap individual reveal targets. The `react-intersection-observer` package provides `<InView>` component that triggers callbacks when elements enter viewport.
+1. **Breadcrumbs should auto-generate from route path using `usePathname()`** — The pattern splits pathname into segments and maps them to links. This scales better than manual configuration for sites with 50+ pages. Schema.org BreadcrumbList JSON-LD is mandatory for SEO; Google uses it to display clean breadcrumb trails in search results instead of raw URLs and to determine topical relevance.
 
-2. **CSS-only textures use SVG filters + gradients** — Dot grids: `radial-gradient(circle, #a0aec0 1px, transparent 1px)` with `background-size: 24px 24px`. Noise: inline SVG `<feTurbulence>` filter with `baseFrequency` for granularity. Both render on GPU and weigh <1KB vs 50-200KB images.
+2. **Avoid 100vw for full-bleed sections due to scrollbar width issues** — On all browsers except Firefox, 100vw incorrectly includes the vertical scrollbar width, causing unwanted horizontal scroll. Modern solution: Use CSS Grid with three columns where content stays in middle column, but hero sections span `grid-column: 1 / -1`. Alternative: Container queries with 100cqw (container query width) or 100dvh (dynamic viewport height).
 
-3. **clip-path is now responsive with shape()** — Chrome 135+, Safari 18.4+, Firefox (Feb 2026) support `shape()` function for non-polygon responsive clipping. For waves/curves, use inline SVG at section boundaries with CSS `clip-path: path()` for slants. Avoid animating clip-path (causes mobile jank); animate transforms instead.
+3. **Optimal prose width is 45-75 characters per line, with 66 being ideal** — Use `max-width: 65ch` in CSS for prose containers. The `ch` unit scales with font size automatically, maintaining optimal line length at any text size. WCAG recommends not exceeding 80 characters. Line height should be ~150% of font size, increasing for longer lines to aid reader eye transition.
 
-4. **Only animate transform and opacity** — These properties are GPU-accelerated and don't trigger layout/paint. Use `will-change` sparingly: apply just before animation starts, remove after. Overuse causes GPU memory bloat. Batch DOM reads before writes to avoid layout thrashing (IntersectionObserver helps by batching).
-
-5. **prefers-reduced-motion is mandatory** — Supported in all major browsers (2026). Disable non-essential animations but keep content visible. Pattern: set animation durations to `0s` or use `animation: none` inside `@media (prefers-reduced-motion: reduce)`. Essential animations (loading states) can remain subtle.
+4. **Premium whitespace uses 8px grid system with "internal ≤ external" spacing rule** — Professional teams use multiples of 8: 8, 16, 24, 32, 40, 48px for all spacing decisions. Items inside components stay snug (less padding), components sit apart from each other (more margin). Generous whitespace signals luxury and reduces cognitive load. In 2026, avoid rigid blocks; introduce subtle spacing variations.
 
 ## Code Examples
 
-### Reusable IntersectionObserver Hook (Client Component)
+### Breadcrumb with JSON-LD (Next.js 14 App Router)
 ```tsx
-'use client'
-import { useEffect, useRef, useState } from 'react'
+'use client';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
-export function useScrollReveal(options = {}) {
-  const ref = useRef<HTMLElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
+export default function Breadcrumb() {
+  const pathname = usePathname();
+  const segments = pathname.split('/').filter(Boolean);
 
-  useEffect(() => {
-    if (!ref.current) return
-    if (!('IntersectionObserver' in window)) {
-      setIsVisible(true) // Fallback for old browsers
-      return
-    }
+  const breadcrumbs = segments.map((segment, i) => ({
+    name: segment.replace(/-/g, ' '),
+    path: '/' + segments.slice(0, i + 1).join('/')
+  }));
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-          observer.disconnect() // Reveal once, then cleanup
-        }
-      },
-      { threshold: 0.1, rootMargin: '50px', ...options }
-    )
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": breadcrumbs.map((crumb, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": crumb.name,
+      "item": `${process.env.NEXT_PUBLIC_SITE_URL}${crumb.path}`
+    }))
+  };
 
-    observer.observe(ref.current)
-    return () => observer.disconnect()
-  }, [])
-
-  return { ref, isVisible }
-}
-
-// Usage:
-export function RevealSection({ children }) {
-  const { ref, isVisible } = useScrollReveal()
   return (
-    <section
-      ref={ref}
-      className={isVisible ? 'reveal-active' : 'reveal-pending'}
-    >
-      {children}
-    </section>
-  )
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <nav className="flex gap-2 text-sm text-gray-400">
+        {breadcrumbs.map((crumb, i) => (
+          <span key={crumb.path}>
+            {i > 0 && <span className="mx-2">/</span>}
+            {i === breadcrumbs.length - 1 ? (
+              <span className="text-white">{crumb.name}</span>
+            ) : (
+              <Link href={crumb.path} className="hover:text-white transition">{crumb.name}</Link>
+            )}
+          </span>
+        ))}
+      </nav>
+    </>
+  );
 }
 ```
 
-### CSS Background Textures (Dark Theme)
+### Full-Bleed Hero with CSS Grid
 ```css
-/* Dot grid */
-.bg-dots {
-  background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-  background-size: 24px 24px;
+.layout {
+  display: grid;
+  grid-template-columns: 1fr min(1200px, 100%) 1fr;
 }
 
-/* Subtle noise via SVG */
-.bg-noise {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+.layout > * {
+  grid-column: 2; /* Content stays centered */
 }
 
-/* Grid lines */
-.bg-grid {
-  background-image:
-    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-  background-size: 32px 32px;
-}
-```
-
-### SVG Section Divider (Slant)
-```css
-.section-divider {
-  position: relative;
-}
-.section-divider::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 80px;
-  background: inherit;
-  clip-path: polygon(0 0, 100% 100%, 100% 100%, 0 100%);
-}
-```
-
-### Animation with Accessibility
-```css
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.reveal-pending {
-  opacity: 0;
-}
-
-.reveal-active {
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-
-/* Disable for users who prefer reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .reveal-active {
-    animation: none;
-    opacity: 1; /* Keep content visible */
-  }
+.hero-full-bleed {
+  grid-column: 1 / -1; /* Spans full width */
 }
 ```
 
 ## Recommendations
 
-1. **Architecture**: Create a client component `<ScrollReveal>` wrapper. Server components render page structure; client wrapper handles intersection logic per section.
-2. **Naming**: Use conventional keyframe names: `fadeInUp`, `fadeInDown`, `slideInLeft`, `slideInRight`, `scaleIn`, `blurIn`.
-3. **will-change pattern**: Apply via JS only when element is near viewport (via IntersectionObserver with larger `rootMargin`), remove after animation completes.
-4. **Dividers**: Use `clip-path: polygon()` for slants, inline SVG `<path>` for organic waves/curves. Position SVG absolutely at section boundaries.
-5. **Textures**: Combine multiple gradients (dots + noise) for depth. Use CSS variables for theme switching.
+1. Place breadcrumbs below header, inside max-width container. Use `/` separator for dark themes with hover state transitioning from gray-400 to white. Current page should be white/no link.
+2. For hero sections with Next.js Image, use `fill` mode with `priority` prop, `object-fit: cover`, and `sizes="100vw"` for optimal LCP.
+3. Apply 65ch max-width to all long-form content blocks. Center with `margin: 0 auto`.
+4. Define spacing scale in Tailwind config as multiples of 8. Use larger spacing between sections (48-96px desktop, 32-64px mobile) than within sections (16-32px).
 
 ## Caveats
 
-- **IntersectionObserver polyfill**: Not needed for 2026 browser support, but fallback to `isVisible: true` for graceful degradation.
-- **shape() function**: Only available in Chrome 135+, Safari 18.4+, Firefox Feb 2026+. Use `@supports` or stick with `polygon()` for broader support.
-- **will-change memory**: Each promoted layer consumes GPU memory. Never apply to >10 elements simultaneously or set permanently in CSS.
-- **clip-path animation**: Causes mobile performance issues (layout recalc). Animate container `transform` instead.
-- **SVG filter performance**: `feTurbulence` noise can be GPU-heavy on mobile. Test frame rates; consider disabling on low-end devices.
+- Auto-generated breadcrumbs may produce poor labels from URL slugs; consider maintaining a route-to-label map for important pages.
+- CSS `ch` unit width varies slightly by font; test across font families.
+- Container queries (100cqw) have limited browser support pre-2023; check caniuse.com if supporting older browsers.
+- 8px grid system can feel rigid at small scales; consider 4px increments for tight UI elements.
 
 ## Raw Query Log
-
-- Query 1: "Next.js 14 App Router IntersectionObserver scroll reveal animation patterns server components 2026" — Client component wrappers with `react-intersection-observer`, avoid scrollY in favor of IntersectionObserver API
-- Query 2: "CSS only background textures dot grid noise patterns dark theme gradients 2026" — Radial gradients for dots, SVG feTurbulence for noise, oklch interpolation support in modern browsers
-- Query 3: "CSS clip-path SVG section dividers wave slant curve responsive 2026" — New shape() function in Feb 2026, inline SVG + transform animations for performance
-- Query 4: "CSS animation performance will-change transform GPU acceleration layout thrashing 2026" — Only animate transform/opacity, batch DOM operations, remove will-change after use
-- Query 5: "prefers-reduced-motion CSS accessibility disable animations keep content visible 2026" — Mandatory for accessibility, set animation durations to 0s or animation: none, keep content visible
+- Query 1: "Next.js 14 App Router breadcrumb navigation component patterns schema.org JSON-LD 2026" — Found usePathname() pattern, JSON-LD mandatory for SEO, placement below header
+- Query 2: "CSS full-bleed hero sections 100vw negative margin constrained layout 2026" — 100vw causes horizontal scroll; use CSS Grid with grid-column: 1/-1 or container queries
+- Query 3: "optimal prose width characters per line readability typography ch units 2026" — 45-75 CPL optimal, 66 ideal; use 65ch max-width; line-height 150%
+- Query 4: "premium whitespace vertical rhythm section padding professional website design 2026" — 8px grid system standard; internal ≤ external spacing rule; whitespace signals luxury

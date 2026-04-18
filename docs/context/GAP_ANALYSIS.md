@@ -4,25 +4,32 @@
 **Verdict:** NEEDS_REVISION
 
 ## Ambiguities
-- [Section 4, page.tsx modifications] — Plan refers to wrapping "What We Do" and "Who We Serve" as if they have `<section>` tags at lines 31 and 43, but actual codebase shows `<CarouselSection>` component calls at lines 22-44 which render their own section tags internally — Plan must clarify whether to wrap the component call or modify component internals
-- [Section 4, About section] — Plan says "Check if AboutSection component has its own section wrapper. If it does, wrap the component call only" but then provides code that adds a new `<section>` wrapper around `<AboutSection />` — AboutSection already has section tag at line 9, creating duplicate nesting
-- [Section 4, Carousel/Giving Back/Contact sections] — Plan shows wrapping component calls in ScrollReveal but does not address that these components already render their own section tags with background classes — unclear if texture classes should be added to component props or if sections need refactoring
-- [Section 5-6, capability pages] — Plan references "Intro", "Capabilities", "Comparison", "Advantages" sections but palantir page has "Intro", "Comparison", "Advantages" only (no "Capabilities" section) — Plan must specify exact section identifiers or line ranges
+
+- [Step 6, line 295] — plan says replace lines 33-49 in leadership/page.tsx but actual file shows hero section ends at line 49, content is at lines 33-48, and uses `.vf-kicker` not `.vf-hero-badge` — architect must verify exact replacement range and whether to preserve `.vf-kicker` or switch to `.vf-hero-badge`
+- [Step 7, line 322] — plan says change line 69 but does not specify find-and-replace string for `.vf-section` padding rule — architect must provide exact old_string to avoid replacing wrong occurrence
+- [Step 8, lines 340-357] — plan says change lines 277 and 284 but does not specify if these are two separate Edit calls or one call per rule — architect must clarify execution approach
+- [Step 3g, line 224] — plan adds breadcrumb to contact page but does not specify where in file structure (after Header at what line) — architect must provide insertion point or confirm "after Header" is sufficient instruction
 
 ## Missing Context
-- No specification for handling components that already render section tags with background classes when adding texture modifiers — CarouselSection, AboutSection, GivingBackSection, ContactSection all have hardcoded `vf-bg-*` classes
-- No specification for SectionDivider color values for sections beyond "What We Do" (wave, #0a0a0a) and "Who We Serve" (slant, #0a0a0a) — remaining sections lack color guidance
-- No specification for which animation variant to use for each capability page section beyond generic labels
+
+- [Step 3] — plan lists 7 pages for breadcrumb integration but VAULT.md shows palantir page exists at app/capabilities/palantir/page.tsx and lonestar page exists at app/lonestar/page.tsx — both missing from breadcrumb integration plan
+- [Step 1, line 33] — breadcrumb label map missing entries for 'palantir' and 'lonestar' routes
+- [Step 4, line 258] — plan references `partners.title` and `partners.intro` but does not cite that these exist in partners.json (verified they do exist, but plan should cite source)
+- [Step 5, line 288] — plan references `content.headline` and `content.intro` but does not cite that these exist in experience.json (verified they do exist at lines 4-5, but plan should cite source)
 
 ## Scope Risks
-- Adding texture classes to existing components may require prop modifications to CarouselSection, AboutSection, GivingBackSection, ContactSection to accept optional className props — not currently in plan
-- SectionDivider positioning at `bottom: 0` with `position: absolute` requires parent sections to have `position: relative` — `.vf-section` already has this at line 71, but plan does not verify this or call it out as a prerequisite check
-- Plan shows SectionDivider placed via className `-top-[60px]` but does not specify whether these Tailwind arbitrary values are available or if negative margins should be added to globals.css
+
+- [Step 7-10] — plan provides specific line numbers for globals.css edits based on pre-Tier-1 file state but does not acknowledge that Tier 1 may have inserted CSS above these targets causing line drift — if line numbers are wrong, coder will need to search by content string which is not provided for all targets
+- [Step 6, line 304] — plan specifies `leadership-hero.jpg` image path (verified it exists) but does not specify fallback behavior if image missing or whether to test image load before deployment
+- [Step 2, line 96] — breadcrumb CSS insertion point "after line 350 (after .vf-body definition)" but .vf-body ends at line 351 — if other CSS was inserted between line 350-351 during Tier 1, insertion point is ambiguous
 
 ## Assumption Flags
-- Assumes import path alias `@/` is configured — actual page.tsx uses relative imports like `"../components/Header"`
-- Assumes wrapping server components in client component wrapper preserves server rendering benefits without hydration mismatch — not verified for components with existing client-side logic (CarouselSection uses Carousel which may have client state)
-- Assumes `.vf-texture-*::before` pseudo-elements do not conflict with existing `.vf-hero-bg::after` usage (line 96-105) — plan does not verify other components for pseudo-element conflicts
+
+- [Step 4-6] — plan assumes all hero sections should use `.vf-hero-badge` but leadership page currently uses `.vf-kicker` for "Meet the Team" — coder will be forced to decide whether to standardize or preserve existing pattern
+- [Step 3] — plan assumes all pages have Header as direct child of fragment and main as next sibling, but does not verify this structure for federal-broadband, program-management, careers, and contact pages
+- [Step 7, line 330] — plan says change tablet padding at line 986 from 64px to 80px but does not verify current value is actually 64px (verified it is, but plan should not assume)
+- [Step 10, line 390] — plan changes footer CTA padding to 80px but does not specify whether this applies to desktop only or requires responsive overrides for mobile
 
 ## Summary
-Plan has structural misalignment with actual component architecture. The codebase uses component wrappers that already render section tags with background classes, but the plan treats sections as if they are inline HTML blocks. Import paths use relative syntax not `@/` aliases. Section identifiers on capability pages do not match plan labels. Verdict is NEEDS_REVISION to resolve component wrapping strategy and verify actual section structure.
+
+Plan is structurally sound but contains multiple line number ambiguities due to not accounting for Tier 1 CSS insertions, omits two capability pages (palantir, lonestar) from breadcrumb integration, and includes several assumptions about file structure that should be verified. The leadership page hero replacement instruction is unclear about whether to preserve `.vf-kicker` vs. switch to `.vf-hero-badge`. Needs targeted revision to provide exact find-and-replace strings for CSS edits and clarify hero badge naming convention.

@@ -1,7 +1,9 @@
 // app/experience/page.tsx
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
+import { Breadcrumb } from "../../components/Breadcrumb";
 import Link from "next/link";
+import Image from "next/image";
 import { Metadata } from "next";
 import content from "../../content/experience.json";
 
@@ -30,12 +32,24 @@ export default function ExperiencePage() {
   return (
     <>
       <Header />
+      <Breadcrumb />
       <main>
-        {/* Page Intro */}
-        <section className="vf-section vf-bg-default" style={{ paddingBottom: 0 }}>
-          <div className="vf-container" style={{ textAlign: "center" }}>
+        {/* Hero */}
+        <section className="vf-section vf-section-hero">
+          <div className="vf-hero-bg">
+            <Image
+              src="/assets/img/hero.jpg"
+              alt="ValorForge Solutions experience"
+              fill
+              priority
+              quality={75}
+              style={{ objectFit: "cover" }}
+            />
+          </div>
+          <div className="vf-hero-content">
+            <div className="vf-hero-badge">Mission-Driven Delivery</div>
             <h1 className="vf-h1">{content.headline}</h1>
-            <p className="vf-lead" style={{ margin: "0 auto" }}>{content.intro}</p>
+            <p className="vf-lead">{content.intro}</p>
           </div>
         </section>
 

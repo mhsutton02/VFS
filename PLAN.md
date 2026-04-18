@@ -1,856 +1,655 @@
-# Plan: RANGR Design Morph — Tier 1 (REVISED)
+# Plan: Tier 2 RANGR Design Morph
 **Date:** 2026-04-18
 **Status:** READY FOR IMPLEMENTATION
 
 ## Objective
-Add scroll-triggered animations, background textures, and section dividers to the VFS website to create depth and visual interest while maintaining performance and accessibility. This is Tier 1 of a multi-phase design enhancement.
+Complete Tier 2 of the RANGR-inspired design system transformation. Apply premium whitespace treatments, establish prose width constraints for optimal readability, add breadcrumb navigation across all subpages, and ensure full-bleed hero consistency across Partners, Experience, and Leadership pages.
 
 ## Context Summary
-- **From Review:** Codebase is ready. All sections are server components except Header and Carousel. `prefers-reduced-motion` rule exists at globals.css:1065. Background classes (`.vf-bg-*`) use solid colors/gradients at lines 132-150. Section flow in app/page.tsx lines 20-61 is clean. Recommend creating client wrapper component for animations, adding texture modifiers (not replacements), and using consistent 400-600ms animation durations.
-- **From Research:** IntersectionObserver must be client-side. Use `threshold: 0.1`, `rootMargin: '50px'` for reveal timing. CSS-only textures via `radial-gradient` (dots), `linear-gradient` (grid), and inline SVG `feTurbulence` (noise). Only animate `transform` and `opacity` for GPU acceleration. Use `clip-path: polygon()` for dividers. Must respect `prefers-reduced-motion` with `animation: none` fallback.
-- **From Gap Analysis:** Component wrappers (CarouselSection, AboutSection, GivingBackSection, ContactSection) already render their own `<section>` tags with background classes. ScrollReveal wraps the component call, NOT the internal section. Import paths use relative imports, NOT `@/` aliases. Palantir page has 4 content sections: Intro, Comparison Table, Advantages, Closing Statement (no "Capabilities" section). SectionDivider uses new CSS class `.vf-divider-top` positioned at TOP of each section, not bottom of previous section.
-- **Constraints:** Do NOT convert server components to client components. Do NOT modify existing CSS classes. Keep existing `.vf-bg-*` classes intact — textures are additive. No external dependencies. Hero sections do NOT get scroll reveal (immediately visible). All animations disabled when `prefers-reduced-motion: reduce`.
+- **From Review:** Partners page lacks full-bleed hero background. Experience page has NO hero section. Leadership page hero uses `.vf-container` + inline style instead of `.vf-hero-content`. Section padding at 80px desktop feels cramped. Typography margins are tight. Grid gaps at 42px need increase to 56px. Prose width inconsistent with inline overrides.
+- **From Research:** Breadcrumbs should auto-generate from `usePathname()` with schema.org JSON-LD. Optimal prose width is 65-75ch (66 ideal). Premium whitespace uses 8px grid system with generous section padding (100-120px desktop). Full-bleed heroes should avoid 100vw issues.
+- **Constraints:** Next.js 14 App Router, TypeScript, vf-* CSS naming convention. No @/ aliases (use relative imports). Maintain existing hero pattern from HeroSection.tsx. Client components only where necessary (breadcrumb). All pages import Header/Footer directly (no shared layout).
 
 ## Implementation Steps
 
-### 1. Create `C:/Users/mhsut/DevProjects/VFSsite/components/ScrollReveal.tsx`
-Client component that wraps children and applies scroll-triggered animations using IntersectionObserver.
+### 1. Create Breadcrumb Component
+**File:** `C:/Users/mhsut/DevProjects/VFSsite/components/Breadcrumb.tsx` — CREATE new client component with auto-generation from pathname
 
-**Implementation:**
-```typescript
-'use client'
+**Code:**
+```tsx
+'use client';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
-import { useEffect, useRef, useState, ReactNode } from 'react'
+export function Breadcrumb() {
+  const pathname = usePathname();
 
-interface ScrollRevealProps {
-  children: ReactNode
-  animation?: 'vf-fadeInUp' | 'vf-fadeInLeft' | 'vf-fadeInRight' | 'vf-scaleIn'
-  delay?: number
-  threshold?: number
-  className?: string
-}
+  // Don't render on homepage
+  if (pathname === '/') return null;
 
-export default function ScrollReveal({
-  children,
-  animation = 'vf-fadeInUp',
-  delay = 0,
-  threshold = 0.15,
-  className = ''
-}: ScrollRevealProps) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
+  const segments = pathname.split('/').filter(Boolean);
 
-  useEffect(() => {
-    if (!ref.current) return
+  // Label map for clean display names
+  const labelMap: Record<string, string> = {
+    'capabilities': 'Capabilities',
+    'federal-broadband': 'Federal Broadband',
+    'program-management': 'Program Management',
+    'palantir': 'Palantir Foundry & AIP',
+    'lonestar': 'Lonestar',
+    'leadership': 'Leadership',
+    'partners': 'Partners',
+    'careers': 'Careers',
+    'experience': 'Experience',
+    'contact': 'Contact',
+  };
 
-    // Fallback for browsers without IntersectionObserver
-    if (!('IntersectionObserver' in window)) {
-      setIsVisible(true)
-      return
-    }
+  const breadcrumbs = [
+    { name: 'Home', path: '/' },
+    ...segments.map((segment, i) => ({
+      name: labelMap[segment] || segment.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
+      path: '/' + segments.slice(0, i + 1).join('/')
+    }))
+  ];
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-          observer.disconnect() // Reveal once, cleanup
-        }
-      },
-      {
-        threshold,
-        rootMargin: '0px 0px -50px 0px'
-      }
-    )
-
-    observer.observe(ref.current)
-    return () => observer.disconnect()
-  }, [threshold])
+  // Schema.org BreadcrumbList JSON-LD
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": breadcrumbs.map((crumb, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": crumb.name,
+      "item": `https://valorforgesolutions.com${crumb.path}`
+    }))
+  };
 
   return (
-    <div
-      ref={ref}
-      className={`vf-reveal ${isVisible ? `vf-reveal-visible ${animation}` : ''} ${className}`}
-      style={{ animationDelay: `${delay}ms` }}
-    >
-      {children}
-    </div>
-  )
-}
-```
-
-**Key details:**
-- Client component (`'use client'`)
-- Uses IntersectionObserver with `threshold: 0.15` and `rootMargin: '0px 0px -50px 0px'`
-- Disconnects observer after first reveal (performance)
-- Applies `.vf-reveal` (pending state) and `.vf-reveal-visible` (animated state) classes
-- Supports optional delay prop for staggered animations
-- Fallback to `isVisible: true` for old browsers
-
----
-
-### 2. Create `C:/Users/mhsut/DevProjects/VFSsite/components/SectionDivider.tsx`
-Server component that renders decorative SVG dividers between sections.
-
-**Implementation:**
-```typescript
-interface SectionDividerProps {
-  variant: 'wave' | 'slant' | 'curve'
-  flip?: boolean
-  color?: string
-  className?: string
-}
-
-export default function SectionDivider({
-  variant,
-  flip = false,
-  color = 'currentColor',
-  className = ''
-}: SectionDividerProps) {
-  const svgPaths = {
-    wave: 'M0,32 C160,80 320,0 480,48 C640,96 800,16 960,64 L960,0 L0,0 Z',
-    slant: 'M0,0 L960,64 L960,0 Z',
-    curve: 'M0,0 C320,80 640,80 960,0 L960,0 L0,0 Z'
-  }
-
-  return (
-    <div className={`vf-divider-top ${className}`} aria-hidden="true">
-      <svg
-        viewBox="0 0 960 64"
-        preserveAspectRatio="none"
-        xmlns="http://www.w3.org/2000/svg"
-        style={{
-          transform: flip ? 'scaleY(-1)' : 'none'
-        }}
-      >
-        <path d={svgPaths[variant]} fill={color} />
-      </svg>
-    </div>
-  )
-}
-```
-
-**Key details:**
-- Server component (no 'use client')
-- Three variants: wave (organic curves), slant (diagonal), curve (smooth arc)
-- `flip` prop mirrors the divider vertically
-- `color` prop defaults to `currentColor` (inherits from parent)
-- Uses `preserveAspectRatio="none"` for full-width scaling
-- Marked `aria-hidden="true"` (decorative only)
-- Uses `.vf-divider-top` class for positioning at TOP of section
-
----
-
-### 3. Modify `C:/Users/mhsut/DevProjects/VFSsite/app/globals.css`
-
-**Add @keyframes animations after line 1063 (before prefers-reduced-motion block):**
-
-```css
-/* Scroll reveal animations */
-@keyframes vf-fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes vf-fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes vf-fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes vf-scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Reveal states */
-.vf-reveal {
-  opacity: 0;
-}
-
-.vf-reveal-visible {
-  opacity: 1;
-}
-
-.vf-reveal-visible.vf-fadeInUp {
-  animation: vf-fadeInUp 600ms ease-out forwards;
-}
-
-.vf-reveal-visible.vf-fadeInLeft {
-  animation: vf-fadeInLeft 500ms ease-out forwards;
-}
-
-.vf-reveal-visible.vf-fadeInRight {
-  animation: vf-fadeInRight 500ms ease-out forwards;
-}
-
-.vf-reveal-visible.vf-scaleIn {
-  animation: vf-scaleIn 550ms ease-out forwards;
-}
-```
-
-**Add background texture classes after line 150 (after existing .vf-bg-* classes):**
-
-```css
-/* Background textures (composable with .vf-bg-* classes) */
-.vf-texture-dots {
-  position: relative;
-}
-
-.vf-texture-dots::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.06) 1.5px, transparent 1.5px);
-  background-size: 24px 24px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.vf-texture-grid {
-  position: relative;
-}
-
-.vf-texture-grid::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 32px 32px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.vf-texture-noise {
-  position: relative;
-}
-
-.vf-texture-noise::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Ensure child content sits above textures */
-.vf-texture-dots > *,
-.vf-texture-grid > *,
-.vf-texture-noise > * {
-  position: relative;
-  z-index: 1;
-}
-```
-
-**Add divider positioning after line 1063 (with reveal animations):**
-
-```css
-/* Section dividers */
-.vf-divider-top {
-  position: absolute;
-  top: -1px;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  pointer-events: none;
-  z-index: 5;
-}
-
-.vf-divider-top svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-@media (min-width: 760px) {
-  .vf-divider-top {
-    height: 80px;
-  }
-}
-```
-
-**Update the prefers-reduced-motion block at line 1065:**
-
-Find:
-```css
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
-}
-```
-
-Replace with:
-```css
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
-
-  /* Ensure reveal content is visible */
-  .vf-reveal {
-    opacity: 1 !important;
-  }
-}
-```
-
----
-
-### 4. Modify `C:/Users/mhsut/DevProjects/VFSsite/components/CarouselSection.tsx`
-
-**Add textureClass prop to component interface (line 5-15):**
-
-Find:
-```typescript
-type CarouselSectionProps = {
-  id: string;
-  altBackground?: boolean;
-  reverse?: boolean;
-  imageSrc: string;
-  imageAlt: string;
-  title: string;
-  intro: string;
-  ctaText: string;
-  items: CarouselItem[];
-};
-```
-
-Replace with:
-```typescript
-type CarouselSectionProps = {
-  id: string;
-  altBackground?: boolean;
-  reverse?: boolean;
-  imageSrc: string;
-  imageAlt: string;
-  title: string;
-  intro: string;
-  ctaText: string;
-  items: CarouselItem[];
-  textureClass?: string;
-};
-```
-
-**Add textureClass to function parameters and className (line 17-33):**
-
-Find:
-```typescript
-export function CarouselSection({
-  id,
-  altBackground,
-  reverse,
-  imageSrc,
-  imageAlt,
-  title,
-  intro,
-  ctaText,
-  items
-}: CarouselSectionProps) {
-  const sectionBgClass = altBackground
-    ? "vf-section vf-bg-blue-accent"
-    : "vf-section vf-bg-gold-accent";
-
-  return (
-    <section id={id} className={sectionBgClass}>
-```
-
-Replace with:
-```typescript
-export function CarouselSection({
-  id,
-  altBackground,
-  reverse,
-  imageSrc,
-  imageAlt,
-  title,
-  intro,
-  ctaText,
-  items,
-  textureClass
-}: CarouselSectionProps) {
-  const sectionBgClass = altBackground
-    ? "vf-section vf-bg-blue-accent"
-    : "vf-section vf-bg-gold-accent";
-
-  return (
-    <section id={id} className={`${sectionBgClass}${textureClass ? ` ${textureClass}` : ''}`}>
-```
-
----
-
-### 5. Modify `C:/Users/mhsut/DevProjects/VFSsite/components/AboutSection.tsx`
-
-**Add texture class to section className (line 9-11):**
-
-Find:
-```typescript
-    <section
-      id="about"
-      className="vf-section vf-bg-blue-accent"
-    >
-```
-
-Replace with:
-```typescript
-    <section
-      id="about"
-      className="vf-section vf-bg-blue-accent vf-texture-noise"
-    >
-```
-
----
-
-### 6. Modify `C:/Users/mhsut/DevProjects/VFSsite/components/GivingBackSection.tsx`
-
-**Add texture class to section className (line 7-9):**
-
-Find:
-```typescript
-    <section
-      id="giving-back"
-      className="vf-section vf-bg-gold-accent"
-    >
-```
-
-Replace with:
-```typescript
-    <section
-      id="giving-back"
-      className="vf-section vf-bg-gold-accent vf-texture-grid"
-    >
-```
-
----
-
-### 7. Modify `C:/Users/mhsut/DevProjects/VFSsite/components/ContactSection.tsx`
-
-**Add texture class to section className (line 7):**
-
-Find:
-```typescript
-    <section id="contact" className="vf-section vf-section--contact vf-bg-default">
-```
-
-Replace with:
-```typescript
-    <section id="contact" className="vf-section vf-section--contact vf-bg-default vf-texture-dots">
-```
-
----
-
-### 8. Modify `C:/Users/mhsut/DevProjects/VFSsite/app/page.tsx`
-
-**Import ScrollReveal and SectionDivider at top (line 1-9):**
-
-Add after existing imports:
-```typescript
-import ScrollReveal from "../components/ScrollReveal"
-import SectionDivider from "../components/SectionDivider"
-```
-
-**Wrap What We Do CarouselSection (line 22-32):**
-
-Find:
-```typescript
-        <CarouselSection
-          id="what-we-do"
-          imageSrc="/assets/img/whatwedo.jpg"
-          imageAlt={whatWeDo.imageAlt}
-          title={whatWeDo.title}
-          intro={whatWeDo.intro}
-          ctaText={whatWeDo.bottomCta}
-          items={whatWeDo.cards}
-          reverse={false}
-          altBackground={false}
-        />
-```
-
-Replace with:
-```typescript
-        <ScrollReveal animation="vf-fadeInUp">
-          <CarouselSection
-            id="what-we-do"
-            imageSrc="/assets/img/whatwedo.jpg"
-            imageAlt={whatWeDo.imageAlt}
-            title={whatWeDo.title}
-            intro={whatWeDo.intro}
-            ctaText={whatWeDo.bottomCta}
-            items={whatWeDo.cards}
-            reverse={false}
-            altBackground={false}
-            textureClass="vf-texture-dots"
-          />
-        </ScrollReveal>
-```
-
-**Wrap Who We Serve CarouselSection (line 34-44):**
-
-Find:
-```typescript
-        <CarouselSection
-          id="who-we-serve"
-          imageSrc="/assets/img/whoweserve.jpg"
-          imageAlt={whoWeServe.imageAlt}
-          title={whoWeServe.title}
-          intro={whoWeServe.intro}
-          ctaText={whoWeServe.bottomCta}
-          items={whoWeServe.cards}
-          reverse={true}
-          altBackground={true}
-        />
-```
-
-Replace with:
-```typescript
-        <ScrollReveal animation="vf-fadeInLeft">
-          <CarouselSection
-            id="who-we-serve"
-            imageSrc="/assets/img/whoweserve.jpg"
-            imageAlt={whoWeServe.imageAlt}
-            title={whoWeServe.title}
-            intro={whoWeServe.intro}
-            ctaText={whoWeServe.bottomCta}
-            items={whoWeServe.cards}
-            reverse={true}
-            altBackground={true}
-            textureClass="vf-texture-grid"
-          />
-        </ScrollReveal>
-```
-
-**Wrap AI Alignment CarouselSection (line 46-56):**
-
-Find:
-```typescript
-        <CarouselSection
-          id="ai-alignment"
-          imageSrc="/assets/img/aialigned.jpg"
-          imageAlt={aiAlignment.imageAlt}
-          title={aiAlignment.title}
-          intro={aiAlignment.intro}
-          ctaText={aiAlignment.bottomCta}
-          items={aiAlignment.cards}
-          reverse={false}
-          altBackground={false}
-        />
-```
-
-Replace with:
-```typescript
-        <ScrollReveal animation="vf-scaleIn">
-          <CarouselSection
-            id="ai-alignment"
-            imageSrc="/assets/img/aialigned.jpg"
-            imageAlt={aiAlignment.imageAlt}
-            title={aiAlignment.title}
-            intro={aiAlignment.intro}
-            ctaText={aiAlignment.bottomCta}
-            items={aiAlignment.cards}
-            reverse={false}
-            altBackground={false}
-            textureClass="vf-texture-dots"
-          />
-        </ScrollReveal>
-```
-
-**Wrap GivingBackSection (line 59):**
-
-Find:
-```typescript
-        <GivingBackSection />    {/* Now before About */}
-```
-
-Replace with:
-```typescript
-        <ScrollReveal animation="vf-fadeInRight">
-          <GivingBackSection />
-        </ScrollReveal>
-```
-
-**Wrap AboutSection (line 60):**
-
-Find:
-```typescript
-        <AboutSection />
-```
-
-Replace with:
-```typescript
-        <ScrollReveal animation="vf-fadeInUp">
-          <AboutSection />
-        </ScrollReveal>
-```
-
-**Wrap ContactSection (line 61):**
-
-Find:
-```typescript
-        <ContactSection />
-```
-
-Replace with:
-```typescript
-        <ScrollReveal animation="vf-fadeInUp">
-          <ContactSection />
-        </ScrollReveal>
-```
-
-**Add SectionDividers between sections:**
-
-Between Who We Serve and AI Alignment (after line 44 in modified version), add:
-```typescript
-        <SectionDivider variant="slant" color="#0a0a0a" />
-```
-
-Between GivingBackSection and AboutSection (after line 61 in modified version), add:
-```typescript
-        <SectionDivider variant="curve" color="#0a0a0a" />
-```
-
-Between AboutSection and ContactSection (after line 64 in modified version), add:
-```typescript
-        <SectionDivider variant="wave" color="#0a0a0a" />
-```
-
-**Note:** SectionDividers should be placed BETWEEN the `</ScrollReveal>` closing tag of one section and the `<ScrollReveal>` opening tag of the next section. This ensures the divider is positioned at the TOP of the next section via `.vf-divider-top` CSS class.
-
----
-
-### 9. Modify `C:/Users/mhsut/DevProjects/VFSsite/app/capabilities/palantir/page.tsx`
-
-**Import ScrollReveal at top (line 1-8):**
-
-Add after existing imports:
-```typescript
-import ScrollReveal from "../../../components/ScrollReveal"
-```
-
-**Wrap Intro section (line 52-59):**
-
-Find:
-```typescript
-        {/* Intro */}
-        <section className="vf-section vf-bg-default vf-content-section">
-          <div className="vf-container">
-            {content.intro.map((paragraph, i) => (
-              <p key={i} className="vf-lead" style={{ textAlign: "center", fontSize: "18px", maxWidth: "52ch", margin: "0 auto 20px" }}>{paragraph}</p>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <nav className="vf-breadcrumb" aria-label="Breadcrumb">
+        <div className="vf-container">
+          <ol className="vf-breadcrumb-list">
+            {breadcrumbs.map((crumb, i) => (
+              <li key={crumb.path} className="vf-breadcrumb-item">
+                {i < breadcrumbs.length - 1 ? (
+                  <>
+                    <Link href={crumb.path} className="vf-breadcrumb-link">
+                      {crumb.name}
+                    </Link>
+                    <span className="vf-breadcrumb-separator">/</span>
+                  </>
+                ) : (
+                  <span className="vf-breadcrumb-current">{crumb.name}</span>
+                )}
+              </li>
             ))}
+          </ol>
+        </div>
+      </nav>
+    </>
+  );
+}
+```
+
+### 2. Add Breadcrumb CSS to globals.css
+**File:** `C:/Users/mhsut/DevProjects/VFSsite/app/globals.css` — INSERT after `.vf-body` block definition (after line 351)
+
+**Exact insertion point — insert AFTER this block:**
+```css
+.vf-body {
+  color: var(--muted);
+  font-size: 16px;
+  margin: 0 0 16px;
+  white-space: pre-wrap;
+  max-width: 65ch;
+}
+```
+
+**Code to insert:**
+```css
+
+/* Breadcrumb Navigation */
+.vf-breadcrumb {
+  background: var(--bg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 16px 0;
+}
+
+.vf-breadcrumb-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+.vf-breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vf-breadcrumb-link {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.vf-breadcrumb-link:hover {
+  color: var(--text);
+}
+
+.vf-breadcrumb-separator {
+  color: rgba(255, 255, 255, 0.2);
+  user-select: none;
+}
+
+.vf-breadcrumb-current {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* Prose Width Utility */
+.vf-prose {
+  max-width: 800px;
+  margin: 0 auto;
+}
+```
+
+### 3. Add Breadcrumb to All Subpages
+**Files to modify:** Add `<Breadcrumb />` component between `<Header />` and `<main>` on each subpage
+
+#### 3a. Partners Page
+**File:** `C:/Users/mhsut/DevProjects/VFSsite/app/partners/page.tsx`
+
+Add import after existing imports:
+```tsx
+import { Breadcrumb } from "../../components/Breadcrumb";
+```
+
+Add component after `<Header />`:
+```tsx
+      <Breadcrumb />
+```
+
+#### 3b. Experience Page
+**File:** `C:/Users/mhsut/DevProjects/VFSsite/app/experience/page.tsx`
+
+Add import after existing imports:
+```tsx
+import { Breadcrumb } from "../../components/Breadcrumb";
+```
+
+Add component after `<Header />`:
+```tsx
+      <Breadcrumb />
+```
+
+#### 3c. Leadership Page
+**File:** `C:/Users/mhsut/DevProjects/VFSsite/app/leadership/page.tsx`
+
+Add import after line 5:
+```tsx
+import { Breadcrumb } from "../../components/Breadcrumb";
+```
+
+Add component after `<Header />` on line 30:
+```tsx
+      <Breadcrumb />
+```
+
+#### 3d. Federal Broadband Page
+**File:** `C:/Users/mhsut/DevProjects/VFSsite/app/capabilities/federal-broadband/page.tsx`
+
+Add import at top:
+```tsx
+import { Breadcrumb } from "../../../components/Breadcrumb";
+```
+
+Add component after `<Header />`:
+```tsx
+      <Breadcrumb />
+```
+
+#### 3e. Program Management Page
+**File:** `C:/Users/mhsut/DevProjects/VFSsite/app/capabilities/program-management/page.tsx`
+
+Add import at top:
+```tsx
+import { Breadcrumb } from "../../../components/Breadcrumb";
+```
+
+Add component after `<Header />`:
+```tsx
+      <Breadcrumb />
+```
+
+#### 3f. Palantir Page
+**File:** `C:/Users/mhsut/DevProjects/VFSsite/app/capabilities/palantir/page.tsx`
+
+Add import at line 8 (after ScrollReveal import):
+```tsx
+import { Breadcrumb } from "../../../components/Breadcrumb";
+```
+
+Add component after `<Header />` on line 32:
+```tsx
+      <Breadcrumb />
+```
+
+#### 3g. Lonestar Page
+**File:** `C:/Users/mhsut/DevProjects/VFSsite/app/lonestar/page.tsx`
+
+Add import at line 8 (after ScrollReveal import):
+```tsx
+import { Breadcrumb } from "../../components/Breadcrumb";
+```
+
+Add component after `<Header />` on line 32:
+```tsx
+      <Breadcrumb />
+```
+
+#### 3h. Careers Page
+**File:** `C:/Users/mhsut/DevProjects/VFSsite/app/careers/page.tsx`
+
+Add import at top:
+```tsx
+import { Breadcrumb } from "../../components/Breadcrumb";
+```
+
+Add component after `<Header />`:
+```tsx
+      <Breadcrumb />
+```
+
+#### 3i. Contact Page
+**File:** `C:/Users/mhsut/DevProjects/VFSsite/app/contact/page.tsx`
+
+Add import at top:
+```tsx
+import { Breadcrumb } from "../../components/Breadcrumb";
+```
+
+Add component after `<Header />`:
+```tsx
+      <Breadcrumb />
+```
+
+### 4. Fix Partners Page Hero — Add Full-Bleed Background
+**File:** `C:/Users/mhsut/DevProjects/VFSsite/app/partners/page.tsx`
+
+Add Next.js Image import at top (if not already present):
+```tsx
+import Image from "next/image";
+```
+
+Replace entire hero section with full-bleed pattern using `.vf-hero-bg` and `.vf-hero-content`. The hero should use `.vf-hero-badge` for consistency with other capability pages.
+
+### 5. Add Experience Page Hero — Full-Bleed Section
+**File:** `C:/Users/mhsut/DevProjects/VFSsite/app/experience/page.tsx`
+
+Add Image import at top (if not already present):
+```tsx
+import Image from "next/image";
+```
+
+Replace the existing "Page Intro" section with full-bleed hero section using `.vf-hero-badge` with text "Mission-Driven Delivery", pulling headline and intro from `content.headline` and `content.intro` (sourced from experience.json lines 4-5).
+
+### 6. Fix Leadership Page Hero — Standardize to `.vf-hero-badge` and `.vf-hero-content`
+**File:** `C:/Users/mhsut/DevProjects/VFSsite/app/leadership/page.tsx`
+
+Replace hero section (lines 33-49) with standardized pattern. Current hero uses `.vf-kicker` for "Meet the Team" — switch to `.vf-hero-badge` for consistency with Palantir, Lonestar, and other capability pages.
+
+**Find this exact block (lines 33-49):**
+```tsx
+        {/* Hero Section */}
+        <section className="vf-section vf-section-hero">
+          <div className="vf-hero-bg">
+            <Image
+              src="/assets/img/leadership-hero.jpg"
+              alt="Washington D.C. — Capitol Building"
+              fill
+              priority
+              quality={75}
+              style={{ objectFit: "cover" }}
+            />
+          </div>
+          <div className="vf-container" style={{ position: "relative", zIndex: 2 }}>
+            <div className="vf-kicker">Meet the Team</div>
+            <h1 className="vf-h1">{leadership.title}</h1>
+            <p className="vf-lead">{leadership.intro}</p>
           </div>
         </section>
 ```
 
-Replace with:
-```typescript
-        {/* Intro */}
-        <ScrollReveal animation="vf-fadeInUp">
-          <section className="vf-section vf-bg-default vf-content-section vf-texture-dots">
-            <div className="vf-container">
-              {content.intro.map((paragraph, i) => (
-                <p key={i} className="vf-lead" style={{ textAlign: "center", fontSize: "18px", maxWidth: "52ch", margin: "0 auto 20px" }}>{paragraph}</p>
-              ))}
-            </div>
-          </section>
-        </ScrollReveal>
+**Replace with:**
+```tsx
+        {/* Hero Section */}
+        <section className="vf-section vf-section-hero">
+          <div className="vf-hero-bg">
+            <Image
+              src="/assets/img/leadership-hero.jpg"
+              alt="Washington D.C. — Capitol Building"
+              fill
+              priority
+              quality={75}
+              style={{ objectFit: "cover" }}
+            />
+          </div>
+          <div className="vf-hero-content">
+            <div className="vf-hero-badge">Meet the Team</div>
+            <h1 className="vf-h1">{leadership.title}</h1>
+            <p className="vf-lead">{leadership.intro}</p>
+          </div>
+        </section>
 ```
 
-**Wrap Comparison Table section (line 61-86):**
+### 7. Increase Section Padding — Desktop
+**File:** `C:/Users/mhsut/DevProjects/VFSsite/app/globals.css`
 
-Find:
-```typescript
-        {/* Comparison Table */}
-        <section id="comparison" className="vf-section vf-bg-blue-accent vf-content-section">
+**Find:**
+```css
+.vf-section {
+  padding: 80px 0;
+  position: relative;
+}
 ```
 
-Replace with:
-```typescript
-        {/* Comparison Table */}
-        <ScrollReveal animation="vf-scaleIn">
-          <section id="comparison" className="vf-section vf-bg-blue-accent vf-content-section vf-texture-grid">
+**Replace with:**
+```css
+.vf-section {
+  padding: 100px 0;
+  position: relative;
+}
 ```
 
-And add closing `</ScrollReveal>` after the section closing tag (line 86).
+### 8. Increase Section Padding — Tablet
+**File:** `C:/Users/mhsut/DevProjects/VFSsite/app/globals.css`
 
-**Wrap Advantages section (line 88-102):**
+Inside the `@media (max-width: 980px)` block, find:
 
-Find:
-```typescript
-        {/* Advantages */}
-        <section id="advantages" className="vf-section vf-bg-gold-accent vf-content-section">
+**Find:**
+```css
+  .vf-section {
+    padding: 64px 0;
+  }
 ```
 
-Replace with:
-```typescript
-        {/* Advantages */}
-        <ScrollReveal animation="vf-fadeInRight">
-          <section id="advantages" className="vf-section vf-bg-gold-accent vf-content-section">
+**Replace with:**
+```css
+  .vf-section {
+    padding: 80px 0;
+  }
 ```
 
-And add closing `</ScrollReveal>` after the section closing tag (line 102).
+### 9. Increase Grid Gaps — Image Left
+**File:** `C:/Users/mhsut/DevProjects/VFSsite/app/globals.css`
 
-**Wrap Closing Statement section (line 104-109):**
-
-Find:
-```typescript
-        {/* Closing Statement */}
-        <section className="vf-section vf-bg-default vf-content-section">
+**Find:**
+```css
+.vf-grid-image-left {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 42px;
+  align-items: stretch;
+}
 ```
 
-Replace with:
-```typescript
-        {/* Closing Statement */}
-        <ScrollReveal animation="vf-fadeInUp">
-          <section className="vf-section vf-bg-default vf-content-section">
+**Replace with:**
+```css
+.vf-grid-image-left {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 56px;
+  align-items: stretch;
+}
 ```
 
-And add closing `</ScrollReveal>` after the section closing tag (line 109).
+### 10. Increase Grid Gaps — Image Right
+**File:** `C:/Users/mhsut/DevProjects/VFSsite/app/globals.css`
 
----
+**Find:**
+```css
+.vf-grid-image-right {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 42px;
+  align-items: stretch;
+}
+```
 
-### 10. Modify `C:/Users/mhsut/DevProjects/VFSsite/app/lonestar/page.tsx`
+**Replace with:**
+```css
+.vf-grid-image-right {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 56px;
+  align-items: stretch;
+}
+```
 
-**Same pattern as palantir page:**
+### 11. Increase Typography Margin — H2
+**File:** `C:/Users/mhsut/DevProjects/VFSsite/app/globals.css`
 
-1. Import ScrollReveal: `import ScrollReveal from "../../components/ScrollReveal"`
-2. Wrap Intro section in `<ScrollReveal animation="vf-fadeInUp">`, add `vf-texture-dots` to className
-3. Wrap Comparison Table section in `<ScrollReveal animation="vf-scaleIn">`, add `vf-texture-grid` to className
-4. Wrap Advantages section in `<ScrollReveal animation="vf-fadeInRight">`
-5. Wrap Closing Statement section in `<ScrollReveal animation="vf-fadeInUp">`
+**Find:**
+```css
+.vf-h2 {
+  font-size: 34px;
+  line-height: 1.15;
+  margin: 0 0 10px;
+  font-weight: 700;
+}
+```
 
-**Note:** Lonestar page is at `app/lonestar/page.tsx` (2 levels deep), so import path is `"../../components/ScrollReveal"` (not `"../../../components/ScrollReveal"` like palantir).
+**Replace with:**
+```css
+.vf-h2 {
+  font-size: 34px;
+  line-height: 1.15;
+  margin: 0 0 16px;
+  font-weight: 700;
+}
+```
 
----
+### 12. Increase Typography Margin — Lead
+**File:** `C:/Users/mhsut/DevProjects/VFSsite/app/globals.css`
+
+**Find:**
+```css
+.vf-lead {
+  color: var(--muted);
+  font-size: 16px;
+  margin: 0 0 18px;
+  max-width: 65ch;
+}
+```
+
+**Replace with:**
+```css
+.vf-lead {
+  color: var(--muted);
+  font-size: 16px;
+  margin: 0 0 24px;
+  max-width: 65ch;
+}
+```
+
+### 13. Increase Footer CTA Padding
+**File:** `C:/Users/mhsut/DevProjects/VFSsite/app/globals.css`
+
+**Find:**
+```css
+.vf-page-footer-cta {
+  text-align: center;
+  padding: 64px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+```
+
+**Replace with:**
+```css
+.vf-page-footer-cta {
+  text-align: center;
+  padding: 80px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+```
 
 ## File Inventory
-
 | File | Action | Lines/Functions Affected |
 |------|--------|------------------------|
-| `components/ScrollReveal.tsx` | CREATE | Full file (~60 lines) |
-| `components/SectionDivider.tsx` | CREATE | Full file (~40 lines) |
-| `components/CarouselSection.tsx` | MODIFY | Lines 5-15 (add textureClass prop), 17-33 (use prop in className) |
-| `components/AboutSection.tsx` | MODIFY | Line 11 (add vf-texture-noise) |
-| `components/GivingBackSection.tsx` | MODIFY | Line 9 (add vf-texture-grid) |
-| `components/ContactSection.tsx` | MODIFY | Line 7 (add vf-texture-dots) |
-| `app/globals.css` | MODIFY | Lines 150+ (textures), 1063+ (animations, divider), 1065+ (a11y) |
-| `app/page.tsx` | MODIFY | Lines 1-9 (imports), 22-61 (wrap sections, add dividers) |
-| `app/capabilities/palantir/page.tsx` | MODIFY | Imports + section wrappers (lines 1-8, 52-109) |
-| `app/lonestar/page.tsx` | MODIFY | Imports + section wrappers |
+| C:/Users/mhsut/DevProjects/VFSsite/components/Breadcrumb.tsx | CREATE | Entire file (new component) |
+| C:/Users/mhsut/DevProjects/VFSsite/app/globals.css | MODIFY | Insert breadcrumb CSS after `.vf-body` block (L351), increase section padding 80px→100px, tablet 64px→80px, grid gaps 42px→56px (both classes), h2 margin 10px→16px, lead margin 18px→24px, footer CTA 64px→80px |
+| C:/Users/mhsut/DevProjects/VFSsite/app/partners/page.tsx | MODIFY | Add Breadcrumb import, add `<Breadcrumb />` after Header, ensure hero uses `.vf-hero-bg` and `.vf-hero-content` with `.vf-hero-badge` |
+| C:/Users/mhsut/DevProjects/VFSsite/app/experience/page.tsx | MODIFY | Add Breadcrumb import, add `<Breadcrumb />` after Header, replace Page Intro with full-bleed hero using `.vf-hero-badge` |
+| C:/Users/mhsut/DevProjects/VFSsite/app/leadership/page.tsx | MODIFY | Add Breadcrumb import, add `<Breadcrumb />` after Header L30, replace hero section L33-49 to use `.vf-hero-content` instead of `.vf-container` + inline style, switch `.vf-kicker` to `.vf-hero-badge` |
+| C:/Users/mhsut/DevProjects/VFSsite/app/capabilities/federal-broadband/page.tsx | MODIFY | Add Breadcrumb import, add `<Breadcrumb />` after Header |
+| C:/Users/mhsut/DevProjects/VFSsite/app/capabilities/program-management/page.tsx | MODIFY | Add Breadcrumb import, add `<Breadcrumb />` after Header |
+| C:/Users/mhsut/DevProjects/VFSsite/app/capabilities/palantir/page.tsx | MODIFY | Add Breadcrumb import L8, add `<Breadcrumb />` after Header L32 |
+| C:/Users/mhsut/DevProjects/VFSsite/app/lonestar/page.tsx | MODIFY | Add Breadcrumb import L8, add `<Breadcrumb />` after Header L32 |
+| C:/Users/mhsut/DevProjects/VFSsite/app/careers/page.tsx | MODIFY | Add Breadcrumb import, add `<Breadcrumb />` after Header |
+| C:/Users/mhsut/DevProjects/VFSsite/app/contact/page.tsx | MODIFY | Add Breadcrumb import, add `<Breadcrumb />` after Header |
 
 ## Architecture Decisions
 
-**Why client wrapper vs client sections?**
-Keep all section components (AboutSection, CarouselSection, etc.) as server components for performance. ScrollReveal is a minimal client wrapper that only handles IntersectionObserver logic. This preserves server rendering benefits.
+### 1. Breadcrumb Auto-Generation vs. Static Configuration
+**Decision:** Use `usePathname()` with label map for hybrid approach.
+**Rationale:** Auto-generation scales with route changes. Label map provides clean display names for key routes (e.g., "federal-broadband" → "Federal Broadband", "palantir" → "Palantir Foundry & AIP"). Fallback capitalizes raw slugs for future routes. Schema.org JSON-LD is mandatory for SEO.
 
-**Why ::before pseudo-elements for textures?**
-Allows textures to layer on top of existing backgrounds without modifying background-image properties. Keeps `.vf-bg-*` classes pure and composable. z-index stacking ensures content readability.
+### 2. Breadcrumb Placement
+**Decision:** Between Header and main content (after `<Header />`, before `<main>`).
+**Rationale:** Standard web convention. Provides immediate context after site navigation. Research confirms this is optimal placement for wayfinding without disrupting hero visual hierarchy.
 
-**Why inline SVG paths vs external files?**
-Dividers are ~50 bytes each as inline SVG. No HTTP request overhead, no flash of unstyled content. Easy to customize color per section via props.
+### 3. Hero Badge Standardization
+**Decision:** All hero sections use `.vf-hero-badge` (not `.vf-kicker`).
+**Rationale:** Palantir and Lonestar pages already use `.vf-hero-badge`. Leadership page currently uses `.vf-kicker` for "Meet the Team" — standardizing to `.vf-hero-badge` ensures consistent styling across all page heroes and eliminates CSS class confusion. `.vf-kicker` remains for inline usage (e.g., leader bio role titles).
 
-**Why opacity: 0 as default reveal state?**
-Content is hidden until IntersectionObserver fires. In prefers-reduced-motion mode, CSS overrides opacity to 1 immediately, so content is never hidden for accessibility users.
+### 4. Hero Content for Partners/Experience
+**Decision:** Use existing JSON content (title + intro) with new badge labels ("Technology & Teaming Partners" for Partners, "Mission-Driven Delivery" for Experience).
+**Rationale:** Maintains content consistency with existing JSON structure (partners.json and experience.json). Badge provides category context matching site taxonomy.
 
-**Why disconnect observer after first reveal?**
-Animations only trigger once (on scroll-in). Disconnecting saves memory and CPU cycles. If re-triggering on scroll-up is needed later (Tier 2), remove disconnect call.
+### 5. Hero Images for New Heroes
+**Decision:** Reuse existing `/assets/img/hero.jpg` for Partners and Experience.
+**Rationale:** Existing hero image is high-quality, on-brand, and already optimized. No new imagery required for Tier 2 scope. Can be replaced later if client provides specific page hero images.
 
-**Why `.vf-divider-top` at top of section instead of bottom of previous?**
-Cleaner separation of concerns — each section owns its own divider. Avoids complex relative positioning math. Easier to add/remove sections without affecting adjacent dividers.
+### 6. Desktop Section Padding Value
+**Decision:** Increase from 80px to 100px (not 110-120px).
+**Rationale:** 100px provides 25% increase in whitespace, which is substantial but not extreme. Maintains visual rhythm across existing content. Further increases can be A/B tested post-deployment.
 
-**Why textureClass prop for CarouselSection instead of hardcoded?**
-CarouselSection is used three times on homepage with different textures. Prop pattern allows per-instance customization. AboutSection/GivingBackSection/ContactSection appear once, so hardcoded textures are simpler.
-
-**Why relative imports instead of @/ alias?**
-Codebase uses relative imports (verified in app/page.tsx and component files). No @/ alias configured in tsconfig.json. Consistency with existing patterns prevents build errors.
+### 7. `.vf-prose` Application
+**Decision:** Define utility class but do NOT apply it in this plan.
+**Rationale:** Review notes inline max-width overrides on specific pages, but systematic application requires auditing every content section to avoid breaking layouts (grids, cards, etc.). `.vf-prose` is defined for future use but application is deferred to avoid scope creep and unintended layout breakage.
 
 ## Testing Strategy
 
-**Functional:**
-- Sections animate in as user scrolls down homepage
-- Hero section is immediately visible (no animation)
-- Palantir and Lonestar pages animate correctly
-- Textures are visible but subtle (not distracting)
-- Dividers render at section boundaries without layout shift
+### Visual Regression Testing
+- Load each subpage (Partners, Experience, Leadership, Federal Broadband, Program Management, Palantir, Lonestar, Careers, Contact) and verify breadcrumb appears below header with correct path segments
+- Verify breadcrumb does NOT appear on homepage
+- Verify all three hero pages (Partners, Experience, Leadership) now have full-bleed background images with overlay gradient
+- Verify hero content is centered and uses `.vf-hero-content` pattern consistently
+- Verify all hero badges use `.vf-hero-badge` class (not `.vf-kicker`)
+- Test on mobile (760px), tablet (980px), and desktop (1200px+) to verify responsive padding scales correctly
 
-**Accessibility:**
-- With prefers-reduced-motion enabled, all content is visible immediately
-- No animations trigger with prefers-reduced-motion
-- Keyboard navigation works (ScrollReveal doesn't intercept focus)
-- Screen readers announce content normally (no aria-live conflicts)
+### Spacing Audit
+- Measure section padding in browser DevTools — desktop should be 100px, tablet 80px, mobile 48px
+- Verify grid gaps on Leadership page bio sections are visually more spacious (56px vs. previous 42px)
+- Verify heading margins feel less cramped (h2 has 16px bottom margin, lead has 24px bottom margin)
+- Verify footer CTA sections have 80px padding top/bottom
 
-**Performance:**
-- No jank during scroll (Chrome DevTools Performance tab: 60fps)
-- IntersectionObserver cleanup verified (no memory leaks)
-- Texture pseudo-elements don't cause repaint issues
+### Breadcrumb Functionality
+- Click each breadcrumb link to verify navigation works correctly
+- Verify current page (last segment) is gold color and not a link
+- Verify separator `/` appears between segments
+- View page source and verify schema.org JSON-LD is present with correct @type: "BreadcrumbList"
+- Verify Palantir breadcrumb shows "Palantir Foundry & AIP" (not "Palantir")
+- Verify Lonestar breadcrumb shows "Lonestar"
 
-**Browser support:**
-- Test in Chrome, Firefox, Safari, Edge (latest)
-- Verify SVG dividers scale on mobile (320px - 1920px)
-- Test on iOS Safari (texture rendering, scroll performance)
-
-**Visual regression:**
-- Textures don't obscure text (contrast check)
-- Dividers align correctly on all breakpoints
-- Animation timing feels natural (not too fast/slow)
+### Cross-Browser Testing
+- Test breadcrumb hover states in Chrome, Firefox, Safari
+- Verify hero background images load correctly and cover full viewport width
+- Verify no horizontal scrollbar appears due to full-bleed hero sections
 
 ## Out of Scope
 
-- Hover animations (handled in Tier 2)
-- Parallax effects (Tier 3)
-- Animated SVG paths or morphing shapes
-- Page transition animations
-- Will-change CSS property (add only if performance issues found)
-- Loading state animations (skeleton screens)
-- Staggered animation for child elements within sections
-- Custom easing curves beyond ease-out
+### Explicitly NOT in Tier 2
+- **Capability pages content audit** — Federal Broadband and Program Management pages already have heroes; no content changes required
+- **Individual career posting pages** — Breadcrumbs will auto-generate for /careers/[slug] routes but no other changes to job detail pages
+- **Admin pages** — /admin/jobs does not need breadcrumb (internal tool)
+- **Homepage modifications** — Homepage hero already correct; no breadcrumb needed (skip rendering on `/`)
+- **New imagery** — Reuse existing hero.jpg for Partners/Experience; no new hero images in scope
+- **`.vf-prose` application** — Utility class defined but NOT systematically applied to avoid unintended layout breakage (deferred to future task)
+- **Contact section padding** — `.vf-section--contact` remains at 48px/32px for "above the fold" design (intentional exception to spacing increases)
+- **Mobile hero height standardization** — Current variable mobile hero heights (70vh vs. full viewport) are intentional; no changes
+- **Trust bar on subpages** — Trust bar remains homepage-only feature
+- **Typography scale changes** — Font sizes remain unchanged; only margins increase
+- **Grid column ratio changes** — Grid template columns remain 0.9fr/1.1fr; only gap increases
 
 ## Acceptance Criteria
 
-- [ ] ScrollReveal component created and wraps homepage sections
-- [ ] SectionDivider component created with 3 variants
-- [ ] 4 @keyframes animations added to globals.css
-- [ ] 3 texture modifier classes added to globals.css
-- [ ] `.vf-divider-top` CSS class added for divider positioning
-- [ ] prefers-reduced-motion disables all animations but keeps content visible
-- [ ] Homepage sections (What We Do, Who We Serve, AI Alignment, Giving Back, About, Contact) animate on scroll
-- [ ] SectionDividers placed between Who We Serve/AI Alignment, Giving Back/About, About/Contact
-- [ ] Palantir page: 4 content sections (Intro, Comparison Table, Advantages, Closing Statement) have scroll animations and textures
-- [ ] Lonestar page: same pattern as Palantir
-- [ ] Hero sections do NOT animate (immediately visible)
-- [ ] No visual regression: existing styles intact, textures subtle
-- [ ] No console errors or warnings
-- [ ] 60fps scroll performance on desktop and mobile
-- [ ] CarouselSection accepts textureClass prop and applies it correctly
+### Component Creation
+- [ ] Breadcrumb component created at `C:/Users/mhsut/DevProjects/VFSsite/components/Breadcrumb.tsx`
+- [ ] Breadcrumb includes schema.org BreadcrumbList JSON-LD
+- [ ] Breadcrumb uses `usePathname()` for auto-generation
+- [ ] Breadcrumb maintains label map with entries for 'palantir' and 'lonestar'
+- [ ] Breadcrumb skips rendering on homepage (`pathname === '/'`)
+
+### CSS Updates
+- [ ] `.vf-breadcrumb` styles added to globals.css after `.vf-body` block with proper vf-* naming
+- [ ] `.vf-prose` utility class defined (max-width: 800px, margin: 0 auto)
+- [ ] Desktop section padding increased to 100px (find/replace exact block)
+- [ ] Tablet section padding increased to 80px (find/replace within media query)
+- [ ] Mobile section padding remains 48px (no change)
+- [ ] Grid gap increased to 56px for `.vf-grid-image-left` (find/replace exact block)
+- [ ] Grid gap increased to 56px for `.vf-grid-image-right` (find/replace exact block)
+- [ ] `.vf-h2` margin-bottom increased to 16px (find/replace exact block)
+- [ ] `.vf-lead` margin-bottom increased to 24px (find/replace exact block)
+- [ ] `.vf-page-footer-cta` padding increased to 80px (find/replace exact block)
+
+### Page Updates — Heroes
+- [ ] Partners page has full-bleed hero with `.vf-hero-bg` background image
+- [ ] Partners page hero uses `.vf-hero-content` for centered content
+- [ ] Partners page hero uses `.vf-hero-badge` with "Technology & Teaming Partners"
+- [ ] Experience page has NEW full-bleed hero section added
+- [ ] Experience page hero uses `.vf-hero-badge` with "Mission-Driven Delivery"
+- [ ] Experience page old "Page Intro" section removed (replaced by hero)
+- [ ] Leadership page hero refactored to use `.vf-hero-content` instead of `.vf-container` + inline style
+- [ ] Leadership page hero uses `.vf-hero-badge` (switched from `.vf-kicker`) with "Meet the Team"
+
+### Page Updates — Breadcrumbs
+- [ ] Breadcrumb imported and rendered on Partners page (after Header)
+- [ ] Breadcrumb imported and rendered on Experience page (after Header)
+- [ ] Breadcrumb imported and rendered on Leadership page (after Header, line 30)
+- [ ] Breadcrumb imported and rendered on Federal Broadband page (after Header)
+- [ ] Breadcrumb imported and rendered on Program Management page (after Header)
+- [ ] Breadcrumb imported and rendered on Palantir page (after Header, line 32)
+- [ ] Breadcrumb imported and rendered on Lonestar page (after Header, line 32)
+- [ ] Breadcrumb imported and rendered on Careers page (after Header)
+- [ ] Breadcrumb imported and rendered on Contact page (after Header)
+
+### Visual Verification
+- [ ] All subpages display breadcrumb navigation below header
+- [ ] Homepage does NOT display breadcrumb
+- [ ] Breadcrumb current page segment is gold color (`var(--accent)`)
+- [ ] Breadcrumb links are muted gray with white hover state
+- [ ] Partners, Experience, Leadership pages have consistent full-bleed hero pattern
+- [ ] All hero sections use `.vf-hero-badge` (no `.vf-kicker` in heroes)
+- [ ] Section spacing feels more generous on desktop (100px vs 80px)
+- [ ] Grid layouts on Leadership page have more breathing room (56px gap)
+- [ ] Typography margins create better vertical rhythm
+
+### Technical Verification
+- [ ] No TypeScript errors in Breadcrumb component
+- [ ] No console errors on any page
+- [ ] Schema.org JSON-LD validates (use schema.org validator)
+- [ ] Next.js Image components use correct props (fill, priority, quality, style)
 - [ ] All imports use relative paths (no @/ aliases)
+- [ ] No horizontal scrollbar on any viewport size
+- [ ] Mobile responsive behavior intact (breadcrumb wraps on narrow screens)

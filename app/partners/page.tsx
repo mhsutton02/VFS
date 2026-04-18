@@ -1,7 +1,9 @@
 // app/partners/page.tsx
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
+import { Breadcrumb } from "../../components/Breadcrumb";
 import partners from "../../content/partners.json";
+import Image from "next/image";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -30,11 +32,22 @@ export default function PartnersPage() {
   return (
     <>
       <Header />
+      <Breadcrumb />
       <main>
         {/* Hero */}
         <section className="vf-section vf-section-hero">
-          <div className="vf-container" style={{ position: "relative", zIndex: 2 }}>
-            <div className="vf-kicker">Technology &amp; Teaming Partners</div>
+          <div className="vf-hero-bg">
+            <Image
+              src="/assets/img/hero.jpg"
+              alt="ValorForge Solutions partners"
+              fill
+              priority
+              quality={75}
+              style={{ objectFit: "cover" }}
+            />
+          </div>
+          <div className="vf-hero-content">
+            <div className="vf-hero-badge">Technology &amp; Teaming Partners</div>
             <h1 className="vf-h1">{partners.title}</h1>
             <p className="vf-lead">{partners.intro}</p>
           </div>

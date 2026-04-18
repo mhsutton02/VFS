@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 import content from "../../../content/palantir.json";
 import ScrollReveal from "../../../components/ScrollReveal"
+import { Breadcrumb } from "../../../components/Breadcrumb";
 
 export const metadata: Metadata = {
   title: content.seoTitle,
@@ -30,6 +31,7 @@ export default function PalantirPage() {
   return (
     <>
       <Header />
+      <Breadcrumb />
       <main>
         {/* Hero */}
         <section className="vf-section vf-section-hero">

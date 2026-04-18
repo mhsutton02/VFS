@@ -1,6 +1,7 @@
 // app/careers/page.tsx
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
+import { Breadcrumb } from "../../components/Breadcrumb";
 import careers from "../../content/careers.json";
 import Image from "next/image";
 import Link from "next/link";
@@ -83,6 +84,7 @@ export default function CareersPage() {
   return (
     <>
       <Header />
+      <Breadcrumb />
       <main>
         {/* Hero */}
         <section className="vf-section vf-section-hero vf-careers-hero">

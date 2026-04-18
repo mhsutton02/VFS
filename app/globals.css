@@ -67,7 +67,7 @@ a, button {
 }
 
 .vf-section {
-  padding: 80px 0;
+  padding: 100px 0;
   position: relative;
 }
 
@@ -275,14 +275,14 @@ a, button {
 .vf-grid-image-left {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: 42px;
+  gap: 56px;
   align-items: stretch;
 }
 
 .vf-grid-image-right {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: 42px;
+  gap: 56px;
   align-items: stretch;
 }
 
@@ -322,7 +322,7 @@ a, button {
 .vf-h2 {
   font-size: 34px;
   line-height: 1.15;
-  margin: 0 0 10px;
+  margin: 0 0 16px;
   font-weight: 700;
 }
 
@@ -338,7 +338,7 @@ a, button {
 .vf-lead {
   color: var(--muted);
   font-size: 16px;
-  margin: 0 0 18px;
+  margin: 0 0 24px;
   max-width: 65ch;
 }
 
@@ -348,6 +348,57 @@ a, button {
   margin: 0 0 16px;
   white-space: pre-wrap;
   max-width: 65ch;
+}
+
+/* Breadcrumb Navigation */
+.vf-breadcrumb {
+  background: var(--bg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 16px 0;
+}
+
+.vf-breadcrumb-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+.vf-breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vf-breadcrumb-link {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.vf-breadcrumb-link:hover {
+  color: var(--text);
+}
+
+.vf-breadcrumb-separator {
+  color: rgba(255, 255, 255, 0.2);
+  user-select: none;
+}
+
+.vf-breadcrumb-current {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* Prose Width Utility */
+.vf-prose {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 /* Buttons */
@@ -983,7 +1034,7 @@ a, button {
     font-size: 30px;
   }
   .vf-section {
-    padding: 64px 0;
+    padding: 80px 0;
   }
 }
 
@@ -1803,7 +1854,7 @@ section[id] {
 /* ═══════════════════════════════════════════ */
 .vf-page-footer-cta {
   text-align: center;
-  padding: 64px 20px;
+  padding: 80px 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 

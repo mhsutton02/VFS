@@ -1,6 +1,7 @@
 // app/leadership/page.tsx
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
+import { Breadcrumb } from "../../components/Breadcrumb";
 import leadership from "../../content/leadership.json";
 import Image from "next/image";
 import { Metadata } from "next";
@@ -28,6 +29,7 @@ export default function LeadershipPage() {
   return (
     <>
       <Header />
+      <Breadcrumb />
       <main>
         {/* Hero Section */}
         <section className="vf-section vf-section-hero">
@@ -41,8 +43,8 @@ export default function LeadershipPage() {
               style={{ objectFit: "cover" }}
             />
           </div>
-          <div className="vf-container" style={{ position: "relative", zIndex: 2 }}>
-            <div className="vf-kicker">Meet the Team</div>
+          <div className="vf-hero-content">
+            <div className="vf-hero-badge">Meet the Team</div>
             <h1 className="vf-h1">{leadership.title}</h1>
             <p className="vf-lead">{leadership.intro}</p>
           </div>
