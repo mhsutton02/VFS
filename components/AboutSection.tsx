@@ -8,7 +8,7 @@ export function AboutSection() {
   return (
     <section
       id="about"
-      className="vf-section vf-bg-blue-accent"
+      className="vf-section vf-bg-blue-accent vf-texture-noise"
     >
       <div className="vf-container vf-grid-image-left">
         {/* Image first (left on desktop) — constrained to match text column height */}

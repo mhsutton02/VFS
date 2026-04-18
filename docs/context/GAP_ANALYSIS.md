@@ -1,32 +1,28 @@
 # Gap Analysis
-**Date:** 2026-04-16
+**Date:** 2026-04-18
 **Plan:** PLAN.md
 **Verdict:** NEEDS_REVISION
 
 ## Ambiguities
-- [Phase 2 Step 6 lonestar.json intro] — intro array shows 1 paragraph but JSON structure shows intro as array — architect must specify if intro contains single string or array with one element
-- [Phase 3 Steps 7-8] — "clone federal-broadband/page.tsx pattern" but exact component import names not specified (HeroSection vs Hero, naming of comparison/advantage section components) — architect must specify component names or confirm cloning includes literal duplication of component structure
-- [Phase 4 Step 9 Header.tsx] — "lines 8-31" and "lines 33-38" reference line numbers but does not account for line shifts after insertions — architect must specify insertion order or confirm line references are pre-edit state only
-- [Phase 5 Step 12 globals.css] — "after existing vf-partner-grid media queries" at line 1391+ but does not confirm if vf-partner-grid is the immediate predecessor or if other classes exist between 1391 and insertion point — architect must specify exact insertion landmark
+- [Section 4, page.tsx modifications] — Plan refers to wrapping "What We Do" and "Who We Serve" as if they have `<section>` tags at lines 31 and 43, but actual codebase shows `<CarouselSection>` component calls at lines 22-44 which render their own section tags internally — Plan must clarify whether to wrap the component call or modify component internals
+- [Section 4, About section] — Plan says "Check if AboutSection component has its own section wrapper. If it does, wrap the component call only" but then provides code that adds a new `<section>` wrapper around `<AboutSection />` — AboutSection already has section tag at line 9, creating duplicate nesting
+- [Section 4, Carousel/Giving Back/Contact sections] — Plan shows wrapping component calls in ScrollReveal but does not address that these components already render their own section tags with background classes — unclear if texture classes should be added to component props or if sections need refactoring
+- [Section 5-6, capability pages] — Plan references "Intro", "Capabilities", "Comparison", "Advantages" sections but palantir page has "Intro", "Comparison", "Advantages" only (no "Capabilities" section) — Plan must specify exact section identifiers or line ranges
 
 ## Missing Context
-- PLAN.md does not cite or provide content for existing federal-broadband/page.tsx structure that Steps 7-8 will clone — coding agent will need to read this file to understand pattern
-- PLAN.md assumes vf-h3 class exists in design system but does not cite globals.css location or confirm class definition — coding agent may need to verify or create
-- PLAN.md does not specify how HeroSection component accepts badge/headline/subheadline props (object destructure, individual props, content prop) — coding agent will infer from federal-broadband usage
-- PLAN.md does not specify scroll-margin-top value for anchor link targets (#comparison, #advantages) to avoid header clipping — coding agent will need to apply existing scroll behavior or define new value
+- No specification for handling components that already render section tags with background classes when adding texture modifiers — CarouselSection, AboutSection, GivingBackSection, ContactSection all have hardcoded `vf-bg-*` classes
+- No specification for SectionDivider color values for sections beyond "What We Do" (wave, #0a0a0a) and "Who We Serve" (slant, #0a0a0a) — remaining sections lack color guidance
+- No specification for which animation variant to use for each capability page section beyond generic labels
 
 ## Scope Risks
-- Phase 1 Step 3 says "update palantir-foundry case study (lines 22-33)" but does not specify exact old_string/new_string for Edit tool — coding agent may need clarification on exact text replacement boundaries
-- Phase 1 Step 4 combines two edits into "SINGLE COMBINED EDIT" but does not specify if these are sequential Edit calls or one multi-hunk edit — coding agent may interpret as two separate edits, contradicting "SINGLE" instruction
-- Phase 5 Step 12 CSS block includes literal code but does not specify if rgba color values or var(--accent)/var(--border) references must match existing design tokens — coding agent may proceed without verifying token consistency
-- Testing Strategy lists 8 test categories but no blocking criteria for what constitutes test failure — coding agent will implement without test validation checkpoints
+- Adding texture classes to existing components may require prop modifications to CarouselSection, AboutSection, GivingBackSection, ContactSection to accept optional className props — not currently in plan
+- SectionDivider positioning at `bottom: 0` with `position: absolute` requires parent sections to have `position: relative` — `.vf-section` already has this at line 71, but plan does not verify this or call it out as a prerequisite check
+- Plan shows SectionDivider placed via className `-top-[60px]` but does not specify whether these Tailwind arbitrary values are available or if negative margins should be added to globals.css
 
 ## Assumption Flags
-- Coding agent will assume intro array in lonestar.json contains array with single string element (not bare string) to match palantir.json structure despite "1 paragraph" description
-- Coding agent will assume vf-h3 class exists and applies correct sizing/weight for advantage headers without verification
-- Coding agent will assume HeroSection component import path is @/components/HeroSection without explicit import statement in Steps 7-8
-- Coding agent will assume Footer.tsx "SINGLE COMBINED EDIT" means one Edit tool call with multi-line old_string/new_string encompassing both Lonestar link insertion and Palantir note addition
-- Coding agent will assume mobile horizontal scroll for comparison tables requires no additional touch-action or -webkit-overflow-scrolling CSS despite iOS Safari mention in Testing Strategy
+- Assumes import path alias `@/` is configured — actual page.tsx uses relative imports like `"../components/Header"`
+- Assumes wrapping server components in client component wrapper preserves server rendering benefits without hydration mismatch — not verified for components with existing client-side logic (CarouselSection uses Carousel which may have client state)
+- Assumes `.vf-texture-*::before` pseudo-elements do not conflict with existing `.vf-hero-bg::after` usage (line 96-105) — plan does not verify other components for pseudo-element conflicts
 
 ## Summary
-Plan is structurally complete with clear phase organization and detailed JSON payloads but contains four critical ambiguities around array structure, component naming, line number stability, and CSS insertion landmarks that will force the coding agent to make interpretive decisions. Missing context around cloned file patterns and existing class definitions will require additional file reads during implementation. Verdict is NEEDS_REVISION to resolve intro array structure and clarify "SINGLE COMBINED EDIT" instruction.
+Plan has structural misalignment with actual component architecture. The codebase uses component wrappers that already render section tags with background classes, but the plan treats sections as if they are inline HTML blocks. Import paths use relative syntax not `@/` aliases. Section identifiers on capability pages do not match plan labels. Verdict is NEEDS_REVISION to resolve component wrapping strategy and verify actual section structure.

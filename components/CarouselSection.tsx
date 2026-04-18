@@ -12,6 +12,7 @@ type CarouselSectionProps = {
   intro: string;
   ctaText: string;
   items: CarouselItem[];
+  textureClass?: string;
 };
 
 export function CarouselSection({
@@ -23,14 +24,15 @@ export function CarouselSection({
   title,
   intro,
   ctaText,
-  items
+  items,
+  textureClass
 }: CarouselSectionProps) {
   const sectionBgClass = altBackground
     ? "vf-section vf-bg-blue-accent"
     : "vf-section vf-bg-gold-accent";
 
   return (
-    <section id={id} className={sectionBgClass}>
+    <section id={id} className={`${sectionBgClass}${textureClass ? ` ${textureClass}` : ''}`}>
       <div
         className={`vf-container ${
           reverse ? "vf-grid-image-left" : "vf-grid-image-right"

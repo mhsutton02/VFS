@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";
 import content from "../../../content/palantir.json";
+import ScrollReveal from "../../../components/ScrollReveal"
 
 export const metadata: Metadata = {
   title: content.seoTitle,
@@ -50,63 +51,71 @@ export default function PalantirPage() {
         </section>
 
         {/* Intro */}
-        <section className="vf-section vf-bg-default vf-content-section">
-          <div className="vf-container">
-            {content.intro.map((paragraph, i) => (
-              <p key={i} className="vf-lead" style={{ textAlign: "center", fontSize: "18px", maxWidth: "52ch", margin: "0 auto 20px" }}>{paragraph}</p>
-            ))}
-          </div>
-        </section>
-
-        {/* Comparison Table */}
-        <section id="comparison" className="vf-section vf-bg-blue-accent vf-content-section">
-          <div className="vf-container">
-            <h2 className="vf-h2">Competitor Comparison</h2>
-            <table className="vf-comparison-table">
-              <thead>
-                <tr>
-                  <th>Capability</th>
-                  {content.comparisonTable.competitors.map((comp) => (
-                    <th key={comp}>{comp}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {content.comparisonTable.rows.map((row) => (
-                  <tr key={row.capability}>
-                    <td>{row.capability}</td>
-                    {row.ratings.map((rating, i) => (
-                      <td key={i}>{rating}</td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        {/* Advantages */}
-        <section id="advantages" className="vf-section vf-bg-gold-accent vf-content-section">
-          <div className="vf-container">
-            <h2 className="vf-h2">Disruptive Advantages</h2>
-            <div className="vf-advantage-grid">
-              {content.advantages.map((adv) => (
-                <div key={adv.header} className="vf-advantage-card">
-                  <h3 className="vf-advantage-header">{adv.header}</h3>
-                  <p className="vf-advantage-parenthetical">{adv.parenthetical}</p>
-                  <p className="vf-advantage-body">{adv.body}</p>
-                </div>
+        <ScrollReveal animation="vf-fadeInUp">
+          <section className="vf-section vf-bg-default vf-content-section vf-texture-dots">
+            <div className="vf-container">
+              {content.intro.map((paragraph, i) => (
+                <p key={i} className="vf-lead" style={{ textAlign: "center", fontSize: "18px", maxWidth: "52ch", margin: "0 auto 20px" }}>{paragraph}</p>
               ))}
             </div>
-          </div>
-        </section>
+          </section>
+        </ScrollReveal>
+
+        {/* Comparison Table */}
+        <ScrollReveal animation="vf-scaleIn">
+          <section id="comparison" className="vf-section vf-bg-blue-accent vf-content-section vf-texture-grid">
+            <div className="vf-container">
+              <h2 className="vf-h2">Competitor Comparison</h2>
+              <table className="vf-comparison-table">
+                <thead>
+                  <tr>
+                    <th>Capability</th>
+                    {content.comparisonTable.competitors.map((comp) => (
+                      <th key={comp}>{comp}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {content.comparisonTable.rows.map((row) => (
+                    <tr key={row.capability}>
+                      <td>{row.capability}</td>
+                      {row.ratings.map((rating, i) => (
+                        <td key={i}>{rating}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </ScrollReveal>
+
+        {/* Advantages */}
+        <ScrollReveal animation="vf-fadeInRight">
+          <section id="advantages" className="vf-section vf-bg-gold-accent vf-content-section">
+            <div className="vf-container">
+              <h2 className="vf-h2">Disruptive Advantages</h2>
+              <div className="vf-advantage-grid">
+                {content.advantages.map((adv) => (
+                  <div key={adv.header} className="vf-advantage-card">
+                    <h3 className="vf-advantage-header">{adv.header}</h3>
+                    <p className="vf-advantage-parenthetical">{adv.parenthetical}</p>
+                    <p className="vf-advantage-body">{adv.body}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        </ScrollReveal>
 
         {/* Closing Statement */}
-        <section className="vf-section vf-bg-default vf-content-section">
-          <div className="vf-container">
-            <p className="vf-lead" style={{ textAlign: "center", fontSize: "22px", maxWidth: "52ch", margin: "0 auto" }}>{content.closingStatement}</p>
-          </div>
-        </section>
+        <ScrollReveal animation="vf-fadeInUp">
+          <section className="vf-section vf-bg-default vf-content-section">
+            <div className="vf-container">
+              <p className="vf-lead" style={{ textAlign: "center", fontSize: "22px", maxWidth: "52ch", margin: "0 auto" }}>{content.closingStatement}</p>
+            </div>
+          </section>
+        </ScrollReveal>
 
         {/* Footer CTA */}
         <div className="vf-page-footer-cta">

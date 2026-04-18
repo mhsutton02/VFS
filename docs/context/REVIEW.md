@@ -1,53 +1,58 @@
 # Code Review
-**Date:** 2026-04-16
-**Scope:** Pre-implementation review for Palantir/Lonestar upgrade — existing patterns, carousel capacity, navigation sync, and design system readiness
+**Date:** 2026-04-18
+**Scope:** VFS website readiness for Tier 1 RANGR-inspired design morph (scroll animations, background textures, section dividers)
 
 ## Verdict: APPROVE
 
+The codebase is **ready for Tier 1 implementation** with minimal architectural changes. The design system, component boundaries, and accessibility infrastructure are well-positioned to absorb scroll-triggered animations, background textures, and section dividers.
+
 ## Critical (P0)
-None. The existing architecture supports the planned changes.
+None — no blocking issues identified.
 
 ## Important (P1)
 
-- **C:/Users/mhsut/DevProjects/VFSsite/hooks/useCarousel.ts:11** — Carousel `visibleCount` is hardcoded to 2. Adding a 7th card to what_we_do.json or 5th to ai_alignment.json is safe (carousel rotates 2-at-a-time, mobile displays all). No overflow risk. No changes needed.
+- **globals.css:1065** — `prefers-reduced-motion` rule already exists and correctly disables animations. When adding new @keyframes, ensure they're included in the wildcard selector (`animation: none !important`).
 
-- **C:/Users/mhsut/DevProjects/VFSsite/components/Header.tsx:8-31** — CAPABILITIES_ITEMS dropdown uses vertical menu with subsections. Adding a 3rd capability (Palantir) will increase menu height. Current styling supports this (vf-nav-dropdown-menu is height: auto). Test on mobile to ensure dropdown doesn't exceed viewport height at 760px breakpoint where nav becomes full-screen overlay.
+- **components/*.tsx (all sections)** — All major sections are **server components** (HeroSection, CarouselSection, AboutSection, GivingBackSection, ContactSection). IntersectionObserver requires client-side code. Create a new `<AnimatedSection>` wrapper client component that accepts children and applies scroll-triggered animations. Keep existing components server-rendered to preserve performance.
 
-- **C:/Users/mhsut/DevProjects/VFSsite/components/Header.tsx:33-38** — NAV_ITEMS array holds 4 items (Leadership, Partners, Careers, Contact). Adding "Lonestar" creates 5 items at 22px gap (line 204, globals.css). Desktop nav uses flexbox with 22px gap — no overflow risk. Verify mobile hamburger menu layout accommodates 5 items cleanly.
+- **globals.css:132-150** — Background classes (`.vf-bg-default`, `.vf-bg-gold-accent`, `.vf-bg-blue-accent`) use solid colors and radial gradients. Add new modifier classes (`.vf-bg-texture-dots`, `.vf-bg-texture-grid`, `.vf-bg-texture-wave`) that can be **composed** with existing background classes. Avoid replacing current backgrounds — layer textures on top.
 
-- **C:/Users/mhsut/DevProjects/VFSsite/app/sitemap.ts:3-47** — Sitemap uses hardcoded array of MetadataRoute.Sitemap objects. Must add two new entries: `/capabilities/palantir` (priority 0.9) and `/lonestar` (priority 0.8 or 0.9, align with existing top-level pages). Follow existing canonical URL pattern.
+- **app/page.tsx:20-61** — Section flow is clean but abrupt. Insert SVG/CSS divider elements between `<section>` tags. Consider a `<SectionDivider variant="wave" />` component that can be dropped between sections without disrupting layout.
 
 ## Suggestions (P2)
 
-- **C:/Users/mhsut/DevProjects/VFSsite/app/globals.css:1338-1391** — Existing `.vf-card-grid` is optimized for 6-card layouts (3x2 desktop, 2x? tablet, 1x? mobile). New pages plan comparison tables and advantages grids. Consider whether these new UI elements should reuse `.vf-card-grid` or get dedicated class names (`.vf-comparison-table`, `.vf-advantage-grid`) to avoid semantic conflicts.
+- **globals.css:372** — Carousel already has a fade/translate transition (`.vf-car-track`). Use this as a template for scroll-triggered animation timing (200ms duration, ease curve). Keep animation durations consistent across the site.
 
-- **C:/Users/mhsut/DevProjects/VFSsite/content/experience.json:22-33** — Palantir Foundry case study currently says "National-Scale Telecom Topology Mapping — Palantir Foundry." Update to add "one of several platform options" framing as planned. Ensure this doesn't create positioning conflict with new Palantir capability page — distinguish between case study (past engagement) and capability page (service offering).
+- **globals.css:190, 499, 715, 825** — Multiple hover transitions exist (0.15s–0.3s). New scroll animations should use longer durations (400–600ms) to feel less jarring than hover states.
 
-- **C:/Users/mhsut/DevProjects/VFSsite/components/Footer.tsx:6-49** — Footer has simple 2-column layout (title block left, links right). Adding "Lonestar" and "Palantir" requires updating links. Current Footer only links to "Capabilities" (line 16-21, points to /capabilities/federal-broadband). Consider whether Footer should link to all capabilities individually or create a capabilities landing page pattern.
+- **components/Header.tsx:1** — Header is the only major client component. Consider adding a `useReducedMotion` hook that reads `prefers-reduced-motion` and provides a boolean to child components. This avoids inline media queries in every animated component.
+
+- **globals.css:62-86** — `.vf-section` and `.vf-container` are well-structured base classes. Add animation classes that target these existing wrappers (`.vf-section.vf-animate-fade-in-bottom`) rather than creating new wrapper divs. Keeps DOM clean.
+
+- **app/lonestar/page.tsx & app/capabilities/palantir/page.tsx:34** — Both use identical hero structure. When adding scroll animations, ensure consistency across all page templates (homepage, capability pages, lonestar).
 
 ## What's Good
 
-- **Capability page pattern is clean and consistent.** Both existing pages (federal-broadband/page.tsx and program-management/page.tsx) follow the same structure: Hero + content sections + footer CTA. New pages can clone this pattern with zero risk.
+- **CSS naming convention** — The `vf-*` prefix is consistent across 2162 lines. New animation classes (e.g., `vf-reveal-fade`, `vf-bg-texture-dots`) will integrate seamlessly.
 
-- **Design system is comprehensive.** The vf-* CSS classes cover all needed primitives: `.vf-h2`, `.vf-kicker`, `.vf-body`, `.vf-section`, background accents (`.vf-bg-gold-accent`, `.vf-bg-blue-accent`, `.vf-bg-default`), `.vf-card-grid`, `.vf-stat-row`, `.vf-capability-list`, `.vf-credential-badge`, `.vf-program-card`. New content can be styled without adding CSS (unless comparison tables and advantage grids are genuinely new patterns).
+- **Server/client boundaries** — Clean separation. Only Header and Carousel are client components. This makes it easy to add a single `<AnimatedSection>` client wrapper without infecting the component tree.
 
-- **JSON-driven content model is robust.** All existing pages load metadata and sections from JSON files. The new pages (palantir.json, lonestar.json) follow this pattern cleanly. TypeScript won't complain as long as JSON structure matches usage in TSX.
+- **Accessibility** — Focus states (line 1073-1086), scroll-margin-top (line 1106-1113), and `prefers-reduced-motion` (line 1065) are already implemented. Tier 1 animations won't degrade a11y.
 
-- **Navigation is modular and extensible.** CAPABILITIES_ITEMS and NAV_ITEMS are clean arrays. Adding Palantir to dropdown and Lonestar to top-level nav is a 2-line change each. Dropdown CSS is height-adaptive, not fixed.
+- **Transition infrastructure** — The `.vf-car-track-exit` / `.vf-car-track-enter` pattern (line 375-383) in the carousel shows a working state-based transition system. Apply this pattern to scroll animations.
+
+- **Background system** — The three-background pattern (`default`, `gold-accent`, `blue-accent`) is applied consistently in `app/page.tsx` (lines 31, 43, 55). Adding optional texture modifiers won't disrupt the existing rhythm.
 
 ## Action Items
 
-1. Add 7th card to C:/Users/mhsut/DevProjects/VFSsite/content/what_we_do.json (safe, carousel rotates)
-2. Add 5th card to C:/Users/mhsut/DevProjects/VFSsite/content/ai_alignment.json (safe, carousel rotates)
-3. Update "Palantir Foundry" case study in C:/Users/mhsut/DevProjects/VFSsite/content/experience.json with "one of several platform options" framing
-4. Create C:/Users/mhsut/DevProjects/VFSsite/content/palantir.json and C:/Users/mhsut/DevProjects/VFSsite/content/lonestar.json
-5. Create C:/Users/mhsut/DevProjects/VFSsite/app/capabilities/palantir/page.tsx (clone federal-broadband pattern)
-6. Create C:/Users/mhsut/DevProjects/VFSsite/app/lonestar/page.tsx (clone existing capability page pattern, but top-level route)
-7. Add Palantir to CAPABILITIES_ITEMS array in C:/Users/mhsut/DevProjects/VFSsite/components/Header.tsx (line 8-31)
-8. Add Lonestar to NAV_ITEMS array in C:/Users/mhsut/DevProjects/VFSsite/components/Header.tsx (line 33-38)
-9. Add Lonestar + Palantir links to C:/Users/mhsut/DevProjects/VFSsite/components/Footer.tsx (decide: individual links or capabilities landing page)
-10. Add subtle Palantir note to C:/Users/mhsut/DevProjects/VFSsite/components/Footer.tsx as planned
-11. Add `/capabilities/palantir` and `/lonestar` entries to C:/Users/mhsut/DevProjects/VFSsite/app/sitemap.ts
-12. Define CSS for comparison tables and advantage grids in C:/Users/mhsut/DevProjects/VFSsite/app/globals.css (if new UI patterns; else reuse `.vf-card-grid`)
-13. Test dropdown menu height on mobile (760px breakpoint) with 3 capability items
-14. Test mobile nav with 5 NAV_ITEMS (4 existing + Lonestar)
+1. **Create `components/AnimatedSection.tsx`** — Client component that wraps children, uses IntersectionObserver, and applies a CSS class on scroll-in. Reads `prefers-reduced-motion` to conditionally enable animations.
+
+2. **Add @keyframes to `globals.css`** — Define `fade-in-bottom`, `fade-in-left`, `fade-in-right`, `zoom-in` animations with 400–600ms durations and ease curves. Ensure line 1067 disables them for reduced-motion users.
+
+3. **Add texture modifier classes** — `.vf-bg-texture-dots`, `.vf-bg-texture-grid`, `.vf-bg-texture-wave` using CSS background patterns or inline SVG data URIs. Make them composable with existing `.vf-bg-*` classes.
+
+4. **Create `components/SectionDivider.tsx`** — Server component that renders decorative SVG/CSS dividers. Props: `variant: "wave" | "slant" | "arrow"`. Keep inline in JSX or extract to separate component based on complexity.
+
+5. **Test on capability pages** — After implementing on `app/page.tsx`, apply same patterns to `app/capabilities/palantir/page.tsx` and `app/lonestar/page.tsx` to ensure consistency.
+
+6. **Verify mobile behavior** — Existing mobile breakpoint at 760px (line 1012) may need adjustments for dividers. Test that SVG dividers scale correctly and don't create layout shifts.

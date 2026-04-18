@@ -6,7 +6,7 @@ export function GivingBackSection() {
   return (
     <section
       id="giving-back"
-      className="vf-section vf-bg-gold-accent"
+      className="vf-section vf-bg-gold-accent vf-texture-grid"
     >
       <div className="vf-container" style={{ textAlign: "center" }}>
         <h2 className="vf-h2">{givingBack.title}</h2>

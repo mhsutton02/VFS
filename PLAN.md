@@ -1,453 +1,856 @@
-# Plan: Palantir Content Integration & New Pages (Lonestar + Federal Palantir)
-**Date:** 2026-04-16
+# Plan: RANGR Design Morph — Tier 1 (REVISED)
+**Date:** 2026-04-18
 **Status:** READY FOR IMPLEMENTATION
 
 ## Objective
-Upgrade the ValorForge Solutions website with subtle Palantir integration across existing content (4 edits) and add two new pages: `/capabilities/palantir` (Federal Palantir capability) and `/lonestar` (Commercial division). This positions VFS as the only SDVOSB Palantir partner while maintaining platform-agnostic messaging and introducing the Lonestar commercial brand.
+Add scroll-triggered animations, background textures, and section dividers to the VFS website to create depth and visual interest while maintaining performance and accessibility. This is Tier 1 of a multi-phase design enhancement.
 
 ## Context Summary
-- **From Review:** All changes approved. Existing carousel pattern supports adding 7th card to what_we_do and 5th to ai_alignment (carousel rotates 2-at-a-time, no overflow). Header dropdown is height-adaptive and supports 3 capabilities. NAV_ITEMS can accommodate 5 items. Comparison tables and advantage grids require new CSS classes (vf-comparison-table, vf-advantage-grid) to avoid semantic conflict with vf-card-grid. Sitemap requires two new entries. Footer needs Lonestar link + Palantir note.
-- **From Research:** N/A
-- **Constraints:** Must follow existing vf-* design system (dark backgrounds, gold/blue accents, Geist font). New pages clone federal-broadband pattern (Hero + content sections + footer CTA). Navigation sync is critical (Header.tsx, Footer.tsx, sitemap.ts must all update). JSON-driven content model (no hardcoded content in TSX). Competitor names in comparison tables publish as-is.
+- **From Review:** Codebase is ready. All sections are server components except Header and Carousel. `prefers-reduced-motion` rule exists at globals.css:1065. Background classes (`.vf-bg-*`) use solid colors/gradients at lines 132-150. Section flow in app/page.tsx lines 20-61 is clean. Recommend creating client wrapper component for animations, adding texture modifiers (not replacements), and using consistent 400-600ms animation durations.
+- **From Research:** IntersectionObserver must be client-side. Use `threshold: 0.1`, `rootMargin: '50px'` for reveal timing. CSS-only textures via `radial-gradient` (dots), `linear-gradient` (grid), and inline SVG `feTurbulence` (noise). Only animate `transform` and `opacity` for GPU acceleration. Use `clip-path: polygon()` for dividers. Must respect `prefers-reduced-motion` with `animation: none` fallback.
+- **From Gap Analysis:** Component wrappers (CarouselSection, AboutSection, GivingBackSection, ContactSection) already render their own `<section>` tags with background classes. ScrollReveal wraps the component call, NOT the internal section. Import paths use relative imports, NOT `@/` aliases. Palantir page has 4 content sections: Intro, Comparison Table, Advantages, Closing Statement (no "Capabilities" section). SectionDivider uses new CSS class `.vf-divider-top` positioned at TOP of each section, not bottom of previous section.
+- **Constraints:** Do NOT convert server components to client components. Do NOT modify existing CSS classes. Keep existing `.vf-bg-*` classes intact — textures are additive. No external dependencies. Hero sections do NOT get scroll reveal (immediately visible). All animations disabled when `prefers-reduced-motion: reduce`.
 
 ## Implementation Steps
 
-### Phase 1: Content Updates (4 files)
-1. **content/what_we_do.json** — Add 7th carousel card: id "palantir-foundry", title "Palantir Foundry & AIP Options", body text emphasizing "optional platform capability" framing, no link field (consistent with existing cards).
+### 1. Create `C:/Users/mhsut/DevProjects/VFSsite/components/ScrollReveal.tsx`
+Client component that wraps children and applies scroll-triggered animations using IntersectionObserver.
 
-2. **content/ai_alignment.json** — Add 5th carousel card: id "platform-agnostic-ai", title "Platform-Agnostic AI Integration", body text describing platform-agnostic approach with optional Palantir integration.
+**Implementation:**
+```typescript
+'use client'
 
-3. **content/experience.json** — Update palantir-foundry case study (lines 22-33 per review): add "one of several platform options" framing to situation text. Preserve existing situation/role/outcome structure.
+import { useEffect, useRef, useState, ReactNode } from 'react'
 
-4. **components/Footer.tsx** — SINGLE COMBINED EDIT: (a) Add Lonestar link to footer navigation links array (href="/lonestar", label="Lonestar"). (b) Add small text line BELOW existing footer links: "ValorForge also offers Palantir Foundry and AIP as an optional capability within our broader federal technology solutions." Do NOT add a separate Palantir link — Palantir stays under Capabilities dropdown only.
+interface ScrollRevealProps {
+  children: ReactNode
+  animation?: 'vf-fadeInUp' | 'vf-fadeInLeft' | 'vf-fadeInRight' | 'vf-scaleIn'
+  delay?: number
+  threshold?: number
+  className?: string
+}
 
-### Phase 2: New Content Files (2 files)
+export default function ScrollReveal({
+  children,
+  animation = 'vf-fadeInUp',
+  delay = 0,
+  threshold = 0.15,
+  className = ''
+}: ScrollRevealProps) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [isVisible, setIsVisible] = useState(false)
 
-5. **content/palantir.json** — Create JSON file with the following structure and exact content:
+  useEffect(() => {
+    if (!ref.current) return
 
-```json
-{
-  "seoTitle": "Federal Palantir Services | ValorForge Solutions",
-  "seoDescription": "The only SDVOSB Palantir partner engineered for federal missions that cannot fail. CMMC 2.0 Level 2 certified Palantir Foundry and AIP implementation.",
-  "hero": {
-    "badge": "SDVOSB · CMMC 2.0 Level 2 Certified",
-    "headline": "The Only SDVOSB Palantir Partner Engineered for Federal Missions That Cannot Fail",
-    "subheadline": "National-scale Palantir Foundry delivery, trusted AI with guide-rail controls, and military-rooted accountability — with compliance built in from day one."
-  },
-  "intro": [
-    "Palantir's trusted service providers each bring something valuable — deep technical expertise, rapid delivery, training excellence, or end-to-end support. ValorForge takes the best of every approach and adds what none of them can match: certified Service-Disabled Veteran-Owned Small Business status, CMMC 2.0 Level 2 compliance baked in from day one, national-scale Palantir Foundry delivery in critical infrastructure, and military-rooted execution discipline fused with Big Four rigor.",
-    "We are not another ex-Palantir boutique chasing projects. We are the federal-first partner that delivers Palantir Foundry and AIP as an optional, high-impact capability layered directly onto our core federal broadband program management, modernization, AI governance, and CMMC services — with accountability that missions demand."
-  ],
-  "comparisonTable": {
-    "competitors": [
-      "ValorForge Solutions",
-      "Foxtrot",
-      "RANGR Data",
-      "10x Partners",
-      "Sibyllians",
-      "ForgeSight / Fourth Age",
-      "Ontologize / Ethicrithm / Aplos / Others"
-    ],
-    "rows": [
-      {
-        "capability": "SDVOSB Certified + Federal Set-Aside / Sole-Source Advantage",
-        "ratings": ["Yes", "No", "No", "No", "No", "No", "No"]
-      },
-      {
-        "capability": "CMMC 2.0 Level 2 Certified (built-in from day one)",
-        "ratings": ["Yes", "No", "No", "No", "No", "No", "No"]
-      },
-      {
-        "capability": "Veteran-Led + Military Execution Discipline",
-        "ratings": ["Yes", "No", "No", "No", "Partial", "No", "No"]
-      },
-      {
-        "capability": "Big Four Methodological Rigor",
-        "ratings": ["Yes", "Strong", "Partial", "Strong", "Strong", "Partial", "Varies"]
-      },
-      {
-        "capability": "Trusted AI Deployment with Palantir as the Operating System + Guide-Rail Controls",
-        "ratings": ["Yes (Optional consulting & implementation service)", "Strong", "Good", "Good", "Good", "Moderate", "Strong"]
-      },
-      {
-        "capability": "End-to-End Implementation & Integration",
-        "ratings": ["Yes", "Strong", "Strong", "Strong", "Strong", "Strong", "Yes"]
-      },
-      {
-        "capability": "Production Sustainment, Optimization & 24/7 Support",
-        "ratings": ["Yes", "Yes", "Strong", "Moderate", "Yes", "Strong", "Moderate"]
-      },
-      {
-        "capability": "Self-Sufficiency Training & Enablement",
-        "ratings": ["Yes", "Yes", "Strong", "Strong", "Yes", "Strong", "Yes"]
-      },
-      {
-        "capability": "Regulated / Mission-Critical Governance Focus",
-        "ratings": ["Yes", "Moderate", "Moderate", "Moderate", "Moderate", "Moderate", "Moderate"]
-      }
-    ]
-  },
-  "advantages": [
-    {
-      "header": "National-Scale Proven Delivery",
-      "parenthetical": "(beats boutiques like Foxtrot, ForgeSight, Northslope)",
-      "body": "We executed one of the largest Palantir digital-twin deployments in U.S. critical infrastructure history — unifying 1,000+ data sources into real-time operational command centers. This same ontology-first framework is replicable across federal programs, delivering scale that pure-play implementers rarely achieve."
-    },
-    {
-      "header": "Ironclad Compliance & Governance Built In",
-      "parenthetical": "(beats everyone, including Ethicrithm and Fourth Age)",
-      "body": "CMMC 2.0 Level 2 certified with zero-trust principles and guide-rail controls from the first day. Every Palantir engagement inherits federal-grade security, auditability, and risk management — no retrofitting required."
-    },
-    {
-      "header": "Veteran-Led Discipline & Federal Contracting Superpower",
-      "parenthetical": "(beats all ex-Palantir/FDE firms like Sibyllians, 10x Partners, Proxet)",
-      "body": "SDVOSB set-aside and sole-source vehicles + military-rooted accountability ensure deadlines are met and outcomes are flawless. We combine senior expertise with the personal commitment only veterans bring."
-    },
-    {
-      "header": "Trusted AI with Palantir as the Operating System",
-      "parenthetical": "(beats AI-focused players like Codestrap and Ethicrithm)",
-      "body": "Consulting and implementation for enterprise trusted AI models, data wrangling, agent orchestration, and policy-enforced guide rails — all while maintaining full auditability and mission alignment."
-    },
-    {
-      "header": "End-to-End + Self-Sufficiency Focus",
-      "parenthetical": "(surpasses Fourth Age, Ontologize, RANGR)",
-      "body": "Full lifecycle support plus training and enablement so your teams become self-sufficient — without creating long-term vendor dependency."
+    // Fallback for browsers without IntersectionObserver
+    if (!('IntersectionObserver' in window)) {
+      setIsVisible(true)
+      return
     }
-  ],
-  "closingStatement": "When your federal mission requires Palantir Foundry or AIP, partner with the only provider that combines the best technical depth, training excellence, and rapid delivery of Palantir's service network with the compliance, contracting advantage, and mission discipline that only ValorForge delivers.",
-  "footerCta": {
-    "text": "Ready to deploy Palantir Foundry or AIP with federal-grade accountability?",
-    "buttonText": "Contact ValorForge",
-    "buttonHref": "/#contact"
-  }
-}
-```
 
-6. **content/lonestar.json** — Create JSON file with the following structure and exact content:
-
-```json
-{
-  "seoTitle": "Lonestar Commercial Palantir Services | ValorForge Solutions",
-  "seoDescription": "The commercial Palantir partner that disrupts the entire service provider market. National-scale proof, veteran discipline, and federal-grade backbone.",
-  "hero": {
-    "badge": "Commercial Division of ValorForge Solutions",
-    "headline": "Lonestar: The Commercial Palantir Partner That Disrupts the Entire Service Provider Market",
-    "subheadline": "National-scale telecom digital-twin proof, military-rooted execution discipline, and enterprise governance standards — with independent agility and federal-grade backbone."
-  },
-  "intro": [
-    "Palantir's service providers each excel in one area: ex-Palantir depth, senior-only speed, embedded engineering, self-sufficiency training, or fast ROI. ValorForge Lonestar takes the absolute best from all of them — and adds what the market has been missing: national-scale telecom digital-twin proof at petabyte levels, military-rooted execution discipline, enterprise governance standards inherited from CMMC 2.0, and an independent commercial focus backed by federal-grade backbone. We are not limited by boutique scope, big-firm bureaucracy, or ex-Palantir alumni networks. We deliver faster, more sustainable, cross-industry results with accountability that cannot fail."
-  ],
-  "comparisonTable": {
-    "competitors": [
-      "ValorForge Lonestar",
-      "Foxtrot",
-      "RANGR Data",
-      "10x Partners",
-      "Sibyllians",
-      "ForgeSight / Northslope / Proxet",
-      "Codestrap / Aplos / Others"
-    ],
-    "rows": [
-      {
-        "capability": "SDVOSB-Backed Federal-Grade Backbone",
-        "ratings": ["Yes", "No", "No", "No", "No", "No", "No"]
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          observer.disconnect() // Reveal once, cleanup
+        }
       },
       {
-        "capability": "CMMC-Derived Enterprise Governance & Guide Rails (built-in)",
-        "ratings": ["Yes", "Partial", "Good", "Partial", "Good", "Partial", "Moderate"]
-      },
-      {
-        "capability": "Veteran-Led Execution Discipline + Military Tempo",
-        "ratings": ["Yes", "No", "No", "No", "Partial", "No", "No"]
-      },
-      {
-        "capability": "Big Four Methodological Rigor",
-        "ratings": ["Yes", "Strong", "Partial", "Strong", "Strong", "Good", "Varies"]
-      },
-      {
-        "capability": "Trusted AI + Palantir as the Operating System",
-        "ratings": ["Yes (Optional service)", "Strong", "Good", "Good", "Good", "Moderate", "Strong"]
-      },
-      {
-        "capability": "End-to-End Implementation & Rapid Time-to-Value",
-        "ratings": ["Yes", "Strong", "Strong", "Strong", "Strong", "Strong", "Yes"]
-      },
-      {
-        "capability": "Production Sustainment & Long-Term Optimization",
-        "ratings": ["Yes", "Yes", "Strong", "Moderate", "Yes", "Yes", "Moderate"]
-      },
-      {
-        "capability": "Self-Sufficiency Training & Enablement",
-        "ratings": ["Yes", "Yes", "Strong", "Strong", "Yes", "Yes", "Yes"]
-      },
-      {
-        "capability": "Independent Agility (No Acquired-Firm Bureaucracy)",
-        "ratings": ["Yes", "Yes", "No (Accenture-owned)", "Yes", "Yes", "Varies", "Yes"]
+        threshold,
+        rootMargin: '0px 0px -50px 0px'
       }
-    ]
-  },
-  "advantages": [
-    {
-      "header": "National-Scale Telecom Digital Twin Proof as Your Blueprint",
-      "parenthetical": "(surpasses Foxtrot's broad experience and ForgeSight's embedding model)",
-      "body": "We have already delivered one of the largest Palantir Foundry deployments in U.S. history. That exact ontology-first, simplification-first architecture is now replicable to healthcare networks, banking risk platforms, manufacturing supply chains, energy logistics, and any regulated enterprise — delivering lower risk and faster time-to-value than any boutique or acquired firm."
-    },
-    {
-      "header": "Senior Expertise + Veteran Discipline That Cannot Fail",
-      "parenthetical": "(beats 10x Partners' senior-only teams, Sibyllians' FDE DNA, and Northslope's ROI focus)",
-      "body": "Military-rooted accountability and Big Four methodological rigor ensure every engagement meets deadlines, mitigates risks, and drives compounding ROI — with the personal commitment only a veteran-led team delivers."
-    },
-    {
-      "header": "End-to-End + Production Sustainment Excellence",
-      "parenthetical": "(exceeds Fourth Age's full lifecycle and RANGR's modern implementation)",
-      "body": "From ontology design and AIP agent orchestration to 24/7 monitoring, optimization, and long-term evolution — we keep your Palantir environment sharp for years, reducing vendor reliance while maximizing uptime and returns."
-    },
-    {
-      "header": "Trusted AI Governance & Guide-Rail Controls",
-      "parenthetical": "(outperforms Ethicrithm's competitive-advantage focus and Codestrap's AI services)",
-      "body": "Palantir as the secure operating system for enterprise AI: data wrangling, model orchestration, policy-enforced guide rails, and full auditability — all with CMMC-derived standards applied commercially from day one."
-    },
-    {
-      "header": "Self-Sufficiency + Rapid Enablement",
-      "parenthetical": "(surpasses Ontologize's training model and Proxet's condensed timelines)",
-      "body": "Hands-on delivery plus best-in-class user enablement and training so your teams own the platform long-term — delivered with startup speed and enterprise discipline."
-    },
-    {
-      "header": "Independent Agility with Federal-Grade Backbone",
-      "parenthetical": "(disrupts every player on Palantir's list)",
-      "body": "As ValorForge's dedicated commercial arm, we move faster than acquired firms and deliver deeper scale and compliance than pure-play boutiques — without ever compromising on governance or outcomes."
-    }
-  ],
-  "closingStatement": "TBD",
-  "footerCta": {
-    "text": "Ready to disrupt your industry with Palantir Foundry or AIP?",
-    "buttonText": "Contact Lonestar",
-    "buttonHref": "/#contact"
+    )
+
+    observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [threshold])
+
+  return (
+    <div
+      ref={ref}
+      className={`vf-reveal ${isVisible ? `vf-reveal-visible ${animation}` : ''} ${className}`}
+      style={{ animationDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  )
+}
+```
+
+**Key details:**
+- Client component (`'use client'`)
+- Uses IntersectionObserver with `threshold: 0.15` and `rootMargin: '0px 0px -50px 0px'`
+- Disconnects observer after first reveal (performance)
+- Applies `.vf-reveal` (pending state) and `.vf-reveal-visible` (animated state) classes
+- Supports optional delay prop for staggered animations
+- Fallback to `isVisible: true` for old browsers
+
+---
+
+### 2. Create `C:/Users/mhsut/DevProjects/VFSsite/components/SectionDivider.tsx`
+Server component that renders decorative SVG dividers between sections.
+
+**Implementation:**
+```typescript
+interface SectionDividerProps {
+  variant: 'wave' | 'slant' | 'curve'
+  flip?: boolean
+  color?: string
+  className?: string
+}
+
+export default function SectionDivider({
+  variant,
+  flip = false,
+  color = 'currentColor',
+  className = ''
+}: SectionDividerProps) {
+  const svgPaths = {
+    wave: 'M0,32 C160,80 320,0 480,48 C640,96 800,16 960,64 L960,0 L0,0 Z',
+    slant: 'M0,0 L960,64 L960,0 Z',
+    curve: 'M0,0 C320,80 640,80 960,0 L960,0 L0,0 Z'
   }
+
+  return (
+    <div className={`vf-divider-top ${className}`} aria-hidden="true">
+      <svg
+        viewBox="0 0 960 64"
+        preserveAspectRatio="none"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{
+          transform: flip ? 'scaleY(-1)' : 'none'
+        }}
+      >
+        <path d={svgPaths[variant]} fill={color} />
+      </svg>
+    </div>
+  )
 }
 ```
 
-### Phase 3: New Page Routes (2 files)
+**Key details:**
+- Server component (no 'use client')
+- Three variants: wave (organic curves), slant (diagonal), curve (smooth arc)
+- `flip` prop mirrors the divider vertically
+- `color` prop defaults to `currentColor` (inherits from parent)
+- Uses `preserveAspectRatio="none"` for full-width scaling
+- Marked `aria-hidden="true"` (decorative only)
+- Uses `.vf-divider-top` class for positioning at TOP of section
 
-7. **app/capabilities/palantir/page.tsx** — Create page component cloning federal-broadband/page.tsx pattern. Import palantir.json content. Render:
-   - HeroSection with hero data (badge, headline, subheadline)
-   - Intro section with two paragraphs from intro array
-   - Comparison table section (id="comparison") using vf-comparison-table class — render competitors as column headers, rows as capability + ratings array
-   - Advantages section (id="advantages") using vf-advantage-grid class — map 5 advantages, each with header (bold vf-h3), parenthetical (italic muted), and body
-   - Closing CTA section with closingStatement text and footerCta button
-   - Add metadata exports (title: seoTitle, description: seoDescription) for SEO
+---
 
-8. **app/lonestar/page.tsx** — Create top-level route (not under /capabilities). Clone same page pattern as palantir/page.tsx but import lonestar.json. Render hero, intro (single paragraph), comparison table (id="comparison"), 6 advantages (id="advantages"), closing statement "TBD", and footerCta. Add metadata exports.
+### 3. Modify `C:/Users/mhsut/DevProjects/VFSsite/app/globals.css`
 
-### Phase 4: Navigation Sync (3 files)
-
-9. **components/Header.tsx** — Add Palantir item to CAPABILITIES_ITEMS array (lines 8-31). Structure:
-```js
-{
-  href: "/capabilities/palantir",
-  label: "Palantir Foundry & AIP",
-  sections: [
-    { href: "/capabilities/palantir#comparison", label: "Competitor Comparison" },
-    { href: "/capabilities/palantir#advantages", label: "Disruptive Advantages" }
-  ]
-}
-```
-Add Lonestar to NAV_ITEMS array (lines 33-38): `{ href: "/lonestar", label: "Lonestar" }`
-
-10. **components/Footer.tsx** — Already updated in Phase 1 Step 4. Verify Lonestar link added to footer navigation links array and Palantir note added as small text below links.
-
-11. **app/sitemap.ts** — Add two entries to sitemap array:
-```js
-{
-  url: 'https://valorforgellc.com/capabilities/palantir',
-  lastModified: new Date(),
-  changeFrequency: 'monthly',
-  priority: 0.9,
-},
-{
-  url: 'https://valorforgellc.com/lonestar',
-  lastModified: new Date(),
-  changeFrequency: 'monthly',
-  priority: 0.9,
-}
-```
-
-### Phase 5: CSS Design System (1 file)
-
-12. **app/globals.css** — Add two new component classes at line 1391+ (after existing vf-partner-grid media queries):
+**Add @keyframes animations after line 1063 (before prefers-reduced-motion block):**
 
 ```css
-/* ═══════════════════════════════════════════ */
-/* Comparison Table                           */
-/* ═══════════════════════════════════════════ */
-.vf-comparison-table {
+/* Scroll reveal animations */
+@keyframes vf-fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes vf-fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes vf-fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes vf-scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Reveal states */
+.vf-reveal {
+  opacity: 0;
+}
+
+.vf-reveal-visible {
+  opacity: 1;
+}
+
+.vf-reveal-visible.vf-fadeInUp {
+  animation: vf-fadeInUp 600ms ease-out forwards;
+}
+
+.vf-reveal-visible.vf-fadeInLeft {
+  animation: vf-fadeInLeft 500ms ease-out forwards;
+}
+
+.vf-reveal-visible.vf-fadeInRight {
+  animation: vf-fadeInRight 500ms ease-out forwards;
+}
+
+.vf-reveal-visible.vf-scaleIn {
+  animation: vf-scaleIn 550ms ease-out forwards;
+}
+```
+
+**Add background texture classes after line 150 (after existing .vf-bg-* classes):**
+
+```css
+/* Background textures (composable with .vf-bg-* classes) */
+.vf-texture-dots {
+  position: relative;
+}
+
+.vf-texture-dots::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.06) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.vf-texture-grid {
+  position: relative;
+}
+
+.vf-texture-grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.vf-texture-noise {
+  position: relative;
+}
+
+.vf-texture-noise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ensure child content sits above textures */
+.vf-texture-dots > *,
+.vf-texture-grid > *,
+.vf-texture-noise > * {
+  position: relative;
+  z-index: 1;
+}
+```
+
+**Add divider positioning after line 1063 (with reveal animations):**
+
+```css
+/* Section dividers */
+.vf-divider-top {
+  position: absolute;
+  top: -1px;
+  left: 0;
   width: 100%;
-  border-collapse: collapse;
-  margin: 24px 0;
-  font-size: 14px;
+  height: 60px;
+  pointer-events: none;
+  z-index: 5;
 }
 
-.vf-comparison-table th {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  padding: 12px 16px;
-  text-align: left;
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.04em;
+.vf-divider-top svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
-.vf-comparison-table th:first-child {
-  background: rgba(245, 183, 74, 0.08);
-  color: var(--accent);
-  font-weight: 800;
-}
-
-.vf-comparison-table td {
-  border: 1px solid var(--border);
-  padding: 10px 14px;
-  color: var(--muted);
-  font-size: 14px;
-  vertical-align: top;
-}
-
-.vf-comparison-table td:first-child {
-  background: rgba(255, 255, 255, 0.02);
-  font-weight: 600;
-  color: var(--text);
-}
-
-.vf-comparison-table tr:nth-child(even) {
-  background: rgba(255, 255, 255, 0.015);
-}
-
-@media (max-width: 760px) {
-  .vf-comparison-table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-  .vf-comparison-table th,
-  .vf-comparison-table td {
-    min-width: 140px;
-  }
-}
-
-/* ═══════════════════════════════════════════ */
-/* Advantage Grid                             */
-/* ═══════════════════════════════════════════ */
-.vf-advantage-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  margin: 24px 0;
-}
-
-.vf-advantage-card {
-  background: rgba(43, 114, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--radius);
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.vf-advantage-card:nth-child(odd) {
-  background: rgba(245, 183, 74, 0.04);
-}
-
-.vf-advantage-header {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--text);
-  margin: 0;
-}
-
-.vf-advantage-parenthetical {
-  font-size: 14px;
-  font-style: italic;
-  color: var(--muted);
-  margin: 0 0 8px;
-}
-
-.vf-advantage-body {
-  font-size: 15px;
-  color: var(--muted);
-  line-height: 1.55;
-  margin: 0;
-}
-
-@media (max-width: 760px) {
-  .vf-advantage-grid {
-    grid-template-columns: 1fr;
+@media (min-width: 760px) {
+  .vf-divider-top {
+    height: 80px;
   }
 }
 ```
 
-Note: vf-bg-blue-accent (line 144-150) and vf-bg-gold-accent (line 136-142) already exist in globals.css. These classes will be applied to sections, not individual cards. Advantage cards use rgba backgrounds in vf-advantage-card class above.
+**Update the prefers-reduced-motion block at line 1065:**
+
+Find:
+```css
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+```
+
+Replace with:
+```css
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Ensure reveal content is visible */
+  .vf-reveal {
+    opacity: 1 !important;
+  }
+}
+```
+
+---
+
+### 4. Modify `C:/Users/mhsut/DevProjects/VFSsite/components/CarouselSection.tsx`
+
+**Add textureClass prop to component interface (line 5-15):**
+
+Find:
+```typescript
+type CarouselSectionProps = {
+  id: string;
+  altBackground?: boolean;
+  reverse?: boolean;
+  imageSrc: string;
+  imageAlt: string;
+  title: string;
+  intro: string;
+  ctaText: string;
+  items: CarouselItem[];
+};
+```
+
+Replace with:
+```typescript
+type CarouselSectionProps = {
+  id: string;
+  altBackground?: boolean;
+  reverse?: boolean;
+  imageSrc: string;
+  imageAlt: string;
+  title: string;
+  intro: string;
+  ctaText: string;
+  items: CarouselItem[];
+  textureClass?: string;
+};
+```
+
+**Add textureClass to function parameters and className (line 17-33):**
+
+Find:
+```typescript
+export function CarouselSection({
+  id,
+  altBackground,
+  reverse,
+  imageSrc,
+  imageAlt,
+  title,
+  intro,
+  ctaText,
+  items
+}: CarouselSectionProps) {
+  const sectionBgClass = altBackground
+    ? "vf-section vf-bg-blue-accent"
+    : "vf-section vf-bg-gold-accent";
+
+  return (
+    <section id={id} className={sectionBgClass}>
+```
+
+Replace with:
+```typescript
+export function CarouselSection({
+  id,
+  altBackground,
+  reverse,
+  imageSrc,
+  imageAlt,
+  title,
+  intro,
+  ctaText,
+  items,
+  textureClass
+}: CarouselSectionProps) {
+  const sectionBgClass = altBackground
+    ? "vf-section vf-bg-blue-accent"
+    : "vf-section vf-bg-gold-accent";
+
+  return (
+    <section id={id} className={`${sectionBgClass}${textureClass ? ` ${textureClass}` : ''}`}>
+```
+
+---
+
+### 5. Modify `C:/Users/mhsut/DevProjects/VFSsite/components/AboutSection.tsx`
+
+**Add texture class to section className (line 9-11):**
+
+Find:
+```typescript
+    <section
+      id="about"
+      className="vf-section vf-bg-blue-accent"
+    >
+```
+
+Replace with:
+```typescript
+    <section
+      id="about"
+      className="vf-section vf-bg-blue-accent vf-texture-noise"
+    >
+```
+
+---
+
+### 6. Modify `C:/Users/mhsut/DevProjects/VFSsite/components/GivingBackSection.tsx`
+
+**Add texture class to section className (line 7-9):**
+
+Find:
+```typescript
+    <section
+      id="giving-back"
+      className="vf-section vf-bg-gold-accent"
+    >
+```
+
+Replace with:
+```typescript
+    <section
+      id="giving-back"
+      className="vf-section vf-bg-gold-accent vf-texture-grid"
+    >
+```
+
+---
+
+### 7. Modify `C:/Users/mhsut/DevProjects/VFSsite/components/ContactSection.tsx`
+
+**Add texture class to section className (line 7):**
+
+Find:
+```typescript
+    <section id="contact" className="vf-section vf-section--contact vf-bg-default">
+```
+
+Replace with:
+```typescript
+    <section id="contact" className="vf-section vf-section--contact vf-bg-default vf-texture-dots">
+```
+
+---
+
+### 8. Modify `C:/Users/mhsut/DevProjects/VFSsite/app/page.tsx`
+
+**Import ScrollReveal and SectionDivider at top (line 1-9):**
+
+Add after existing imports:
+```typescript
+import ScrollReveal from "../components/ScrollReveal"
+import SectionDivider from "../components/SectionDivider"
+```
+
+**Wrap What We Do CarouselSection (line 22-32):**
+
+Find:
+```typescript
+        <CarouselSection
+          id="what-we-do"
+          imageSrc="/assets/img/whatwedo.jpg"
+          imageAlt={whatWeDo.imageAlt}
+          title={whatWeDo.title}
+          intro={whatWeDo.intro}
+          ctaText={whatWeDo.bottomCta}
+          items={whatWeDo.cards}
+          reverse={false}
+          altBackground={false}
+        />
+```
+
+Replace with:
+```typescript
+        <ScrollReveal animation="vf-fadeInUp">
+          <CarouselSection
+            id="what-we-do"
+            imageSrc="/assets/img/whatwedo.jpg"
+            imageAlt={whatWeDo.imageAlt}
+            title={whatWeDo.title}
+            intro={whatWeDo.intro}
+            ctaText={whatWeDo.bottomCta}
+            items={whatWeDo.cards}
+            reverse={false}
+            altBackground={false}
+            textureClass="vf-texture-dots"
+          />
+        </ScrollReveal>
+```
+
+**Wrap Who We Serve CarouselSection (line 34-44):**
+
+Find:
+```typescript
+        <CarouselSection
+          id="who-we-serve"
+          imageSrc="/assets/img/whoweserve.jpg"
+          imageAlt={whoWeServe.imageAlt}
+          title={whoWeServe.title}
+          intro={whoWeServe.intro}
+          ctaText={whoWeServe.bottomCta}
+          items={whoWeServe.cards}
+          reverse={true}
+          altBackground={true}
+        />
+```
+
+Replace with:
+```typescript
+        <ScrollReveal animation="vf-fadeInLeft">
+          <CarouselSection
+            id="who-we-serve"
+            imageSrc="/assets/img/whoweserve.jpg"
+            imageAlt={whoWeServe.imageAlt}
+            title={whoWeServe.title}
+            intro={whoWeServe.intro}
+            ctaText={whoWeServe.bottomCta}
+            items={whoWeServe.cards}
+            reverse={true}
+            altBackground={true}
+            textureClass="vf-texture-grid"
+          />
+        </ScrollReveal>
+```
+
+**Wrap AI Alignment CarouselSection (line 46-56):**
+
+Find:
+```typescript
+        <CarouselSection
+          id="ai-alignment"
+          imageSrc="/assets/img/aialigned.jpg"
+          imageAlt={aiAlignment.imageAlt}
+          title={aiAlignment.title}
+          intro={aiAlignment.intro}
+          ctaText={aiAlignment.bottomCta}
+          items={aiAlignment.cards}
+          reverse={false}
+          altBackground={false}
+        />
+```
+
+Replace with:
+```typescript
+        <ScrollReveal animation="vf-scaleIn">
+          <CarouselSection
+            id="ai-alignment"
+            imageSrc="/assets/img/aialigned.jpg"
+            imageAlt={aiAlignment.imageAlt}
+            title={aiAlignment.title}
+            intro={aiAlignment.intro}
+            ctaText={aiAlignment.bottomCta}
+            items={aiAlignment.cards}
+            reverse={false}
+            altBackground={false}
+            textureClass="vf-texture-dots"
+          />
+        </ScrollReveal>
+```
+
+**Wrap GivingBackSection (line 59):**
+
+Find:
+```typescript
+        <GivingBackSection />    {/* Now before About */}
+```
+
+Replace with:
+```typescript
+        <ScrollReveal animation="vf-fadeInRight">
+          <GivingBackSection />
+        </ScrollReveal>
+```
+
+**Wrap AboutSection (line 60):**
+
+Find:
+```typescript
+        <AboutSection />
+```
+
+Replace with:
+```typescript
+        <ScrollReveal animation="vf-fadeInUp">
+          <AboutSection />
+        </ScrollReveal>
+```
+
+**Wrap ContactSection (line 61):**
+
+Find:
+```typescript
+        <ContactSection />
+```
+
+Replace with:
+```typescript
+        <ScrollReveal animation="vf-fadeInUp">
+          <ContactSection />
+        </ScrollReveal>
+```
+
+**Add SectionDividers between sections:**
+
+Between Who We Serve and AI Alignment (after line 44 in modified version), add:
+```typescript
+        <SectionDivider variant="slant" color="#0a0a0a" />
+```
+
+Between GivingBackSection and AboutSection (after line 61 in modified version), add:
+```typescript
+        <SectionDivider variant="curve" color="#0a0a0a" />
+```
+
+Between AboutSection and ContactSection (after line 64 in modified version), add:
+```typescript
+        <SectionDivider variant="wave" color="#0a0a0a" />
+```
+
+**Note:** SectionDividers should be placed BETWEEN the `</ScrollReveal>` closing tag of one section and the `<ScrollReveal>` opening tag of the next section. This ensures the divider is positioned at the TOP of the next section via `.vf-divider-top` CSS class.
+
+---
+
+### 9. Modify `C:/Users/mhsut/DevProjects/VFSsite/app/capabilities/palantir/page.tsx`
+
+**Import ScrollReveal at top (line 1-8):**
+
+Add after existing imports:
+```typescript
+import ScrollReveal from "../../../components/ScrollReveal"
+```
+
+**Wrap Intro section (line 52-59):**
+
+Find:
+```typescript
+        {/* Intro */}
+        <section className="vf-section vf-bg-default vf-content-section">
+          <div className="vf-container">
+            {content.intro.map((paragraph, i) => (
+              <p key={i} className="vf-lead" style={{ textAlign: "center", fontSize: "18px", maxWidth: "52ch", margin: "0 auto 20px" }}>{paragraph}</p>
+            ))}
+          </div>
+        </section>
+```
+
+Replace with:
+```typescript
+        {/* Intro */}
+        <ScrollReveal animation="vf-fadeInUp">
+          <section className="vf-section vf-bg-default vf-content-section vf-texture-dots">
+            <div className="vf-container">
+              {content.intro.map((paragraph, i) => (
+                <p key={i} className="vf-lead" style={{ textAlign: "center", fontSize: "18px", maxWidth: "52ch", margin: "0 auto 20px" }}>{paragraph}</p>
+              ))}
+            </div>
+          </section>
+        </ScrollReveal>
+```
+
+**Wrap Comparison Table section (line 61-86):**
+
+Find:
+```typescript
+        {/* Comparison Table */}
+        <section id="comparison" className="vf-section vf-bg-blue-accent vf-content-section">
+```
+
+Replace with:
+```typescript
+        {/* Comparison Table */}
+        <ScrollReveal animation="vf-scaleIn">
+          <section id="comparison" className="vf-section vf-bg-blue-accent vf-content-section vf-texture-grid">
+```
+
+And add closing `</ScrollReveal>` after the section closing tag (line 86).
+
+**Wrap Advantages section (line 88-102):**
+
+Find:
+```typescript
+        {/* Advantages */}
+        <section id="advantages" className="vf-section vf-bg-gold-accent vf-content-section">
+```
+
+Replace with:
+```typescript
+        {/* Advantages */}
+        <ScrollReveal animation="vf-fadeInRight">
+          <section id="advantages" className="vf-section vf-bg-gold-accent vf-content-section">
+```
+
+And add closing `</ScrollReveal>` after the section closing tag (line 102).
+
+**Wrap Closing Statement section (line 104-109):**
+
+Find:
+```typescript
+        {/* Closing Statement */}
+        <section className="vf-section vf-bg-default vf-content-section">
+```
+
+Replace with:
+```typescript
+        {/* Closing Statement */}
+        <ScrollReveal animation="vf-fadeInUp">
+          <section className="vf-section vf-bg-default vf-content-section">
+```
+
+And add closing `</ScrollReveal>` after the section closing tag (line 109).
+
+---
+
+### 10. Modify `C:/Users/mhsut/DevProjects/VFSsite/app/lonestar/page.tsx`
+
+**Same pattern as palantir page:**
+
+1. Import ScrollReveal: `import ScrollReveal from "../../components/ScrollReveal"`
+2. Wrap Intro section in `<ScrollReveal animation="vf-fadeInUp">`, add `vf-texture-dots` to className
+3. Wrap Comparison Table section in `<ScrollReveal animation="vf-scaleIn">`, add `vf-texture-grid` to className
+4. Wrap Advantages section in `<ScrollReveal animation="vf-fadeInRight">`
+5. Wrap Closing Statement section in `<ScrollReveal animation="vf-fadeInUp">`
+
+**Note:** Lonestar page is at `app/lonestar/page.tsx` (2 levels deep), so import path is `"../../components/ScrollReveal"` (not `"../../../components/ScrollReveal"` like palantir).
+
+---
 
 ## File Inventory
+
 | File | Action | Lines/Functions Affected |
-|------|--------|--------------------------|
-| content/what_we_do.json | MODIFY | Add 7th object to array (after id: "giving-back") |
-| content/ai_alignment.json | MODIFY | Add 5th object to array (after id: "ai-policy-development") |
-| content/experience.json | MODIFY | Update palantir-foundry case study situation text (L22-33) |
-| components/Footer.tsx | MODIFY | Add Lonestar link to nav array + Palantir note text below links (footer body, ~L16-49) |
-| content/palantir.json | CREATE | Full file (seoTitle, seoDescription, hero, intro[2], comparisonTable, advantages[5], closingStatement, footerCta) |
-| content/lonestar.json | CREATE | Full file (seoTitle, seoDescription, hero, intro[1], comparisonTable, advantages[6], closingStatement: "TBD", footerCta) |
-| app/capabilities/palantir/page.tsx | CREATE | Full file (clone federal-broadband pattern, import palantir.json, render sections with vf-comparison-table, vf-advantage-grid) |
-| app/lonestar/page.tsx | CREATE | Full file (clone capability page pattern, import lonestar.json, render sections with vf-comparison-table, vf-advantage-grid) |
-| components/Header.tsx | MODIFY | CAPABILITIES_ITEMS array (~L8-31): add Palantir with 2 subsections. NAV_ITEMS array (~L33-38): add Lonestar |
-| app/sitemap.ts | MODIFY | Add 2 entries to sitemap array (~L3-47): /capabilities/palantir, /lonestar |
-| app/globals.css | MODIFY | Add .vf-comparison-table and .vf-advantage-grid classes (~L1391+) |
+|------|--------|------------------------|
+| `components/ScrollReveal.tsx` | CREATE | Full file (~60 lines) |
+| `components/SectionDivider.tsx` | CREATE | Full file (~40 lines) |
+| `components/CarouselSection.tsx` | MODIFY | Lines 5-15 (add textureClass prop), 17-33 (use prop in className) |
+| `components/AboutSection.tsx` | MODIFY | Line 11 (add vf-texture-noise) |
+| `components/GivingBackSection.tsx` | MODIFY | Line 9 (add vf-texture-grid) |
+| `components/ContactSection.tsx` | MODIFY | Line 7 (add vf-texture-dots) |
+| `app/globals.css` | MODIFY | Lines 150+ (textures), 1063+ (animations, divider), 1065+ (a11y) |
+| `app/page.tsx` | MODIFY | Lines 1-9 (imports), 22-61 (wrap sections, add dividers) |
+| `app/capabilities/palantir/page.tsx` | MODIFY | Imports + section wrappers (lines 1-8, 52-109) |
+| `app/lonestar/page.tsx` | MODIFY | Imports + section wrappers |
 
 ## Architecture Decisions
-- **New CSS classes instead of reusing vf-card-grid:** Comparison tables and advantage grids are semantically distinct from card grids. Using dedicated classes (vf-comparison-table, vf-advantage-grid) avoids semantic conflict and allows specific responsive behavior (tables scroll horizontally on mobile, advantages collapse to 1-col).
-- **Lonestar as top-level route:** Lonestar is a distinct brand/division, not a capability under VFS Capabilities dropdown. Top-level route /lonestar matches its positioning as a separate commercial offering.
-- **Palantir under /capabilities:** Federal Palantir capability is a service offering within VFS capabilities, consistent with federal-broadband and program-management.
-- **Competitor names publish as-is:** Per instruction, comparison tables use actual competitor names without redaction or pseudonyms.
-- **No link on what_we_do Palantir card:** Consistent with existing cards in what_we_do.json, which have no href field.
-- **Mobile comparison table behavior:** Horizontal scroll (overflow-x: auto) on mobile. This is simpler than column collapsing and ensures all 7 competitor columns + row headers remain visible and readable at 320px+ viewport widths.
-- **Palantir subsections in Header:** Two subsections matching page section IDs: "Competitor Comparison" (#comparison), "Disruptive Advantages" (#advantages). Follows existing pattern of Federal Broadband and Program Management capabilities with 2-5 subsections.
-- **Footer single edit:** Phase 1 Step 4 and Phase 4 Step 10 are the same edit. Footer.tsx receives ONE combined edit: add Lonestar link to navigation links array, add Palantir note as small text below links. No separate Palantir link — Palantir remains under Capabilities dropdown only.
-- **Lonestar closing CTA:** Uses placeholder "TBD" per user instruction. This is a deferred decision and does not block implementation. The closingStatement field in lonestar.json contains the literal string "TBD".
+
+**Why client wrapper vs client sections?**
+Keep all section components (AboutSection, CarouselSection, etc.) as server components for performance. ScrollReveal is a minimal client wrapper that only handles IntersectionObserver logic. This preserves server rendering benefits.
+
+**Why ::before pseudo-elements for textures?**
+Allows textures to layer on top of existing backgrounds without modifying background-image properties. Keeps `.vf-bg-*` classes pure and composable. z-index stacking ensures content readability.
+
+**Why inline SVG paths vs external files?**
+Dividers are ~50 bytes each as inline SVG. No HTTP request overhead, no flash of unstyled content. Easy to customize color per section via props.
+
+**Why opacity: 0 as default reveal state?**
+Content is hidden until IntersectionObserver fires. In prefers-reduced-motion mode, CSS overrides opacity to 1 immediately, so content is never hidden for accessibility users.
+
+**Why disconnect observer after first reveal?**
+Animations only trigger once (on scroll-in). Disconnecting saves memory and CPU cycles. If re-triggering on scroll-up is needed later (Tier 2), remove disconnect call.
+
+**Why `.vf-divider-top` at top of section instead of bottom of previous?**
+Cleaner separation of concerns — each section owns its own divider. Avoids complex relative positioning math. Easier to add/remove sections without affecting adjacent dividers.
+
+**Why textureClass prop for CarouselSection instead of hardcoded?**
+CarouselSection is used three times on homepage with different textures. Prop pattern allows per-instance customization. AboutSection/GivingBackSection/ContactSection appear once, so hardcoded textures are simpler.
+
+**Why relative imports instead of @/ alias?**
+Codebase uses relative imports (verified in app/page.tsx and component files). No @/ alias configured in tsconfig.json. Consistency with existing patterns prevents build errors.
 
 ## Testing Strategy
-- **Carousel rotation:** Verify 7th card in what_we_do and 5th in ai_alignment rotate correctly at 2-at-a-time visibleCount. Test mobile view (all cards display in vertical stack).
-- **Navigation:** Test Header dropdown with 3 capabilities (Federal Broadband, Program Management, Palantir Foundry & AIP). Verify height doesn't exceed viewport at 760px mobile breakpoint. Test NAV_ITEMS with 5 items (Leadership, Partners, Careers, Contact, Lonestar) in mobile hamburger menu.
-- **Responsive tables:** Test vf-comparison-table on mobile (320px, 375px, 760px). Verify horizontal scroll enables at <760px. Scroll right to verify all 7 competitor columns + row headers are readable. Test on iOS Safari for smooth scrolling behavior.
-- **Advantage grid:** Verify 2-col layout on desktop (>760px), 1-col on mobile (≤760px). Check alternating gold/blue accent backgrounds on advantage cards.
-- **Sitemap:** Verify /capabilities/palantir and /lonestar appear in generated sitemap.xml with priority 0.9, changeFrequency monthly.
-- **Footer:** Verify Lonestar link navigates correctly to /lonestar. Verify Palantir note text displays below footer links as small text (13px, muted color).
-- **SEO metadata:** Verify new pages export metadata for title/description. Check OpenGraph tags render in page head using View Source.
-- **Anchor links:** Test Header subsection links (Competitor Comparison, Disruptive Advantages) navigate to #comparison, #advantages section IDs on /capabilities/palantir page without header clipping (scroll-margin-top applies).
+
+**Functional:**
+- Sections animate in as user scrolls down homepage
+- Hero section is immediately visible (no animation)
+- Palantir and Lonestar pages animate correctly
+- Textures are visible but subtle (not distracting)
+- Dividers render at section boundaries without layout shift
+
+**Accessibility:**
+- With prefers-reduced-motion enabled, all content is visible immediately
+- No animations trigger with prefers-reduced-motion
+- Keyboard navigation works (ScrollReveal doesn't intercept focus)
+- Screen readers announce content normally (no aria-live conflicts)
+
+**Performance:**
+- No jank during scroll (Chrome DevTools Performance tab: 60fps)
+- IntersectionObserver cleanup verified (no memory leaks)
+- Texture pseudo-elements don't cause repaint issues
+
+**Browser support:**
+- Test in Chrome, Firefox, Safari, Edge (latest)
+- Verify SVG dividers scale on mobile (320px - 1920px)
+- Test on iOS Safari (texture rendering, scroll performance)
+
+**Visual regression:**
+- Textures don't obscure text (contrast check)
+- Dividers align correctly on all breakpoints
+- Animation timing feels natural (not too fast/slow)
 
 ## Out of Scope
-- Creating a /capabilities landing page (Footer links directly to individual capabilities)
-- Updating admin/jobs or any backend functionality
-- Adding analytics tracking or conversion pixels to new pages
-- Implementing interactive elements on comparison tables (sortable columns, filters, expandable rows)
-- Adding images/screenshots to new pages (content is text-only per instruction)
-- Updating partners.json or leadership.json with Palantir partnership details
-- Creating a dedicated Lonestar logo or brand assets (uses VFS branding/theme)
-- Building mobile-specific comparison table views beyond horizontal scroll (no column collapsing, no vertical stacking of table data)
-- Finalizing Lonestar closing CTA text (remains "TBD" placeholder)
+
+- Hover animations (handled in Tier 2)
+- Parallax effects (Tier 3)
+- Animated SVG paths or morphing shapes
+- Page transition animations
+- Will-change CSS property (add only if performance issues found)
+- Loading state animations (skeleton screens)
+- Staggered animation for child elements within sections
+- Custom easing curves beyond ease-out
 
 ## Acceptance Criteria
-- [ ] 7th card appears in What We Do carousel with "optional platform capability" framing
-- [ ] 5th card appears in AI Alignment carousel with platform-agnostic messaging
-- [ ] Palantir case study in experience.json includes "one of several platform options" framing
-- [ ] Footer displays Lonestar link AND Palantir capability note (small text below links)
-- [ ] /capabilities/palantir page renders with hero, intro (2 paragraphs), comparison table (7 competitors, 9 rows), 5 advantages, closing statement, CTA
-- [ ] /lonestar page renders with hero, intro (1 paragraph), comparison table (7 competitors, 9 rows), 6 advantages, closing "TBD", CTA
-- [ ] Header Capabilities dropdown includes "Palantir Foundry & AIP" with 2 subsections (Competitor Comparison, Disruptive Advantages)
-- [ ] Header NAV_ITEMS includes Lonestar
-- [ ] Sitemap includes /capabilities/palantir and /lonestar entries with priority 0.9
-- [ ] vf-comparison-table class styles competitor tables with dark theme, gold accent on first column, 1px borders, horizontal scroll on mobile (<760px)
-- [ ] vf-advantage-grid class styles advantages as 2-col desktop (>760px), 1-col mobile (≤760px) with alternating gold/blue accent card backgrounds
-- [ ] All pages follow existing vf-* design system (Geist font, consistent spacing, color palette)
-- [ ] No broken links in navigation (all hrefs resolve correctly)
-- [ ] Mobile navigation accommodates 3 capability items and 5 top-level nav items without overflow
-- [ ] Comparison tables display all 7 competitor columns + row headers on mobile via horizontal scroll
-- [ ] Anchor links from Header subsections navigate to #comparison and #advantages sections without header clipping
+
+- [ ] ScrollReveal component created and wraps homepage sections
+- [ ] SectionDivider component created with 3 variants
+- [ ] 4 @keyframes animations added to globals.css
+- [ ] 3 texture modifier classes added to globals.css
+- [ ] `.vf-divider-top` CSS class added for divider positioning
+- [ ] prefers-reduced-motion disables all animations but keeps content visible
+- [ ] Homepage sections (What We Do, Who We Serve, AI Alignment, Giving Back, About, Contact) animate on scroll
+- [ ] SectionDividers placed between Who We Serve/AI Alignment, Giving Back/About, About/Contact
+- [ ] Palantir page: 4 content sections (Intro, Comparison Table, Advantages, Closing Statement) have scroll animations and textures
+- [ ] Lonestar page: same pattern as Palantir
+- [ ] Hero sections do NOT animate (immediately visible)
+- [ ] No visual regression: existing styles intact, textures subtle
+- [ ] No console errors or warnings
+- [ ] 60fps scroll performance on desktop and mobile
+- [ ] CarouselSection accepts textureClass prop and applies it correctly
+- [ ] All imports use relative paths (no @/ aliases)

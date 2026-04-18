@@ -4,7 +4,7 @@ import { ContactForm } from "./ContactForm";
 
 export function ContactSection() {
   return (
-    <section id="contact" className="vf-section vf-section--contact vf-bg-default">
+    <section id="contact" className="vf-section vf-section--contact vf-bg-default vf-texture-dots">
       <div className="vf-container vf-contact-grid">
         <div className="vf-contact-info">
           <h2 className="vf-h2">{contactContent.title}</h2>

@@ -250,3 +250,78 @@ All 11 routes including new /leadership page generated successfully in static bu
 
 - Lonestar closing CTA text remains "TBD" per plan specification. Awaiting final copy.
 - No dedicated hero images for Palantir or Lonestar pages; both use existing /assets/img/hero.jpg placeholder.
+
+---
+
+# Implementation Log
+**Date:** 2026-04-18
+**Plan Reference:** PLAN.md -- RANGR Design Morph, Tier 1 (Steps 1-10)
+
+## Changes Made
+
+### Step 1: Created components/ScrollReveal.tsx (NEW)
+- [components/ScrollReveal.tsx:1-57] -- Client component wrapping children with IntersectionObserver-based scroll reveal. Supports 4 animation variants (vf-fadeInUp, vf-fadeInLeft, vf-fadeInRight, vf-scaleIn), configurable threshold/delay, browser fallback for missing IntersectionObserver, single-fire with observer disconnect.
+
+### Step 2: Created components/SectionDivider.tsx (NEW)
+- [components/SectionDivider.tsx:1-36] -- Server component rendering decorative SVG dividers. 3 path variants (wave, slant, curve), flip/color/className props, aria-hidden="true", preserveAspectRatio="none" for full-width scaling.
+
+### Step 3: Modified app/globals.css
+- [app/globals.css:151-206] -- Added 3 background texture classes (.vf-texture-dots, .vf-texture-grid, .vf-texture-noise) using ::before pseudo-elements with radial-gradient, linear-gradient, and inline SVG feTurbulence respectively. Added z-index stacking rule for child content above textures.
+- [app/globals.css:1113-1168] -- Added 4 @keyframes animations (vf-fadeInUp 600ms, vf-fadeInLeft 500ms, vf-fadeInRight 500ms, vf-scaleIn 550ms) all using ease-out. Added .vf-reveal (opacity:0) and .vf-reveal-visible (opacity:1) state classes with animation bindings per variant.
+- [app/globals.css:1170-1188] -- Added .vf-divider-top positioning (absolute, top:-1px, 60px height, z-index:5) with SVG block display rule and responsive 80px height at >=760px.
+- [app/globals.css:1200-1203] -- Added .vf-reveal { opacity: 1 !important; } inside existing prefers-reduced-motion block to ensure content is always visible when animations are disabled.
+
+### Step 4: Modified components/CarouselSection.tsx
+- [components/CarouselSection.tsx:14] -- Added textureClass?: string to CarouselSectionProps type.
+- [components/CarouselSection.tsx:27] -- Added textureClass to destructured props.
+- [components/CarouselSection.tsx:33] -- Applied textureClass conditionally to section className via template literal.
+
+### Step 5: Modified components/AboutSection.tsx
+- [components/AboutSection.tsx:11] -- Added vf-texture-noise to section className.
+
+### Step 6: Modified components/GivingBackSection.tsx
+- [components/GivingBackSection.tsx:9] -- Added vf-texture-grid to section className.
+
+### Step 7: Modified components/ContactSection.tsx
+- [components/ContactSection.tsx:7] -- Added vf-texture-dots to section className.
+
+### Step 8: Modified app/page.tsx
+- [app/page.tsx:9-10] -- Added imports for ScrollReveal and SectionDivider using relative paths.
+- [app/page.tsx:24-37] -- Wrapped What We Do CarouselSection in ScrollReveal (vf-fadeInUp), added textureClass="vf-texture-dots".
+- [app/page.tsx:39-52] -- Wrapped Who We Serve CarouselSection in ScrollReveal (vf-fadeInLeft), added textureClass="vf-texture-grid".
+- [app/page.tsx:54] -- Added SectionDivider (slant, #0a0a0a) between Who We Serve and AI Alignment.
+- [app/page.tsx:55-68] -- Wrapped AI Alignment CarouselSection in ScrollReveal (vf-scaleIn), added textureClass="vf-texture-dots".
+- [app/page.tsx:70-72] -- Wrapped GivingBackSection in ScrollReveal (vf-fadeInRight).
+- [app/page.tsx:73] -- Added SectionDivider (curve, #0a0a0a) between Giving Back and About.
+- [app/page.tsx:74-76] -- Wrapped AboutSection in ScrollReveal (vf-fadeInUp).
+- [app/page.tsx:77] -- Added SectionDivider (wave, #0a0a0a) between About and Contact.
+- [app/page.tsx:78-80] -- Wrapped ContactSection in ScrollReveal (vf-fadeInUp).
+
+### Step 9: Modified app/capabilities/palantir/page.tsx
+- [app/capabilities/palantir/page.tsx:8] -- Added ScrollReveal import (3 levels deep: ../../../components/ScrollReveal).
+- [app/capabilities/palantir/page.tsx:53-62] -- Wrapped Intro section in ScrollReveal (vf-fadeInUp), added vf-texture-dots to className.
+- [app/capabilities/palantir/page.tsx:64-91] -- Wrapped Comparison Table in ScrollReveal (vf-scaleIn), added vf-texture-grid to className.
+- [app/capabilities/palantir/page.tsx:93-109] -- Wrapped Advantages in ScrollReveal (vf-fadeInRight).
+- [app/capabilities/palantir/page.tsx:111-118] -- Wrapped Closing Statement in ScrollReveal (vf-fadeInUp).
+
+### Step 10: Modified app/lonestar/page.tsx
+- [app/lonestar/page.tsx:8] -- Added ScrollReveal import (2 levels deep: ../../components/ScrollReveal).
+- [app/lonestar/page.tsx:53-62] -- Wrapped Intro section in ScrollReveal (vf-fadeInUp), added vf-texture-dots to className.
+- [app/lonestar/page.tsx:64-91] -- Wrapped Comparison Table in ScrollReveal (vf-scaleIn), added vf-texture-grid to className.
+- [app/lonestar/page.tsx:93-109] -- Wrapped Advantages in ScrollReveal (vf-fadeInRight).
+- [app/lonestar/page.tsx:111-118] -- Wrapped Closing Statement in ScrollReveal (vf-fadeInUp).
+
+## Deviations from Plan
+- None
+
+## Testing Notes
+- Full next build passes with 0 errors and 0 warnings (21/21 static pages generated successfully)
+- Hero sections on all 3 pages (homepage, palantir, lonestar) are NOT wrapped in ScrollReveal -- immediately visible per plan constraints
+- All imports use relative paths (no @/ aliases) matching existing codebase convention
+- Manual browser testing still needed: scroll animation timing, texture visibility/subtlety, divider rendering at section boundaries, prefers-reduced-motion behavior, mobile scroll performance, iOS Safari compatibility
+
+## Open Items
+- Visual QA in browser (Chrome, Firefox, Safari, Edge) needed to confirm animation timing feels natural, textures are subtle and do not obscure text, dividers align correctly at all breakpoints
+- iOS Safari scroll performance testing pending
+- prefers-reduced-motion accessibility verification pending (manual OS settings toggle)
+- 60fps scroll performance measurement pending (Chrome DevTools Performance tab)
