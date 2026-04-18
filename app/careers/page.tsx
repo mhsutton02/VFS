@@ -128,7 +128,7 @@ export default function CareersPage() {
               <div className="vf-careers-empty">
                 <p className="vf-body">
                   No open positions right now — check back soon or{" "}
-                  <Link href="/#contact" style={{ color: "var(--accent)" }}>
+                  <Link href="/#contact" className="vf-link-accent">
                     reach out
                   </Link>{" "}
                   to express interest.

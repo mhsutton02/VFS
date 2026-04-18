@@ -143,7 +143,7 @@ export function ContactForm() {
       {status === "error" && (
         <p style={{ color: "#ef4444", fontSize: "14px", margin: 0 }}>
           Something went wrong. Please try again or email us directly at{" "}
-          <a href="mailto:contact@valorforgesolutions.com" style={{ color: "var(--accent)" }}>
+          <a href="mailto:contact@valorforgesolutions.com" className="vf-link-accent">
             contact@valorforgesolutions.com
           </a>.
         </p>

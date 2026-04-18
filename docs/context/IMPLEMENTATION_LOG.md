@@ -382,3 +382,39 @@ All 11 routes including new /leadership page generated successfully in static bu
 
 ## Open Items
 - None -- all plan items implemented
+
+---
+
+# Implementation Log
+**Date:** 2026-04-18
+**Plan Reference:** PLAN.md -- Tier 3 RANGR Design Morph (Link Accent Consistency & Card Grid Standardization)
+
+## Changes Made
+
+### globals.css (9 edits)
+- [app/globals.css:433-437] -- Replaced `.vf-btn-ghost` with `.vf-btn-gold` -- defines gold button class referenced by partners page markup; changed border-color from rgba(0,0,0,0.15) to var(--accent)
+- [app/globals.css:after L396] -- Added `.vf-link-accent` utility class (color: var(--accent), text-decoration: underline, transition: opacity 0.2s) and `.vf-link-accent:hover` (opacity: 0.8) after `.vf-breadcrumb-current` block -- centralizes accent link styling
+- [app/globals.css:262-268] -- Added `transition: color 0.2s ease;` to `.vf-nav-list a` -- smooths nav link hover color change
+- [app/globals.css:1546-1553] -- Added `transition: border-color 0.2s, background 0.2s;` to `.vf-program-card` and new `.vf-program-card:hover` rule (border-color: rgba(245,183,74,0.3), background: rgba(255,255,255,0.06)) -- hover state for program cards
+- [app/globals.css:1603-1611] -- Added `transition: border-color 0.2s, background 0.2s;` to `.vf-partner-card` and new `.vf-partner-card:hover` rule (border-color: rgba(245,183,74,0.3), background: rgba(255,255,255,0.06)) -- hover state for partner cards
+- [app/globals.css:750-755] -- Added `transition: border-color 0.2s, background 0.2s;` to `.vf-careers-card` and new `.vf-careers-card:hover` rule (border-color: rgba(245,183,74,0.4), background: rgba(255,255,255,0.07)) -- hover state for careers cards
+- [app/globals.css:494-506] -- Added `transition: border-color 0.15s;` to `.vf-card` and new `.vf-card:hover` rule (border-color: rgba(245,183,74,0.25)) -- hover state for carousel cards
+- [app/globals.css:1542] -- Changed `.vf-card-grid` gap from `20px` to `24px` -- standardizes card grid gap across all grids
+- [app/globals.css:605-608] -- Added `transform: scale(1.02);` to `.vf-partners-logos a:hover` -- subtle hover scale on partner logos
+
+### Component/Page edits (3 edits)
+- [components/ApplicationForm.tsx:158] -- Replaced `style={{ color: "var(--accent)" }}` with `className="vf-link-accent"` on email link -- uses centralized utility class
+- [components/ContactForm.tsx:146] -- Replaced `style={{ color: "var(--accent)" }}` with `className="vf-link-accent"` on email link -- uses centralized utility class
+- [app/careers/page.tsx:131] -- Replaced `style={{ color: "var(--accent)" }}` with `className="vf-link-accent"` on "reach out" Link -- uses centralized utility class
+
+## Deviations from Plan
+- Edit 10 (partner card button selector change from `.vf-partner-card .vf-btn-gold` to `.vf-partner-card a`) was skipped per user correction. The existing `.vf-partner-card .vf-btn-gold` selector works correctly now that Edit 1 defines the `.vf-btn-gold` class.
+
+## Testing Notes
+- `npx next build` completed successfully with 0 errors (21 static pages generated)
+- Visual regression testing needed: partners page gold buttons, all card hover states (program, partner, careers, carousel), nav link transitions, email link accent colors, partner logo hover scale, card grid gap alignment
+- Mobile responsive testing needed: nav transitions, card hovers, link styles on touch devices
+- Cross-browser testing needed for all hover transitions (Chrome, Firefox, Safari, Edge)
+
+## Open Items
+- None

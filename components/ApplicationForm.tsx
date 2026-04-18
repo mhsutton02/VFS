@@ -155,7 +155,7 @@ export function ApplicationForm({ jobTitle, jobNumber, notifyEmails }: Applicati
       {status === "error" && errorMsg && (
         <p style={{ color: "#ef4444", fontSize: "14px", margin: 0 }}>
           {errorMsg}{" "}
-          <a href="mailto:careers@valorforgesolutions.com" style={{ color: "var(--accent)" }}>
+          <a href="mailto:careers@valorforgesolutions.com" className="vf-link-accent">
             careers@valorforgesolutions.com
           </a>
         </p>

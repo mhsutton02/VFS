@@ -265,6 +265,7 @@ a, button {
   font-size: 14px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  transition: color 0.2s ease;
 }
 
 .vf-nav-list a:hover {
@@ -395,6 +396,17 @@ a, button {
   font-weight: 500;
 }
 
+/* Link accent utility */
+.vf-link-accent {
+  color: var(--accent);
+  text-decoration: underline;
+  transition: opacity 0.2s;
+}
+
+.vf-link-accent:hover {
+  opacity: 0.8;
+}
+
 /* Prose Width Utility */
 .vf-prose {
   max-width: 800px;
@@ -430,10 +442,10 @@ a, button {
   border: none;
 }
 
-.vf-btn-ghost {
+.vf-btn-gold {
   background: var(--accent);
-  border-color: rgba(0, 0, 0, 0.15);
   color: #0a0a0a;
+  border-color: var(--accent);
 }
 
 .vf-section-bottom {
@@ -503,6 +515,11 @@ a, button {
   flex-direction: column;
   justify-content: flex-start;
   min-height: 288px;
+  transition: border-color 0.15s;
+}
+
+.vf-card:hover {
+  border-color: rgba(245, 183, 74, 0.25);
 }
 
 .vf-card-title {
@@ -605,6 +622,7 @@ a, button {
 .vf-partners-logos a:hover {
   filter: grayscale(0%);
   opacity: 1;
+  transform: scale(1.02);
 }
 
 .vf-contact-meta {
@@ -752,6 +770,12 @@ a, button {
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius);
   padding: 32px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.vf-careers-card:hover {
+  border-color: rgba(245, 183, 74, 0.4);
+  background: rgba(255, 255, 255, 0.07);
 }
 
 .vf-careers-card .vf-h3 {
@@ -1539,7 +1563,7 @@ section[id] {
 .vf-card-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 24px;
   margin-top: 24px;
 }
 
@@ -1550,6 +1574,12 @@ section[id] {
   padding: 24px;
   display: flex;
   flex-direction: column;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.vf-program-card:hover {
+  border-color: rgba(245, 183, 74, 0.3);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .vf-program-card-title {
@@ -1608,6 +1638,12 @@ section[id] {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.vf-partner-card:hover {
+  border-color: rgba(245, 183, 74, 0.3);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .vf-partner-card-logo {
